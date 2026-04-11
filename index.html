@@ -69,44 +69,25 @@
         .btn-outline-gold { background: transparent; border: 2px solid var(--gold-primary); color: var(--gold-primary); }
         .btn-outline-gold:hover { background: var(--gold-primary); color: var(--black-primary); }
         
-        /* Hero with Split Layout */
+        /* Hero */
         .hero {
             min-height: calc(100vh - var(--header-height));
             display: flex;
             align-items: center;
             position: relative;
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.92) 0%, rgba(26, 26, 26, 0.92) 50%, rgba(10, 10, 10, 0.92) 100%), url('hero-bg.jpg');
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.88) 0%, rgba(26, 26, 26, 0.88) 50%, rgba(10, 10, 10, 0.88) 100%), url('hero-bg.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            padding: 40px 0;
-        }
-        .hero .container { position: relative; z-index: 2; }
-        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
-        .hero-left { animation: fadeInUp 0.8s ease; }
-        .hero-badge { display: inline-block; background: rgba(212, 175, 55, 0.2); border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 24px; border-radius: 50px; font-size: 13px; font-weight: 500; letter-spacing: 3px; margin-bottom: 24px; backdrop-filter: blur(5px); }
-        .hero-title { font-size: clamp(36px, 6vw, 60px); font-weight: 700; color: var(--white); margin-bottom: 16px; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .hero-title .gold-text { color: var(--gold-primary); text-shadow: 0 0 30px var(--gold-glow); }
-        .hero-subtitle { font-size: clamp(16px, 2.5vw, 20px); color: var(--gray-light); margin-bottom: 24px; font-weight: 300; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .hero-about { margin: 24px 0 32px; }
-        .hero-about h3 { color: var(--gold-primary); font-size: 22px; margin-bottom: 12px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .hero-about p { color: var(--gray-light); font-size: 15px; line-height: 1.7; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-        
-        /* Hero Card (Right Side) */
-        .hero-card {
-            background: var(--black-card);
-            border: 2px solid var(--gold-primary);
-            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--gold-glow);
-            animation: fadeInUp 0.8s ease 0.2s both;
-            position: relative;
         }
-        .hero-card img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; display: block; }
-        .hero-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(180deg, transparent, rgba(10,10,10,0.8)); text-align: center; }
-        .hero-card-overlay h4 { color: var(--gold-primary); font-size: 20px; margin-bottom: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .hero-card-overlay p { color: var(--white); font-size: 13px; opacity: 0.9; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 60%); }
+        .hero-content { text-align: center; position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 60px 0; }
+        .hero-badge { display: inline-block; background: rgba(212, 175, 55, 0.2); border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 24px; border-radius: 50px; font-size: 14px; font-weight: 500; letter-spacing: 3px; margin-bottom: 24px; animation: fadeInUp 0.8s ease; backdrop-filter: blur(5px); }
+        .hero-title { font-size: clamp(40px, 8vw, 72px); font-weight: 700; color: var(--white); margin-bottom: 20px; line-height: 1.2; animation: fadeInUp 0.8s ease 0.1s both; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .hero-title .gold-text { color: var(--gold-primary); text-shadow: 0 0 30px var(--gold-glow); }
+        .hero-subtitle { font-size: clamp(18px, 3vw, 24px); color: var(--gray-light); margin-bottom: 40px; font-weight: 300; animation: fadeInUp 0.8s ease 0.2s both; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.3s both; }
         
         /* Sections */
         .section { padding: 100px 0; }
@@ -118,15 +99,28 @@
         .section-header { text-align: center; margin-bottom: 60px; }
         .section-header .gold-text { color: var(--gold-primary); }
         
-        /* About */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .about-image { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .about-image img { width: 100%; height: auto; display: block; }
-        .about-image::after { content: ''; position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; border: 2px solid var(--gold-primary); border-radius: 20px; z-index: -1; }
+        /* About Grid with Hero Card */
+        .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        .about-content { animation: fadeInUp 0.8s ease; }
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
         .stat-item { text-align: center; }
         .stat-number { font-size: 36px; font-weight: 700; color: var(--gold-primary); font-family: var(--font-heading); }
         .stat-label { color: var(--gray-mid); font-size: 14px; }
+        
+        /* Hero Card (Beside Our Story) */
+        .hero-card {
+            background: var(--black-card);
+            border: 2px solid var(--gold-primary);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--gold-glow);
+            animation: fadeInUp 0.8s ease 0.2s both;
+            position: relative;
+        }
+        .hero-card img { width: 100%; height: 100%; min-height: 400px; object-fit: cover; display: block; }
+        .hero-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(180deg, transparent, rgba(10,10,10,0.85)); text-align: center; }
+        .hero-card-overlay h4 { color: var(--gold-primary); font-size: 22px; margin-bottom: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero-card-overlay p { color: var(--white); font-size: 13px; opacity: 0.9; }
         
         /* Courses */
         .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -174,7 +168,7 @@
         .footer-contact p { color: var(--gray-mid); font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.1); color: var(--gray-mid); font-size: 14px; }
         .footer-credit { margin-top: 10px; }
-        .footer-credit a { color: var(--gold-primary); font-weight: 500; text-decoration: none; transition: all 0.3s ease; }
+        .footer-credit a { color: var(--gold-primary); font-weight: 500; transition: all 0.3s ease; }
         .footer-credit a:hover { color: var(--gold-light); text-decoration: underline; }
         
         /* Animations */
@@ -184,7 +178,7 @@
         
         /* Responsive */
         @media (max-width: 1024px) { 
-            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
             .hero-card { max-width: 450px; margin: 0 auto; }
             .courses-grid { grid-template-columns: repeat(2, 1fr); } 
             .impact-grid { grid-template-columns: repeat(2, 1fr); } 
@@ -195,13 +189,12 @@
             .nav-menu.active { display: flex; } 
             .mobile-menu-btn { display: block; } 
             .lang-toggle { margin-left: 0; margin-top: 16px; } 
-            .hero { padding: 60px 0; }
-            .hero-buttons { flex-direction: column; align-items: flex-start; } 
-            .btn { width: 100%; }
-            .about-grid { grid-template-columns: 1fr; } 
+            .hero-buttons { flex-direction: column; align-items: center; } 
+            .btn { width: 100%; max-width: 300px; }
             .courses-grid { grid-template-columns: 1fr; } 
             .impact-grid { grid-template-columns: 1fr; } 
             .footer-grid { grid-template-columns: 1fr; gap: 30px; } 
+            .hero { background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 26, 26, 0.9) 50%, rgba(10, 10, 10, 0.9) 100%), url('hero-bg.jpg'); background-size: cover; background-position: center; }
         }
         
         [data-en], [data-am] { transition: opacity 0.2s ease; }
@@ -234,45 +227,35 @@
         </div>
     </header>
     
-    <!-- HERO WITH SPLIT LAYOUT -->
+    <!-- HERO SECTION -->
     <section class="hero">
+        <div class="container hero-content">
+            <span class="hero-badge" data-en="ETHIOPIA'S FIRST PRIVATE BEAUTY COLLEGE" data-am="የኢትዮጵያ የመጀመሪያው የግል የውበት ኮሌጅ">ETHIOPIA'S FIRST PRIVATE BEAUTY COLLEGE</span>
+            <h1 class="hero-title"><span data-en="LOVELY" data-am="ላቭሊ">LOVELY</span> <span class="gold-text" data-en="BEAUTY COLLEGE" data-am="ቢዩቲ ኮሌጅ">BEAUTY COLLEGE</span></h1>
+            <p class="hero-subtitle" data-en="Where Beauty Becomes a Profession" data-am="ውበት ሙያ የሚሆንበት">Where Beauty Becomes a Profession</p>
+            <div class="hero-buttons"><a href="register.html" class="btn btn-gold" data-en="Register Now" data-am="አሁን ይመዝገቡ">Register Now</a><a href="courses.html" class="btn btn-outline-gold" data-en="Explore Courses" data-am="ኮርሶችን ይመልከቱ">Explore Courses</a></div>
+        </div>
+    </section>
+    
+    <!-- ABOUT SECTION WITH HERO CARD BESIDE OUR STORY -->
+    <section class="section">
         <div class="container">
-            <div class="hero-grid">
-                <div class="hero-left">
-                    <span class="hero-badge" data-en="ETHIOPIA'S FIRST PRIVATE BEAUTY COLLEGE" data-am="የኢትዮጵያ የመጀመሪያው የግል የውበት ኮሌጅ">ETHIOPIA'S FIRST PRIVATE BEAUTY COLLEGE</span>
-                    <h1 class="hero-title"><span data-en="LOVELY" data-am="ላቭሊ">LOVELY</span> <span class="gold-text" data-en="BEAUTY COLLEGE" data-am="ቢዩቲ ኮሌጅ">BEAUTY COLLEGE</span></h1>
-                    <p class="hero-subtitle" data-en="Where Beauty Becomes a Profession" data-am="ውበት ሙያ የሚሆንበት">Where Beauty Becomes a Profession</p>
-                    <div class="hero-about">
-                        <h3 data-en="Ethiopia's Leading Beauty Institution" data-am="የኢትዮጵያ መሪ የውበት ተቋም">Ethiopia's Leading Beauty Institution</h3>
-                        <p data-en="Lovely Plus Beauty College is Ethiopia's premier professional beauty training institution, built on over 28 years of excellence and innovation. We have trained thousands of successful beauty professionals now working across Ethiopia and internationally." data-am="ላቭሊ ፕላስ ቢዩቲ ኮሌጅ ከ28 ዓመታት በላይ የላቀ ውጤት እና ፈጠራ ላይ የተመሰረተ የኢትዮጵያ ቀዳሚ ሙያዊ የውበት ማሰልጠኛ ተቋም ነው። በሺዎች የሚቆጠሩ ስኬታማ የውበት ባለሙያዎችን በማፍራት በኢትዮጵያ እና በዓለም አቀፍ ደረጃ እየሰሩ ይገኛሉ።">Lovely Plus Beauty College is Ethiopia's premier professional beauty training institution, built on over 28 years of excellence and innovation. We have trained thousands of successful beauty professionals now working across Ethiopia and internationally.</p>
-                    </div>
-                    <div class="hero-buttons">
-                        <a href="register.html" class="btn btn-gold" data-en="Register Now" data-am="አሁን ይመዝገቡ">Register Now</a>
-                        <a href="courses.html" class="btn btn-outline-gold" data-en="Explore Courses" data-am="ኮርሶችን ይመልከቱ">Explore Courses</a>
-                    </div>
+            <div class="about-grid">
+                <!-- Left: Our Story Text -->
+                <div class="about-content">
+                    <h2 class="section-title"><span data-en="Our" data-am="የእኛ">Our</span> <span class="gold-text" data-en="Story" data-am="ታሪክ">Story</span></h2>
+                    <p class="section-desc" data-en="Founded in 1998, Lovely Plus Beauty College has grown from a single training center to three campuses across Addis Ababa, producing over 5,000 graduates who now work in top salons, run their own businesses, and have found success internationally." data-am="በ1998 የተመሰረተው ላቭሊ ፕላስ ቢዩቲ ኮሌጅ ከአንድ የስልጠና ማዕከል ወደ ሶስት ካምፓሶች በአዲስ አበባ አድጎ ከ5,000 በላይ ተመራቂዎችን በማፍራት በከፍተኛ ሳሎኖች ውስጥ የሚሰሩ፣ የራሳቸውን ንግድ የሚያካሂዱ እና በአለም አቀፍ ደረጃ ስኬታማ የሆኑ ባለሙያዎችን አፍርቷል።">Founded in 1998, Lovely Plus Beauty College has grown from a single training center to three campuses across Addis Ababa, producing over 5,000 graduates who now work in top salons, run their own businesses, and have found success internationally.</p>
+                    <div class="stats-grid"><div class="stat-item"><div class="stat-number">28+</div><div class="stat-label" data-en="Years Experience" data-am="ዓመታት ልምድ">Years Experience</div></div><div class="stat-item"><div class="stat-number">5000+</div><div class="stat-label" data-en="Graduates" data-am="ተመራቂዎች">Graduates</div></div><div class="stat-item"><div class="stat-number">3</div><div class="stat-label" data-en="Branches" data-am="ቅርንጫፎች">Branches</div></div><div class="stat-item"><div class="stat-number">13</div><div class="stat-label" data-en="Courses" data-am="ኮርሶች">Courses</div></div></div>
+                    <a href="about.html" class="btn btn-outline-gold" style="margin-top:32px;" data-en="Learn More" data-am="ተጨማሪ ይወቁ">Learn More</a>
                 </div>
                 
+                <!-- Right: Hero Card Image -->
                 <div class="hero-card">
                     <img src="hero-card.jpg" alt="Beauty College Student">
                     <div class="hero-card-overlay">
                         <h4 data-en="Beauty College" data-am="የውበት ኮሌጅ">Beauty College</h4>
                         <p data-en="Est. 1998 G.C." data-am="የተቋቋመ 1998">Est. 1998 G.C.</p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ABOUT -->
-    <section class="section">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image"><img src="https://images.unsplash.com/photo-1560066984-138dad26401b?w=600&h=700&fit=crop" alt="Beauty College" style="width:100%; height:100%; object-fit:cover;"></div>
-                <div class="about-content">
-                    <h2 class="section-title"><span data-en="Our" data-am="የእኛ">Our</span> <span class="gold-text" data-en="Story" data-am="ታሪክ">Story</span></h2>
-                    <p class="section-desc" data-en="Founded in 1998, Lovely Plus Beauty College has grown from a single training center to three campuses across Addis Ababa, producing over 5,000 graduates who now work in top salons, run their own businesses, and have found success internationally." data-am="በ1998 የተመሰረተው ላቭሊ ፕላስ ቢዩቲ ኮሌጅ ከአንድ የስልጠና ማዕከል ወደ ሶስት ካምፓሶች በአዲስ አበባ አድጎ ከ5,000 በላይ ተመራቂዎችን በማፍራት በከፍተኛ ሳሎኖች ውስጥ የሚሰሩ፣ የራሳቸውን ንግድ የሚያካሂዱ እና በአለም አቀፍ ደረጃ ስኬታማ የሆኑ ባለሙያዎችን አፍርቷል።">Founded in 1998, Lovely Plus Beauty College has grown from a single training center to three campuses across Addis Ababa, producing over 5,000 graduates who now work in top salons, run their own businesses, and have found success internationally.</p>
-                    <div class="stats-grid"><div class="stat-item"><div class="stat-number">28+</div><div class="stat-label" data-en="Years Experience" data-am="ዓመታት ልምድ">Years Experience</div></div><div class="stat-item"><div class="stat-number">5000+</div><div class="stat-label" data-en="Graduates" data-am="ተመራቂዎች">Graduates</div></div><div class="stat-item"><div class="stat-number">3</div><div class="stat-label" data-en="Branches" data-am="ቅርንጫፎች">Branches</div></div><div class="stat-item"><div class="stat-number">13</div><div class="stat-label" data-en="Courses" data-am="ኮርሶች">Courses</div></div></div>
-                    <a href="about.html" class="btn btn-outline-gold" style="margin-top:32px;" data-en="Learn More" data-am="ተጨማሪ ይወቁ">Learn More</a>
                 </div>
             </div>
         </div>
