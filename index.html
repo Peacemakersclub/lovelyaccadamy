@@ -17,9 +17,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- PocketBase SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/pocketbase@0.21.5/dist/pocketbase.umd.min.js"></script>
-    
     <style>
         /* ============================================
            LOVELY BEAUTY COLLEGE - GOLD & BLACK THEME
@@ -504,6 +501,37 @@
         }
         
         /* ============================================
+           LEGACY SECTION
+           ============================================ */
+        .legacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .legacy-card {
+            padding: 30px;
+            background: var(--black-card);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .legacy-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        
+        .legacy-title {
+            color: var(--gold-primary);
+            margin-bottom: 12px;
+        }
+        
+        .legacy-desc {
+            color: var(--gray-mid);
+        }
+        
+        /* ============================================
            CTA SECTION
            ============================================ */
         .cta-section {
@@ -748,7 +776,7 @@
                 <a href="index.html" class="nav-link active" data-en="Home" data-am="መነሻ">Home</a>
                 <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
                 <a href="courses.html" class="nav-link" data-en="Courses" data-am="ኮርሶች">Courses</a>
-                <a href="student-portal/login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
+                <a href="student-login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
                 <a href="register.html" class="nav-link" data-en="Register" data-am="ይመዝገቡ">Register</a>
                 <a href="contact.html" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a>
                 <button class="lang-toggle" id="langToggle">አማ / EN</button>
@@ -935,21 +963,21 @@
                 </p>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center;">
-                <div style="padding: 30px; background: var(--black-card); border-radius: 20px; border: 1px solid rgba(212,175,55,0.2);">
-                    <div style="font-size: 40px; margin-bottom: 16px;">🏆</div>
-                    <h4 style="color: var(--gold-primary); margin-bottom: 12px;" data-en="First National Competition" data-am="የመጀመሪያ ብሄራዊ ውድድር">First National Competition</h4>
-                    <p style="color: var(--gray-mid);" data-en="Organized Ethiopia's first beauty competition" data-am="የኢትዮጵያን የመጀመሪያ የውበት ውድድር አዘጋጅቷል">Organized Ethiopia's first beauty competition</p>
+            <div class="legacy-grid">
+                <div class="legacy-card">
+                    <div class="legacy-icon">🏆</div>
+                    <h4 class="legacy-title" data-en="First National Competition" data-am="የመጀመሪያ ብሄራዊ ውድድር">First National Competition</h4>
+                    <p class="legacy-desc" data-en="Organized Ethiopia's first beauty competition" data-am="የኢትዮጵያን የመጀመሪያ የውበት ውድድር አዘጋጅቷል">Organized Ethiopia's first beauty competition</p>
                 </div>
-                <div style="padding: 30px; background: var(--black-card); border-radius: 20px; border: 1px solid rgba(212,175,55,0.2);">
-                    <div style="font-size: 40px; margin-bottom: 16px;">🏨</div>
-                    <h4 style="color: var(--gold-primary); margin-bottom: 12px;" data-en="Sheraton Addis Event" data-am="ሸራተን አዲስ ዝግጅት">Sheraton Addis Event</h4>
-                    <p style="color: var(--gray-mid);" data-en="Hosted prestigious beauty events" data-am="የተከበሩ የውበት ዝግጅቶችን አስተናግዷል">Hosted prestigious beauty events</p>
+                <div class="legacy-card">
+                    <div class="legacy-icon">🏨</div>
+                    <h4 class="legacy-title" data-en="Sheraton Addis Event" data-am="ሸራተን አዲስ ዝግጅት">Sheraton Addis Event</h4>
+                    <p class="legacy-desc" data-en="Hosted prestigious beauty events" data-am="የተከበሩ የውበት ዝግጅቶችን አስተናግዷል">Hosted prestigious beauty events</p>
                 </div>
-                <div style="padding: 30px; background: var(--black-card); border-radius: 20px; border: 1px solid rgba(212,175,55,0.2);">
-                    <div style="font-size: 40px; margin-bottom: 16px;">📺</div>
-                    <h4 style="color: var(--gold-primary); margin-bottom: 12px;" data-en="Media Recognition" data-am="ሚዲያ እውቅና">Media Recognition</h4>
-                    <p style="color: var(--gray-mid);" data-en="Featured in national media outlets" data-am="በብሄራዊ ሚዲያዎች ተለይቷል">Featured in national media outlets</p>
+                <div class="legacy-card">
+                    <div class="legacy-icon">📺</div>
+                    <h4 class="legacy-title" data-en="Media Recognition" data-am="ሚዲያ እውቅና">Media Recognition</h4>
+                    <p class="legacy-desc" data-en="Featured in national media outlets" data-am="በብሄራዊ ሚዲያዎች ተለይቷል">Featured in national media outlets</p>
                 </div>
             </div>
         </div>
@@ -1057,13 +1085,11 @@
                 if (text) el.textContent = text;
             });
             
-            // Update toggle button text
             const langToggle = document.getElementById('langToggle');
             if (langToggle) {
                 langToggle.textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ';
             }
             
-            // Update HTML lang attribute
             document.documentElement.lang = lang;
         }
         
@@ -1074,7 +1100,6 @@
             });
         }
         
-        // Set initial language
         setLanguage(currentLang);
         
         // ============================================
@@ -1099,7 +1124,6 @@
                     }
                 }
                 
-                // Only animate if not already animated
                 if (counter.textContent === '0') {
                     updateCount();
                 }
@@ -1121,7 +1145,6 @@
                 }
             });
             
-            // Animate counters when they become visible
             const impactSection = document.querySelector('.impact-grid');
             if (impactSection) {
                 const rect = impactSection.getBoundingClientRect();
@@ -1146,12 +1169,7 @@
             }
         });
         
-        // ============================================
-        // POCKETBASE INITIALIZATION (Placeholder)
-        // ============================================
-        // Will be fully configured when backend is deployed
-        console.log('🌟 Lovely Beauty College - Ready');
-        console.log('📍 PocketBase will be connected to: (backend URL)');
+        console.log('🌟 Lovely Beauty College - Homepage Loaded');
     </script>
 </body>
 </html>
