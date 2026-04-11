@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Contact Us | Lovely Plus Beauty College</title>
+    <meta name="description" content="Contact Lovely Plus Beauty College - 3 branches in Addis Ababa. Sebatgna, Piassa, and Megenagna locations. Call 0991171819 or visit us today.">
+    
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           LOVELY BEAUTY COLLEGE - GOLD & BLACK THEME
+           ============================================ */
+        
+        :root {
+            --black-primary: #0A0A0A;
+            --black-secondary: #111111;
+            --black-card: #1A1A1A;
+            --gold-primary: #D4AF37;
+            --gold-light: #F5D76E;
+            --gold-dark: #996515;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --white: #FFFFFF;
+            --gray-light: #E0E0E0;
+            --gray-mid: #B0B0B0;
+            --gray-dark: #666666;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            
+            --container-max: 1280px;
+            --header-height: 80px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--black-primary);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+        
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--black-primary);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--header-height);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+        
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-main {
+            font-size: 22px;
+            color: var(--gold-primary);
+            letter-spacing: 2px;
+        }
+        
+        .logo-sub {
+            font-size: 11px;
+            color: var(--gray-mid);
+            letter-spacing: 1px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--gray-light);
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-primary);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--gold-primary);
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 16px;
+        }
+        
+        .lang-toggle:hover {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: var(--black-primary);
+            box-shadow: 0 4px 15px var(--gold-glow);
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--gold-glow);
+        }
+        
+        /* ============================================
+           PAGE HEADER
+           ============================================ */
+        .page-header {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .page-title {
+            font-size: clamp(40px, 8vw, 64px);
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+        
+        .page-title .gold-text {
+            color: var(--gold-primary);
+        }
+        
+        .page-subtitle {
+            color: var(--gray-mid);
+            font-size: 18px;
+        }
+        
+        /* ============================================
+           SECTIONS
+           ============================================ */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 20px;
+        }
+        
+        .section-title .gold-text {
+            color: var(--gold-primary);
+        }
+        
+        /* ============================================
+           CONTACT INFO CARDS
+           ============================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .contact-card {
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 30px var(--gold-glow);
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 20px;
+        }
+        
+        .contact-card h3 {
+            color: var(--gold-primary);
+            margin-bottom: 16px;
+            font-size: 22px;
+        }
+        
+        .contact-card p {
+            color: var(--gray-mid);
+            margin-bottom: 8px;
+        }
+        
+        .contact-card .phone {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* ============================================
+           BRANCHES SECTION
+           ============================================ */
+        .branches-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .branch-card {
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .branch-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+        
+        .branch-name {
+            color: var(--gold-primary);
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .branch-badge {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .branch-info {
+            color: var(--gray-mid);
+            margin-bottom: 16px;
+        }
+        
+        .branch-info i {
+            color: var(--gold-primary);
+            margin-right: 10px;
+        }
+        
+        .branch-phone {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 600;
+            margin: 16px 0;
+        }
+        
+        /* ============================================
+           MAP SECTION
+           ============================================ */
+        .map-container {
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-mid);
+        }
+        
+        .map-placeholder .map-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: var(--gold-primary);
+        }
+        
+        /* ============================================
+           CONTACT FORM
+           ============================================ */
+        .form-container {
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--gold-primary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--black-secondary);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-status {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            display: none;
+        }
+        
+        .form-status.success {
+            display: block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .form-status.error {
+            display: block;
+            background: rgba(220, 53, 69, 0.15);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+        
+        /* ============================================
+           SOCIAL SECTION
+           ============================================ */
+        .social-section {
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .social-large {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .social-card {
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 30px 40px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .social-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 30px var(--gold-glow);
+            transform: translateY(-5px);
+        }
+        
+        .social-card .social-icon {
+            font-size: 40px;
+        }
+        
+        .social-card .social-info h4 {
+            color: var(--gold-primary);
+            margin-bottom: 4px;
+        }
+        
+        .social-card .social-info p {
+            color: var(--gray-mid);
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--black-primary);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-desc {
+            color: var(--gray-mid);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+        }
+        
+        .footer-title {
+            color: var(--gold-primary);
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--gray-mid);
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold-primary);
+        }
+        
+        .footer-contact p {
+            color: var(--gray-mid);
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            color: var(--gray-mid);
+            font-size: 14px;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .branches-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .social-large {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                right: 0;
+                background: var(--black-primary);
+                flex-direction: column;
+                padding: 30px;
+                border-bottom: 1px solid var(--gold-primary);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .lang-toggle {
+                margin-left: 0;
+                margin-top: 16px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- ============================================ -->
+    <!-- HEADER                                        -->
+    <!-- ============================================ -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">💎</div>
+                <div class="logo-text">
+                    <div class="logo-main">LOVELY BEAUTY</div>
+                    <div class="logo-sub">EST 1998 G.C.</div>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
+                <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
+                <a href="courses.html" class="nav-link" data-en="Courses" data-am="ኮርሶች">Courses</a>
+                <a href="student-portal/login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
+                <a href="register.html" class="nav-link" data-en="Register" data-am="ይመዝገቡ">Register</a>
+                <a href="contact.html" class="nav-link active" data-en="Contact" data-am="አድራሻ">Contact</a>
+                <button class="lang-toggle" id="langToggle">አማ / EN</button>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+    
+    <!-- ============================================ -->
+    <!-- PAGE HEADER                                   -->
+    <!-- ============================================ -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <span data-en="Get In" data-am="ያግኙን">Get In</span>
+                <span class="gold-text" data-en="Touch" data-am="">Touch</span>
+            </h1>
+            <p class="page-subtitle" data-en="Visit one of our three campuses in Addis Ababa or contact us online" 
+               data-am="በአዲስ አበባ ከሚገኙት ሶስት ካምፓሶቻችን አንዱን ይጎብኙ ወይም በመስመር ላይ ያግኙን">
+                Visit one of our three campuses in Addis Ababa or contact us online
+            </p>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- QUICK CONTACT CARDS                           -->
+    <!-- ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card fade-in-up">
+                    <div class="contact-icon">📞</div>
+                    <h3 data-en="Call Us" data-am="ይደውሉ">Call Us</h3>
+                    <p class="phone">0991171819</p>
+                    <p class="phone">0911221032</p>
+                    <p>0112750345 (Sebatgna)</p>
+                    <p>0116587060 (Megenagna)</p>
+                </div>
+                
+                <div class="contact-card fade-in-up">
+                    <div class="contact-icon">📍</div>
+                    <h3 data-en="Visit Us" data-am="ይጎብኙ">Visit Us</h3>
+                    <p data-en="Megenagna Campus (Main)" data-am="መገናኛ ካምፓስ (ዋና)">Megenagna Campus (Main)</p>
+                    <p>Nucleus Plaza, 5th Floor</p>
+                    <p>Next to Marhont Building</p>
+                    <p>Addis Ababa, Ethiopia</p>
+                </div>
+                
+                <div class="contact-card fade-in-up">
+                    <div class="contact-icon">⏰</div>
+                    <h3 data-en="Working Hours" data-am="የስራ ሰዓት">Working Hours</h3>
+                    <p data-en="Monday - Friday" data-am="ሰኞ - አርብ">Monday - Friday</p>
+                    <p>8:30 AM - 5:30 PM</p>
+                    <p data-en="Saturday" data-am="ቅዳሜ">Saturday</p>
+                    <p>9:00 AM - 3:00 PM</p>
+                    <p data-en="Sunday: Closed" data-am="እሁድ: ዝግ">Sunday: Closed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- BRANCHES SECTION                              -->
+    <!-- ============================================ -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">
+                <span data-en="Our" data-am="የእኛ">Our</span>
+                <span class="gold-text" data-en="Campuses" data-am="ካምፓሶች">Campuses</span>
+            </h2>
+            
+            <div class="branches-grid">
+                <!-- Megenagna Branch -->
+                <div class="branch-card fade-in-up">
+                    <div class="branch-name">
+                        📍 Megenagna
+                        <span class="branch-badge" data-en="Main Campus" data-am="ዋና ካምፓስ">Main Campus</span>
+                    </div>
+                    <div class="branch-info">
+                        <p>📍 Nucleus Plaza, 5th Floor</p>
+                        <p>📍 Next to Marhont Building</p>
+                        <p>📍 Addis Ababa, 1000</p>
+                    </div>
+                    <div class="branch-phone">📞 0116587060</div>
+                    <div class="branch-phone">📱 0991171819</div>
+                    <a href="https://maps.google.com/?q=Megenagna+Addis+Ababa" target="_blank" class="btn btn-gold" style="padding: 10px 20px; font-size: 14px; margin-top: 16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a>
+                </div>
+                
+                <!-- Piassa Branch -->
+                <div class="branch-card fade-in-up">
+                    <div class="branch-name">
+                        📍 Piassa
+                    </div>
+                    <div class="branch-info">
+                        <p>📍 Piassa Area</p>
+                        <p>📍 Addis Ababa, Ethiopia</p>
+                    </div>
+                    <div class="branch-phone">📞 +251118125206</div>
+                    <div class="branch-phone">📱 0945671188</div>
+                    <a href="https://maps.google.com/?q=Piassa+Addis+Ababa" target="_blank" class="btn btn-gold" style="padding: 10px 20px; font-size: 14px; margin-top: 16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a>
+                </div>
+                
+                <!-- Sebatgna Branch -->
+                <div class="branch-card fade-in-up">
+                    <div class="branch-name">
+                        📍 Sebatgna
+                    </div>
+                    <div class="branch-info">
+                        <p>📍 Sebatgna Area</p>
+                        <p>📍 Addis Ababa, Ethiopia</p>
+                    </div>
+                    <div class="branch-phone">📞 0112750345</div>
+                    <div class="branch-phone">📱 0911221032</div>
+                    <a href="https://maps.google.com/?q=Sebatgna+Addis+Ababa" target="_blank" class="btn btn-gold" style="padding: 10px 20px; font-size: 14px; margin-top: 16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- MAP SECTION                                   -->
+    <!-- ============================================ -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="map-container fade-in-up">
+                <div class="map-placeholder">
+                    <div class="map-icon">🗺️</div>
+                    <h3 style="color: var(--gold-primary); margin-bottom: 16px;">Megenagna Campus Location</h3>
+                    <p style="margin-bottom: 20px;">Nucleus Plaza, 5th Floor, Next to Marhont Building</p>
+                    <p style="color: var(--gray-dark);">📍 Addis Ababa, Ethiopia 1000</p>
+                    <a href="https://maps.google.com/?q=Megenagna+Addis+Ababa+Ethiopia" target="_blank" class="btn btn-outline-gold" style="margin-top: 24px;" data-en="Open in Google Maps" data-am="በጉግል ካርታ ይክፈቱ">Open in Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- CONTACT FORM                                  -->
+    <!-- ============================================ -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">
+                <span data-en="Send Us a" data-am="መልእክት">Send Us a</span>
+                <span class="gold-text" data-en="Message" data-am="ይላኩ">Message</span>
+            </h2>
+            
+            <div class="form-container fade-in-up">
+                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Replace with your Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                    <input type="hidden" name="subject" value="New Contact from Lovely Beauty College Website">
+                    <input type="hidden" name="from_name" value="Lovely Beauty College Contact Form">
+                    <input type="hidden" name="redirect" value="false">
+                    
+                    <div class="form-group">
+                        <label for="name" data-en="Full Name *" data-am="ሙሉ ስም *">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" data-en="Phone Number *" data-am="ስልክ ቁጥር *">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="09xxxxxxxx">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" data-en="Email Address" data-am="ኢሜይል">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="branch" data-en="Preferred Branch" data-am="የሚመርጡት ቅርንጫፍ">Preferred Branch</label>
+                        <select id="branch" name="branch">
+                            <option value="Megenagna" data-en="Megenagna (Main)" data-am="መገናኛ (ዋና)">Megenagna (Main)</option>
+                            <option value="Piassa" data-en="Piassa" data-am="ፒያሳ">Piassa</option>
+                            <option value="Sebatgna" data-en="Sebatgna" data-am="ሰባትኛ">Sebatgna</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" data-en="Your Message *" data-am="መልእክትዎ *">Your Message *</label>
+                        <textarea id="message" name="message" required placeholder="How can we help you?"></textarea>
+                    </div>
+                    
+                    <div id="formStatus" class="form-status"></div>
+                    
+                    <button type="submit" class="btn btn-gold" style="width: 100%;" data-en="Send Message" data-am="መልእክት ላክ">Send Message</button>
+                    
+                    <p style="color: var(--gray-dark); font-size: 12px; text-align: center; margin-top: 16px;" data-en="We'll get back to you within 24 hours." data-am="በ24 ሰዓታት ውስጥ ምላሽ እንሰጣለን።">We'll get back to you within 24 hours.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- SOCIAL MEDIA SECTION                          -->
+    <!-- ============================================ -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="social-section">
+                <h2 class="section-title">
+                    <span data-en="Follow Us on" data-am="ይከታተሉን">Follow Us on</span>
+                    <span class="gold-text" data-en="Social Media" data-am="ማህበራዊ ሚዲያ">Social Media</span>
+                </h2>
+                
+                <div class="social-large">
+                    <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-card">
+                        <span class="social-icon">📘</span>
+                        <div class="social-info">
+                            <h4>Facebook</h4>
+                            <p>@LovelyBeautyCollege</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-card">
+                        <span class="social-icon">🎵</span>
+                        <div class="social-info">
+                            <h4>TikTok</h4>
+                            <p>@lovelybeautycollege</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- FOOTER                                        -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="logo-main" style="color: var(--gold-primary);">LOVELY BEAUTY</div>
+                        <div class="logo-sub">EST 1998 G.C.</div>
+                    </div>
+                    <p class="footer-desc" data-en="The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998." 
+                       data-am="የመጀመሪያው የግል የውበት ኮሌጅ በኢትዮጵያ፣ ከ1998 ጀምሮ የውበት ባለሙያዎችን በመቅረጽ ላይ።">
+                        The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a>
+                        <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" data-en="Home" data-am="መነሻ">Home</a></li>
+                        <li><a href="about.html" data-en="About Us" data-am="ስለ እኛ">About Us</a></li>
+                        <li><a href="courses.html" data-en="Courses" data-am="ኮርሶች">Courses</a></li>
+                        <li><a href="news-events.html" data-en="News & Events" data-am="ዜና እና ዝግጅቶች">News & Events</a></li>
+                        <li><a href="contact.html" data-en="Contact" data-am="አድራሻ">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-courses">
+                    <h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4>
+                    <ul class="footer-links">
+                        <li><a href="courses.html" data-en="Hairdressing" data-am="ፀጉር ስራ">Hairdressing</a></li>
+                        <li><a href="courses.html" data-en="Makeup Artistry" data-am="ሜካፕ">Makeup Artistry</a></li>
+                        <li><a href="courses.html" data-en="Nail Technology" data-am="ጥፍር ጥበብ">Nail Technology</a></li>
+                        <li><a href="courses.html" data-en="Barbering" data-am="ወንድ ፀጉር">Barbering</a></li>
+                        <li><a href="courses.html" data-en="Skincare" data-am="የቆዳ እንክብካቤ">Skincare</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4>
+                    <p>📍 <span data-en="Megenagna, Addis Ababa" data-am="መገናኛ፣ አዲስ አበባ">Megenagna, Addis Ababa</span></p>
+                    <p>📞 0991171819 / 0911221032</p>
+                    <p>📞 0112750345 (Sebatgna)</p>
+                    <p>📞 0116587060 (Megenagna)</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Lovely Plus Beauty College. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT                                    -->
+    <!-- ============================================ -->
+    <script>
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+            });
+        }
+        
+        // ============================================
+        // LANGUAGE TOGGLE
+        // ============================================
+        let currentLang = localStorage.getItem('lovelyLang') || 'en';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lovelyLang', lang);
+            
+            const elements = document.querySelectorAll('[data-en][data-am]');
+            elements.forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.textContent = text;
+            });
+            
+            const langToggle = document.getElementById('langToggle');
+            if (langToggle) {
+                langToggle.textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ';
+            }
+            
+            document.documentElement.lang = lang;
+            
+            // Update select options
+            const branchSelect = document.getElementById('branch');
+            if (branchSelect) {
+                const options = branchSelect.options;
+                for (let i = 0; i < options.length; i++) {
+                    const text = options[i].getAttribute(`data-${lang}`);
+                    if (text) options[i].textContent = text;
+                }
+            }
+        }
+        
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                setLanguage(currentLang === 'en' ? 'am' : 'en');
+            });
+        }
+        
+        setLanguage(currentLang);
+        
+        // ============================================
+        // CONTACT FORM HANDLING
+        // ============================================
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Show loading state
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                
+                try {
+                    const formData = new FormData(contactForm);
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        formStatus.className = 'form-status success';
+                        formStatus.textContent = currentLang === 'en' 
+                            ? '✓ Thank you! Your message has been sent. We will contact you soon.' 
+                            : '✓ አመሰግናለሁ! መልእክትዎ ተልኳል። በቅርቡ እናገኝዎታለን።';
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    formStatus.className = 'form-status error';
+                    formStatus.textContent = currentLang === 'en'
+                        ? '⚠️ There was an error. Please try again or call us directly.'
+                        : '⚠️ ስህተት ተከስቷል። እባክዎ እንደገና ይሞክሩ ወይም በቀጥታ ይደውሉ።';
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+        
+        // ============================================
+        // STICKY HEADER SHADOW
+        // ============================================
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.6)';
+            } else {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+            }
+        });
+        
+        // ============================================
+        // FADE IN ANIMATIONS
+        // ============================================
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+        
+        console.log('🌟 Lovely Beauty College - Contact Page Loaded');
+        console.log('📝 To activate contact form: Replace YOUR_ACCESS_KEY_HERE with Web3Forms key');
+    </script>
+</body>
+</html>
