@@ -39,15 +39,8 @@
             --header-height: 80px;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         
         body {
             font-family: var(--font-body);
@@ -56,728 +49,211 @@
             line-height: 1.6;
         }
         
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            line-height: 1.3;
-        }
-        
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s ease;
-        }
-        
-        .container {
-            max-width: var(--container-max);
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; line-height: 1.3; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
         
         /* ============================================
            HEADER
            ============================================ */
         .header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
             background: var(--black-primary);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
         
         .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between;
             height: var(--header-height);
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
+        .logo { display: flex; align-items: center; gap: 12px; }
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 48px; height: 48px;
             background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 0 20px var(--gold-glow);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; box-shadow: 0 0 20px var(--gold-glow);
         }
+        .logo-text { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
+        .logo-main { font-size: 22px; color: var(--gold-primary); letter-spacing: 2px; }
+        .logo-sub { font-size: 11px; color: var(--gray-mid); letter-spacing: 1px; }
         
-        .logo-text {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        
-        .logo-main {
-            font-size: 22px;
-            color: var(--gold-primary);
-            letter-spacing: 2px;
-        }
-        
-        .logo-sub {
-            font-size: 11px;
-            color: var(--gray-mid);
-            letter-spacing: 1px;
-        }
-        
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        
+        .nav-menu { display: flex; align-items: center; gap: 32px; }
         .nav-link {
-            font-weight: 500;
-            font-size: 15px;
-            color: var(--gray-light);
-            position: relative;
-            padding: 8px 0;
+            font-weight: 500; font-size: 15px; color: var(--gray-light);
+            position: relative; padding: 8px 0;
         }
-        
-        .nav-link:hover {
-            color: var(--gold-primary);
-        }
-        
+        .nav-link:hover { color: var(--gold-primary); }
         .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold-primary);
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 2px; background: var(--gold-primary);
             transition: width 0.3s ease;
         }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .nav-link.active {
-            color: var(--gold-primary);
-        }
-        
-        .nav-link.active::after {
-            width: 100%;
-        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: var(--gold-primary); }
+        .nav-link.active::after { width: 100%; }
         
         .lang-toggle {
-            background: transparent;
-            border: 1px solid var(--gold-primary);
-            color: var(--gold-primary);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 16px;
+            background: transparent; border: 1px solid var(--gold-primary);
+            color: var(--gold-primary); padding: 8px 16px; border-radius: 30px;
+            font-size: 14px; font-weight: 500; cursor: pointer;
+            transition: all 0.3s ease; margin-left: 16px;
         }
-        
-        .lang-toggle:hover {
-            background: var(--gold-primary);
-            color: var(--black-primary);
-        }
+        .lang-toggle:hover { background: var(--gold-primary); color: var(--black-primary); }
         
         .mobile-menu-btn {
-            display: none;
-            background: transparent;
-            border: none;
-            color: var(--white);
-            font-size: 28px;
-            cursor: pointer;
+            display: none; background: transparent; border: none;
+            color: var(--white); font-size: 28px; cursor: pointer;
         }
         
         /* Buttons */
         .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
+            display: inline-block; padding: 12px 28px; border-radius: 50px;
+            font-weight: 600; font-size: 14px; text-align: center;
+            transition: all 0.3s ease; cursor: pointer; border: none;
         }
-        
         .btn-gold {
             background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--black-primary);
-            box-shadow: 0 4px 15px var(--gold-glow);
+            color: var(--black-primary); box-shadow: 0 4px 15px var(--gold-glow);
         }
-        
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--gold-glow);
-        }
-        
-        .btn-outline-gold {
-            background: transparent;
-            border: 2px solid var(--gold-primary);
-            color: var(--gold-primary);
-        }
-        
-        .btn-outline-gold:hover {
-            background: var(--gold-primary);
-            color: var(--black-primary);
-        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--gold-glow); }
+        .btn-outline-gold { background: transparent; border: 2px solid var(--gold-primary); color: var(--gold-primary); }
+        .btn-outline-gold:hover { background: var(--gold-primary); color: var(--black-primary); }
         
         /* ============================================
            PAGE HEADER
            ============================================ */
         .page-header {
             background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
-            padding: 60px 0;
-            text-align: center;
+            padding: 60px 0; text-align: center;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
-        
-        .page-title {
-            font-size: clamp(36px, 6vw, 56px);
-            color: var(--white);
-            margin-bottom: 16px;
-        }
-        
-        .page-title .gold-text {
-            color: var(--gold-primary);
-        }
-        
-        .page-subtitle {
-            color: var(--gray-mid);
-            font-size: 18px;
-        }
+        .page-title { font-size: clamp(36px, 6vw, 56px); color: var(--white); margin-bottom: 16px; }
+        .page-title .gold-text { color: var(--gold-primary); }
+        .page-subtitle { color: var(--gray-mid); font-size: 18px; }
         
         /* ============================================
            SECTIONS
            ============================================ */
-        .section {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            font-size: clamp(28px, 4vw, 40px);
-            margin-bottom: 20px;
-        }
-        
-        .section-title .gold-text {
-            color: var(--gold-primary);
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+        .section { padding: 60px 0; }
+        .section-title { font-size: clamp(28px, 4vw, 40px); margin-bottom: 20px; }
+        .section-title .gold-text { color: var(--gold-primary); }
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
         
         /* ============================================
            FEATURED NEWS
            ============================================ */
-        .featured-news {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .featured-main {
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        
-        .featured-image {
-            height: 300px;
-            background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-primary);
-            font-size: 48px;
-        }
-        
-        .featured-content {
-            padding: 30px;
-        }
-        
-        .news-badge {
-            display: inline-block;
-            background: var(--gold-primary);
-            color: var(--black-primary);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        
-        .news-date {
-            color: var(--gray-dark);
-            font-size: 14px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .featured-title {
-            font-size: 28px;
-            margin-bottom: 16px;
-            color: var(--white);
-        }
-        
-        .featured-excerpt {
-            color: var(--gray-mid);
-            margin-bottom: 20px;
-        }
-        
-        .featured-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .sidebar-news {
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-        
-        .sidebar-news:hover {
-            border-color: var(--gold-primary);
-        }
-        
-        .sidebar-title {
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
+        .featured-news { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; margin-bottom: 40px; }
+        .featured-main { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; overflow: hidden; }
+        .featured-image { height: 300px; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); display: flex; align-items: center; justify-content: center; color: var(--gold-primary); font-size: 48px; }
+        .featured-content { padding: 30px; }
+        .news-badge { display: inline-block; background: var(--gold-primary); color: var(--black-primary); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 16px; }
+        .news-date { color: var(--gray-dark); font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .featured-title { font-size: 28px; margin-bottom: 16px; color: var(--white); }
+        .featured-excerpt { color: var(--gray-mid); margin-bottom: 20px; }
+        .featured-sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-news { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 16px; padding: 24px; transition: all 0.3s ease; }
+        .sidebar-news:hover { border-color: var(--gold-primary); }
+        .sidebar-title { font-size: 18px; margin-bottom: 12px; }
         
         /* ============================================
            NEWS GRID
            ============================================ */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        
-        .news-card {
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .news-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold-primary);
-            box-shadow: 0 10px 30px var(--gold-glow);
-        }
-        
-        .news-image {
-            height: 180px;
-            background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-primary);
-            font-size: 36px;
-        }
-        
-        .news-content {
-            padding: 24px;
-        }
-        
-        .news-title {
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-        
-        .news-excerpt {
-            color: var(--gray-mid);
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
+        .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .news-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 16px; overflow: hidden; transition: all 0.3s ease; }
+        .news-card:hover { transform: translateY(-5px); border-color: var(--gold-primary); box-shadow: 0 10px 30px var(--gold-glow); }
+        .news-image { height: 180px; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); display: flex; align-items: center; justify-content: center; color: var(--gold-primary); font-size: 36px; }
+        .news-content { padding: 24px; }
+        .news-title { font-size: 18px; margin-bottom: 12px; }
+        .news-excerpt { color: var(--gray-mid); font-size: 14px; margin-bottom: 16px; }
         
         /* ============================================
            YOUTUBE SECTION
            ============================================ */
-        .youtube-section {
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px 0;
-        }
-        
-        .youtube-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            background: #000;
-        }
-        
-        .youtube-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
-            color: var(--gray-mid);
-        }
-        
-        .youtube-placeholder .play-icon {
-            font-size: 64px;
-            color: var(--gold-primary);
-            margin-bottom: 20px;
-        }
+        .youtube-section { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 40px; margin: 40px 0; }
+        .youtube-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; }
+        .youtube-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); color: var(--gray-mid); }
+        .youtube-placeholder .play-icon { font-size: 64px; color: var(--gold-primary); margin-bottom: 20px; }
         
         /* ============================================
            GALLERY SECTION
            ============================================ */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .gallery-item:hover {
-            border-color: var(--gold-primary);
-            transform: scale(1.02);
-        }
-        
-        .gallery-icon {
-            font-size: 40px;
-            color: var(--gold-primary);
-        }
-        
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px;
-            color: var(--white);
-        }
-        
-        .gallery-category {
-            color: var(--gold-primary);
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .gallery-title {
-            font-size: 14px;
-        }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .gallery-item { position: relative; aspect-ratio: 1; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.15); transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .gallery-item:hover { border-color: var(--gold-primary); transform: scale(1.02); }
+        .gallery-icon { font-size: 40px; color: var(--gold-primary); }
+        .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 20px; color: var(--white); }
+        .gallery-category { color: var(--gold-primary); font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+        .gallery-title { font-size: 14px; }
         
         /* ============================================
            UPCOMING EVENTS
            ============================================ */
-        .events-list {
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 30px;
-        }
-        
-        .event-item {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-        
-        .event-item:last-child {
-            border-bottom: none;
-        }
-        
-        .event-date {
-            text-align: center;
-            min-width: 70px;
-        }
-        
-        .event-day {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--gold-primary);
-            font-family: var(--font-heading);
-            line-height: 1;
-        }
-        
-        .event-month {
-            font-size: 14px;
-            color: var(--gray-mid);
-            text-transform: uppercase;
-        }
-        
-        .event-details {
-            flex: 1;
-        }
-        
-        .event-title {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-        
-        .event-meta {
-            display: flex;
-            gap: 20px;
-            color: var(--gray-dark);
-            font-size: 13px;
-        }
-        
-        .event-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .events-list { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px; }
+        .event-item { display: flex; align-items: center; gap: 24px; padding: 20px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
+        .event-item:last-child { border-bottom: none; }
+        .event-date { text-align: center; min-width: 70px; }
+        .event-day { font-size: 32px; font-weight: 700; color: var(--gold-primary); font-family: var(--font-heading); line-height: 1; }
+        .event-month { font-size: 14px; color: var(--gray-mid); text-transform: uppercase; }
+        .event-details { flex: 1; }
+        .event-title { font-size: 18px; margin-bottom: 8px; }
+        .event-meta { display: flex; gap: 20px; color: var(--gray-dark); font-size: 13px; }
+        .event-meta span { display: flex; align-items: center; gap: 6px; }
         
         /* ============================================
            CTA SECTION
            ============================================ */
-        .cta-section {
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            padding: 60px 0;
-            text-align: center;
-            margin-top: 40px;
-        }
-        
-        .cta-title {
-            font-size: clamp(28px, 4vw, 40px);
-            color: var(--black-primary);
-            margin-bottom: 16px;
-        }
-        
-        .btn-black {
-            background: var(--black-primary);
-            color: var(--gold-primary);
-        }
-        
-        .btn-black:hover {
-            background: var(--black-secondary);
-            transform: translateY(-2px);
-        }
+        .cta-section { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); padding: 60px 0; text-align: center; margin-top: 40px; }
+        .cta-title { font-size: clamp(28px, 4vw, 40px); color: var(--black-primary); margin-bottom: 16px; }
+        .btn-black { background: var(--black-primary); color: var(--gold-primary); }
+        .btn-black:hover { background: var(--black-secondary); transform: translateY(-2px); }
         
         /* ============================================
            FOOTER
            ============================================ */
-        .footer {
-            background: var(--black-primary);
-            padding: 60px 0 30px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-logo {
-            margin-bottom: 20px;
-        }
-        
-        .footer-desc {
-            color: var(--gray-mid);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 16px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-primary);
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: var(--gold-primary);
-            color: var(--black-primary);
-        }
-        
-        .footer-title {
-            color: var(--gold-primary);
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: var(--gray-mid);
-            font-size: 14px;
-        }
-        
-        .footer-links a:hover {
-            color: var(--gold-primary);
-        }
-        
-        .footer-contact p {
-            color: var(--gray-mid);
-            font-size: 14px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            color: var(--gray-mid);
-            font-size: 14px;
-        }
+        .footer { background: var(--black-primary); padding: 60px 0 30px; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
+        .footer-logo { margin-bottom: 20px; }
+        .footer-desc { color: var(--gray-mid); font-size: 14px; margin-bottom: 20px; }
+        .social-links { display: flex; gap: 16px; }
+        .social-link { width: 40px; height: 40px; background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); transition: all 0.3s ease; }
+        .social-link:hover { background: var(--gold-primary); color: var(--black-primary); }
+        .footer-title { color: var(--gold-primary); font-size: 18px; margin-bottom: 20px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--gray-mid); font-size: 14px; }
+        .footer-links a:hover { color: var(--gold-primary); }
+        .footer-contact p { color: var(--gray-mid); font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.1); color: var(--gray-mid); font-size: 14px; }
         
         /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 1024px) {
-            .featured-news {
-                grid-template-columns: 1fr;
-            }
-            
-            .news-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .featured-news { grid-template-columns: 1fr; }
+            .news-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
-        
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                right: 0;
-                background: var(--black-primary);
-                flex-direction: column;
-                padding: 30px;
-                border-bottom: 1px solid var(--gold-primary);
-            }
-            
-            .nav-menu.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .lang-toggle {
-                margin-left: 0;
-                margin-top: 16px;
-            }
-            
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .event-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .youtube-section {
-                padding: 20px;
-            }
+            .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 30px; border-bottom: 1px solid var(--gold-primary); z-index: 999; }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .lang-toggle { margin-left: 0; margin-top: 16px; }
+            .news-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .event-item { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .youtube-section { padding: 20px; }
         }
-        
         @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
+            .gallery-grid { grid-template-columns: 1fr; }
         }
         
         /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease forwards;
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { animation: fadeInUp 0.8s ease forwards; }
     </style>
 </head>
 <body>
@@ -799,7 +275,7 @@
                 <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
                 <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
                 <a href="courses.html" class="nav-link" data-en="Courses" data-am="ኮርሶች">Courses</a>
-                <a href="student-portal/login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
+                <a href="student-login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
                 <a href="register.html" class="nav-link" data-en="Register" data-am="ይመዝገቡ">Register</a>
                 <a href="contact.html" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a>
                 <a href="news-events.html" class="nav-link active" data-en="News & Events" data-am="ዜና እና ዝግጅቶች">News & Events</a>
@@ -819,10 +295,7 @@
                 <span data-en="News &" data-am="ዜና እና">News &</span>
                 <span class="gold-text" data-en="Events" data-am="ዝግጅቶች">Events</span>
             </h1>
-            <p class="page-subtitle" data-en="Stay updated with the latest from Lovely Beauty College" 
-               data-am="ከላቭሊ ቢዩቲ ኮሌጅ የቅርብ ጊዜ ዜናዎችን ይከታተሉ">
-                Stay updated with the latest from Lovely Beauty College
-            </p>
+            <p class="page-subtitle" data-en="Stay updated with the latest from Lovely Beauty College" data-am="ከላቭሊ ቢዩቲ ኮሌጅ የቅርብ ጊዜ ዜናዎችን ይከታተሉ">Stay updated with the latest from Lovely Beauty College</p>
         </div>
     </section>
     
@@ -833,48 +306,19 @@
         <div class="container">
             <div class="featured-news">
                 <div class="featured-main fade-in-up">
-                    <div class="featured-image">
-                        <span>🏆</span>
-                    </div>
+                    <div class="featured-image"><span>🏆</span></div>
                     <div class="featured-content">
                         <span class="news-badge" data-en="FEATURED" data-am="የተለየ">FEATURED</span>
-                        <div class="news-date">
-                            <span>📅</span>
-                            <span>April 5, 2025</span>
-                        </div>
-                        <h2 class="featured-title" data-en="National Beauty Competition 2025 Announced" 
-                            data-am="ብሄራዊ የውበት ውድድር 2025 ይፋ ሆነ">
-                            National Beauty Competition 2025 Announced
-                        </h2>
-                        <p class="featured-excerpt" data-en="Lovely Beauty College is proud to announce the 5th National Beauty Competition, bringing together the best talent from across Ethiopia. Registration opens May 1st." 
-                           data-am="ላቭሊ ቢዩቲ ኮሌጅ 5ኛውን ብሄራዊ የውበት ውድድር በማወጅ ይኮራል። ምዝገባ ከግንቦት 1 ጀምሮ ይጀምራል።">
-                            Lovely Beauty College is proud to announce the 5th National Beauty Competition, bringing together the best talent from across Ethiopia. Registration opens May 1st.
-                        </p>
+                        <div class="news-date"><span>📅</span><span>April 5, 2025</span></div>
+                        <h2 class="featured-title" data-en="National Beauty Competition 2025 Announced" data-am="ብሄራዊ የውበት ውድድር 2025 ይፋ ሆነ">National Beauty Competition 2025 Announced</h2>
+                        <p class="featured-excerpt" data-en="Lovely Beauty College is proud to announce the 5th National Beauty Competition, bringing together the best talent from across Ethiopia. Registration opens May 1st." data-am="ላቭሊ ቢዩቲ ኮሌጅ 5ኛውን ብሄራዊ የውበት ውድድር በማወጅ ይኮራል። ምዝገባ ከግንቦት 1 ጀምሮ ይጀምራል።">Lovely Beauty College is proud to announce the 5th National Beauty Competition, bringing together the best talent from across Ethiopia. Registration opens May 1st.</p>
                         <a href="#" class="btn btn-outline-gold" data-en="Read More" data-am="ተጨማሪ ያንብቡ">Read More</a>
                     </div>
                 </div>
-                
                 <div class="featured-sidebar">
-                    <div class="sidebar-news fade-in-up">
-                        <span class="news-badge" style="background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary);" data-en="ANNOUNCEMENT" data-am="ማስታወቂያ">ANNOUNCEMENT</span>
-                        <h3 class="sidebar-title" data-en="New Campus Opening in Bole" data-am="አዲስ ካምፓስ በቦሌ ሊከፈት ነው">New Campus Opening in Bole</h3>
-                        <p style="color: var(--gray-mid); font-size: 14px; margin-bottom: 12px;" data-en="Coming September 2025" data-am="መስከረም 2025 ይመጣል">Coming September 2025</p>
-                        <div class="news-date">📅 April 1, 2025</div>
-                    </div>
-                    
-                    <div class="sidebar-news fade-in-up">
-                        <span class="news-badge" style="background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary);" data-en="SUCCESS STORY" data-am="የስኬት ታሪክ">SUCCESS STORY</span>
-                        <h3 class="sidebar-title" data-en="Graduate Opens Award-Winning Salon" data-am="ተመራቂ ተሸላሚ ሳሎን ከፈተ">Graduate Opens Award-Winning Salon</h3>
-                        <p style="color: var(--gray-mid); font-size: 14px; margin-bottom: 12px;" data-en="Meet Helen, Class of 2023" data-am="ሄለንን ያግኙ፣ የ2015 ተመራቂ">Meet Helen, Class of 2023</p>
-                        <div class="news-date">📅 March 28, 2025</div>
-                    </div>
-                    
-                    <div class="sidebar-news fade-in-up">
-                        <span class="news-badge" style="background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary);" data-en="TRAINING" data-am="ስልጠና">TRAINING</span>
-                        <h3 class="sidebar-title" data-en="Free Masterclass: Advanced Makeup Techniques" data-am="ነፃ ማስተርክላስ፡ የላቀ የሜካፕ ቴክኒኮች">Free Masterclass: Advanced Makeup Techniques</h3>
-                        <p style="color: var(--gray-mid); font-size: 14px; margin-bottom: 12px;" data-en="April 15, 2025 | 2:00 PM" data-am="ሚያዝያ 15, 2017 | 8፡00 ሰዓት">April 15, 2025 | 2:00 PM</p>
-                        <div class="news-date">📅 March 25, 2025</div>
-                    </div>
+                    <div class="sidebar-news fade-in-up"><span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);" data-en="ANNOUNCEMENT" data-am="ማስታወቂያ">ANNOUNCEMENT</span><h3 class="sidebar-title" data-en="New Campus Opening in Bole" data-am="አዲስ ካምፓስ በቦሌ ሊከፈት ነው">New Campus Opening in Bole</h3><p style="color:var(--gray-mid);font-size:14px;margin-bottom:12px;" data-en="Coming September 2025" data-am="መስከረም 2025 ይመጣል">Coming September 2025</p><div class="news-date">📅 April 1, 2025</div></div>
+                    <div class="sidebar-news fade-in-up"><span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);" data-en="SUCCESS STORY" data-am="የስኬት ታሪክ">SUCCESS STORY</span><h3 class="sidebar-title" data-en="Graduate Opens Award-Winning Salon" data-am="ተመራቂ ተሸላሚ ሳሎን ከፈተ">Graduate Opens Award-Winning Salon</h3><p style="color:var(--gray-mid);font-size:14px;margin-bottom:12px;" data-en="Meet Helen, Class of 2023" data-am="ሄለንን ያግኙ፣ የ2015 ተመራቂ">Meet Helen, Class of 2023</p><div class="news-date">📅 March 28, 2025</div></div>
+                    <div class="sidebar-news fade-in-up"><span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);" data-en="TRAINING" data-am="ስልጠና">TRAINING</span><h3 class="sidebar-title" data-en="Free Masterclass: Advanced Makeup Techniques" data-am="ነፃ ማስተርክላስ፡ የላቀ የሜካፕ ቴክኒኮች">Free Masterclass: Advanced Makeup Techniques</h3><p style="color:var(--gray-mid);font-size:14px;margin-bottom:12px;" data-en="April 15, 2025 | 2:00 PM" data-am="ሚያዝያ 15, 2017 | 8፡00 ሰዓት">April 15, 2025 | 2:00 PM</p><div class="news-date">📅 March 25, 2025</div></div>
                 </div>
             </div>
         </div>
@@ -883,49 +327,13 @@
     <!-- ============================================ -->
     <!-- LATEST NEWS GRID                              -->
     <!-- ============================================ -->
-    <section class="section" style="padding-top: 0;">
+    <section class="section" style="padding-top:0;">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span data-en="Latest" data-am="የቅርብ ጊዜ">Latest</span>
-                    <span class="gold-text" data-en="News" data-am="ዜናዎች">News</span>
-                </h2>
-                <a href="#" class="btn btn-outline-gold" data-en="View All News" data-am="ሁሉንም ዜናዎች ይመልከቱ">View All News</a>
-            </div>
-            
+            <div class="section-header"><h2 class="section-title"><span data-en="Latest" data-am="የቅርብ ጊዜ">Latest</span> <span class="gold-text" data-en="News" data-am="ዜናዎች">News</span></h2><a href="#" class="btn btn-outline-gold" data-en="View All News" data-am="ሁሉንም ዜናዎች ይመልከቱ">View All News</a></div>
             <div class="news-grid">
-                <div class="news-card fade-in-up">
-                    <div class="news-image">
-                        <span>💇</span>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">📅 March 20, 2025</div>
-                        <h3 class="news-title" data-en="New Hairdressing Equipment Arrives" data-am="አዲስ የፀጉር መሳሪያዎች ደረሱ">New Hairdressing Equipment Arrives</h3>
-                        <p class="news-excerpt" data-en="State-of-the-art equipment installed at all three campuses." data-am="በሶስቱም ካምፓሶች ዘመናዊ መሳሪያዎች ተገጠሙ።">State-of-the-art equipment installed at all three campuses.</p>
-                    </div>
-                </div>
-                
-                <div class="news-card fade-in-up">
-                    <div class="news-image">
-                        <span>🎓</span>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">📅 March 15, 2025</div>
-                        <h3 class="news-title" data-en="Graduation Ceremony 2025" data-am="የምረቃ ስነ-ስርዓት 2017">Graduation Ceremony 2025</h3>
-                        <p class="news-excerpt" data-en="Over 200 students graduated in our spring ceremony." data-am="ከ200 በላይ ተማሪዎች በፀደይ ስነ-ስርዓታችን ተመረቁ።">Over 200 students graduated in our spring ceremony.</p>
-                    </div>
-                </div>
-                
-                <div class="news-card fade-in-up">
-                    <div class="news-image">
-                        <span>🤝</span>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">📅 March 10, 2025</div>
-                        <h3 class="news-title" data-en="Partnership with International Beauty Brand" data-am="ከአለም አቀፍ የውበት ብራንድ ጋር ሽርክና">Partnership with International Beauty Brand</h3>
-                        <p class="news-excerpt" data-en="Exclusive training opportunities for our students." data-am="ለተማሪዎቻችን ልዩ የስልጠና እድሎች።">Exclusive training opportunities for our students.</p>
-                    </div>
-                </div>
+                <div class="news-card fade-in-up"><div class="news-image"><span>💇</span></div><div class="news-content"><div class="news-date">📅 March 20, 2025</div><h3 class="news-title" data-en="New Hairdressing Equipment Arrives" data-am="አዲስ የፀጉር መሳሪያዎች ደረሱ">New Hairdressing Equipment Arrives</h3><p class="news-excerpt" data-en="State-of-the-art equipment installed at all three campuses." data-am="በሶስቱም ካምፓሶች ዘመናዊ መሳሪያዎች ተገጠሙ።">State-of-the-art equipment installed at all three campuses.</p></div></div>
+                <div class="news-card fade-in-up"><div class="news-image"><span>🎓</span></div><div class="news-content"><div class="news-date">📅 March 15, 2025</div><h3 class="news-title" data-en="Graduation Ceremony 2025" data-am="የምረቃ ስነ-ስርዓት 2017">Graduation Ceremony 2025</h3><p class="news-excerpt" data-en="Over 200 students graduated in our spring ceremony." data-am="ከ200 በላይ ተማሪዎች በፀደይ ስነ-ስርዓታችን ተመረቁ።">Over 200 students graduated in our spring ceremony.</p></div></div>
+                <div class="news-card fade-in-up"><div class="news-image"><span>🤝</span></div><div class="news-content"><div class="news-date">📅 March 10, 2025</div><h3 class="news-title" data-en="Partnership with International Beauty Brand" data-am="ከአለም አቀፍ የውበት ብራንድ ጋር ሽርክና">Partnership with International Beauty Brand</h3><p class="news-excerpt" data-en="Exclusive training opportunities for our students." data-am="ለተማሪዎቻችን ልዩ የስልጠና እድሎች።">Exclusive training opportunities for our students.</p></div></div>
             </div>
         </div>
     </section>
@@ -933,177 +341,46 @@
     <!-- ============================================ -->
     <!-- YOUTUBE SECTION                               -->
     <!-- ============================================ -->
-    <section class="section" style="padding-top: 0;">
+    <section class="section" style="padding-top:0;">
         <div class="container">
             <div class="youtube-section fade-in-up">
-                <h2 class="section-title" style="text-align: center; margin-bottom: 24px;">
-                    <span data-en="Watch Our" data-am="ይመልከቱ">Watch Our</span>
-                    <span class="gold-text" data-en="Latest Video" data-am="የቅርብ ጊዜ ቪዲዮ">Latest Video</span>
-                </h2>
-                
-                <div class="youtube-container">
-                    <div class="youtube-placeholder">
-                        <div class="play-icon">▶️</div>
-                        <h3 style="color: var(--gold-primary); margin-bottom: 12px;" data-en="YouTube Video Placeholder" data-am="የዩቲዩብ ቪዲዮ ቦታ">YouTube Video Placeholder</h3>
-                        <p style="color: var(--gray-mid); margin-bottom: 20px;" data-en="Replace with your YouTube embed code" data-am="በእርስዎ የዩቲዩብ ኤምቤድ ኮድ ይተኩ">Replace with your YouTube embed code</p>
-                        <p style="color: var(--gray-dark); font-size: 12px;" data-en="Example: Campus Tour, Student Testimonials, Training Highlights" 
-                           data-am="ምሳሌ፡ የካምፓስ ጉብኝት፣ የተማሪ ምስክርነቶች፣ የስልጠና ዋና ዋና ነጥቦች">
-                            Example: Campus Tour, Student Testimonials, Training Highlights
-                        </p>
-                    </div>
-                </div>
-                
-                <p style="color: var(--gray-mid); font-size: 14px; text-align: center; margin-top: 20px;" 
-                   data-en="Subscribe to our YouTube channel for tutorials, campus tours, and student success stories!" 
-                   data-am="ለትምህርቶች፣ የካምፓስ ጉብኝቶች እና የተማሪ ስኬት ታሪኮች የዩቲዩብ ቻናላችንን ይመዝገቡ!">
-                    Subscribe to our YouTube channel for tutorials, campus tours, and student success stories!
-                </p>
+                <h2 class="section-title" style="text-align:center;margin-bottom:24px;"><span data-en="Watch Our" data-am="ይመልከቱ">Watch Our</span> <span class="gold-text" data-en="Latest Video" data-am="የቅርብ ጊዜ ቪዲዮ">Latest Video</span></h2>
+                <div class="youtube-container"><div class="youtube-placeholder"><div class="play-icon">▶️</div><h3 style="color:var(--gold-primary);margin-bottom:12px;" data-en="YouTube Video Placeholder" data-am="የዩቲዩብ ቪዲዮ ቦታ">YouTube Video Placeholder</h3><p style="color:var(--gray-mid);margin-bottom:20px;" data-en="Replace with your YouTube embed code" data-am="በእርስዎ የዩቲዩብ ኤምቤድ ኮድ ይተኩ">Replace with your YouTube embed code</p></div></div>
+                <p style="color:var(--gray-mid);font-size:14px;text-align:center;margin-top:20px;" data-en="Subscribe to our YouTube channel for tutorials, campus tours, and student success stories!" data-am="ለትምህርቶች፣ የካምፓስ ጉብኝቶች እና የተማሪ ስኬት ታሪኮች የዩቲዩብ ቻናላችንን ይመዝገቡ!">Subscribe to our YouTube channel for tutorials, campus tours, and student success stories!</p>
             </div>
         </div>
     </section>
     
     <!-- ============================================ -->
-    <!-- GALLERY SECTION (Cloudinary Ready)            -->
+    <!-- GALLERY SECTION                               -->
     <!-- ============================================ -->
-    <section class="section" style="padding-top: 0;">
+    <section class="section" style="padding-top:0;">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span data-en="Photo" data-am="ፎቶ">Photo</span>
-                    <span class="gold-text" data-en="Gallery" data-am="ማዕከለ-ስዕላት">Gallery</span>
-                </h2>
-                <a href="#" class="btn btn-outline-gold" data-en="View Full Gallery" data-am="ሙሉ ማዕከለ-ስዕላት ይመልከቱ">View Full Gallery</a>
-            </div>
-            
+            <div class="section-header"><h2 class="section-title"><span data-en="Photo" data-am="ፎቶ">Photo</span> <span class="gold-text" data-en="Gallery" data-am="ማዕከለ-ስዕላት">Gallery</span></h2><a href="#" class="btn btn-outline-gold" data-en="View Full Gallery" data-am="ሙሉ ማዕከለ-ስዕላት ይመልከቱ">View Full Gallery</a></div>
             <div class="gallery-grid">
-                <div class="gallery-item fade-in-up">
-                    <span class="gallery-icon">🎓</span>
-                    <div class="gallery-overlay">
-                        <div class="gallery-category" data-en="Graduation" data-am="ምረቃ">Graduation</div>
-                        <div class="gallery-title" data-en="Class of 2024" data-am="የ2016 ክፍል">Class of 2024</div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item fade-in-up">
-                    <span class="gallery-icon">🏆</span>
-                    <div class="gallery-overlay">
-                        <div class="gallery-category" data-en="Competition" data-am="ውድድር">Competition</div>
-                        <div class="gallery-title" data-en="National Beauty 2024" data-am="ብሄራዊ ውበት 2016">National Beauty 2024</div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item fade-in-up">
-                    <span class="gallery-icon">💇</span>
-                    <div class="gallery-overlay">
-                        <div class="gallery-category" data-en="Training" data-am="ስልጠና">Training</div>
-                        <div class="gallery-title" data-en="Hairdressing Workshop" data-am="የፀጉር አውደ ጥናት">Hairdressing Workshop</div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item fade-in-up">
-                    <span class="gallery-icon">💄</span>
-                    <div class="gallery-overlay">
-                        <div class="gallery-category" data-en="Training" data-am="ስልጠና">Training</div>
-                        <div class="gallery-title" data-en="Makeup Masterclass" data-am="የሜካፕ ማስተርክላስ">Makeup Masterclass</div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item fade-in-up">
-                    <span class="gallery-icon">🏫</span>
-                    <div class="gallery-overlay">
-                        <div class="gallery-category" data-en="Campus" data-am="ካምፓስ">Campus</div>
-                        <div class="gallery-title" data-en="Megenagna Campus" data-am="መገናኛ ካምፓስ">Megenagna Campus</div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item fade-in-up">
-                    <span class="gallery-icon">🎉</span>
-                    <div class="gallery-overlay">
-                        <div class="gallery-category" data-en="Events" data-am="ዝግጅቶች">Events</div>
-                        <div class="gallery-title" data-en="Open House 2024" data-am="ክፍት ቤት 2016">Open House 2024</div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item fade-in-up">
-                    <span class="gallery-icon">👩‍🎓</span>
-                    <div class="gallery-overlay">
-                        <div class="gallery-category" data-en="Students" data-am="ተማሪዎች">Students</div>
-                        <div class="gallery-title" data-en="Practical Session" data-am="ተግባራዊ ክፍለ ጊዜ">Practical Session</div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item fade-in-up">
-                    <span class="gallery-icon">🏅</span>
-                    <div class="gallery-overlay">
-                        <div class="gallery-category" data-en="Awards" data-am="ሽልማቶች">Awards</div>
-                        <div class="gallery-title" data-en="Excellence Award" data-am="የላቀ ውጤት ሽልማት">Excellence Award</div>
-                    </div>
-                </div>
+                <div class="gallery-item fade-in-up"><span class="gallery-icon">🎓</span><div class="gallery-overlay"><div class="gallery-category" data-en="Graduation" data-am="ምረቃ">Graduation</div><div class="gallery-title" data-en="Class of 2024" data-am="የ2016 ክፍል">Class of 2024</div></div></div>
+                <div class="gallery-item fade-in-up"><span class="gallery-icon">🏆</span><div class="gallery-overlay"><div class="gallery-category" data-en="Competition" data-am="ውድድር">Competition</div><div class="gallery-title" data-en="National Beauty 2024" data-am="ብሄራዊ ውበት 2016">National Beauty 2024</div></div></div>
+                <div class="gallery-item fade-in-up"><span class="gallery-icon">💇</span><div class="gallery-overlay"><div class="gallery-category" data-en="Training" data-am="ስልጠና">Training</div><div class="gallery-title" data-en="Hairdressing Workshop" data-am="የፀጉር አውደ ጥናት">Hairdressing Workshop</div></div></div>
+                <div class="gallery-item fade-in-up"><span class="gallery-icon">💄</span><div class="gallery-overlay"><div class="gallery-category" data-en="Training" data-am="ስልጠና">Training</div><div class="gallery-title" data-en="Makeup Masterclass" data-am="የሜካፕ ማስተርክላስ">Makeup Masterclass</div></div></div>
+                <div class="gallery-item fade-in-up"><span class="gallery-icon">🏫</span><div class="gallery-overlay"><div class="gallery-category" data-en="Campus" data-am="ካምፓስ">Campus</div><div class="gallery-title" data-en="Megenagna Campus" data-am="መገናኛ ካምፓስ">Megenagna Campus</div></div></div>
+                <div class="gallery-item fade-in-up"><span class="gallery-icon">🎉</span><div class="gallery-overlay"><div class="gallery-category" data-en="Events" data-am="ዝግጅቶች">Events</div><div class="gallery-title" data-en="Open House 2024" data-am="ክፍት ቤት 2016">Open House 2024</div></div></div>
+                <div class="gallery-item fade-in-up"><span class="gallery-icon">👩‍🎓</span><div class="gallery-overlay"><div class="gallery-category" data-en="Students" data-am="ተማሪዎች">Students</div><div class="gallery-title" data-en="Practical Session" data-am="ተግባራዊ ክፍለ ጊዜ">Practical Session</div></div></div>
+                <div class="gallery-item fade-in-up"><span class="gallery-icon">🏅</span><div class="gallery-overlay"><div class="gallery-category" data-en="Awards" data-am="ሽልማቶች">Awards</div><div class="gallery-title" data-en="Excellence Award" data-am="የላቀ ውጤት ሽልማት">Excellence Award</div></div></div>
             </div>
-            
-            <p style="color: var(--gray-dark); font-size: 13px; text-align: center; margin-top: 24px;" 
-               data-en="* Connect your Cloudinary account to display real images. See documentation for setup instructions." 
-               data-am="* እውነተኛ ምስሎችን ለማሳየት የCloudinary መለያዎን ያገናኙ። ለማዋቀር መመሪያ ሰነዱን ይመልከቱ።">
-                * Connect your Cloudinary account to display real images. See documentation for setup instructions.
-            </p>
+            <p style="color:var(--gray-dark);font-size:13px;text-align:center;margin-top:24px;" data-en="* Connect your Cloudinary account to display real images." data-am="* እውነተኛ ምስሎችን ለማሳየት የCloudinary መለያዎን ያገናኙ።">* Connect your Cloudinary account to display real images.</p>
         </div>
     </section>
     
     <!-- ============================================ -->
     <!-- UPCOMING EVENTS                               -->
     <!-- ============================================ -->
-    <section class="section" style="padding-top: 0;">
+    <section class="section" style="padding-top:0;">
         <div class="container">
-            <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">
-                <span data-en="Upcoming" data-am="መጪ">Upcoming</span>
-                <span class="gold-text" data-en="Events" data-am="ዝግጅቶች">Events</span>
-            </h2>
-            
+            <h2 class="section-title" style="text-align:center;margin-bottom:40px;"><span data-en="Upcoming" data-am="መጪ">Upcoming</span> <span class="gold-text" data-en="Events" data-am="ዝግጅቶች">Events</span></h2>
             <div class="events-list fade-in-up">
-                <div class="event-item">
-                    <div class="event-date">
-                        <div class="event-day">15</div>
-                        <div class="event-month" data-en="APR" data-am="ሚያ">APR</div>
-                    </div>
-                    <div class="event-details">
-                        <h3 class="event-title" data-en="Free Makeup Masterclass" data-am="ነፃ የሜካፕ ማስተርክላስ">Free Makeup Masterclass</h3>
-                        <div class="event-meta">
-                            <span>⏰ 2:00 PM - 5:00 PM</span>
-                            <span>📍 Megenagna Campus</span>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-outline-gold" data-en="Register" data-am="ይመዝገቡ">Register</a>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-date">
-                        <div class="event-day">22</div>
-                        <div class="event-month" data-en="APR" data-am="ሚያ">APR</div>
-                    </div>
-                    <div class="event-details">
-                        <h3 class="event-title" data-en="Career Day & Job Fair" data-am="የሙያ ቀን እና የስራ ትርኢት">Career Day & Job Fair</h3>
-                        <div class="event-meta">
-                            <span>⏰ 10:00 AM - 4:00 PM</span>
-                            <span>📍 All Campuses</span>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-outline-gold" data-en="Learn More" data-am="ተጨማሪ">Learn More</a>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-date">
-                        <div class="event-day">01</div>
-                        <div class="event-month" data-en="MAY" data-am="ግን">MAY</div>
-                    </div>
-                    <div class="event-details">
-                        <h3 class="event-title" data-en="New Intake Registration Opens" data-am="አዲስ የምዝገባ ቅበላ ይከፈታል">New Intake Registration Opens</h3>
-                        <div class="event-meta">
-                            <span>⏰ All Day</span>
-                            <span>📍 Online & Campuses</span>
-                        </div>
-                    </div>
-                    <a href="register.html" class="btn btn-gold" data-en="Register Now" data-am="አሁን ይመዝገቡ">Register Now</a>
-                </div>
+                <div class="event-item"><div class="event-date"><div class="event-day">15</div><div class="event-month" data-en="APR" data-am="ሚያ">APR</div></div><div class="event-details"><h3 class="event-title" data-en="Free Makeup Masterclass" data-am="ነፃ የሜካፕ ማስተርክላስ">Free Makeup Masterclass</h3><div class="event-meta"><span>⏰ 2:00 PM - 5:00 PM</span><span>📍 Megenagna Campus</span></div></div><a href="#" class="btn btn-outline-gold" data-en="Register" data-am="ይመዝገቡ">Register</a></div>
+                <div class="event-item"><div class="event-date"><div class="event-day">22</div><div class="event-month" data-en="APR" data-am="ሚያ">APR</div></div><div class="event-details"><h3 class="event-title" data-en="Career Day & Job Fair" data-am="የሙያ ቀን እና የስራ ትርኢት">Career Day & Job Fair</h3><div class="event-meta"><span>⏰ 10:00 AM - 4:00 PM</span><span>📍 All Campuses</span></div></div><a href="#" class="btn btn-outline-gold" data-en="Learn More" data-am="ተጨማሪ">Learn More</a></div>
+                <div class="event-item"><div class="event-date"><div class="event-day">01</div><div class="event-month" data-en="MAY" data-am="ግን">MAY</div></div><div class="event-details"><h3 class="event-title" data-en="New Intake Registration Opens" data-am="አዲስ የምዝገባ ቅበላ ይከፈታል">New Intake Registration Opens</h3><div class="event-meta"><span>⏰ All Day</span><span>📍 Online & Campuses</span></div></div><a href="register.html" class="btn btn-gold" data-en="Register Now" data-am="አሁን ይመዝገቡ">Register Now</a></div>
             </div>
         </div>
     </section>
@@ -1114,15 +391,8 @@
     <section class="cta-section">
         <div class="container">
             <h2 class="cta-title" data-en="Never Miss an Update" data-am="ዝማኔ ፈጽሞ አያምልጥዎ">Never Miss an Update</h2>
-            <p style="color: var(--black-primary); margin-bottom: 24px; opacity: 0.9;" 
-               data-en="Follow us on social media for the latest news and events" 
-               data-am="ለቅርብ ጊዜ ዜናዎች እና ዝግጅቶች በማህበራዊ ሚዲያ ይከታተሉን">
-                Follow us on social media for the latest news and events
-            </p>
-            <div style="display: flex; gap: 16px; justify-content: center;">
-                <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="btn btn-black">📘 Facebook</a>
-                <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="btn btn-black">🎵 TikTok</a>
-            </div>
+            <p style="color:var(--black-primary);margin-bottom:24px;opacity:0.9;" data-en="Follow us on social media for the latest news and events" data-am="ለቅርብ ጊዜ ዜናዎች እና ዝግጅቶች በማህበራዊ ሚዲያ ይከታተሉን">Follow us on social media for the latest news and events</p>
+            <div style="display:flex;gap:16px;justify-content:center;"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="btn btn-black">📘 Facebook</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="btn btn-black">🎵 TikTok</a></div>
         </div>
     </section>
     
@@ -1132,143 +402,34 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-info">
-                    <div class="footer-logo">
-                        <div class="logo-main" style="color: var(--gold-primary);">LOVELY BEAUTY</div>
-                        <div class="logo-sub">EST 1998 G.C.</div>
-                    </div>
-                    <p class="footer-desc" data-en="The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998." 
-                       data-am="የመጀመሪያው የግል የውበት ኮሌጅ በኢትዮጵያ፣ ከ1998 ጀምሮ የውበት ባለሙያዎችን በመቅረጽ ላይ።">
-                        The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a>
-                        <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a>
-                    </div>
-                </div>
-                
-                <div class="footer-links-section">
-                    <h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html" data-en="Home" data-am="መነሻ">Home</a></li>
-                        <li><a href="about.html" data-en="About Us" data-am="ስለ እኛ">About Us</a></li>
-                        <li><a href="courses.html" data-en="Courses" data-am="ኮርሶች">Courses</a></li>
-                        <li><a href="news-events.html" data-en="News & Events" data-am="ዜና እና ዝግጅቶች">News & Events</a></li>
-                        <li><a href="contact.html" data-en="Contact" data-am="አድራሻ">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-courses">
-                    <h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4>
-                    <ul class="footer-links">
-                        <li><a href="courses.html" data-en="Hairdressing" data-am="ፀጉር ስራ">Hairdressing</a></li>
-                        <li><a href="courses.html" data-en="Makeup Artistry" data-am="ሜካፕ">Makeup Artistry</a></li>
-                        <li><a href="courses.html" data-en="Nail Technology" data-am="ጥፍር ጥበብ">Nail Technology</a></li>
-                        <li><a href="courses.html" data-en="Barbering" data-am="ወንድ ፀጉር">Barbering</a></li>
-                        <li><a href="courses.html" data-en="Skincare" data-am="የቆዳ እንክብካቤ">Skincare</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4>
-                    <p>📍 <span data-en="Megenagna, Addis Ababa" data-am="መገናኛ፣ አዲስ አበባ">Megenagna, Addis Ababa</span></p>
-                    <p>📞 0991171819 / 0911221032</p>
-                    <p>📞 0112750345 (Sebatgna)</p>
-                    <p>📞 0116587060 (Megenagna)</p>
-                </div>
+                <div class="footer-info"><div class="footer-logo"><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">EST 1998 G.C.</div></div><p class="footer-desc" data-en="The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998." data-am="የመጀመሪያው የግል የውበት ኮሌጅ በኢትዮጵያ፣ ከ1998 ጀምሮ የውበት ባለሙያዎችን በመቅረጽ ላይ።">The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998.</p><div class="social-links"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a></div></div>
+                <div class="footer-links-section"><h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4><ul class="footer-links"><li><a href="index.html" data-en="Home" data-am="መነሻ">Home</a></li><li><a href="about.html" data-en="About Us" data-am="ስለ እኛ">About Us</a></li><li><a href="courses.html" data-en="Courses" data-am="ኮርሶች">Courses</a></li><li><a href="news-events.html" data-en="News & Events" data-am="ዜና እና ዝግጅቶች">News & Events</a></li><li><a href="contact.html" data-en="Contact" data-am="አድራሻ">Contact</a></li></ul></div>
+                <div class="footer-courses"><h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4><ul class="footer-links"><li><a href="courses.html" data-en="Hairdressing" data-am="ፀጉር ስራ">Hairdressing</a></li><li><a href="courses.html" data-en="Makeup Artistry" data-am="ሜካፕ">Makeup Artistry</a></li><li><a href="courses.html" data-en="Nail Technology" data-am="ጥፍር ጥበብ">Nail Technology</a></li><li><a href="courses.html" data-en="Barbering" data-am="ወንድ ፀጉር">Barbering</a></li><li><a href="courses.html" data-en="Skincare" data-am="የቆዳ እንክብካቤ">Skincare</a></li></ul></div>
+                <div class="footer-contact"><h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4><p>📍 <span data-en="Megenagna, Addis Ababa" data-am="መገናኛ፣ አዲስ አበባ">Megenagna, Addis Ababa</span></p><p>📞 0991171819 / 0911221032</p><p>📞 0112750345 (Sebatgna)</p><p>📞 0116587060 (Megenagna)</p><p>✉️ info@lovelybeautycollege.com</p></div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>© 2025 Lovely Plus Beauty College. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
-            </div>
+            <div class="footer-bottom"><p>© 2025 Lovely Plus Beauty College. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p></div>
         </div>
     </footer>
     
-    <!-- ============================================ -->
-    <!-- JAVASCRIPT                                    -->
-    <!-- ============================================ -->
     <script>
-        // ============================================
-        // MOBILE MENU TOGGLE
-        // ============================================
+        // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navMenu = document.getElementById('navMenu');
+        if (mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰'; }); }
+        document.querySelectorAll('.nav-link').forEach(link => { link.addEventListener('click', () => { navMenu.classList.remove('active'); if (mobileMenuBtn) mobileMenuBtn.textContent = '☰'; }); });
         
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
-            });
-        }
-        
-        // ============================================
-        // LANGUAGE TOGGLE
-        // ============================================
+        // Language Toggle
         let currentLang = localStorage.getItem('lovelyLang') || 'en';
-        
-        function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('lovelyLang', lang);
-            
-            const elements = document.querySelectorAll('[data-en][data-am]');
-            elements.forEach(el => {
-                const text = el.getAttribute(`data-${lang}`);
-                if (text) el.textContent = text;
-            });
-            
-            const langToggle = document.getElementById('langToggle');
-            if (langToggle) {
-                langToggle.textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ';
-            }
-            
-            document.documentElement.lang = lang;
-        }
-        
-        const langToggle = document.getElementById('langToggle');
-        if (langToggle) {
-            langToggle.addEventListener('click', () => {
-                setLanguage(currentLang === 'en' ? 'am' : 'en');
-            });
-        }
-        
+        function setLanguage(lang) { currentLang = lang; localStorage.setItem('lovelyLang', lang); document.querySelectorAll('[data-en][data-am]').forEach(el => { const text = el.getAttribute(`data-${lang}`); if (text) el.textContent = text; }); document.getElementById('langToggle').textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ'; document.documentElement.lang = lang; }
+        document.getElementById('langToggle').addEventListener('click', () => { setLanguage(currentLang === 'en' ? 'am' : 'en'); });
         setLanguage(currentLang);
         
-        // ============================================
-        // STICKY HEADER SHADOW
-        // ============================================
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.6)';
-            } else {
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-            }
-        });
-        
-        // ============================================
-        // FADE IN ANIMATIONS
-        // ============================================
-        const fadeElements = document.querySelectorAll('.fade-in-up');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        fadeElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
+        // Sticky Header & Animations
+        window.addEventListener('scroll', () => { document.querySelector('.header').style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0, 0, 0, 0.6)' : '0 4px 20px rgba(0, 0, 0, 0.5)'; });
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } }); }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-up').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'all 0.6s ease'; observer.observe(el); });
         
         console.log('🌟 Lovely Beauty College - News & Events Page Loaded');
-        console.log('📺 YouTube placeholder ready - replace with your embed code');
-        console.log('🖼️ Gallery ready - connect Cloudinary for real images');
     </script>
 </body>
 </html>
