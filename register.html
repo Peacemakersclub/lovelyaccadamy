@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Register | Lovely Plus Beauty College</title>
+    <meta name="description" content="Register for professional beauty courses at Lovely Plus Beauty College. Start your career in hairdressing, makeup, skincare, and more.">
+    
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           LOVELY BEAUTY COLLEGE - GOLD & BLACK THEME
+           ============================================ */
+        
+        :root {
+            --black-primary: #0A0A0A;
+            --black-secondary: #111111;
+            --black-card: #1A1A1A;
+            --gold-primary: #D4AF37;
+            --gold-light: #F5D76E;
+            --gold-dark: #996515;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --white: #FFFFFF;
+            --gray-light: #E0E0E0;
+            --gray-mid: #B0B0B0;
+            --gray-dark: #666666;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            
+            --container-max: 1280px;
+            --header-height: 80px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--black-primary);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+        
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--black-primary);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--header-height);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+        
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-main {
+            font-size: 22px;
+            color: var(--gold-primary);
+            letter-spacing: 2px;
+        }
+        
+        .logo-sub {
+            font-size: 11px;
+            color: var(--gray-mid);
+            letter-spacing: 1px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--gray-light);
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-primary);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--gold-primary);
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 16px;
+        }
+        
+        .lang-toggle:hover {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 28px;
+            cursor: pointer;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: var(--black-primary);
+            box-shadow: 0 4px 15px var(--gold-glow);
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--gold-glow);
+        }
+        
+        .btn-outline-gold {
+            background: transparent;
+            border: 2px solid var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .btn-outline-gold:hover {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+        }
+        
+        /* ============================================
+           PAGE HEADER
+           ============================================ */
+        .page-header {
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .page-title {
+            font-size: clamp(36px, 6vw, 56px);
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+        
+        .page-title .gold-text {
+            color: var(--gold-primary);
+        }
+        
+        .page-subtitle {
+            color: var(--gray-mid);
+            font-size: 18px;
+        }
+        
+        /* ============================================
+           REGISTRATION FORM
+           ============================================ */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .form-container {
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .form-header h2 {
+            color: var(--gold-primary);
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        
+        .form-header p {
+            color: var(--gray-mid);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--gold-primary);
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group label .required {
+            color: #dc3545;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--black-secondary);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--gray-dark);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-group small {
+            display: block;
+            color: var(--gray-dark);
+            font-size: 12px;
+            margin-top: 6px;
+        }
+        
+        .course-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .course-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--black-secondary);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .course-checkbox:hover {
+            border-color: var(--gold-primary);
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .course-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold-primary);
+            cursor: pointer;
+        }
+        
+        .course-checkbox span {
+            color: var(--gray-light);
+            font-size: 14px;
+        }
+        
+        .payment-info {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+        
+        .payment-info h4 {
+            color: var(--gold-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-mid);
+        }
+        
+        .form-status {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 12px;
+            display: none;
+        }
+        
+        .form-status.success {
+            display: block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .form-status.error {
+            display: block;
+            background: rgba(220, 53, 69, 0.15);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+        
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 24px 0;
+        }
+        
+        .terms input {
+            width: 18px;
+            height: 18px;
+            margin-top: 3px;
+            accent-color: var(--gold-primary);
+        }
+        
+        .terms label {
+            color: var(--gray-mid);
+            font-size: 14px;
+        }
+        
+        .terms a {
+            color: var(--gold-primary);
+            text-decoration: underline;
+        }
+        
+        /* ============================================
+           BENEFITS SECTION
+           ============================================ */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .benefit-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .benefit-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        
+        .benefit-item h4 {
+            color: var(--gold-primary);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .benefit-item p {
+            color: var(--gray-mid);
+            font-size: 13px;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--black-primary);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-desc {
+            color: var(--gray-mid);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+        }
+        
+        .footer-title {
+            color: var(--gold-primary);
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--gray-mid);
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold-primary);
+        }
+        
+        .footer-contact p {
+            color: var(--gray-mid);
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            color: var(--gray-mid);
+            font-size: 14px;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                right: 0;
+                background: var(--black-primary);
+                flex-direction: column;
+                padding: 30px;
+                border-bottom: 1px solid var(--gold-primary);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .lang-toggle {
+                margin-left: 0;
+                margin-top: 16px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .course-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- ============================================ -->
+    <!-- HEADER                                        -->
+    <!-- ============================================ -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">💎</div>
+                <div class="logo-text">
+                    <div class="logo-main">LOVELY BEAUTY</div>
+                    <div class="logo-sub">EST 1998 G.C.</div>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
+                <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
+                <a href="courses.html" class="nav-link" data-en="Courses" data-am="ኮርሶች">Courses</a>
+                <a href="student-portal/login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
+                <a href="register.html" class="nav-link active" data-en="Register" data-am="ይመዝገቡ">Register</a>
+                <a href="contact.html" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a>
+                <button class="lang-toggle" id="langToggle">አማ / EN</button>
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+    
+    <!-- ============================================ -->
+    <!-- PAGE HEADER                                   -->
+    <!-- ============================================ -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">
+                <span data-en="Register for" data-am="ይመዝገቡ">Register for</span>
+                <span class="gold-text" data-en="Courses" data-am="ኮርሶች">Courses</span>
+            </h1>
+            <p class="page-subtitle" data-en="Start your journey to becoming a professional beauty expert" 
+               data-am="ሙያዊ የውበት ባለሙያ ለመሆን ጉዞዎን ይጀምሩ">
+                Start your journey to becoming a professional beauty expert
+            </p>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- REGISTRATION FORM                             -->
+    <!-- ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="form-container fade-in-up">
+                <div class="form-header">
+                    <h2 data-en="Student Registration" data-am="የተማሪ ምዝገባ">Student Registration</h2>
+                    <p data-en="Fill in your details to enroll in our beauty courses" 
+                       data-am="በውበት ኮርሶቻችን ለመመዝገብ ዝርዝሮችዎን ይሙሉ">
+                        Fill in your details to enroll in our beauty courses
+                    </p>
+                </div>
+                
+                <form id="registrationForm" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Replace with your Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                    <input type="hidden" name="subject" value="New Student Registration - Lovely Beauty College">
+                    <input type="hidden" name="from_name" value="Lovely Beauty Registration">
+                    <input type="hidden" name="redirect" value="false">
+                    
+                    <!-- Personal Information -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-en="Full Name" data-am="ሙሉ ስም">Full Name <span class="required">*</span></label>
+                            <input type="text" name="full_name" required placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-en="Phone Number" data-am="ስልክ ቁጥር">Phone Number <span class="required">*</span></label>
+                            <input type="tel" name="phone" required placeholder="09xxxxxxxx">
+                            <small data-en="We'll use this to contact you about your registration" 
+                                   data-am="ስለ ምዝገባዎ ለማግኘት ይህን እንጠቀማለን">We'll use this to contact you about your registration</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-en="Email Address" data-am="ኢሜይል አድራሻ">Email Address</label>
+                            <input type="email" name="email" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-en="Date of Birth" data-am="የትውልድ ቀን">Date of Birth</label>
+                            <input type="date" name="dob">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-en="Address" data-am="አድራሻ">Address</label>
+                        <input type="text" name="address" placeholder="Your current address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-en="Emergency Contact" data-am="የአደጋ ጊዜ አድራሻ">Emergency Contact</label>
+                        <input type="tel" name="emergency_contact" placeholder="Contact name and phone">
+                    </div>
+                    
+                    <!-- Course Selection -->
+                    <div class="form-group">
+                        <label data-en="Select Course(s)" data-am="ኮርስ(ቶች) ይምረጡ">Select Course(s) <span class="required">*</span></label>
+                        <div class="course-options">
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Hairdressing">
+                                <span>💇 Hairdressing (ፀጉር ስራ)</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Makeup Artistry">
+                                <span>💄 Makeup Artistry (ሜካፕ)</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Nail Technology">
+                                <span>💅 Nail Technology (ጥፍር ጥበብ)</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Barbering">
+                                <span>✂️ Barbering (ወንድ ፀጉር)</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Skincare & Facial">
+                                <span>🧖 Skincare & Facial (የቆዳ እንክብካቤ)</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Eyelash Extension">
+                                <span>👁️ Eyelash Extension (ዐይን ሽፋሽፍ)</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Henna Art">
+                                <span>🌿 Henna Art (ሂና)</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Level 2 Hair & Beauty">
+                                <span>📜 Level 2 Hair & Beauty</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Level 3 Hair & Beauty">
+                                <span>📜 Level 3 Hair & Beauty</span>
+                            </label>
+                            <label class="course-checkbox">
+                                <input type="checkbox" name="courses" value="Level 4 Hair & Beauty">
+                                <span>📜 Level 4 Hair & Beauty</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-en="Preferred Branch" data-am="የሚመርጡት ቅርንጫፍ">Preferred Branch <span class="required">*</span></label>
+                            <select name="branch" required>
+                                <option value="" data-en="Select a branch" data-am="ቅርንጫፍ ይምረጡ">Select a branch</option>
+                                <option value="Megenagna" data-en="Megenagna (Main Campus)" data-am="መገናኛ (ዋና ካምፓስ)">Megenagna (Main Campus)</option>
+                                <option value="Piassa" data-en="Piassa" data-am="ፒያሳ">Piassa</option>
+                                <option value="Sebatgna" data-en="Sebatgna" data-am="ሰባትኛ">Sebatgna</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-en="Preferred Start Date" data-am="የሚመርጡት የመጀመሪያ ቀን">Preferred Start Date</label>
+                            <select name="start_date">
+                                <option value="Immediate" data-en="Immediate" data-am="ወዲያውኑ">Immediate</option>
+                                <option value="Next Month" data-en="Next Month" data-am="በሚቀጥለው ወር">Next Month</option>
+                                <option value="Next Intake" data-en="Next Intake" data-am="በሚቀጥለው ቅበላ">Next Intake</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-en="How did you hear about us?" data-am="ስለ እኛ እንዴት ሰሙ?">How did you hear about us?</label>
+                        <select name="referral_source">
+                            <option value="Social Media" data-en="Social Media" data-am="ማህበራዊ ሚዲያ">Social Media</option>
+                            <option value="Friend/Family" data-en="Friend or Family" data-am="ጓደኛ/ቤተሰብ">Friend or Family</option>
+                            <option value="Advertisement" data-en="Advertisement" data-am="ማስታወቂያ">Advertisement</option>
+                            <option value="Walk-in" data-en="Walk-in" data-am="በአካል መጥቼ">Walk-in</option>
+                            <option value="Other" data-en="Other" data-am="ሌላ">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-en="Additional Notes" data-am="ተጨማሪ ማስታወሻ">Additional Notes</label>
+                        <textarea name="notes" placeholder="Any questions or special requests?"></textarea>
+                    </div>
+                    
+                    <!-- Payment Information -->
+                    <div class="payment-info">
+                        <h4>
+                            <span>💰</span>
+                            <span data-en="Payment Information" data-am="የክፍያ መረጃ">Payment Information</span>
+                        </h4>
+                        <p style="color: var(--gray-mid); margin-bottom: 16px;" data-en="Registration fee: 500 ETB (to be paid at the campus)" 
+                           data-am="የምዝገባ ክፍያ፡ 500 ብር (በካምፓሱ የሚከፈል)">
+                            Registration fee: 500 ETB (to be paid at the campus)
+                        </p>
+                        <div class="payment-methods">
+                            <div class="payment-method">
+                                <span>💵</span>
+                                <span data-en="Cash" data-am="ጥሬ ገንዘብ">Cash</span>
+                            </div>
+                            <div class="payment-method">
+                                <span>📱</span>
+                                <span data-en="Mobile Banking" data-am="ሞባይል ባንኪንግ">Mobile Banking</span>
+                            </div>
+                            <div class="payment-method">
+                                <span>🏦</span>
+                                <span data-en="Bank Transfer" data-am="ባንክ ትራንስፈር">Bank Transfer</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Terms and Conditions -->
+                    <div class="terms">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">
+                            <span data-en="I agree to the" data-am="ተስማምቻለሁ">I agree to the</span>
+                            <a href="#" data-en="Terms and Conditions" data-am="ውሎች እና ሁኔታዎች">Terms and Conditions</a>
+                            <span data-en="and confirm that the information provided is accurate." 
+                                  data-am="እና የቀረበው መረጃ ትክክለኛ መሆኑን አረጋግጣለሁ።">and confirm that the information provided is accurate.</span>
+                        </label>
+                    </div>
+                    
+                    <div id="formStatus" class="form-status"></div>
+                    
+                    <button type="submit" class="btn btn-gold" style="width: 100%;">
+                        <span data-en="Submit Registration" data-am="ምዝገባ ያስገቡ">Submit Registration</span>
+                    </button>
+                    
+                    <p style="color: var(--gray-dark); font-size: 13px; text-align: center; margin-top: 20px;" 
+                       data-en="After submission, our admissions team will contact you within 24 hours to confirm your registration." 
+                       data-am="ከቀረበ በኋላ የምዝገባ ቡድናችን ምዝገባዎን ለማረጋገጥ በ24 ሰዓታት ውስጥ ያገኙዎታል።">
+                        After submission, our admissions team will contact you within 24 hours to confirm your registration.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- BENEFITS SECTION                              -->
+    <!-- ============================================ -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefit-item fade-in-up">
+                    <div class="benefit-icon">📜</div>
+                    <h4 data-en="National Certification" data-am="ብሄራዊ ሰርተፍኬት">National Certification</h4>
+                    <p data-en="Recognized by Ministry of Education" data-am="በትምህርት ሚኒስቴር እውቅና የተሰጠው">Recognized by Ministry of Education</p>
+                </div>
+                <div class="benefit-item fade-in-up">
+                    <div class="benefit-icon">👩‍🏫</div>
+                    <h4 data-en="Expert Instructors" data-am="ልምድ ያላቸው አስተማሪዎች">Expert Instructors</h4>
+                    <p data-en="Learn from industry professionals" data-am="ከኢንዱስትሪ ባለሙያዎች ይማሩ">Learn from industry professionals</p>
+                </div>
+                <div class="benefit-item fade-in-up">
+                    <div class="benefit-icon">💼</div>
+                    <h4 data-en="Job Placement" data-am="የስራ ምደባ">Job Placement</h4>
+                    <p data-en="Career support after graduation" data-am="ከምረቃ በኋላ የሙያ ድጋፍ">Career support after graduation</p>
+                </div>
+                <div class="benefit-item fade-in-up">
+                    <div class="benefit-icon">🏆</div>
+                    <h4 data-en="28+ Years Legacy" data-am="ከ28+ ዓመታት ቅርስ">28+ Years Legacy</h4>
+                    <p data-en="Ethiopia's first private beauty college" data-am="የኢትዮጵያ የመጀመሪያው የግል የውበት ኮሌጅ">Ethiopia's first private beauty college</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- FOOTER                                        -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <div class="logo-main" style="color: var(--gold-primary);">LOVELY BEAUTY</div>
+                        <div class="logo-sub">EST 1998 G.C.</div>
+                    </div>
+                    <p class="footer-desc" data-en="The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998." 
+                       data-am="የመጀመሪያው የግል የውበት ኮሌጅ በኢትዮጵያ፣ ከ1998 ጀምሮ የውበት ባለሙያዎችን በመቅረጽ ላይ።">
+                        The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a>
+                        <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-section">
+                    <h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" data-en="Home" data-am="መነሻ">Home</a></li>
+                        <li><a href="about.html" data-en="About Us" data-am="ስለ እኛ">About Us</a></li>
+                        <li><a href="courses.html" data-en="Courses" data-am="ኮርሶች">Courses</a></li>
+                        <li><a href="news-events.html" data-en="News & Events" data-am="ዜና እና ዝግጅቶች">News & Events</a></li>
+                        <li><a href="contact.html" data-en="Contact" data-am="አድራሻ">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-courses">
+                    <h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4>
+                    <ul class="footer-links">
+                        <li><a href="courses.html" data-en="Hairdressing" data-am="ፀጉር ስራ">Hairdressing</a></li>
+                        <li><a href="courses.html" data-en="Makeup Artistry" data-am="ሜካፕ">Makeup Artistry</a></li>
+                        <li><a href="courses.html" data-en="Nail Technology" data-am="ጥፍር ጥበብ">Nail Technology</a></li>
+                        <li><a href="courses.html" data-en="Barbering" data-am="ወንድ ፀጉር">Barbering</a></li>
+                        <li><a href="courses.html" data-en="Skincare" data-am="የቆዳ እንክብካቤ">Skincare</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4>
+                    <p>📍 <span data-en="Megenagna, Addis Ababa" data-am="መገናኛ፣ አዲስ አበባ">Megenagna, Addis Ababa</span></p>
+                    <p>📞 0991171819 / 0911221032</p>
+                    <p>📞 0112750345 (Sebatgna)</p>
+                    <p>📞 0116587060 (Megenagna)</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Lovely Plus Beauty College. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT                                    -->
+    <!-- ============================================ -->
+    <script>
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+            });
+        }
+        
+        // ============================================
+        // LANGUAGE TOGGLE
+        // ============================================
+        let currentLang = localStorage.getItem('lovelyLang') || 'en';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lovelyLang', lang);
+            
+            const elements = document.querySelectorAll('[data-en][data-am]');
+            elements.forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.textContent = text;
+            });
+            
+            const langToggle = document.getElementById('langToggle');
+            if (langToggle) {
+                langToggle.textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ';
+            }
+            
+            document.documentElement.lang = lang;
+            
+            // Update select options
+            const selects = document.querySelectorAll('select');
+            selects.forEach(select => {
+                const options = select.options;
+                for (let i = 0; i < options.length; i++) {
+                    const text = options[i].getAttribute(`data-${lang}`);
+                    if (text) options[i].textContent = text;
+                }
+            });
+            
+            // Update placeholders
+            const inputs = document.querySelectorAll('input[placeholder]');
+            inputs.forEach(input => {
+                const placeholderEn = input.getAttribute('data-en-placeholder');
+                const placeholderAm = input.getAttribute('data-am-placeholder');
+                if (placeholderEn || placeholderAm) {
+                    input.placeholder = lang === 'en' ? placeholderEn : placeholderAm;
+                }
+            });
+        }
+        
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                setLanguage(currentLang === 'en' ? 'am' : 'en');
+            });
+        }
+        
+        setLanguage(currentLang);
+        
+        // ============================================
+        // FORM VALIDATION
+        // ============================================
+        const registrationForm = document.getElementById('registrationForm');
+        const formStatus = document.getElementById('formStatus');
+        
+        if (registrationForm) {
+            registrationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Check if at least one course is selected
+                const courseCheckboxes = document.querySelectorAll('input[name="courses"]:checked');
+                if (courseCheckboxes.length === 0) {
+                    formStatus.className = 'form-status error';
+                    formStatus.textContent = currentLang === 'en' 
+                        ? '⚠️ Please select at least one course.' 
+                        : '⚠️ እባክዎ ቢያንስ አንድ ኮርስ ይምረጡ።';
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = registrationForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = currentLang === 'en' ? 'Submitting...' : 'በማስገባት ላይ...';
+                submitBtn.disabled = true;
+                
+                try {
+                    const formData = new FormData(registrationForm);
+                    
+                    // Add selected courses as comma-separated list
+                    const selectedCourses = Array.from(courseCheckboxes).map(cb => cb.value);
+                    formData.append('selected_courses', selectedCourses.join(', '));
+                    
+                    const response = await fetch(registrationForm.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        formStatus.className = 'form-status success';
+                        formStatus.textContent = currentLang === 'en' 
+                            ? '✓ Registration submitted successfully! Our admissions team will contact you within 24 hours.' 
+                            : '✓ ምዝገባ በተሳካ ሁኔታ ቀርቧል! የምዝገባ ቡድናችን በ24 ሰዓታት ውስጥ ያገኙዎታል።';
+                        registrationForm.reset();
+                        
+                        // Scroll to success message
+                        formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    formStatus.className = 'form-status error';
+                    formStatus.textContent = currentLang === 'en'
+                        ? '⚠️ There was an error submitting your registration. Please try again or call us directly.'
+                        : '⚠️ ምዝገባዎን በማስገባት ላይ ስህተት ተከስቷል። እባክዎ እንደገና ይሞክሩ ወይም በቀጥታ ይደውሉ።';
+                    console.error('Registration error:', error);
+                } finally {
+                    submitBtn.innerHTML = currentLang === 'en' ? 'Submit Registration' : 'ምዝገባ ያስገቡ';
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+        
+        // ============================================
+        // STICKY HEADER SHADOW
+        // ============================================
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.6)';
+            } else {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+            }
+        });
+        
+        // ============================================
+        // FADE IN ANIMATIONS
+        // ============================================
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+        
+        console.log('🌟 Lovely Beauty College - Registration Page Loaded');
+    </script>
+</body>
+</html>
