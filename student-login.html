@@ -194,6 +194,13 @@
     </div>
     
     <script>
+        // Clear any existing auth that might cause redirect
+        // This prevents the blink/redirect issue
+        (function() {
+            // DO NOT auto-redirect - just stay on login page
+            console.log('✅ Login page loaded - ready for login');
+        })();
+        
         const DEMO = { username: 'student@lovely.com', password: 'lovely2024' };
         
         document.getElementById('loginForm').addEventListener('submit', (e) => {
@@ -203,19 +210,38 @@
             const errorMsg = document.getElementById('errorMsg');
             
             if (username === DEMO.username && password === DEMO.password) {
+                // Store auth data
                 localStorage.setItem('lovelyAuth', JSON.stringify({
                     name: 'Helen Tesfaye',
                     studentId: 'LBC-2024-001',
                     loggedIn: true
                 }));
-                window.location.href = 'student-dashboard.html';
-            } else {
+                
+                // Show success message briefly then redirect
+                errorMsg.classList.remove('show');
+                errorMsg.style.background = 'rgba(212, 175, 55, 0.15)';
+                errorMsg.style.borderColor = '#D4AF37';
+                errorMsg.style.color = '#D4AF37';
+                errorMsg.textContent = '✓ Login successful! Redirecting...';
                 errorMsg.classList.add('show');
+                
+                // Redirect after short delay
+                setTimeout(() => {
+                    window.location.href = 'student-dashboard.html';
+                }, 500);
+            } else {
+                errorMsg.style.background = 'rgba(220, 53, 69, 0.15)';
+                errorMsg.style.borderColor = '#dc3545';
+                errorMsg.style.color = '#dc3545';
                 errorMsg.textContent = 'Invalid credentials. Use the demo credentials below.';
+                errorMsg.classList.add('show');
             }
         });
         
         document.getElementById('username').addEventListener('input', () => {
+            document.getElementById('errorMsg').classList.remove('show');
+        });
+        document.getElementById('password').addEventListener('input', () => {
             document.getElementById('errorMsg').classList.remove('show');
         });
     </script>
