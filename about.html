@@ -649,6 +649,7 @@
                 flex-direction: column;
                 padding: 30px;
                 border-bottom: 1px solid var(--gold-primary);
+                z-index: 999;
             }
             
             .nav-menu.active {
@@ -734,7 +735,7 @@
                 <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
                 <a href="about.html" class="nav-link active" data-en="About" data-am="ስለ እኛ">About</a>
                 <a href="courses.html" class="nav-link" data-en="Courses" data-am="ኮርሶች">Courses</a>
-                <a href="student-portal/login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
+                <a href="student-login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
                 <a href="register.html" class="nav-link" data-en="Register" data-am="ይመዝገቡ">Register</a>
                 <a href="contact.html" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a>
                 <button class="lang-toggle" id="langToggle">አማ / EN</button>
@@ -781,7 +782,7 @@
                     </p>
                     
                     <div class="highlight-box">
-                        <p class="highlight-text" data-en=""" data-am=""">"</p>
+                        <p class="highlight-text">"</p>
                         <p data-en="We don't just teach beauty techniques — we build careers, transform lives, and elevate the entire beauty industry in Ethiopia." 
                            data-am="የውበት ቴክኒኮችን ብቻ አናስተምርም — ሙያዎችን እንገነባለን፣ ህይወቶችን እንለውጣለን፣ እና በኢትዮጵያ ያለውን አጠቃላይ የውበት ኢንዱስትሪ እናሳድጋለን።">
                             We don't just teach beauty techniques — we build careers, transform lives, and elevate the entire beauty industry in Ethiopia.
@@ -1043,6 +1044,7 @@
                     <p>📞 0991171819 / 0911221032</p>
                     <p>📞 0112750345 (Sebatgna)</p>
                     <p>📞 0116587060 (Megenagna)</p>
+                    <p>✉️ info@lovelybeautycollege.com</p>
                 </div>
             </div>
             
@@ -1066,6 +1068,14 @@
                 mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
             });
         }
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                if (mobileMenuBtn) mobileMenuBtn.textContent = '☰';
+            });
+        });
         
         // Language Toggle
         let currentLang = localStorage.getItem('lovelyLang') || 'en';
