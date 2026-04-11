@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Student Dashboard | Lovely Plus Beauty College</title>
+    <meta name="description" content="Student dashboard for Lovely Plus Beauty College. Track your courses, attendance, grades, and certificates.">
+    
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --black-primary: #0A0A0A;
+            --black-secondary: #111111;
+            --black-card: #1A1A1A;
+            --gold-primary: #D4AF37;
+            --gold-light: #F5D76E;
+            --gold-dark: #996515;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --white: #FFFFFF;
+            --gray-light: #E0E0E0;
+            --gray-mid: #B0B0B0;
+            --gray-dark: #666666;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            
+            --sidebar-width: 280px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--black-primary);
+            color: var(--white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+        
+        /* ============================================
+           SIDEBAR
+           ============================================ */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--black-card);
+            border-right: 1px solid rgba(212, 175, 55, 0.15);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-main {
+            font-size: 16px;
+            color: var(--gold-primary);
+            letter-spacing: 1px;
+        }
+        
+        .logo-sub {
+            font-size: 9px;
+            color: var(--gray-mid);
+        }
+        
+        .student-profile {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--black-primary);
+        }
+        
+        .student-info h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        
+        .student-info p {
+            font-size: 12px;
+            color: var(--gold-primary);
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 20px 0;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            color: var(--gray-mid);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: rgba(212, 175, 55, 0.05);
+            color: var(--gold-primary);
+        }
+        
+        .nav-item.active {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-primary);
+            border-left-color: var(--gold-primary);
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            width: 24px;
+        }
+        
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            color: var(--gray-mid);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 14px;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(220, 53, 69, 0.1);
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+        
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px 40px;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .welcome h1 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .welcome h1 span {
+            color: var(--gold-primary);
+        }
+        
+        .welcome p {
+            color: var(--gray-mid);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-toggle:hover {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+        }
+        
+        /* ============================================
+           STATS CARDS
+           ============================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 5px 20px var(--gold-glow);
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .stat-content h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold-primary);
+            margin-bottom: 4px;
+        }
+        
+        .stat-content p {
+            color: var(--gray-mid);
+            font-size: 13px;
+        }
+        
+        /* ============================================
+           DASHBOARD GRID
+           ============================================ */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+        }
+        
+        .dashboard-card {
+            background: var(--black-card);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .card-header h3 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            color: var(--gold-primary);
+        }
+        
+        .card-header a {
+            color: var(--gray-mid);
+            font-size: 13px;
+            text-decoration: none;
+        }
+        
+        .card-header a:hover {
+            color: var(--gold-primary);
+        }
+        
+        /* Courses List */
+        .course-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+        }
+        
+        .course-item:last-child {
+            border-bottom: none;
+        }
+        
+        .course-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        
+        .course-info {
+            flex: 1;
+        }
+        
+        .course-info h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: var(--black-secondary);
+            border-radius: 3px;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+            border-radius: 3px;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 12px;
+            color: var(--gray-dark);
+        }
+        
+        /* Attendance */
+        .attendance-stats {
+            text-align: center;
+            padding: 10px 0 20px;
+        }
+        
+        .attendance-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: conic-gradient(var(--gold-primary) 0deg 324deg, var(--gray-dark) 324deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .attendance-circle::before {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background: var(--black-card);
+            border-radius: 50%;
+        }
+        
+        .attendance-percent {
+            position: relative;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold-primary);
+        }
+        
+        .attendance-label {
+            color: var(--gray-mid);
+            margin-top: 8px;
+        }
+        
+        /* Notifications */
+        .notification-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .notification-content p {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        
+        .notification-time {
+            font-size: 11px;
+            color: var(--gray-dark);
+        }
+        
+        /* Results */
+        .result-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-course {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .result-score {
+            font-weight: 600;
+            color: var(--gold-primary);
+        }
+        
+        .result-grade {
+            background: rgba(212, 175, 55, 0.15);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Certificate Card */
+        .certificate-preview {
+            background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
+            border: 2px solid var(--gold-primary);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 16px;
+        }
+        
+        .certificate-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+        
+        .certificate-preview h4 {
+            color: var(--gold-primary);
+            margin-bottom: 8px;
+        }
+        
+        .certificate-preview p {
+            color: var(--gray-mid);
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        
+        .btn-small {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-small:hover {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: var(--gold-primary);
+            color: var(--black-primary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 50;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+    
+    <!-- ============================================ -->
+    <!-- SIDEBAR                                        -->
+    <!-- ============================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="logo-icon">💎</div>
+                <div class="logo-text">
+                    <div class="logo-main">LOVELY BEAUTY</div>
+                    <div class="logo-sub">EST 1998 G.C.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="student-profile">
+            <div class="student-avatar" id="studentInitials">HT</div>
+            <div class="student-info">
+                <h4 id="studentName">Helen Tesfaye</h4>
+                <p id="studentId">LBC-2024-001</p>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">📊</span>
+                <span data-en="Dashboard" data-am="ዳሽቦርድ">Dashboard</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">👤</span>
+                <span data-en="My Profile" data-am="የእኔ መገለጫ">My Profile</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">📚</span>
+                <span data-en="My Courses" data-am="የእኔ ኮርሶች">My Courses</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">📅</span>
+                <span data-en="Attendance" data-am="መገኘት">Attendance</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">📝</span>
+                <span data-en="Results" data-am="ውጤቶች">Results</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">📜</span>
+                <span data-en="Certificates" data-am="ሰርተፍኬቶች">Certificates</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">🔔</span>
+                <span data-en="Notifications" data-am="ማሳወቂያዎች">Notifications</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="logout-btn" id="logoutBtn">
+                <span>🚪</span>
+                <span data-en="Logout" data-am="ውጣ">Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT                                  -->
+    <!-- ============================================ -->
+    <main class="main-content">
+        <div class="dashboard-header">
+            <div class="welcome">
+                <h1>
+                    <span data-en="Welcome back," data-am="እንኳን ደህና መጡ፣">Welcome back,</span>
+                    <span id="displayName">Helen</span>!
+                </h1>
+                <p data-en="Here's your learning progress overview" data-am="የትምህርት እድገትዎ አጠቃላይ እይታ ይህ ነው">Here's your learning progress overview</p>
+            </div>
+            <div class="header-actions">
+                <button class="lang-toggle" id="langToggle">አማ / EN</button>
+            </div>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <div class="stat-icon">📚</div>
+                <div class="stat-content">
+                    <h3>3</h3>
+                    <p data-en="Active Courses" data-am="ንቁ ኮርሶች">Active Courses</p>
+                </div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-icon">📅</div>
+                <div class="stat-content">
+                    <h3>90%</h3>
+                    <p data-en="Attendance Rate" data-am="የመገኘት መጠን">Attendance Rate</p>
+                </div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-content">
+                    <h3>3.8</h3>
+                    <p data-en="GPA" data-am="አማካይ ውጤት">GPA</p>
+                </div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-icon">📜</div>
+                <div class="stat-content">
+                    <h3>1</h3>
+                    <p data-en="Certificates" data-am="ሰርተፍኬቶች">Certificates</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- My Courses -->
+                <div class="dashboard-card fade-in">
+                    <div class="card-header">
+                        <h3 data-en="My Courses" data-am="የእኔ ኮርሶች">My Courses</h3>
+                        <a href="#" data-en="View All →" data-am="ሁሉንም ይመልከቱ →">View All →</a>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-icon">💇</div>
+                        <div class="course-info">
+                            <h4>Level 3 Hairdressing</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                            <div class="course-meta">
+                                <span data-en="Progress: 75%" data-am="እድገት: 75%">Progress: 75%</span>
+                                <span data-en="Next: Color Theory" data-am="ቀጣይ: የቀለም ቲዎሪ">Next: Color Theory</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-icon">💄</div>
+                        <div class="course-info">
+                            <h4>Makeup Artistry</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%;"></div>
+                            </div>
+                            <div class="course-meta">
+                                <span data-en="Progress: 45%" data-am="እድገት: 45%">Progress: 45%</span>
+                                <span data-en="Next: Bridal Makeup" data-am="ቀጣይ: የሙሽራ ሜካፕ">Next: Bridal Makeup</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-icon">💅</div>
+                        <div class="course-info">
+                            <h4>Nail Technology</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                            <div class="course-meta">
+                                <span data-en="Progress: 90%" data-am="እድገት: 90%">Progress: 90%</span>
+                                <span data-en="Next: Final Assessment" data-am="ቀጣይ: የመጨረሻ ምዘና">Next: Final Assessment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Results -->
+                <div class="dashboard-card fade-in">
+                    <div class="card-header">
+                        <h3 data-en="Recent Results" data-am="የቅርብ ጊዜ ውጤቶች">Recent Results</h3>
+                        <a href="#" data-en="View All →" data-am="ሁሉንም ይመልከቱ →">View All →</a>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-course">Hairdressing - Practical</span>
+                        <span class="result-score">85%</span>
+                        <span class="result-grade">A</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-course">Makeup - Color Theory</span>
+                        <span class="result-score">92%</span>
+                        <span class="result-grade">A+</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-course">Nail Art - Gel Application</span>
+                        <span class="result-score">78%</span>
+                        <span class="result-grade">B+</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-course">Professional Ethics</span>
+                        <span class="result-score">88%</span>
+                        <span class="result-grade">A-</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div>
+                <!-- Attendance Overview -->
+                <div class="dashboard-card fade-in">
+                    <div class="card-header">
+                        <h3 data-en="Attendance Overview" data-am="የመገኘት አጠቃላይ እይታ">Attendance Overview</h3>
+                    </div>
+                    
+                    <div class="attendance-stats">
+                        <div class="attendance-circle">
+                            <span class="attendance-percent">90%</span>
+                        </div>
+                        <p class="attendance-label" data-en="Overall Attendance Rate" data-am="አጠቃላይ የመገኘት መጠን">Overall Attendance Rate</p>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <div class="result-item">
+                            <span>📚 Hairdressing</span>
+                            <span style="color: var(--gold-primary);">92%</span>
+                        </div>
+                        <div class="result-item">
+                            <span>💄 Makeup Artistry</span>
+                            <span style="color: var(--gold-primary);">88%</span>
+                        </div>
+                        <div class="result-item">
+                            <span>💅 Nail Technology</span>
+                            <span style="color: var(--gold-primary);">95%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notifications -->
+                <div class="dashboard-card fade-in">
+                    <div class="card-header">
+                        <h3 data-en="Notifications" data-am="ማሳወቂያዎች">Notifications</h3>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-icon">📢</div>
+                        <div class="notification-content">
+                            <p data-en="Registration open for National Beauty Competition" data-am="ለብሄራዊ የውበት ውድድር ምዝገባ ተከፍቷል">Registration open for National Beauty Competition</p>
+                            <span class="notification-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-icon">📅</div>
+                        <div class="notification-content">
+                            <p data-en="Makeup Masterclass this Friday at 2PM" data-am="የሜካፕ ማስተርክላስ ዓርብ ከ8፡00 ሰዓት ጀምሮ">Makeup Masterclass this Friday at 2PM</p>
+                            <span class="notification-time">Yesterday</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-icon">✅</div>
+                        <div class="notification-content">
+                            <p data-en="Your attendance has been marked for today" data-am="�ዛሬ መገኘትዎ ተመዝግቧል">Your attendance has been marked for today</p>
+                            <span class="notification-time">Today, 9:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certificate Preview -->
+                <div class="dashboard-card fade-in">
+                    <div class="card-header">
+                        <h3 data-en="Your Certificates" data-am="የእርስዎ ሰርተፍኬቶች">Your Certificates</h3>
+                    </div>
+                    
+                    <div class="certificate-preview">
+                        <div class="certificate-icon">📜</div>
+                        <h4 data-en="Level 2 Hair & Beauty" data-am="ደረጃ 2 ፀጉር እና ውበት">Level 2 Hair & Beauty</h4>
+                        <p data-en="Issued: March 15, 2025" data-am="የተሰጠበት ቀን: መጋቢት 15, 2017">Issued: March 15, 2025</p>
+                        <button class="btn-small" data-en="Download Certificate" data-am="ሰርተፍኬት አውርድ">Download Certificate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // ============================================
+        // AUTHENTICATION CHECK
+        // ============================================
+        const storedAuth = localStorage.getItem('lovelyStudentAuth') || sessionStorage.getItem('lovelyStudentAuth');
+        
+        if (!storedAuth) {
+            // Not logged in - redirect to login
+            window.location.href = 'login.html';
+        } else {
+            try {
+                const authData = JSON.parse(storedAuth);
+                if (!authData.loggedIn) {
+                    window.location.href = 'login.html';
+                } else {
+                    // Update UI with student data
+                    document.getElementById('studentName').textContent = authData.name || 'Helen Tesfaye';
+                    document.getElementById('studentId').textContent = authData.studentId || 'LBC-2024-001';
+                    document.getElementById('displayName').textContent = authData.name?.split(' ')[0] || 'Helen';
+                    
+                    // Set initials
+                    const nameParts = (authData.name || 'Helen Tesfaye').split(' ');
+                    const initials = nameParts.map(n => n[0]).join('');
+                    document.getElementById('studentInitials').textContent = initials;
+                }
+            } catch (e) {
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // ============================================
+        // LOGOUT FUNCTIONALITY
+        // ============================================
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('lovelyStudentAuth');
+            sessionStorage.removeItem('lovelyStudentAuth');
+            window.location.href = 'login.html';
+        });
+        
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                mobileMenuToggle.textContent = sidebar.classList.contains('active') ? '✕' : '☰';
+            });
+        }
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            }
+        });
+        
+        // ============================================
+        // LANGUAGE TOGGLE
+        // ============================================
+        let currentLang = localStorage.getItem('lovelyLang') || 'en';
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lovelyLang', lang);
+            
+            const elements = document.querySelectorAll('[data-en][data-am]');
+            elements.forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.textContent = text;
+            });
+            
+            const langToggle = document.getElementById('langToggle');
+            if (langToggle) {
+                langToggle.textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ';
+            }
+            
+            document.documentElement.lang = lang;
+        }
+        
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                setLanguage(currentLang === 'en' ? 'am' : 'en');
+            });
+        }
+        
+        setLanguage(currentLang);
+        
+        console.log('🌟 Lovely Beauty College - Student Dashboard');
+        console.log('✅ Authentication verified');
+    </script>
+</body>
+</html>
