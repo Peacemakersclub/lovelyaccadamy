@@ -2,6 +2,8 @@ backend:
   name: github
   repo: Peacemakersclub/lovelyaccadamy
   branch: main
+  base_url: https://api.decapcms.org
+  auth_endpoint: auth
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
@@ -11,7 +13,28 @@ collections:
     label: "News & Events"
     folder: "content/news"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Category", name: "category", widget: "select", options: ["News", "Event", "Competition", "Announcement", "Success Story"]}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Content", name: "body", widget: "markdown"}
+
+  - name: "courses"
+    label: "Courses"
+    folder: "content/courses"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Course Name", name: "title", widget: "string"}
+      - {label: "Icon", name: "icon", widget: "string", default: "💇"}
+      - {label: "Category", name: "category", widget: "select", options: ["hair", "makeup", "nails", "skincare", "certification"]}
+      - {label: "Level", name: "level", widget: "string"}
+      - {label: "Duration", name: "duration", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
