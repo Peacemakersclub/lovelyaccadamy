@@ -3,48 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Lovely Plus Beauty College</title>
-    <meta name="description" content="Contact Lovely Plus Beauty College - 3 branches in Addis Ababa. Sebatgna, Piassa, and Megenagna locations.">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    
+    <title>Contact Us | Lovely Beauty College and Training Center</title>
+    <meta name="description" content="Contact Lovely Beauty College and Training Center - 4 branches in Addis Ababa. Megenagna, Arada, Merkato, and Gofa locations.">
+    
+    <link rel="icon" type="image/x-icon" href="logo.jpg">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --black-primary: #0A0A0A; --black-secondary: #111111; --black-card: #1A1A1A;
-            --gold-primary: #D4AF37; --gold-light: #F5D76E; --gold-dark: #996515; --gold-glow: rgba(212, 175, 55, 0.3);
-            --white: #FFFFFF; --gray-light: #E0E0E0; --gray-mid: #B0B0B0; --gray-dark: #666666;
-            --font-heading: 'Playfair Display', serif; --font-body: 'Poppins', sans-serif;
-            --container-max: 1280px; --header-height: 80px;
+            --black-primary: #0A0A0A;
+            --black-secondary: #111111;
+            --black-card: #1A1A1A;
+            --gold-primary: #D4AF37;
+            --gold-light: #F5D76E;
+            --gold-dark: #996515;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --white: #FFFFFF;
+            --gray-light: #E0E0E0;
+            --gray-mid: #B0B0B0;
+            --gray-dark: #666666;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            --container-max: 1280px;
+            --header-height: 80px;
         }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: var(--font-body); background-color: var(--black-primary); color: var(--white); line-height: 1.6; }
-        h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; }
-        a { text-decoration: none; color: inherit; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; line-height: 1.3; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
         .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
         
         /* Header */
         .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .header-container { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); }
         .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 20px var(--gold-glow); }
+        .logo-image { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 20px var(--gold-glow); border: 1px solid var(--gold-primary); }
         .logo-text { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
-        .logo-main { font-size: 22px; color: var(--gold-primary); letter-spacing: 2px; }
-        .logo-sub { font-size: 11px; color: var(--gray-mid); letter-spacing: 1px; }
-        .nav-menu { display: flex; align-items: center; gap: 32px; }
-        .nav-link { font-weight: 500; font-size: 15px; color: var(--gray-light); position: relative; padding: 8px 0; }
+        .logo-main { font-size: 20px; color: var(--gold-primary); letter-spacing: 2px; }
+        .logo-sub { font-size: 10px; color: var(--gray-mid); letter-spacing: 1px; }
+        .nav-menu { display: flex; align-items: center; gap: 28px; }
+        .nav-link { font-weight: 500; font-size: 14px; color: var(--gray-light); position: relative; padding: 8px 0; }
         .nav-link:hover { color: var(--gold-primary); }
         .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold-primary); transition: width 0.3s ease; }
         .nav-link:hover::after { width: 100%; }
         .nav-link.active { color: var(--gold-primary); }
         .nav-link.active::after { width: 100%; }
-        .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 16px; border-radius: 30px; font-size: 14px; cursor: pointer; margin-left: 16px; }
+        .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 6px 14px; border-radius: 30px; font-size: 13px; cursor: pointer; margin-left: 12px; }
         .lang-toggle:hover { background: var(--gold-primary); color: var(--black-primary); }
         .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
         
         /* Buttons */
-        .btn { display: inline-block; padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 16px; text-align: center; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; text-align: center; transition: all 0.3s ease; cursor: pointer; border: none; }
         .btn-gold { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); color: var(--black-primary); box-shadow: 0 4px 15px var(--gold-glow); }
         .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--gold-glow); }
         .btn-outline-gold { background: transparent; border: 2px solid var(--gold-primary); color: var(--gold-primary); }
@@ -54,11 +70,11 @@
         .page-header { background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%); padding: 80px 0; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
         .page-title { font-size: clamp(40px, 8vw, 64px); margin-bottom: 16px; }
         .page-title .gold-text { color: var(--gold-primary); }
-        .page-subtitle { color: var(--gray-mid); font-size: 18px; }
+        .page-subtitle { color: var(--gray-mid); font-size: 18px; max-width: 700px; margin: 0 auto; }
         
         /* Sections */
         .section { padding: 80px 0; }
-        .section-title { font-size: clamp(28px, 4vw, 40px); margin-bottom: 20px; }
+        .section-title { font-size: clamp(28px, 4vw, 40px); margin-bottom: 20px; text-align: center; }
         .section-title .gold-text { color: var(--gold-primary); }
         
         /* Contact Cards */
@@ -70,39 +86,40 @@
         .contact-card p { color: var(--gray-mid); margin-bottom: 8px; }
         .contact-card .phone { color: var(--white); font-size: 18px; font-weight: 600; }
         
-        /* Branches */
-        .branches-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
-        .branch-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px; transition: all 0.3s ease; }
+        /* Branches Grid */
+        .branches-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-top: 40px; }
+        .branch-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.3s ease; }
         .branch-card:hover { border-color: var(--gold-primary); box-shadow: 0 10px 30px var(--gold-glow); }
-        .branch-name { color: var(--gold-primary); font-size: 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .branch-badge { background: var(--gold-primary); color: var(--black-primary); padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .branch-info { color: var(--gray-mid); margin-bottom: 16px; }
-        .branch-phone { color: var(--white); font-size: 18px; font-weight: 600; margin: 16px 0; }
+        .branch-icon { font-size: 30px; margin-bottom: 16px; }
+        .branch-name { color: var(--gold-primary); font-size: 22px; margin-bottom: 8px; }
+        .branch-badge { background: var(--gold-primary); color: var(--black-primary); padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; margin-bottom: 16px; }
+        .branch-address { color: var(--gray-mid); font-size: 13px; margin-bottom: 16px; }
+        .branch-phone { color: var(--white); font-size: 15px; font-weight: 500; }
         
-        /* Map */
+        /* Map Section */
         .map-container { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; overflow: hidden; margin-top: 40px; }
         .map-placeholder { width: 100%; height: 400px; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--gray-mid); }
-        .map-placeholder .map-icon { font-size: 60px; margin-bottom: 20px; color: var(--gold-primary); }
+        .map-icon { font-size: 60px; margin-bottom: 20px; color: var(--gold-primary); }
         
         /* Contact Form */
         .form-container { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 40px; max-width: 700px; margin: 0 auto; }
         .form-group { margin-bottom: 24px; }
-        .form-group label { display: block; color: var(--gold-primary); margin-bottom: 8px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; background: var(--black-secondary); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; color: var(--white); font-size: 16px; }
+        .form-group label { display: block; color: var(--gold-primary); margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; background: var(--black-secondary); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; color: var(--white); font-size: 15px; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold-primary); box-shadow: 0 0 0 3px var(--gold-glow); }
         .form-group textarea { resize: vertical; min-height: 120px; }
         .form-status { margin-top: 20px; padding: 16px; border-radius: 12px; display: none; }
         .form-status.success { display: block; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-primary); color: var(--gold-primary); }
         .form-status.error { display: block; background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; color: #dc3545; }
         
-        /* Social */
+        /* Social Section */
         .social-section { text-align: center; margin-top: 60px; }
-        .social-large { display: flex; justify-content: center; gap: 30px; margin-top: 30px; }
-        .social-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px 40px; transition: all 0.3s ease; display: flex; align-items: center; gap: 20px; }
+        .social-large { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
+        .social-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 25px 35px; transition: all 0.3s ease; display: flex; align-items: center; gap: 20px; }
         .social-card:hover { border-color: var(--gold-primary); box-shadow: 0 10px 30px var(--gold-glow); transform: translateY(-5px); }
-        .social-card .social-icon { font-size: 40px; }
-        .social-card h4 { color: var(--gold-primary); }
-        .social-card p { color: var(--gray-mid); }
+        .social-icon { font-size: 35px; }
+        .social-info h4 { color: var(--gold-primary); margin-bottom: 4px; }
+        .social-info p { color: var(--gray-mid); }
         
         /* Footer */
         .footer { background: var(--black-primary); padding: 60px 0 30px; border-top: 1px solid rgba(212, 175, 55, 0.2); }
@@ -116,27 +133,39 @@
         .footer-links li { margin-bottom: 12px; }
         .footer-links a { color: var(--gray-mid); font-size: 14px; }
         .footer-links a:hover { color: var(--gold-primary); }
-        .footer-contact p { color: var(--gray-mid); font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .footer-contact p { color: var(--gray-mid); font-size: 14px; margin-bottom: 12px; }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.1); color: var(--gray-mid); font-size: 14px; }
+        .footer-credit { margin-top: 10px; }
+        .footer-credit a { color: var(--gold-primary); font-weight: 500; }
+        .footer-credit a:hover { color: var(--gold-light); text-decoration: underline; }
         
         /* Responsive */
-        @media (max-width: 1024px) { .contact-grid, .branches-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr 1fr; } .social-large { flex-direction: column; align-items: center; } }
+        @media (max-width: 1024px) { .contact-grid { grid-template-columns: 1fr; } .branches-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 768px) {
             .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 30px; border-bottom: 1px solid var(--gold-primary); z-index: 999; }
             .nav-menu.active { display: flex; }
             .mobile-menu-btn { display: block; }
             .lang-toggle { margin-left: 0; margin-top: 16px; }
+            .branches-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .form-container { padding: 30px 20px; }
+            .social-card { padding: 20px; }
         }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in-up { animation: fadeInUp 0.8s ease forwards; }
     </style>
 </head>
 <body>
+    
+    <!-- HEADER -->
     <header class="header">
         <div class="container header-container">
-            <a href="index.html" class="logo"><div class="logo-icon">💎</div><div class="logo-text"><div class="logo-main">LOVELY BEAUTY</div><div class="logo-sub">EST 1998 G.C.</div></div></a>
+            <div class="logo">
+                <img src="logo.jpg" alt="Lovely Beauty College" class="logo-image">
+                <div class="logo-text">
+                    <div class="logo-main">LOVELY BEAUTY</div>
+                    <div class="logo-sub">COLLEGE & TRAINING CENTER</div>
+                </div>
+            </div>
+            
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
                 <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
@@ -146,87 +175,159 @@
                 <a href="contact.html" class="nav-link active" data-en="Contact" data-am="አድራሻ">Contact</a>
                 <button class="lang-toggle" id="langToggle">አማ / EN</button>
             </nav>
+            
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
     </header>
     
+    <!-- PAGE HEADER -->
     <section class="page-header">
         <div class="container">
-            <h1 class="page-title"><span data-en="Get In" data-am="ያግኙን">Get In</span> <span class="gold-text" data-en="Touch" data-am="">Touch</span></h1>
-            <p class="page-subtitle" data-en="Visit one of our three campuses in Addis Ababa or contact us online" data-am="በአዲስ አበባ ከሚገኙት ሶስት ካምፓሶቻችን አንዱን ይጎብኙ ወይም በመስመር ላይ ያግኙን">Visit one of our three campuses in Addis Ababa or contact us online</p>
+            <h1 class="page-title">
+                <span data-en="Get In" data-am="ያግኙን">Get In</span>
+                <span class="gold-text" data-en="Touch" data-am="ተገናኝ">Touch</span>
+            </h1>
+            <p class="page-subtitle" data-en="Visit one of our four campuses in Addis Ababa or contact us online" data-am="በአዲስ አበባ ከሚገኙት አራት ካምፓሶቻችን አንዱን ይጎብኙ ወይም በመስመር ላይ ያግኙን">Visit one of our four campuses in Addis Ababa or contact us online</p>
         </div>
     </section>
     
+    <!-- QUICK CONTACT CARDS -->
     <section class="section">
         <div class="container">
             <div class="contact-grid">
-                <div class="contact-card fade-in-up"><div class="contact-icon">📞</div><h3 data-en="Call Us" data-am="ይደውሉ">Call Us</h3><p class="phone">0991171819</p><p class="phone">0911221032</p><p>0112750345 (Sebatgna)</p><p>0116587060 (Megenagna)</p></div>
-                <div class="contact-card fade-in-up"><div class="contact-icon">📍</div><h3 data-en="Visit Us" data-am="ይጎብኙ">Visit Us</h3><p data-en="Megenagna Campus (Main)" data-am="መገናኛ ካምፓስ (ዋና)">Megenagna Campus (Main)</p><p>Nucleus Plaza, 5th Floor</p><p>Next to Marhont Building</p><p>Addis Ababa, Ethiopia</p></div>
-                <div class="contact-card fade-in-up"><div class="contact-icon">⏰</div><h3 data-en="Working Hours" data-am="የስራ ሰዓት">Working Hours</h3><p data-en="Monday - Friday" data-am="ሰኞ - አርብ">Monday - Friday</p><p>8:30 AM - 5:30 PM</p><p data-en="Saturday" data-am="ቅዳሜ">Saturday</p><p>9:00 AM - 3:00 PM</p><p data-en="Sunday: Closed" data-am="እሁድ: ዝግ">Sunday: Closed</p></div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <h2 class="section-title" style="text-align:center;"><span data-en="Our" data-am="የእኛ">Our</span> <span class="gold-text" data-en="Campuses" data-am="ካምፓሶች">Campuses</span></h2>
-            <div class="branches-grid">
-                <div class="branch-card fade-in-up"><div class="branch-name">📍 Megenagna <span class="branch-badge" data-en="Main Campus" data-am="ዋና ካምፓስ">Main Campus</span></div><div class="branch-info"><p>📍 Nucleus Plaza, 5th Floor</p><p>📍 Next to Marhont Building</p><p>📍 Addis Ababa, 1000</p></div><div class="branch-phone">📞 0116587060</div><div class="branch-phone">📱 0991171819</div><a href="https://maps.google.com/?q=Megenagna+Addis+Ababa" target="_blank" class="btn btn-gold" style="padding:10px 20px;font-size:14px;margin-top:16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a></div>
-                <div class="branch-card fade-in-up"><div class="branch-name">📍 Piassa</div><div class="branch-info"><p>📍 Piassa Area</p><p>📍 Addis Ababa, Ethiopia</p></div><div class="branch-phone">📞 +251118125206</div><div class="branch-phone">📱 0945671188</div><a href="https://maps.google.com/?q=Piassa+Addis+Ababa" target="_blank" class="btn btn-gold" style="padding:10px 20px;font-size:14px;margin-top:16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a></div>
-                <div class="branch-card fade-in-up"><div class="branch-name">📍 Sebatgna</div><div class="branch-info"><p>📍 Sebatgna Area</p><p>📍 Addis Ababa, Ethiopia</p></div><div class="branch-phone">📞 0112750345</div><div class="branch-phone">📱 0911221032</div><a href="https://maps.google.com/?q=Sebatgna+Addis+Ababa" target="_blank" class="btn btn-gold" style="padding:10px 20px;font-size:14px;margin-top:16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a></div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <div class="map-container fade-in-up"><div class="map-placeholder"><div class="map-icon">🗺️</div><h3 style="color:var(--gold-primary);margin-bottom:16px;">Megenagna Campus Location</h3><p>Nucleus Plaza, 5th Floor, Next to Marhont Building</p><p style="color:var(--gray-dark);">📍 Addis Ababa, Ethiopia 1000</p><a href="https://maps.google.com/?q=Megenagna+Addis+Ababa+Ethiopia" target="_blank" class="btn btn-outline-gold" style="margin-top:24px;" data-en="Open in Google Maps" data-am="በጉግል ካርታ ይክፈቱ">Open in Google Maps</a></div></div>
-        </div>
-    </section>
-    
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <h2 class="section-title" style="text-align:center;"><span data-en="Send Us a" data-am="መልእክት">Send Us a</span> <span class="gold-text" data-en="Message" data-am="ይላኩ">Message</span></h2>
-            <div class="form-container fade-in-up">
-                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="94a172b5-52c8-43fe-b548-1b49d03705ba">
-                    <input type="hidden" name="subject" value="New Contact from Lovely Beauty College Website">
-                    <input type="hidden" name="from_name" value="Lovely Beauty College Contact Form">
-                    <input type="hidden" name="redirect" value="false">
-                    <div class="form-group"><label data-en="Full Name *" data-am="ሙሉ ስም *">Full Name *</label><input type="text" name="name" required placeholder="Enter your full name"></div>
-                    <div class="form-group"><label data-en="Phone Number *" data-am="ስልክ ቁጥር *">Phone Number *</label><input type="tel" name="phone" required placeholder="09xxxxxxxx"></div>
-                    <div class="form-group"><label data-en="Email Address" data-am="ኢሜይል">Email Address</label><input type="email" name="email" placeholder="your@email.com"></div>
-                    <div class="form-group"><label data-en="Preferred Branch" data-am="የሚመርጡት ቅርንጫፍ">Preferred Branch</label><select name="branch"><option value="Megenagna">Megenagna (Main)</option><option value="Piassa">Piassa</option><option value="Sebatgna">Sebatgna</option></select></div>
-                    <div class="form-group"><label data-en="Your Message *" data-am="መልእክትዎ *">Your Message *</label><textarea name="message" required placeholder="How can we help you?"></textarea></div>
-                    <div id="formStatus" class="form-status"></div>
-                    <button type="submit" class="btn btn-gold" style="width:100%;" data-en="Send Message" data-am="መልእክት ላክ">Send Message</button>
-                    <p style="color:var(--gray-dark);font-size:12px;text-align:center;margin-top:16px;" data-en="We'll get back to you within 24 hours." data-am="በ24 ሰዓታት ውስጥ ምላሽ እንሰጣለን።">We'll get back to you within 24 hours.</p>
-                </form>
-            </div>
-        </div>
-    </section>
-    
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <div class="social-section">
-                <h2 class="section-title"><span data-en="Follow Us on" data-am="ይከታተሉን">Follow Us on</span> <span class="gold-text" data-en="Social Media" data-am="ማህበራዊ ሚዲያ">Social Media</span></h2>
-                <div class="social-large">
-                    <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-card"><span class="social-icon">📘</span><div><h4>Facebook</h4><p>@LovelyBeautyCollege</p></div></a>
-                    <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-card"><span class="social-icon">🎵</span><div><h4>TikTok</h4><p>@lovelybeautycollege</p></div></a>
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3 data-en="Call Us" data-am="ይደውሉ">Call Us</h3>
+                    <p class="phone">0991171819</p>
+                    <p class="phone">0911221032</p>
+                    <p>0945671188</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3 data-en="Visit Us" data-am="ይጎብኙ">Visit Us</h3>
+                    <p data-en="Main Campus - Megenagna" data-am="ዋና ካምፓስ - መገናኛ">Main Campus - Megenagna</p>
+                    <p>Nucleus Plaza, 5th Floor</p>
+                    <p>Addis Ababa, Ethiopia</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">⏰</div>
+                    <h3 data-en="Working Hours" data-am="የስራ ሰዓት">Working Hours</h3>
+                    <p data-en="Monday - Friday" data-am="ሰኞ - አርብ">Monday - Friday</p>
+                    <p>8:30 AM - 5:30 PM</p>
+                    <p data-en="Saturday" data-am="ቅዳሜ">Saturday</p>
+                    <p>9:00 AM - 3:00 PM</p>
                 </div>
             </div>
         </div>
     </section>
     
+    <!-- OUR BRANCHES -->
+    <section class="section" style="padding-top:0;">
+        <div class="container">
+            <h2 class="section-title"><span data-en="Our" data-am="የእኛ">Our</span> <span class="gold-text" data-en="Campuses" data-am="ካምፓሶች">Campuses</span></h2>
+            <div class="branches-grid">
+                <div class="branch-card">
+                    <div class="branch-icon">🏛️</div>
+                    <h3 class="branch-name">Megenagna</h3>
+                    <span class="branch-badge" data-en="Main Campus" data-am="ዋና ካምፓስ">Main Campus</span>
+                    <p class="branch-address">Nucleus Plaza, 5th Floor<br>Next to Marhont Building</p>
+                    <p class="branch-phone">📞 0116587060</p>
+                    <a href="https://maps.google.com/?q=Megenagna+Addis+Ababa" target="_blank" class="btn btn-outline-gold" style="padding:8px 16px; font-size:13px; margin-top:16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a>
+                </div>
+                <div class="branch-card">
+                    <div class="branch-icon">🏛️</div>
+                    <h3 class="branch-name">Arada</h3>
+                    <span class="branch-badge">Branch</span>
+                    <p class="branch-address">Arada Area<br>Addis Ababa, Ethiopia</p>
+                    <p class="branch-phone">📞 0911221032</p>
+                    <a href="https://maps.google.com/?q=Arada+Addis+Ababa" target="_blank" class="btn btn-outline-gold" style="padding:8px 16px; font-size:13px; margin-top:16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a>
+                </div>
+                <div class="branch-card">
+                    <div class="branch-icon">🏛️</div>
+                    <h3 class="branch-name">Merkato</h3>
+                    <span class="branch-badge">Branch</span>
+                    <p class="branch-address">Merkato Area<br>Addis Ababa, Ethiopia</p>
+                    <p class="branch-phone">📞 0991171819</p>
+                    <a href="https://maps.google.com/?q=Merkato+Addis+Ababa" target="_blank" class="btn btn-outline-gold" style="padding:8px 16px; font-size:13px; margin-top:16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a>
+                </div>
+                <div class="branch-card">
+                    <div class="branch-icon">🏛️</div>
+                    <h3 class="branch-name">Gofa</h3>
+                    <span class="branch-badge">Branch</span>
+                    <p class="branch-address">Gofa Area<br>Addis Ababa, Ethiopia</p>
+                    <p class="branch-phone">📞 0945671188</p>
+                    <a href="https://maps.google.com/?q=Gofa+Addis+Ababa" target="_blank" class="btn btn-outline-gold" style="padding:8px 16px; font-size:13px; margin-top:16px;" data-en="Get Directions" data-am="አቅጣጫ ያግኙ">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- MAP SECTION -->
+    <section class="section" style="padding-top:0;">
+        <div class="container">
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <div class="map-icon">🗺️</div>
+                    <h3 style="color:var(--gold-primary); margin-bottom:16px;">Megenagna Main Campus</h3>
+                    <p style="margin-bottom:20px;">Nucleus Plaza, 5th Floor, Next to Marhont Building</p>
+                    <p style="color:var(--gray-dark);">📍 Addis Ababa, Ethiopia</p>
+                    <a href="https://maps.google.com/?q=Megenagna+Addis+Ababa+Ethiopia" target="_blank" class="btn btn-outline-gold" style="margin-top:24px;" data-en="Open in Google Maps" data-am="በጉግል ካርታ ይክፈቱ">Open in Google Maps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CONTACT FORM -->
+    <section class="section" style="padding-top:0;">
+        <div class="container">
+            <h2 class="section-title"><span data-en="Send Us a" data-am="መልእክት">Send Us a</span> <span class="gold-text" data-en="Message" data-am="ይላኩ">Message</span></h2>
+            <div class="form-container">
+                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="94a172b5-52c8-43fe-b548-1b49d03705ba">
+                    <input type="hidden" name="subject" value="New Contact from Lovely Beauty College Website">
+                    <input type="hidden" name="from_name" value="Lovely Beauty College Contact Form">
+                    <input type="hidden" name="redirect" value="false">
+                    
+                    <div class="form-group"><label data-en="Full Name *" data-am="ሙሉ ስም *">Full Name *</label><input type="text" name="name" required placeholder="Enter your full name"></div>
+                    <div class="form-group"><label data-en="Phone Number *" data-am="ስልክ ቁጥር *">Phone Number *</label><input type="tel" name="phone" required placeholder="09xxxxxxxx"></div>
+                    <div class="form-group"><label data-en="Email Address" data-am="ኢሜይል">Email Address</label><input type="email" name="email" placeholder="your@email.com"></div>
+                    <div class="form-group"><label data-en="Preferred Branch" data-am="የሚመርጡት ቅርንጫፍ">Preferred Branch</label><select name="branch"><option value="Megenagna">Megenagna (Main)</option><option value="Arada">Arada</option><option value="Merkato">Merkato</option><option value="Gofa">Gofa</option></select></div>
+                    <div class="form-group"><label data-en="Your Message *" data-am="መልእክትዎ *">Your Message *</label><textarea name="message" required placeholder="How can we help you?"></textarea></div>
+                    
+                    <div id="formStatus" class="form-status"></div>
+                    <button type="submit" class="btn btn-gold" style="width:100%;" data-en="Send Message" data-am="መልእክት ላክ">Send Message</button>
+                    <p style="color:var(--gray-dark); font-size:12px; text-align:center; margin-top:16px;" data-en="We'll get back to you within 24 hours." data-am="በ24 ሰዓታት ውስጥ ምላሽ እንሰጣለን።">We'll get back to you within 24 hours.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SOCIAL MEDIA -->
+    <section class="section" style="padding-top:0;">
+        <div class="container">
+            <div class="social-section">
+                <h2 class="section-title"><span data-en="Follow Us on" data-am="ይከታተሉን">Follow Us on</span> <span class="gold-text" data-en="Social Media" data-am="ማህበራዊ ሚዲያ">Social Media</span></h2>
+                <div class="social-large">
+                    <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-card"><span class="social-icon">📘</span><div class="social-info"><h4>Facebook</h4><p>@LovelyBeautyCollege</p></div></a>
+                    <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-card"><span class="social-icon">🎵</span><div class="social-info"><h4>TikTok</h4><p>@lovelybeautycollege</p></div></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">EST 1998 G.C.</div><p class="footer-desc" data-en="The 1st Private Beauty College in Ethiopia." data-am="የመጀመሪያው የግል የውበት ኮሌጅ በኢትዮጵያ።">The 1st Private Beauty College in Ethiopia.</p><div class="social-links"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a></div></div>
+                <div><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div><p class="footer-desc" data-en="Ethiopia's first fully established professional beauty college." data-am="የኢትዮጵያ የመጀመሪያው ሙሉ በሙሉ የተቋቋመ ሙያዊ የውበት ኮሌጅ።">Ethiopia's first fully established professional beauty college.</p><div class="social-links"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a></div></div>
                 <div><h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="courses.html">Courses</a></li><li><a href="news-events.html">News & Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-                <div><h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4><ul class="footer-links"><li><a href="courses.html">Hairdressing</a></li><li><a href="courses.html">Makeup Artistry</a></li><li><a href="courses.html">Nail Technology</a></li><li><a href="courses.html">Barbering</a></li><li><a href="courses.html">Skincare</a></li></ul></div>
-                <div class="footer-contact"><h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4><p>📍 Megenagna, Addis Ababa</p><p>📞 0991171819 / 0911221032</p><p>📞 0112750345 (Sebatgna)</p><p>📞 0116587060 (Megenagna)</p><p>✉️ info@lovelybeautycollege.com</p></div>
+                <div><h4 class="footer-title" data-en="Our Branches" data-am="ቅርንጫፎቻችን">Our Branches</h4><ul class="footer-links"><li>📍 Megenagna (Main)</li><li>📍 Arada</li><li>📍 Merkato</li><li>📍 Gofa</li></ul></div>
+                <div class="footer-contact"><h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4><p>📍 Addis Ababa, Ethiopia</p><p>📞 0991171819 / 0911221032</p><p>📞 0116587060 (Megenagna)</p><p>✉️ lovelybeautycollage@proton.me</p></div>
             </div>
-            <div class="footer-bottom"><p>© 2025 Lovely Plus Beauty College. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p></div>
+            <div class="footer-bottom">
+                <p>© 2025 Lovely Beauty College and Training Center. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
+                <p class="footer-credit"><span data-en="Powered by" data-am="የተጎላበተው በ">Powered by</span> <a href="https://addispowerwebsolution.pages.dev" target="_blank">Addis Power Web Solution</a></p>
+            </div>
         </div>
     </footer>
     
@@ -259,10 +360,8 @@
             finally { btn.textContent = orig; btn.disabled = false; }
         });
         
-        // Header & Animations
+        // Header Shadow
         window.addEventListener('scroll', () => { document.querySelector('.header').style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.6)' : '0 4px 20px rgba(0,0,0,0.5)'; });
-        const obs = new IntersectionObserver((e) => { e.forEach(entry => { if(entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } }); }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in-up').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'all 0.6s ease'; obs.observe(el); });
     </script>
 </body>
 </html>
