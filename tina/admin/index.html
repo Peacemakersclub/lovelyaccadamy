@@ -5,28 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Manager | Lovely Beauty College</title>
     <link rel="icon" href="../logo.jpg">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #0A0A0A;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            color: #D4AF37;
-        }
-        .loading {
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
-    <div class="loading">
-        <h1>💎 LOVELY BEAUTY</h1>
-        <p>Loading Content Manager...</p>
-    </div>
-    <script type="module" src="./tina.js"></script>
+    <script type="module">
+        // Tina CMS Configuration
+        const config = {
+            branch: "main",
+            clientId: "86aba70b-c964-46f8-9804-8dee298d18a3",
+            token: null,
+            media: {
+                tina: {
+                    mediaRoot: "assets/images/uploads",
+                    publicFolder: "",
+                },
+            },
+            schema: {
+                collections: [
+                    {
+                        name: "news",
+                        label: "News & Events",
+                        path: "content/news",
+                        format: "md",
+                        fields: [
+                            { type: "string", name: "title", label: "Title", isTitle: true, required: true },
+                            { type: "datetime", name: "date", label: "Publish Date" },
+                            { type: "string", name: "category", label: "Category", options: ["News", "Event", "Competition", "Announcement", "Success Story"] },
+                            { type: "image", name: "image", label: "Featured Image" },
+                            { type: "rich-text", name: "body", label: "Content", isBody: true },
+                        ],
+                    },
+                ],
+            },
+        };
+
+        // Load Tina CMS
+        import('https://unpkg.com/tinacms@latest/dist/tinacms.es.js').then(({ createApp }) => {
+            const app = createApp({ config });
+            app.start();
+        });
+    </script>
 </body>
 </html>
