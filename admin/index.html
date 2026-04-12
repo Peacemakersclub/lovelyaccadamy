@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,23 +6,20 @@
     <title>Content Manager | Lovely Beauty College</title>
     <link rel="icon" href="../logo.jpg">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #0A0A0A;
-        }
+        body { margin: 0; padding: 0; background: #0A0A0A; }
     </style>
 </head>
 <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
-        // Initialize Decap CMS with GitHub backend
         CMS.init({
             config: {
                 backend: {
                     name: 'github',
                     repo: 'Peacemakersclub/lovelyaccadamy',
-                    branch: 'main'
+                    branch: 'main',
+                    base_url: 'https://decap-cms-github-oauth.vercel.app',
+                    auth_endpoint: 'auth'
                 },
                 media_folder: 'assets/images/uploads',
                 public_folder: '/assets/images/uploads',
