@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Register | Lovely Plus Beauty College</title>
-    <meta name="description" content="Register for professional beauty courses at Lovely Plus Beauty College. Start your career in hairdressing, makeup, skincare, and more.">
+    <title>Register | Lovely Beauty College and Training Center</title>
+    <meta name="description" content="Register for professional beauty courses at Lovely Beauty College. Start your career in hairdressing, makeup, skincare, and more.">
     
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <link rel="icon" type="image/x-icon" href="logo.jpg">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,7 @@
             --gold-dark: #996515;
             --gold-glow: rgba(212, 175, 55, 0.3);
             --white: #FFFFFF;
+            --gray-light: #E0E0E0;
             --gray-mid: #B0B0B0;
             --gray-dark: #666666;
             --font-heading: 'Playfair Display', serif;
@@ -35,31 +36,31 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: var(--font-body); background-color: var(--black-primary); color: var(--white); line-height: 1.6; }
-        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; line-height: 1.3; }
         a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
         .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
         
         /* Header */
-        .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+        .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .header-container { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); }
         .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 20px var(--gold-glow); }
+        .logo-image { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 20px var(--gold-glow); border: 1px solid var(--gold-primary); }
         .logo-text { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
-        .logo-main { font-size: 22px; color: var(--gold-primary); letter-spacing: 2px; }
-        .logo-sub { font-size: 11px; color: var(--gray-mid); letter-spacing: 1px; }
-        .nav-menu { display: flex; align-items: center; gap: 32px; }
-        .nav-link { font-weight: 500; font-size: 15px; color: var(--gray-mid); position: relative; padding: 8px 0; }
+        .logo-main { font-size: 20px; color: var(--gold-primary); letter-spacing: 2px; }
+        .logo-sub { font-size: 10px; color: var(--gray-mid); letter-spacing: 1px; }
+        .nav-menu { display: flex; align-items: center; gap: 28px; }
+        .nav-link { font-weight: 500; font-size: 14px; color: var(--gray-light); position: relative; padding: 8px 0; }
         .nav-link:hover { color: var(--gold-primary); }
         .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold-primary); transition: width 0.3s ease; }
         .nav-link:hover::after { width: 100%; }
         .nav-link.active { color: var(--gold-primary); }
         .nav-link.active::after { width: 100%; }
-        .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 16px; border-radius: 30px; font-size: 14px; cursor: pointer; margin-left: 16px; }
+        .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 6px 14px; border-radius: 30px; font-size: 13px; cursor: pointer; margin-left: 12px; }
         .lang-toggle:hover { background: var(--gold-primary); color: var(--black-primary); }
         .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
         
         /* Buttons */
-        .btn { display: inline-block; padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 16px; text-align: center; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; text-align: center; transition: all 0.3s ease; cursor: pointer; border: none; }
         .btn-gold { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); color: var(--black-primary); box-shadow: 0 4px 15px var(--gold-glow); }
         .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--gold-glow); }
         
@@ -69,33 +70,42 @@
         .page-title .gold-text { color: var(--gold-primary); }
         .page-subtitle { color: var(--gray-mid); font-size: 18px; }
         
-        /* Form */
+        /* Sections */
         .section { padding: 60px 0; }
+        
+        /* Form Container */
         .form-container { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 24px; padding: 48px; max-width: 800px; margin: 0 auto; }
         .form-header { text-align: center; margin-bottom: 40px; }
         .form-header h2 { color: var(--gold-primary); font-size: 32px; margin-bottom: 12px; }
         .form-header p { color: var(--gray-mid); }
+        
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
         .form-group { margin-bottom: 24px; }
         .form-group label { display: block; color: var(--gold-primary); margin-bottom: 8px; font-size: 14px; }
         .form-group .required { color: #dc3545; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; background: var(--black-secondary); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; color: var(--white); font-size: 16px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; background: var(--black-secondary); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; color: var(--white); font-size: 15px; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold-primary); box-shadow: 0 0 0 3px var(--gold-glow); }
         .form-group textarea { resize: vertical; min-height: 100px; }
-        .course-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        
+        .course-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 8px; }
         .course-checkbox { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--black-secondary); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 10px; cursor: pointer; }
         .course-checkbox:hover { border-color: var(--gold-primary); background: rgba(212, 175, 55, 0.05); }
-        .course-checkbox input { accent-color: var(--gold-primary); }
+        .course-checkbox input { accent-color: var(--gold-primary); width: 18px; height: 18px; }
+        .course-checkbox span { color: var(--gray-light); font-size: 14px; }
+        
         .payment-info { background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; padding: 24px; margin: 32px 0; }
-        .payment-info h4 { color: var(--gold-primary); margin-bottom: 16px; }
-        .payment-methods { display: flex; gap: 20px; }
+        .payment-info h4 { color: var(--gold-primary); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .payment-methods { display: flex; gap: 20px; flex-wrap: wrap; }
         .payment-method { display: flex; align-items: center; gap: 8px; color: var(--gray-mid); }
+        
+        .terms { display: flex; align-items: flex-start; gap: 12px; margin: 24px 0; }
+        .terms input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--gold-primary); }
+        .terms label { color: var(--gray-mid); font-size: 14px; }
+        .terms a { color: var(--gold-primary); text-decoration: underline; }
+        
         .form-status { margin-top: 24px; padding: 16px; border-radius: 12px; display: none; }
         .form-status.success { display: block; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-primary); color: var(--gold-primary); }
         .form-status.error { display: block; background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; color: #dc3545; }
-        .terms { display: flex; gap: 12px; margin: 24px 0; color: var(--gray-mid); font-size: 14px; }
-        .terms input { accent-color: var(--gold-primary); }
-        .terms a { color: var(--gold-primary); text-decoration: underline; }
         
         /* Benefits */
         .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
@@ -118,6 +128,9 @@
         .footer-links a:hover { color: var(--gold-primary); }
         .footer-contact p { color: var(--gray-mid); font-size: 14px; margin-bottom: 12px; }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.1); color: var(--gray-mid); font-size: 14px; }
+        .footer-credit { margin-top: 10px; }
+        .footer-credit a { color: var(--gold-primary); font-weight: 500; }
+        .footer-credit a:hover { color: var(--gold-light); text-decoration: underline; }
         
         /* Responsive */
         @media (max-width: 1024px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; } }
@@ -127,27 +140,26 @@
             .mobile-menu-btn { display: block; }
             .lang-toggle { margin-left: 0; margin-top: 16px; }
             .form-container { padding: 30px 20px; }
-            .form-row { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
             .course-options { grid-template-columns: 1fr; }
             .benefits-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
         }
-        
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in-up { animation: fadeInUp 0.8s ease forwards; }
     </style>
 </head>
 <body>
     
+    <!-- HEADER -->
     <header class="header">
         <div class="container header-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">💎</div>
+            <div class="logo">
+                <img src="logo.jpg" alt="Lovely Beauty College" class="logo-image">
                 <div class="logo-text">
                     <div class="logo-main">LOVELY BEAUTY</div>
-                    <div class="logo-sub">EST 1998 G.C.</div>
+                    <div class="logo-sub">COLLEGE & TRAINING CENTER</div>
                 </div>
-            </a>
+            </div>
+            
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
                 <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
@@ -157,23 +169,29 @@
                 <a href="contact.html" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a>
                 <button class="lang-toggle" id="langToggle">አማ / EN</button>
             </nav>
+            
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
     </header>
     
+    <!-- PAGE HEADER -->
     <section class="page-header">
         <div class="container">
-            <h1 class="page-title"><span data-en="Register for" data-am="ይመዝገቡ">Register for</span> <span class="gold-text" data-en="Courses" data-am="ኮርሶች">Courses</span></h1>
+            <h1 class="page-title">
+                <span data-en="Register for" data-am="ይመዝገቡ">Register for</span>
+                <span class="gold-text" data-en="Courses" data-am="ኮርሶች">Courses</span>
+            </h1>
             <p class="page-subtitle" data-en="Start your journey to becoming a professional beauty expert" data-am="ሙያዊ የውበት ባለሙያ ለመሆን ጉዞዎን ይጀምሩ">Start your journey to becoming a professional beauty expert</p>
         </div>
     </section>
     
+    <!-- REGISTRATION FORM -->
     <section class="section">
         <div class="container">
-            <div class="form-container fade-in-up">
+            <div class="form-container">
                 <div class="form-header">
                     <h2 data-en="Student Registration" data-am="የተማሪ ምዝገባ">Student Registration</h2>
-                    <p data-en="Fill in your details to enroll in our beauty courses" data-am="በውበት ኮርሶቻችን ለመመዝገብ ዝርዝሮችዎን ይሙሉ">Fill in your details to enroll in our beauty courses</p>
+                    <p data-en="Fill in your details to enroll in our professional beauty courses" data-am="በሙያዊ የውበት ኮርሶቻችን ለመመዝገብ ዝርዝሮችዎን ይሙሉ">Fill in your details to enroll in our professional beauty courses</p>
                 </div>
                 
                 <form id="registrationForm" action="https://api.web3forms.com/submit" method="POST">
@@ -186,40 +204,42 @@
                         <div class="form-group"><label data-en="Full Name" data-am="ሙሉ ስም">Full Name <span class="required">*</span></label><input type="text" name="full_name" required placeholder="Enter your full name"></div>
                         <div class="form-group"><label data-en="Phone Number" data-am="ስልክ ቁጥር">Phone Number <span class="required">*</span></label><input type="tel" name="phone" required placeholder="09xxxxxxxx"></div>
                     </div>
+                    
                     <div class="form-row">
-                        <div class="form-group"><label data-en="Email Address" data-am="ኢሜይል አድራሻ">Email Address</label><input type="email" name="email" placeholder="your@email.com"></div>
+                        <div class="form-group"><label data-en="Email Address" data-am="ኢሜይል">Email Address</label><input type="email" name="email" placeholder="your@email.com"></div>
                         <div class="form-group"><label data-en="Date of Birth" data-am="የትውልድ ቀን">Date of Birth</label><input type="date" name="dob"></div>
                     </div>
+                    
                     <div class="form-group"><label data-en="Address" data-am="አድራሻ">Address</label><input type="text" name="address" placeholder="Your current address"></div>
-                    <div class="form-group"><label data-en="Emergency Contact" data-am="የአደጋ ጊዜ አድራሻ">Emergency Contact</label><input type="tel" name="emergency_contact" placeholder="Contact name and phone"></div>
                     
                     <div class="form-group">
                         <label data-en="Select Course(s)" data-am="ኮርስ(ቶች) ይምረጡ">Select Course(s) <span class="required">*</span></label>
                         <div class="course-options">
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Hairdressing"><span>💇 Hairdressing (ፀጉር ስራ)</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Makeup Artistry"><span>💄 Makeup Artistry (ሜካፕ)</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Nail Technology"><span>💅 Nail Technology (ጥፍር ጥበብ)</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Barbering"><span>✂️ Barbering (ወንድ ፀጉር)</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Skincare & Facial"><span>🧖 Skincare & Facial (የቆዳ እንክብካቤ)</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Eyelash Extension"><span>👁️ Eyelash Extension (ዐይን ሽፋሽፍ)</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Henna Art"><span>🌿 Henna Art (ሂና)</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Level 2 Hair & Beauty"><span>📜 Level 2 Hair & Beauty</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Level 3 Hair & Beauty"><span>📜 Level 3 Hair & Beauty</span></label>
-                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Level 4 Hair & Beauty"><span>📜 Level 4 Hair & Beauty</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Hairdressing & Barbering"><span>💇 Hairdressing & Barbering</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Makeup Artistry"><span>💄 Makeup Artistry</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Nail Technology"><span>💅 Nail Technology</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Skincare & Aesthetics"><span>🧖 Skincare & Aesthetics</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Eyelash & Brow Services"><span>👁️ Eyelash & Brow Services</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Massage Therapy"><span>💆 Massage Therapy</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Henna Art"><span>🌿 Henna Art</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Bridal & Fashion Makeup"><span>👰 Bridal & Fashion Makeup</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Facial Treatment"><span>✨ Facial Treatment</span></label>
+                            <label class="course-checkbox"><input type="checkbox" name="courses" value="Beauty Therapy & Salon Management"><span>🏪 Beauty Therapy & Salon Management</span></label>
                         </div>
                     </div>
                     
                     <div class="form-row">
-                        <div class="form-group"><label data-en="Preferred Branch" data-am="የሚመርጡት ቅርንጫፍ">Preferred Branch <span class="required">*</span></label><select name="branch" required><option value="" data-en="Select a branch" data-am="ቅርንጫፍ ይምረጡ">Select a branch</option><option value="Megenagna">Megenagna (Main Campus)</option><option value="Piassa">Piassa</option><option value="Sebatgna">Sebatgna</option></select></div>
+                        <div class="form-group"><label data-en="Preferred Branch" data-am="የሚመርጡት ቅርንጫፍ">Preferred Branch <span class="required">*</span></label><select name="branch" required><option value="">Select a branch</option><option value="Megenagna">Megenagna (Main Campus)</option><option value="Arada">Arada</option><option value="Merkato">Merkato</option><option value="Gofa">Gofa</option></select></div>
                         <div class="form-group"><label data-en="Preferred Start Date" data-am="የሚመርጡት የመጀመሪያ ቀን">Preferred Start Date</label><select name="start_date"><option value="Immediate">Immediate</option><option value="Next Month">Next Month</option><option value="Next Intake">Next Intake</option></select></div>
                     </div>
                     
                     <div class="form-group"><label data-en="How did you hear about us?" data-am="ስለ እኛ እንዴት ሰሙ?">How did you hear about us?</label><select name="referral_source"><option value="Social Media">Social Media</option><option value="Friend/Family">Friend or Family</option><option value="Advertisement">Advertisement</option><option value="Walk-in">Walk-in</option><option value="Other">Other</option></select></div>
+                    
                     <div class="form-group"><label data-en="Additional Notes" data-am="ተጨማሪ ማስታወሻ">Additional Notes</label><textarea name="notes" placeholder="Any questions or special requests?"></textarea></div>
                     
                     <div class="payment-info">
                         <h4><span>💰</span> <span data-en="Payment Information" data-am="የክፍያ መረጃ">Payment Information</span></h4>
-                        <p style="color:var(--gray-mid);margin-bottom:16px;" data-en="Registration fee: 500 ETB (to be paid at the campus)" data-am="የምዝገባ ክፍያ፡ 500 ብር (በካምፓሱ የሚከፈል)">Registration fee: 500 ETB (to be paid at the campus)</p>
+                        <p style="color:var(--gray-mid); margin-bottom:16px;" data-en="Registration fee: 500 ETB (to be paid at the campus)" data-am="የምዝገባ ክፍያ፡ 500 ብር (በካምፓሱ የሚከፈል)">Registration fee: 500 ETB (to be paid at the campus)</p>
                         <div class="payment-methods"><div class="payment-method"><span>💵</span><span data-en="Cash" data-am="ጥሬ ገንዘብ">Cash</span></div><div class="payment-method"><span>📱</span><span data-en="Mobile Banking" data-am="ሞባይል ባንኪንግ">Mobile Banking</span></div><div class="payment-method"><span>🏦</span><span data-en="Bank Transfer" data-am="ባንክ ትራንስፈር">Bank Transfer</span></div></div>
                     </div>
                     
@@ -227,32 +247,37 @@
                     
                     <div id="formStatus" class="form-status"></div>
                     <button type="submit" class="btn btn-gold" style="width:100%;"><span data-en="Submit Registration" data-am="ምዝገባ ያስገቡ">Submit Registration</span></button>
-                    <p style="color:var(--gray-dark);font-size:13px;text-align:center;margin-top:20px;" data-en="After submission, our admissions team will contact you within 24 hours." data-am="ከቀረበ በኋላ የምዝገባ ቡድናችን በ24 ሰዓታት ውስጥ ያገኙዎታል።">After submission, our admissions team will contact you within 24 hours.</p>
+                    <p style="color:var(--gray-dark); font-size:13px; text-align:center; margin-top:20px;" data-en="After submission, our admissions team will contact you within 24 hours." data-am="ከቀረበ በኋላ የምዝገባ ቡድናችን በ24 ሰዓታት ውስጥ ያገኙዎታል።">After submission, our admissions team will contact you within 24 hours.</p>
                 </form>
             </div>
         </div>
     </section>
     
+    <!-- BENEFITS -->
     <section class="section" style="padding-top:0;">
         <div class="container">
             <div class="benefits-grid">
-                <div class="benefit-item fade-in-up"><div class="benefit-icon">📜</div><h4 data-en="National Certification" data-am="ብሄራዊ ሰርተፍኬት">National Certification</h4><p data-en="Recognized by Ministry of Education" data-am="በትምህርት ሚኒስቴር እውቅና የተሰጠው">Recognized by Ministry of Education</p></div>
-                <div class="benefit-item fade-in-up"><div class="benefit-icon">👩‍🏫</div><h4 data-en="Expert Instructors" data-am="ልምድ ያላቸው አስተማሪዎች">Expert Instructors</h4><p data-en="Learn from industry professionals" data-am="ከኢንዱስትሪ ባለሙያዎች ይማሩ">Learn from industry professionals</p></div>
-                <div class="benefit-item fade-in-up"><div class="benefit-icon">💼</div><h4 data-en="Job Placement" data-am="የስራ ምደባ">Job Placement</h4><p data-en="Career support after graduation" data-am="ከምረቃ በኋላ የሙያ ድጋፍ">Career support after graduation</p></div>
-                <div class="benefit-item fade-in-up"><div class="benefit-icon">🏆</div><h4 data-en="28+ Years Legacy" data-am="ከ28+ ዓመታት ቅርስ">28+ Years Legacy</h4><p data-en="Ethiopia's first private beauty college" data-am="የኢትዮጵያ የመጀመሪያው የግል የውበት ኮሌጅ">Ethiopia's first private beauty college</p></div>
+                <div class="benefit-item"><div class="benefit-icon">📜</div><h4 data-en="Government Recognized" data-am="በመንግስት እውቅና የተሰጠው">Government Recognized</h4><p data-en="TVET Level 2-4 certification" data-am="ደረጃ 2-4 የቴክኒክና ሙያ ሰርተፍኬት">TVET Level 2-4 certification</p></div>
+                <div class="benefit-item"><div class="benefit-icon">👩‍🏫</div><h4 data-en="Expert Instructors" data-am="ልምድ ያላቸው አስተማሪዎች">Expert Instructors</h4><p data-en="Learn from industry professionals" data-am="ከኢንዱስትሪ ባለሙያዎች ይማሩ">Learn from industry professionals</p></div>
+                <div class="benefit-item"><div class="benefit-icon">💼</div><h4 data-en="Career Support" data-am="የሙያ ድጋፍ">Career Support</h4><p data-en="Job placement assistance" data-am="የስራ ምደባ እርዳታ">Job placement assistance</p></div>
+                <div class="benefit-item"><div class="benefit-icon">🏆</div><h4 data-en="20+ Years Legacy" data-am="ከ20+ ዓመታት ቅርስ">20+ Years Legacy</h4><p data-en="Ethiopia's first professional beauty college" data-am="የኢትዮጵያ የመጀመሪያው ሙያዊ የውበት ኮሌጅ">Ethiopia's first professional beauty college</p></div>
             </div>
         </div>
     </section>
     
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">EST 1998 G.C.</div><p class="footer-desc" data-en="The 1st Private Beauty College in Ethiopia." data-am="የመጀመሪያው የግል የውበት ኮሌጅ በኢትዮጵያ።">The 1st Private Beauty College in Ethiopia.</p><div class="social-links"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a></div></div>
-                <div><h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="courses.html">Courses</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-                <div><h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4><ul class="footer-links"><li><a href="courses.html">Hairdressing</a></li><li><a href="courses.html">Makeup Artistry</a></li><li><a href="courses.html">Nail Technology</a></li><li><a href="courses.html">Barbering</a></li></ul></div>
-                <div class="footer-contact"><h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4><p>📍 Megenagna, Addis Ababa</p><p>📞 0991171819 / 0911221032</p><p>📞 0112750345 (Sebatgna)</p><p>📞 0116587060 (Megenagna)</p><p>✉️ info@lovelybeautycollege.com</p></div>
+                <div><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div><p class="footer-desc" data-en="Ethiopia's first fully established professional beauty college." data-am="የኢትዮጵያ የመጀመሪያው ሙሉ በሙሉ የተቋቋመ ሙያዊ የውበት ኮሌጅ።">Ethiopia's first fully established professional beauty college.</p><div class="social-links"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a></div></div>
+                <div><h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="courses.html">Courses</a></li><li><a href="news-events.html">News & Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div><h4 class="footer-title" data-en="Our Branches" data-am="ቅርንጫፎቻችን">Our Branches</h4><ul class="footer-links"><li>📍 Megenagna (Main)</li><li>📍 Arada</li><li>📍 Merkato</li><li>📍 Gofa</li></ul></div>
+                <div class="footer-contact"><h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4><p>📍 Addis Ababa, Ethiopia</p><p>📞 0991171819 / 0911221032</p><p>✉️ lovelybeautycollage@proton.me</p></div>
             </div>
-            <div class="footer-bottom"><p>© 2025 Lovely Plus Beauty College. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p></div>
+            <div class="footer-bottom">
+                <p>© 2025 Lovely Beauty College and Training Center. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
+                <p class="footer-credit"><span data-en="Powered by" data-am="የተጎላበተው በ">Powered by</span> <a href="https://addispowerwebsolution.pages.dev" target="_blank">Addis Power Web Solution</a></p>
+            </div>
         </div>
     </footer>
     
@@ -269,17 +294,18 @@
         document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'am' : 'en'));
         setLanguage(currentLang);
         
-        // Form
+        // Form Validation
         const form = document.getElementById('registrationForm');
         const status = document.getElementById('formStatus');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            if(!document.querySelectorAll('input[name="courses"]:checked').length) { status.className = 'form-status error'; status.textContent = currentLang === 'en' ? '⚠️ Please select at least one course.' : '⚠️ እባክዎ ቢያንስ አንድ ኮርስ ይምረጡ።'; return; }
+            const checked = document.querySelectorAll('input[name="courses"]:checked');
+            if(checked.length === 0) { status.className = 'form-status error'; status.textContent = currentLang === 'en' ? '⚠️ Please select at least one course.' : '⚠️ እባክዎ ቢያንስ አንድ ኮርስ ይምረጡ።'; return; }
             const btn = form.querySelector('button'); const orig = btn.textContent;
             btn.textContent = currentLang === 'en' ? 'Submitting...' : 'በማስገባት ላይ...'; btn.disabled = true;
             try {
                 const fd = new FormData(form);
-                fd.append('selected_courses', Array.from(document.querySelectorAll('input[name="courses"]:checked')).map(c => c.value).join(', '));
+                fd.append('selected_courses', Array.from(checked).map(c => c.value).join(', '));
                 const res = await fetch(form.action, { method: 'POST', body: fd });
                 const data = await res.json();
                 if(data.success) { status.className = 'form-status success'; status.textContent = currentLang === 'en' ? '✓ Registration submitted! We will contact you within 24 hours.' : '✓ ምዝገባ ቀርቧል! በ24 ሰዓታት ውስጥ እናገኝዎታለን።'; form.reset(); }
@@ -288,10 +314,8 @@
             finally { btn.textContent = orig; btn.disabled = false; }
         });
         
-        // Sticky header & animations
+        // Header Shadow
         window.addEventListener('scroll', () => { document.querySelector('.header').style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.6)' : '0 4px 20px rgba(0,0,0,0.5)'; });
-        const obs = new IntersectionObserver((e) => { e.forEach(entry => { if(entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } }); }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in-up').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'all 0.6s ease'; obs.observe(el); });
     </script>
 </body>
 </html>
