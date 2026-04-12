@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>About Us | Lovely Plus Beauty College</title>
-    <meta name="description" content="About Lovely Plus Beauty College - Ethiopia's first private beauty college, est. 1998. Vision, Mission, Values, and 28+ years of excellence.">
+    <title>About Us | Lovely Beauty College and Training Center</title>
+    <meta name="description" content="About Lovely Beauty College and Training Center - Ethiopia's first professional beauty college. Est. 1998 by Fasil Michael. Vision, Mission, Values, and Legacy.">
     
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <link rel="icon" type="image/x-icon" href="logo.jpg">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,10 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ============================================
-           LOVELY BEAUTY COLLEGE - GOLD & BLACK THEME
-           ============================================ */
-        
         :root {
             --black-primary: #0A0A0A;
             --black-secondary: #111111;
@@ -31,705 +27,158 @@
             --gray-light: #E0E0E0;
             --gray-mid: #B0B0B0;
             --gray-dark: #666666;
-            
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Poppins', sans-serif;
-            
             --container-max: 1280px;
             --header-height: 80px;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background-color: var(--black-primary); color: var(--white); line-height: 1.6; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; line-height: 1.3; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
         
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: var(--font-body);
-            background-color: var(--black-primary);
-            color: var(--white);
-            line-height: 1.6;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            line-height: 1.3;
-        }
-        
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s ease;
-        }
-        
-        .container {
-            max-width: var(--container-max);
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        /* ============================================
-           HEADER
-           ============================================ */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--black-primary);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-        
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: var(--header-height);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 0 20px var(--gold-glow);
-        }
-        
-        .logo-text {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        
-        .logo-main {
-            font-size: 22px;
-            color: var(--gold-primary);
-            letter-spacing: 2px;
-        }
-        
-        .logo-sub {
-            font-size: 11px;
-            color: var(--gray-mid);
-            letter-spacing: 1px;
-        }
-        
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        
-        .nav-link {
-            font-weight: 500;
-            font-size: 15px;
-            color: var(--gray-light);
-            position: relative;
-            padding: 8px 0;
-        }
-        
-        .nav-link:hover {
-            color: var(--gold-primary);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold-primary);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .nav-link.active {
-            color: var(--gold-primary);
-        }
-        
-        .nav-link.active::after {
-            width: 100%;
-        }
-        
-        .lang-toggle {
-            background: transparent;
-            border: 1px solid var(--gold-primary);
-            color: var(--gold-primary);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 16px;
-        }
-        
-        .lang-toggle:hover {
-            background: var(--gold-primary);
-            color: var(--black-primary);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: transparent;
-            border: none;
-            color: var(--white);
-            font-size: 28px;
-            cursor: pointer;
-        }
+        /* Header */
+        .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .header-container { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-image { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 20px var(--gold-glow); border: 1px solid var(--gold-primary); }
+        .logo-text { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
+        .logo-main { font-size: 20px; color: var(--gold-primary); letter-spacing: 2px; }
+        .logo-sub { font-size: 10px; color: var(--gray-mid); letter-spacing: 1px; }
+        .nav-menu { display: flex; align-items: center; gap: 28px; }
+        .nav-link { font-weight: 500; font-size: 14px; color: var(--gray-light); position: relative; padding: 8px 0; }
+        .nav-link:hover { color: var(--gold-primary); }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold-primary); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: var(--gold-primary); }
+        .nav-link.active::after { width: 100%; }
+        .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 6px 14px; border-radius: 30px; font-size: 13px; cursor: pointer; margin-left: 12px; }
+        .lang-toggle:hover { background: var(--gold-primary); color: var(--black-primary); }
+        .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
         
         /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; text-align: center; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-gold { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); color: var(--black-primary); box-shadow: 0 4px 15px var(--gold-glow); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--gold-glow); }
+        .btn-outline-gold { background: transparent; border: 2px solid var(--gold-primary); color: var(--gold-primary); }
+        .btn-outline-gold:hover { background: var(--gold-primary); color: var(--black-primary); }
         
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--black-primary);
-            box-shadow: 0 4px 15px var(--gold-glow);
-        }
+        /* Page Header */
+        .page-header { background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%); padding: 80px 0; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .page-title { font-size: clamp(40px, 8vw, 64px); margin-bottom: 16px; }
+        .page-title .gold-text { color: var(--gold-primary); }
+        .page-subtitle { color: var(--gray-mid); font-size: 18px; max-width: 700px; margin: 0 auto; }
         
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--gold-glow);
-        }
+        /* Sections */
+        .section { padding: 80px 0; }
+        .section-dark { background: var(--black-secondary); }
+        .section-title { font-size: clamp(28px, 4vw, 40px); margin-bottom: 24px; }
+        .section-title .gold-text { color: var(--gold-primary); }
+        .section-desc { color: var(--gray-mid); margin-bottom: 32px; font-size: 16px; }
         
-        .btn-outline-gold {
-            background: transparent;
-            border: 2px solid var(--gold-primary);
-            color: var(--gold-primary);
-        }
+        /* Founder Section */
+        .founder-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; align-items: center; }
+        .founder-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 24px; padding: 40px; text-align: center; }
+        .founder-icon { font-size: 64px; margin-bottom: 20px; }
+        .founder-name { color: var(--gold-primary); font-size: 28px; margin-bottom: 8px; }
+        .founder-title { color: var(--gray-mid); margin-bottom: 20px; }
+        .founder-quote { color: var(--gray-light); font-style: italic; line-height: 1.8; }
         
-        .btn-outline-gold:hover {
-            background: var(--gold-primary);
-            color: var(--black-primary);
-        }
+        /* Vision & Mission */
+        .vm-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        .vm-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 40px 30px; transition: all 0.3s ease; }
+        .vm-card:hover { border-color: var(--gold-primary); box-shadow: 0 10px 30px var(--gold-glow); transform: translateY(-5px); }
+        .vm-icon { font-size: 40px; margin-bottom: 20px; }
+        .vm-title { color: var(--gold-primary); font-size: 24px; margin-bottom: 20px; }
+        .vm-text { color: var(--gray-mid); line-height: 1.8; }
         
-        /* ============================================
-           PAGE HEADER
-           ============================================ */
-        .page-header {
-            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
-            padding: 80px 0;
-            text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
+        /* Values Grid */
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .value-item { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 16px; padding: 30px 20px; text-align: center; transition: all 0.3s ease; }
+        .value-item:hover { border-color: var(--gold-primary); background: rgba(212, 175, 55, 0.05); }
+        .value-icon { font-size: 32px; margin-bottom: 16px; }
+        .value-name { color: var(--gold-primary); font-weight: 600; font-size: 18px; margin-bottom: 8px; }
+        .value-desc { color: var(--gray-mid); font-size: 13px; }
         
-        .page-title {
-            font-size: clamp(40px, 8vw, 64px);
-            color: var(--white);
-            margin-bottom: 16px;
-        }
+        /* Timeline / Development Process */
+        .process-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; margin-top: 40px; }
+        .process-step { text-align: center; }
+        .step-number { width: 50px; height: 50px; background: var(--gold-primary); color: var(--black-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; margin: 0 auto 16px; }
+        .step-title { color: var(--gold-primary); font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        .step-desc { color: var(--gray-mid); font-size: 12px; }
         
-        .page-title .gold-text {
-            color: var(--gold-primary);
-        }
+        /* Branches */
+        .branches-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 30px; }
+        .branch-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 16px; padding: 25px; text-align: center; transition: all 0.3s ease; }
+        .branch-card:hover { border-color: var(--gold-primary); }
+        .branch-icon { font-size: 30px; margin-bottom: 12px; }
+        .branch-name { color: var(--gold-primary); font-size: 18px; font-weight: 600; }
         
-        .page-subtitle {
-            color: var(--gray-mid);
-            font-size: 18px;
-        }
+        /* Legacy Highlight */
+        .legacy-highlight { background: var(--black-card); border: 2px solid var(--gold-primary); border-radius: 20px; padding: 40px; text-align: center; margin-top: 40px; }
+        .legacy-highlight h3 { color: var(--gold-primary); font-size: 28px; margin-bottom: 20px; }
+        .legacy-highlight p { color: var(--gray-light); font-size: 18px; line-height: 1.8; max-width: 800px; margin: 0 auto; }
         
-        /* ============================================
-           SECTIONS
-           ============================================ */
-        .section {
-            padding: 80px 0;
-        }
+        /* CTA */
+        .cta-section { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); padding: 80px 0; text-align: center; }
+        .cta-title { font-size: clamp(32px, 5vw, 48px); color: var(--black-primary); margin-bottom: 20px; }
+        .btn-black { background: var(--black-primary); color: var(--gold-primary); }
+        .btn-black:hover { background: var(--black-secondary); transform: translateY(-2px); }
         
-        .section-dark {
-            background: var(--black-secondary);
-        }
+        /* Footer */
+        .footer { background: var(--black-primary); padding: 60px 0 30px; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
+        .footer-desc { color: var(--gray-mid); font-size: 14px; margin: 20px 0; }
+        .social-links { display: flex; gap: 16px; }
+        .social-link { width: 40px; height: 40px; background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); }
+        .social-link:hover { background: var(--gold-primary); color: var(--black-primary); }
+        .footer-title { color: var(--gold-primary); font-size: 18px; margin-bottom: 20px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--gray-mid); font-size: 14px; }
+        .footer-links a:hover { color: var(--gold-primary); }
+        .footer-contact p { color: var(--gray-mid); font-size: 14px; margin-bottom: 12px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.1); color: var(--gray-mid); font-size: 14px; }
+        .footer-credit { margin-top: 10px; }
+        .footer-credit a { color: var(--gold-primary); font-weight: 500; }
+        .footer-credit a:hover { color: var(--gold-light); text-decoration: underline; }
         
-        .section-title {
-            font-size: clamp(28px, 4vw, 40px);
-            margin-bottom: 20px;
-        }
-        
-        .section-title .gold-text {
-            color: var(--gold-primary);
-        }
-        
-        .section-desc {
-            color: var(--gray-mid);
-            margin-bottom: 40px;
-            max-width: 800px;
-        }
-        
-        /* ============================================
-           COMPANY PROFILE
-           ============================================ */
-        .profile-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .profile-image {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        
-        .profile-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .highlight-box {
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 30px;
-        }
-        
-        .highlight-text {
-            font-size: 18px;
-            color: var(--gold-primary);
-            font-style: italic;
-            margin-bottom: 16px;
-        }
-        
-        /* ============================================
-           VISION & MISSION CARDS
-           ============================================ */
-        .vm-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .vm-card {
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-        
-        .vm-card:hover {
-            border-color: var(--gold-primary);
-            box-shadow: 0 10px 30px var(--gold-glow);
-            transform: translateY(-5px);
-        }
-        
-        .vm-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 24px;
-        }
-        
-        .vm-title {
-            font-size: 24px;
-            color: var(--gold-primary);
-            margin-bottom: 20px;
-        }
-        
-        .vm-list {
-            list-style: none;
-        }
-        
-        .vm-list li {
-            color: var(--gray-mid);
-            margin-bottom: 12px;
-            padding-left: 24px;
-            position: relative;
-        }
-        
-        .vm-list li::before {
-            content: '✦';
-            position: absolute;
-            left: 0;
-            color: var(--gold-primary);
-        }
-        
-        /* ============================================
-           VALUES GRID
-           ============================================ */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            margin-top: 40px;
-        }
-        
-        .value-item {
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 16px;
-            padding: 30px 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .value-item:hover {
-            border-color: var(--gold-primary);
-            background: rgba(212, 175, 55, 0.05);
-        }
-        
-        .value-icon {
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-        
-        .value-name {
-            color: var(--gold-primary);
-            font-weight: 600;
-            font-size: 18px;
-        }
-        
-        /* ============================================
-           TIMELINE
-           ============================================ */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 60px auto 0;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--gold-primary), var(--gold-dark));
-        }
-        
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-        
-        .timeline-content {
-            width: 45%;
-            padding: 25px;
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-        }
-        
-        .timeline-content:hover {
-            border-color: var(--gold-primary);
-        }
-        
-        .timeline-year {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--gold-primary);
-            font-family: var(--font-heading);
-            margin-bottom: 8px;
-        }
-        
-        .timeline-title {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        
-        .timeline-desc {
-            color: var(--gray-mid);
-            font-size: 14px;
-        }
-        
-        .timeline-dot {
-            width: 20px;
-            height: 20px;
-            background: var(--gold-primary);
-            border-radius: 50%;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 0 20px var(--gold-glow);
-            border: 3px solid var(--black-primary);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-left: auto;
-        }
-        
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-right: auto;
-        }
-        
-        /* ============================================
-           CTA SECTION
-           ============================================ */
-        .cta-section {
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .cta-title {
-            font-size: clamp(32px, 5vw, 48px);
-            color: var(--black-primary);
-            margin-bottom: 20px;
-        }
-        
-        .cta-subtitle {
-            color: var(--black-primary);
-            font-size: 18px;
-            margin-bottom: 32px;
-            opacity: 0.9;
-        }
-        
-        .btn-black {
-            background: var(--black-primary);
-            color: var(--gold-primary);
-        }
-        
-        .btn-black:hover {
-            background: var(--black-secondary);
-            transform: translateY(-2px);
-        }
-        
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer {
-            background: var(--black-primary);
-            padding: 60px 0 30px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-logo {
-            margin-bottom: 20px;
-        }
-        
-        .footer-desc {
-            color: var(--gray-mid);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 16px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: var(--black-card);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-primary);
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: var(--gold-primary);
-            color: var(--black-primary);
-        }
-        
-        .footer-title {
-            color: var(--gold-primary);
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: var(--gray-mid);
-            font-size: 14px;
-        }
-        
-        .footer-links a:hover {
-            color: var(--gold-primary);
-        }
-        
-        .footer-contact p {
-            color: var(--gray-mid);
-            font-size: 14px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            color: var(--gray-mid);
-            font-size: 14px;
-        }
-        
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
+        /* Responsive */
         @media (max-width: 1024px) {
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .vm-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .values-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .founder-grid { grid-template-columns: 1fr; }
+            .vm-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; }
+            .branches-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
-        
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                right: 0;
-                background: var(--black-primary);
-                flex-direction: column;
-                padding: 30px;
-                border-bottom: 1px solid var(--gold-primary);
-                z-index: 999;
-            }
-            
-            .nav-menu.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .lang-toggle {
-                margin-left: 0;
-                margin-top: 16px;
-            }
-            
-            .timeline::before {
-                left: 30px;
-            }
-            
-            .timeline-item {
-                flex-direction: column !important;
-                align-items: flex-start;
-                padding-left: 60px;
-            }
-            
-            .timeline-content {
-                width: 100% !important;
-                margin: 0 !important;
-            }
-            
-            .timeline-dot {
-                left: 30px !important;
-            }
-            
-            .values-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .values-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease forwards;
+            .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 30px; border-bottom: 1px solid var(--gold-primary); z-index: 999; }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .lang-toggle { margin-left: 0; margin-top: 16px; }
+            .values-grid { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr; }
+            .branches-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     
-    <!-- ============================================ -->
-    <!-- HEADER                                        -->
-    <!-- ============================================ -->
+    <!-- HEADER -->
     <header class="header">
         <div class="container header-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">💎</div>
+            <div class="logo">
+                <img src="logo.jpg" alt="Lovely Beauty College" class="logo-image">
                 <div class="logo-text">
                     <div class="logo-main">LOVELY BEAUTY</div>
-                    <div class="logo-sub">EST 1998 G.C.</div>
+                    <div class="logo-sub">COLLEGE & TRAINING CENTER</div>
                 </div>
-            </a>
+            </div>
             
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
@@ -745,398 +194,152 @@
         </div>
     </header>
     
-    <!-- ============================================ -->
-    <!-- PAGE HEADER                                   -->
-    <!-- ============================================ -->
+    <!-- PAGE HEADER -->
     <section class="page-header">
         <div class="container">
             <h1 class="page-title">
-                <span data-en="About" data-am="ስለ እኛ">About</span>
+                <span data-en="About" data-am="ስለ">About</span>
                 <span class="gold-text" data-en="Lovely Beauty" data-am="ላቭሊ ቢዩቲ">Lovely Beauty</span>
             </h1>
-            <p class="page-subtitle" data-en="Ethiopia's First Private Beauty College — Excellence Since 1998" 
-               data-am="የኢትዮጵያ የመጀመሪያው የግል የውበት ኮሌጅ — ከ1998 ጀምሮ የላቀ ውጤት">
-                Ethiopia's First Private Beauty College — Excellence Since 1998
-            </p>
+            <p class="page-subtitle" data-en="Ethiopia's First Professional Beauty College — Building Careers Since 1998" data-am="የኢትዮጵያ የመጀመሪያው ሙያዊ የውበት ኮሌጅ — ከ1998 ጀምሮ ሙያዎችን በመገንባት ላይ">Ethiopia's First Professional Beauty College — Building Careers Since 1998</p>
         </div>
     </section>
     
-    <!-- ============================================ -->
-    <!-- COMPANY PROFILE                               -->
-    <!-- ============================================ -->
+    <!-- FOUNDER SECTION -->
     <section class="section">
         <div class="container">
-            <div class="profile-grid">
-                <div class="profile-content fade-in-up">
-                    <h2 class="section-title">
-                        <span data-en="Our" data-am="የእኛ">Our</span>
-                        <span class="gold-text" data-en="Story" data-am="ታሪክ">Story</span>
-                    </h2>
-                    <p class="section-desc" data-en="Lovely Plus Beauty College was founded in 1998 with a singular vision: to elevate beauty education in Ethiopia to international standards. As the first private beauty college in the nation, we pioneered professional training in hairdressing, makeup, skincare, and all aspects of the beauty industry." 
-                       data-am="ላቭሊ ፕላስ ቢዩቲ ኮሌጅ በ1998 ዓ.ም የተመሰረተው በአንድ ራዕይ ነው፡ በኢትዮጵያ ያለውን የውበት ትምህርት ወደ አለም አቀፍ ደረጃ ማሳደግ።">
-                        Lovely Plus Beauty College was founded in 1998 with a singular vision: to elevate beauty education in Ethiopia to international standards. As the first private beauty college in the nation, we pioneered professional training in hairdressing, makeup, skincare, and all aspects of the beauty industry.
-                    </p>
-                    <p class="section-desc" data-en="Over 28 years, we have grown from a single training center to three campuses across Addis Ababa, producing over 5,000 graduates who now work in top salons, run their own businesses, and have found success internationally." 
-                       data-am="ከ28 ዓመታት በላይ፣ ከአንድ የስልጠና ማዕከል ወደ ሶስት ካምፓሶች በአዲስ አበባ አድገናል፣ ከ5,000 በላይ ተመራቂዎችን በማፍራት በከፍተኛ ሳሎኖች ውስጥ የሚሰሩ፣ የራሳቸውን ንግድ የሚያካሂዱ እና በአለም አቀፍ ደረጃ ስኬታማ የሆኑ።">
-                        Over 28 years, we have grown from a single training center to three campuses across Addis Ababa, producing over 5,000 graduates who now work in top salons, run their own businesses, and have found success internationally.
-                    </p>
-                    
-                    <div class="highlight-box">
-                        <p class="highlight-text">"</p>
-                        <p data-en="We don't just teach beauty techniques — we build careers, transform lives, and elevate the entire beauty industry in Ethiopia." 
-                           data-am="የውበት ቴክኒኮችን ብቻ አናስተምርም — ሙያዎችን እንገነባለን፣ ህይወቶችን እንለውጣለን፣ እና በኢትዮጵያ ያለውን አጠቃላይ የውበት ኢንዱስትሪ እናሳድጋለን።">
-                            We don't just teach beauty techniques — we build careers, transform lives, and elevate the entire beauty industry in Ethiopia.
-                        </p>
-                        <p style="color: var(--gold-primary); margin-top: 16px; font-weight: 500;">— Lovely Beauty College</p>
-                    </div>
+            <div class="founder-grid">
+                <div class="founder-card">
+                    <div class="founder-icon">👨‍💼</div>
+                    <h2 class="founder-name">Fasil Michael</h2>
+                    <p class="founder-title" data-en="Founder & Visionary Leader" data-am="መስራች እና ባለራዕይ መሪ">Founder & Visionary Leader</p>
+                    <p class="founder-quote" data-en="Beauty is not just talent—it is a professional career that deserves recognition, standards, and excellence." data-am="ውበት ተሰጥኦ ብቻ አይደለም—እውቅና፣ ደረጃዎች እና ልህቀት የሚገባው ሙያዊ ስራ ነው።">"Beauty is not just talent—it is a professional career that deserves recognition, standards, and excellence."</p>
                 </div>
-                
-                <div class="profile-image fade-in-up">
-                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&h=700&fit=crop" alt="Beauty College Building" style="width:100%; height:100%; object-fit:cover; border-radius:20px;">
+                <div class="founder-content">
+                    <h2 class="section-title"><span data-en="Company" data-am="የኩባንያ">Company</span> <span class="gold-text" data-en="Profile" data-am="መገለጫ">Profile</span></h2>
+                    <p class="section-desc" data-en="Lovely Beauty College and Training Center is Ethiopia's first fully established professional beauty training institution and now a recognized national beauty college. Founded through vision, leadership, and dedication, Lovely Beauty College has played a historic role in shaping Ethiopia's beauty industry." data-am="ላቭሊ ቢዩቲ ኮሌጅ እና ማሰልጠኛ ማዕከል የኢትዮጵያ የመጀመሪያው ሙሉ በሙሉ የተቋቋመ ሙያዊ የውበት ማሰልጠኛ ተቋም ሲሆን አሁን እውቅና ያለው ብሔራዊ የውበት ኮሌጅ ነው። በራዕይ፣ በአመራር እና በትጋት የተመሰረተው ላቭሊ ቢዩቲ ኮሌጅ የኢትዮጵያን የውበት ኢንዱስትሪ በመቅረጽ ታሪካዊ ሚና ተጫውቷል።">Lovely Beauty College and Training Center is Ethiopia's first fully established professional beauty training institution and now a recognized national beauty college. Founded through vision, leadership, and dedication, Lovely Beauty College has played a historic role in shaping Ethiopia's beauty industry.</p>
+                    <p class="section-desc" data-en="From its humble beginning in 1998 G.C with only five students, Lovely has grown into a national institution with multiple branches and thousands of graduates across Ethiopia." data-am="ከ1998 ዓ.ም ትሑት ጅምር በአምስት ተማሪዎች ብቻ፣ ላቭሊ በመላው ኢትዮጵያ በርካታ ቅርንጫፎች እና በሺዎች የሚቆጠሩ ተመራቂዎች ያሉት ብሔራዊ ተቋም ሆኗል።">From its humble beginning in 1998 G.C with only five students, Lovely has grown into a national institution with multiple branches and thousands of graduates across Ethiopia.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- ============================================ -->
-    <!-- VISION, MISSION, GOALS                        -->
-    <!-- ============================================ -->
+    <!-- OUR STORY -->
     <section class="section section-dark">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 class="section-title">
-                    <span data-en="Our" data-am="የእኛ">Our</span>
-                    <span class="gold-text" data-en="Vision & Mission" data-am="ራዕይ እና ተልዕኮ">Vision & Mission</span>
-                </h2>
-            </div>
+            <h2 class="section-title" style="text-align:center;"><span data-en="Our" data-am="የእኛ">Our</span> <span class="gold-text" data-en="Story" data-am="ታሪክ">Story</span></h2>
+            <p class="section-desc" style="text-align:center; max-width:900px; margin-left:auto; margin-right:auto;" data-en="Lovely Beauty College was founded by visionary leaders who believed beauty is not just talent—it is a professional career that deserves recognition and standards. The institution was established to create a formal, professional beauty education system in Ethiopia." data-am="ላቭሊ ቢዩቲ ኮሌጅ የተመሰረተው ውበት ተሰጥኦ ብቻ ሳይሆን እውቅና እና ደረጃዎች የሚገባው ሙያዊ ስራ ነው ብለው በሚያምኑ ባለራዕይ መሪዎች ነው። ተቋሙ የተቋቋመው በኢትዮጵያ መደበኛ፣ ሙያዊ የውበት ትምህርት ስርዓት ለመፍጠር ነው።">Lovely Beauty College was founded by visionary leaders who believed beauty is not just talent—it is a professional career that deserves recognition and standards. The institution was established to create a formal, professional beauty education system in Ethiopia.</p>
             
+            <div class="legacy-highlight">
+                <h3 data-en="🏆 A Historic Milestone" data-am="🏆 ታሪካዊ ምዕራፍ">🏆 A Historic Milestone</h3>
+                <p data-en="In 2000 G.C, Lovely organized Ethiopia's first national beauty competition at Sheraton Addis, awarding professional stylists and introducing beauty as a respected profession. This historic event was broadcast on television, radio, and magazines, bringing national recognition to the beauty industry." data-am="በ2000 ዓ.ም ላቭሊ የኢትዮጵያን የመጀመሪያ ብሔራዊ የውበት ውድድር በሸራተን አዲስ አዘጋጅቶ ሙያዊ ባለሙያዎችን በመሸለም ውበትን እንደ የተከበረ ሙያ አስተዋውቋል። ይህ ታሪካዊ ክስተት በቴሌቪዥን፣ በሬዲዮ እና በመጽሔቶች ተሰራጭቶ ለውበት ኢንዱስትሪው ብሔራዊ እውቅና አምጥቷል።">In 2000 G.C, Lovely organized Ethiopia's first national beauty competition at Sheraton Addis, awarding professional stylists and introducing beauty as a respected profession. This historic event was broadcast on television, radio, and magazines, bringing national recognition to the beauty industry.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- VISION & MISSION -->
+    <section class="section">
+        <div class="container">
             <div class="vm-grid">
-                <!-- Vision Card -->
-                <div class="vm-card fade-in-up">
+                <div class="vm-card">
                     <div class="vm-icon">👁️</div>
-                    <h3 class="vm-title" data-en="Vision" data-am="ራዕይ">Vision</h3>
-                    <p style="color: var(--gray-mid);" data-en="Aspires to create competent and self-reliant citizens and improve the livelihoods of all Ethiopians by 2025." 
-                       data-am="እስከ 2025 ድረስ ብቁ እና ራሳቸውን የቻሉ ዜጎችን ለመፍጠር እና የሁሉም ኢትዮጵያውያንን ኑሮ ለማሻሻል ይጥራል።">
-                        Aspires to create competent and self-reliant citizens and improve the livelihoods of all Ethiopians by 2025.
-                    </p>
+                    <h3 class="vm-title" data-en="Our Vision" data-am="ራዕያችን">Our Vision</h3>
+                    <p class="vm-text" data-en="To become Africa's leading beauty college producing world-class professionals and setting global standards in beauty education, innovation, and creativity." data-am="የአለም ደረጃ ባለሙያዎችን በማፍራት እና በውበት ትምህርት፣ በፈጠራ እና በፈጠራ ስራዎች አለም አቀፍ ደረጃዎችን በማውጣት የአፍሪካ መሪ የውበት ኮሌጅ ለመሆን።">To become Africa's leading beauty college producing world-class professionals and setting global standards in beauty education, innovation, and creativity.</p>
                 </div>
-                
-                <!-- Mission Card -->
-                <div class="vm-card fade-in-up">
+                <div class="vm-card">
                     <div class="vm-icon">🎯</div>
-                    <h3 class="vm-title" data-en="Mission" data-am="ተልዕኮ">Mission</h3>
-                    <ul class="vm-list">
-                        <li data-en="Producing productive, self-reliant, competent workforce" data-am="አምራች፣ ራሳቸውን የቻሉ፣ ብቁ የሰው ሃይል ማፍራት">Producing productive, self-reliant, competent workforce</li>
-                        <li data-en="Providing congenial ambience for training and creativity" data-am="ለስልጠና እና ለፈጠራ ምቹ ሁኔታን ማቅረብ">Providing congenial ambience for training and creativity</li>
-                        <li data-en="High quality Beauty education for global citizens" data-am="ለአለም ዜጎች ከፍተኛ ጥራት ያለው የውበት ትምህርት">High quality Beauty education for global citizens</li>
-                        <li data-en="Training morally-responsible professionals" data-am="ሥነ ምግባራዊ ኃላፊነት ያላቸውን ባለሙያዎች ማሰልጠን">Training morally-responsible professionals</li>
-                        <li data-en="Promoting capacity to manage and develop" data-am="የማስተዳደር እና የማልማት አቅምን ማሳደግ">Promoting capacity to manage and develop</li>
-                    </ul>
-                </div>
-                
-                <!-- Goals Card -->
-                <div class="vm-card fade-in-up">
-                    <div class="vm-icon">⭐</div>
-                    <h3 class="vm-title" data-en="Goals" data-am="ግቦች">Goals</h3>
-                    <ul class="vm-list">
-                        <li data-en="High quality Beauty graduates serving humanity" data-am="ሰብአዊነትን የሚያገለግሉ ከፍተኛ ጥራት ያላቸው የውበት ተመራቂዎች">High quality Beauty graduates serving humanity</li>
-                        <li data-en="Pursuit of knowledge, skills relevant to society" data-am="ለህብረተሰቡ ተዛማጅ የሆነ እውቀትና ክህሎት ማሳደግ">Pursuit of knowledge, skills relevant to society</li>
-                        <li data-en="Public services beneficial to community needs" data-am="ለማህበረሰቡ ፍላጎት የሚጠቅሙ የህዝብ አገልግሎቶች">Public services beneficial to community needs</li>
-                    </ul>
+                    <h3 class="vm-title" data-en="Our Mission" data-am="ተልዕኳችን">Our Mission</h3>
+                    <p class="vm-text" data-en="To create competent, self-reliant professionals and improve livelihoods in Ethiopia. To provide professional, standardized, and internationally aligned beauty education that strengthens individuals and elevates Ethiopia's beauty industry globally." data-am="ብቁ፣ ራሳቸውን የቻሉ ባለሙያዎችን መፍጠር እና በኢትዮጵያ ውስጥ ኑሮን ማሻሻል። ግለሰቦችን የሚያጠናክር እና የኢትዮጵያን የውበት ኢንዱስትሪ በአለም አቀፍ ደረጃ ከፍ የሚያደርግ ሙያዊ፣ ደረጃውን የጠበቀ እና ከአለም አቀፍ ደረጃ ጋር የተጣጣመ የውበት ትምህርት መስጠት።">To create competent, self-reliant professionals and improve livelihoods in Ethiopia. To provide professional, standardized, and internationally aligned beauty education that strengthens individuals and elevates Ethiopia's beauty industry globally.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- ============================================ -->
-    <!-- CORE VALUES                                   -->
-    <!-- ============================================ -->
-    <section class="section">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 class="section-title">
-                    <span data-en="Our Core" data-am="የእኛ ዋና">Our Core</span>
-                    <span class="gold-text" data-en="Values" data-am="እሴቶች">Values</span>
-                </h2>
-                <p class="section-desc" style="margin: 0 auto;" data-en="The principles that guide everything we do" 
-                   data-am="የምናደርገውን ሁሉ የሚመሩ መርሆዎች">
-                    The principles that guide everything we do
-                </p>
-            </div>
-            
-            <div class="values-grid">
-                <div class="value-item fade-in-up">
-                    <div class="value-icon">💎</div>
-                    <div class="value-name" data-en="Integrity" data-am="ታማኝነት">Integrity</div>
-                </div>
-                <div class="value-item fade-in-up">
-                    <div class="value-icon">🤝</div>
-                    <div class="value-name" data-en="Customer Service" data-am="የደንበኛ አገልግሎት">Customer Service</div>
-                </div>
-                <div class="value-item fade-in-up">
-                    <div class="value-icon">✅</div>
-                    <div class="value-name" data-en="Accountability" data-am="ተጠያቂነት">Accountability</div>
-                </div>
-                <div class="value-item fade-in-up">
-                    <div class="value-icon">🤲</div>
-                    <div class="value-name" data-en="Collaboration" data-am="ትብብር">Collaboration</div>
-                </div>
-                <div class="value-item fade-in-up">
-                    <div class="value-icon">🔥</div>
-                    <div class="value-name" data-en="Engagement" data-am="ተሳትፎ">Engagement</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- ============================================ -->
-    <!-- HISTORY TIMELINE                             -->
-    <!-- ============================================ -->
+    <!-- CORE VALUES -->
     <section class="section section-dark">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 class="section-title">
-                    <span data-en="Our" data-am="የእኛ">Our</span>
-                    <span class="gold-text" data-en="Journey" data-am="ጉዞ">Journey</span>
-                </h2>
-                <p class="section-desc" style="margin: 0 auto;" data-en="28+ years of excellence in beauty education" 
-                   data-am="በውበት ትምህርት ከ28+ ዓመታት የላቀ ውጤት">
-                    28+ years of excellence in beauty education
-                </p>
-            </div>
-            
-            <div class="timeline">
-                <div class="timeline-item fade-in-up">
-                    <div class="timeline-content">
-                        <div class="timeline-year">1998</div>
-                        <div class="timeline-title" data-en="Founded" data-am="ተመሠረተ">Founded</div>
-                        <div class="timeline-desc" data-en="Lovely Beauty College opens as Ethiopia's first private beauty training institution" 
-                           data-am="ላቭሊ ቢዩቲ ኮሌጅ እንደ ኢትዮጵያ የመጀመሪያ የግል የውበት ማሰልጠኛ ተቋም ተከፈተ">
-                            Lovely Beauty College opens as Ethiopia's first private beauty training institution
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                
-                <div class="timeline-item fade-in-up">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2005</div>
-                        <div class="timeline-title" data-en="First Competition" data-am="የመጀመሪያ ውድድር">First Competition</div>
-                        <div class="timeline-desc" data-en="Organized Ethiopia's first national beauty competition at Sheraton Addis" 
-                           data-am="በሸራተን አዲስ የኢትዮጵያን የመጀመሪያ ብሔራዊ የውበት ውድድር አዘጋጀ">
-                            Organized Ethiopia's first national beauty competition at Sheraton Addis
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                
-                <div class="timeline-item fade-in-up">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2010</div>
-                        <div class="timeline-title" data-en="Second Branch" data-am="ሁለተኛ ቅርንጫፍ">Second Branch</div>
-                        <div class="timeline-desc" data-en="Opened Piassa campus to meet growing demand" 
-                           data-am="እያደገ የመጣውን ፍላጎት ለማሟላት የፒያሳ ካምፓስ ተከፈተ">
-                            Opened Piassa campus to meet growing demand
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                
-                <div class="timeline-item fade-in-up">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2015</div>
-                        <div class="timeline-title" data-en="National Accreditation" data-am="ብሔራዊ እውቅና">National Accreditation</div>
-                        <div class="timeline-desc" data-en="Received full accreditation from Ministry of Education up to Level 4" 
-                           data-am="ከትምህርት ሚኒስቴር እስከ ደረጃ 4 ሙሉ እውቅና አገኘ">
-                            Received full accreditation from Ministry of Education up to Level 4
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                
-                <div class="timeline-item fade-in-up">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2020</div>
-                        <div class="timeline-title" data-en="Megenagna Campus" data-am="መገናኛ ካምፓስ">Megenagna Campus</div>
-                        <div class="timeline-desc" data-en="Opened flagship Megenagna campus at Nucleus Plaza" 
-                           data-am="በኑክሊየስ ፕላዛ ዋናውን የመገናኛ ካምፓስ ከፈተ">
-                            Opened flagship Megenagna campus at Nucleus Plaza
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
-                
-                <div class="timeline-item fade-in-up">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2025</div>
-                        <div class="timeline-title" data-en="Today" data-am="ዛሬ">Today</div>
-                        <div class="timeline-desc" data-en="5,000+ graduates, 3 campuses, 13 courses — continuing to lead beauty education in Ethiopia" 
-                           data-am="5,000+ ተመራቂዎች፣ 3 ካምፓሶች፣ 13 ኮርሶች — በኢትዮጵያ የውበት ትምህርትን መምራት ቀጥሏል">
-                            5,000+ graduates, 3 campuses, 13 courses — continuing to lead beauty education in Ethiopia
-                        </div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
+            <h2 class="section-title" style="text-align:center;"><span data-en="Our Core" data-am="ዋና እሴቶቻችን">Our Core</span> <span class="gold-text" data-en="Values" data-am="">Values</span></h2>
+            <div class="values-grid">
+                <div class="value-item"><div class="value-icon">✨</div><div class="value-name" data-en="Excellence" data-am="ልህቀት">Excellence</div><p class="value-desc" data-en="We never compromise quality" data-am="ጥራትን ፈጽሞ አንሰዋም">We never compromise quality</p></div>
+                <div class="value-item"><div class="value-icon">💼</div><div class="value-name" data-en="Professionalism" data-am="ሙያዊነት">Professionalism</div><p class="value-desc" data-en="Beauty is a respected profession" data-am="ውበት የተከበረ ሙያ ነው">Beauty is a respected profession</p></div>
+                <div class="value-item"><div class="value-icon">💡</div><div class="value-name" data-en="Innovation" data-am="ፈጠራ">Innovation</div><p class="value-desc" data-en="We lead industry development" data-am="የኢንዱስትሪ ልማትን እንመራለን">We lead industry development</p></div>
+                <div class="value-item"><div class="value-icon">🤝</div><div class="value-name" data-en="Integrity" data-am="ታማኝነት">Integrity</div><p class="value-desc" data-en="Honest and trusted certification" data-am="ታማኝ እና እምነት የሚጣልበት ሰርተፍኬት">Honest and trusted certification</p></div>
+                <div class="value-item"><div class="value-icon">🌱</div><div class="value-name" data-en="Empowerment" data-am="ማብቃት">Empowerment</div><p class="value-desc" data-en="We create careers and livelihoods" data-am="ሙያዎችን እና ኑሮዎችን እንፈጥራለን">We create careers and livelihoods</p></div>
+                <div class="value-item"><div class="value-icon">👑</div><div class="value-name" data-en="Leadership" data-am="አመራር">Leadership</div><p class="value-desc" data-en="We set national standards" data-am="ብሔራዊ ደረጃዎችን እናወጣለን">We set national standards</p></div>
             </div>
         </div>
     </section>
     
-    <!-- ============================================ -->
-    <!-- CTA SECTION                                   -->
-    <!-- ============================================ -->
+    <!-- DEVELOPMENT PROCESS -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;"><span data-en="Our Development" data-am="የእድገት">Our Development</span> <span class="gold-text" data-en="Process" data-am="ሂደት">Process</span></h2>
+            <p class="section-desc" style="text-align:center;" data-en="Every student follows a structured professional path to success" data-am="እያንዳንዱ ተማሪ ወደ ስኬት የተዋቀረ ሙያዊ መንገድ ይከተላል">Every student follows a structured professional path to success</p>
+            <div class="process-grid">
+                <div class="process-step"><div class="step-number">1</div><div class="step-title" data-en="Talent Assessment" data-am="ተሰጥኦ ምዘና">Talent Assessment</div><p class="step-desc" data-en="Identify strengths & goals" data-am="ጥንካሬዎችን እና ግቦችን መለየት">Identify strengths & goals</p></div>
+                <div class="process-step"><div class="step-number">2</div><div class="step-title" data-en="Professional Training" data-am="ሙያዊ ስልጠና">Professional Training</div><p class="step-desc" data-en="Hands-on with curriculum" data-am="በስርዓተ ትምህርት ተግባራዊ ልምምድ">Hands-on with curriculum</p></div>
+                <div class="process-step"><div class="step-number">3</div><div class="step-title" data-en="Skill Standardization" data-am="ክህሎት ደረጃ መስጠት">Skill Standardization</div><p class="step-desc" data-en="Aligned with national standards" data-am="ከብሔራዊ ደረጃዎች ጋር የተጣጣመ">Aligned with national standards</p></div>
+                <div class="process-step"><div class="step-number">4</div><div class="step-title" data-en="Certification" data-am="ሰርተፍኬት">Certification</div><p class="step-desc" data-en="Recognized certificates" data-am="እውቅና ያላቸው ሰርተፍኬቶች">Recognized certificates</p></div>
+                <div class="process-step"><div class="step-number">5</div><div class="step-title" data-en="Industry Exposure" data-am="የኢንዱስትሪ ተሞክሮ">Industry Exposure</div><p class="step-desc" data-en="Competitions & real experience" data-am="ውድድሮች እና እውነተኛ ልምድ">Competitions & real experience</p></div>
+                <div class="process-step"><div class="step-number">6</div><div class="step-title" data-en="Career Support" data-am="የሙያ ድጋፍ">Career Support</div><p class="step-desc" data-en="Job placement & business guidance" data-am="የስራ ምደባ እና የንግድ መምሪያ">Job placement & business guidance</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- OUR BRANCHES -->
+    <section class="section section-dark">
+        <div class="container">
+            <h2 class="section-title" style="text-align:center;"><span data-en="Our" data-am="የእኛ">Our</span> <span class="gold-text" data-en="Branches" data-am="ቅርንጫፎች">Branches</span></h2>
+            <p class="section-desc" style="text-align:center;" data-en="Serving communities across Addis Ababa" data-am="በአዲስ አበባ ዙሪያ ማህበረሰቦችን በማገልገል ላይ">Serving communities across Addis Ababa</p>
+            <div class="branches-grid">
+                <div class="branch-card"><div class="branch-icon">📍</div><div class="branch-name">Megenagna</div><p style="color:var(--gray-mid); font-size:13px;" data-en="Main Campus" data-am="ዋና ካምፓስ">Main Campus</p></div>
+                <div class="branch-card"><div class="branch-icon">📍</div><div class="branch-name">Arada</div><p style="color:var(--gray-mid); font-size:13px;">Branch</p></div>
+                <div class="branch-card"><div class="branch-icon">📍</div><div class="branch-name">Merkato</div><p style="color:var(--gray-mid); font-size:13px;">Branch</p></div>
+                <div class="branch-card"><div class="branch-icon">📍</div><div class="branch-name">Gofa</div><p style="color:var(--gray-mid); font-size:13px;">Branch</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
     <section class="cta-section">
         <div class="container">
             <h2 class="cta-title" data-en="Join Our Legacy of Excellence" data-am="የላቀ ውጤት ቅርሳችንን ይቀላቀሉ">Join Our Legacy of Excellence</h2>
-            <p class="cta-subtitle" data-en="Become part of Ethiopia's most prestigious beauty institution" 
-               data-am="የኢትዮጵያ እጅግ የተከበረ የውበት ተቋም አካል ይሁኑ">
-                Become part of Ethiopia's most prestigious beauty institution
-            </p>
+            <p style="color:var(--black-primary); margin-bottom:24px; opacity:0.9;" data-en="Become part of Ethiopia's most prestigious beauty institution" data-am="የኢትዮጵያ እጅግ የተከበረ የውበት ተቋም አካል ይሁኑ">Become part of Ethiopia's most prestigious beauty institution</p>
             <a href="register.html" class="btn btn-black" data-en="Register Now" data-am="አሁን ይመዝገቡ">Register Now</a>
         </div>
     </section>
     
-    <!-- ============================================ -->
-    <!-- FOOTER                                        -->
-    <!-- ============================================ -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-info">
-                    <div class="footer-logo">
-                        <div class="logo-main" style="color: var(--gold-primary);">LOVELY BEAUTY</div>
-                        <div class="logo-sub">EST 1998 G.C.</div>
-                    </div>
-                    <p class="footer-desc" data-en="The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998." 
-                       data-am="የመጀመሪያው የግል የውበት ኮሌጅ በኢትዮጵያ፣ ከ1998 ጀምሮ የውበት ባለሙያዎችን በመቅረጽ ላይ።">
-                        The 1st Private Beauty College in Ethiopia, shaping beauty professionals since 1998.
-                    </p>
-                    <div class="social-links">
-                        <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a>
-                        <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a>
-                    </div>
-                </div>
-                
-                <div class="footer-links-section">
-                    <h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html" data-en="Home" data-am="መነሻ">Home</a></li>
-                        <li><a href="about.html" data-en="About Us" data-am="ስለ እኛ">About Us</a></li>
-                        <li><a href="courses.html" data-en="Courses" data-am="ኮርሶች">Courses</a></li>
-                        <li><a href="news-events.html" data-en="News & Events" data-am="ዜና እና ዝግጅቶች">News & Events</a></li>
-                        <li><a href="contact.html" data-en="Contact" data-am="አድራሻ">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-courses">
-                    <h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4>
-                    <ul class="footer-links">
-                        <li><a href="courses.html" data-en="Hairdressing" data-am="ፀጉር ስራ">Hairdressing</a></li>
-                        <li><a href="courses.html" data-en="Makeup Artistry" data-am="ሜካፕ">Makeup Artistry</a></li>
-                        <li><a href="courses.html" data-en="Nail Technology" data-am="ጥፍር ጥበብ">Nail Technology</a></li>
-                        <li><a href="courses.html" data-en="Barbering" data-am="ወንድ ፀጉር">Barbering</a></li>
-                        <li><a href="courses.html" data-en="Skincare" data-am="የቆዳ እንክብካቤ">Skincare</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4>
-                    <p>📍 <span data-en="Megenagna, Addis Ababa" data-am="መገናኛ፣ አዲስ አበባ">Megenagna, Addis Ababa</span></p>
-                    <p>📞 0991171819 / 0911221032</p>
-                    <p>📞 0112750345 (Sebatgna)</p>
-                    <p>📞 0116587060 (Megenagna)</p>
-                    <p>✉️ info@lovelybeautycollege.com</p>
-                </div>
+                <div><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div><p class="footer-desc" data-en="Ethiopia's first fully established professional beauty college." data-am="የኢትዮጵያ የመጀመሪያው ሙሉ በሙሉ የተቋቋመ ሙያዊ የውበት ኮሌጅ።">Ethiopia's first fully established professional beauty college.</p><div class="social-links"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a></div></div>
+                <div><h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="courses.html">Courses</a></li><li><a href="news-events.html">News & Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div><h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4><ul class="footer-links"><li><a href="courses.html">Hairdressing</a></li><li><a href="courses.html">Makeup Artistry</a></li><li><a href="courses.html">Nail Technology</a></li><li><a href="courses.html">Skincare</a></li></ul></div>
+                <div class="footer-contact"><h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4><p>📍 Addis Ababa, Ethiopia</p><p>📞 0991171819 / 0911221032</p><p>✉️ lovelybeautycollage@proton.me</p></div>
             </div>
-            
             <div class="footer-bottom">
-                <p>© 2025 Lovely Plus Beauty College. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
+                <p>© 2025 Lovely Beauty College and Training Center. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
+                <p class="footer-credit"><span data-en="Powered by" data-am="የተጎላበተው በ">Powered by</span> <a href="https://addispowerwebsolution.pages.dev" target="_blank">Addis Power Web Solution</a></p>
             </div>
         </div>
     </footer>
     
-    <!-- ============================================ -->
-    <!-- JAVASCRIPT                                    -->
-    <!-- ============================================ -->
     <script>
-        // Mobile Menu Toggle
+        // Mobile Menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navMenu = document.getElementById('navMenu');
+        if(mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰'; }); }
+        document.querySelectorAll('.nav-link').forEach(l => { l.addEventListener('click', () => { navMenu.classList.remove('active'); if(mobileMenuBtn) mobileMenuBtn.textContent = '☰'; }); });
         
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
-            });
-        }
-        
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                if (mobileMenuBtn) mobileMenuBtn.textContent = '☰';
-            });
-        });
-        
-        // Language Toggle
+        // Language
         let currentLang = localStorage.getItem('lovelyLang') || 'en';
-        
-        function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('lovelyLang', lang);
-            
-            const elements = document.querySelectorAll('[data-en][data-am]');
-            elements.forEach(el => {
-                const text = el.getAttribute(`data-${lang}`);
-                if (text) el.textContent = text;
-            });
-            
-            const langToggle = document.getElementById('langToggle');
-            if (langToggle) {
-                langToggle.textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ';
-            }
-            
-            document.documentElement.lang = lang;
-        }
-        
-        const langToggle = document.getElementById('langToggle');
-        if (langToggle) {
-            langToggle.addEventListener('click', () => {
-                setLanguage(currentLang === 'en' ? 'am' : 'en');
-            });
-        }
-        
+        function setLanguage(lang) { currentLang = lang; localStorage.setItem('lovelyLang', lang); document.querySelectorAll('[data-en][data-am]').forEach(el => { const text = el.getAttribute(`data-${lang}`); if(text) el.textContent = text; }); document.getElementById('langToggle').textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ'; document.documentElement.lang = lang; }
+        document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'am' : 'en'));
         setLanguage(currentLang);
         
-        // Scroll Animations
-        const fadeElements = document.querySelectorAll('.fade-in-up');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        fadeElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-        
-        // Sticky Header Shadow
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.6)';
-            } else {
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-            }
-        });
-        
-        console.log('🌟 Lovely Beauty College - About Page Loaded');
+        // Header Shadow
+        window.addEventListener('scroll', () => { document.querySelector('.header').style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.6)' : '0 4px 20px rgba(0,0,0,0.5)'; });
     </script>
 </body>
 </html>
