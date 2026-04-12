@@ -6,34 +6,103 @@
     <title>Content Manager | Lovely Beauty College</title>
     <link rel="icon" href="logo.jpg">
     <style>
-        body { margin: 0; padding: 0; background: #0A0A0A; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Poppins', sans-serif; color: #D4AF37; }
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0A0A0A;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #D4AF37;
+        }
         .loading { text-align: center; }
+        .error { color: #dc3545; margin-top: 20px; display: none; }
     </style>
 </head>
 <body>
-    <div class="loading"><h1>💎 LOVELY BEAUTY</h1><p>Loading Content Manager...</p></div>
+    <div class="loading">
+        <h1>💎 LOVELY BEAUTY</h1>
+        <p id="status">Starting Content Manager...</p>
+        <p class="error" id="error"></p>
+    </div>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "tinacms": "https://unpkg.com/tinacms@1.5.22/dist/tinacms.es.js"
+            }
+        }
+    </script>
+    
     <script type="module">
-        const config = {
-            branch: "main",
-            clientId: "86aba70b-c964-46f8-9804-8dee298d18a3",
-            token: null,
-            media: { tina: { mediaRoot: "assets/images/uploads", publicFolder: "" } },
-            schema: {
-                collections: [
-                    {
-                        name: "news", label: "News & Events", path: "content/news", format: "md",
-                        fields: [
-                            { type: "string", name: "title", label: "Title", isTitle: true, required: true },
-                            { type: "datetime", name: "date", label: "Publish Date" },
-                            { type: "string", name: "category", label: "Category", options: ["News", "Event", "Competition", "Announcement", "Success Story"] },
-                            { type: "image", name: "image", label: "Featured Image" },
-                            { type: "rich-text", name: "body", label: "Content", isBody: true },
-                        ],
+        // Show status updates
+        const statusEl = document.getElementById('status');
+        const errorEl = document.getElementById('error');
+        
+        function updateStatus(msg) {
+            statusEl.textContent = msg;
+            console.log('Tina CMS:', msg);
+        }
+        
+        function showError(msg) {
+            errorEl.textContent = msg;
+            errorEl.style.display = 'block';
+            console.error('Tina CMS Error:', msg);
+        }
+        
+        try {
+            updateStatus('Loading Tina CMS...');
+            
+            // Tina CMS Configuration
+            const config = {
+                branch: "main",
+                clientId: "86aba70b-c964-46f8-9804-8dee298d18a3",
+                token: null,
+                media: {
+                    tina: {
+                        mediaRoot: "assets/images/uploads",
+                        publicFolder: "",
                     },
-                ],
-            },
-        };
-        import('https://unpkg.com/tinacms@latest/dist/tinacms.es.js').then(({ createApp }) => { createApp({ config }).start(); });
+                },
+                schema: {
+                    collections: [
+                        {
+                            name: "news",
+                            label: "News & Events",
+                            path: "content/news",
+                            format: "md",
+                            fields: [
+                                { type: "string", name: "title", label: "Title", isTitle: true, required: true },
+                                { type: "datetime", name: "date", label: "Publish Date" },
+                                { type: "string", name: "category", label: "Category", options: ["News", "Event", "Competition", "Announcement", "Success Story"] },
+                                { type: "image", name: "image", label: "Featured Image" },
+                                { type: "rich-text", name: "body", label: "Content", isBody: true },
+                            ],
+                        },
+                    ],
+                },
+            };
+            
+            import('tinacms').then(({ createApp }) => {
+                updateStatus('Creating CMS app...');
+                const app = createApp({ config });
+                updateStatus('Starting CMS...');
+                app.start();
+                updateStatus('CMS Ready! Redirecting...');
+                
+                // Hide loading screen after successful start
+                setTimeout(() => {
+                    document.querySelector('.loading').style.display = 'none';
+                }, 1000);
+            }).catch(err => {
+                showError('Failed to load Tina CMS: ' + err.message);
+            });
+            
+        } catch (err) {
+            showError('Configuration error: ' + err.message);
+        }
     </script>
 </body>
 </html>
