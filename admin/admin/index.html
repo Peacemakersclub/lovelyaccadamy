@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Manager | Lovely Beauty College</title>
+    <link rel="icon" href="../logo.jpg">
+</head>
+<body>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+        // GitHub OAuth Client ID - replace with yours
+        const GITHUB_CLIENT_ID = 'YOUR_GITHUB_OAUTH_CLIENT_ID';
+        
+        CMS.init({
+            config: {
+                backend: {
+                    name: 'github',
+                    repo: 'Peacemakersclub/lovelyaccadamy',
+                    branch: 'main'
+                },
+                media_folder: 'assets/images/uploads',
+                public_folder: '/assets/images/uploads',
+                collections: [
+                    {
+                        name: 'news',
+                        label: 'News & Events',
+                        folder: 'content/news',
+                        create: true,
+                        slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+                        fields: [
+                            {label: 'Title', name: 'title', widget: 'string'},
+                            {label: 'Publish Date', name: 'date', widget: 'datetime'},
+                            {label: 'Category', name: 'category', widget: 'select', options: ['News', 'Event', 'Competition', 'Announcement', 'Success Story']},
+                            {label: 'Featured Image', name: 'image', widget: 'image', required: false},
+                            {label: 'Content', name: 'body', widget: 'markdown'}
+                        ]
+                    }
+                ]
+            }
+        });
+        
+        // Override auth to use client-side OAuth without proxy
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loginBtn = document.querySelector('[class*="LoginButton"]');
+                if (loginBtn) {
+                    loginBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const redirectUri = window.location.origin + '/admin/';
+                        const authUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo`;
+                        window.location.href = authUrl;
+                    });
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
