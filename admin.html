@@ -28,14 +28,6 @@
         <p class="error" id="error"></p>
     </div>
     
-    <script type="importmap">
-        {
-            "imports": {
-                "tinacms": "https://unpkg.com/tinacms@1.5.22/dist/tinacms.es.js"
-            }
-        }
-    </script>
-    
     <script type="module">
         // Show status updates
         const statusEl = document.getElementById('status');
@@ -85,20 +77,44 @@
                 },
             };
             
-            import('tinacms').then(({ createApp }) => {
-                updateStatus('Creating CMS app...');
-                const app = createApp({ config });
-                updateStatus('Starting CMS...');
-                app.start();
-                updateStatus('CMS Ready! Redirecting...');
-                
-                // Hide loading screen after successful start
-                setTimeout(() => {
-                    document.querySelector('.loading').style.display = 'none';
-                }, 1000);
-            }).catch(err => {
-                showError('Failed to load Tina CMS: ' + err.message);
-            });
+            // Use the correct Tina CMS URL
+            import('https://unpkg.com/tinacms@2.2.0/dist/index.es.js')
+                .then((module) => {
+                    updateStatus('Creating CMS app...');
+                    const createApp = module.createApp || module.default?.createApp;
+                    if (!createApp) {
+                        throw new Error('Could not find createApp in Tina CMS module');
+                    }
+                    const app = createApp({ config });
+                    updateStatus('Starting CMS...');
+                    app.start();
+                    updateStatus('CMS Ready!');
+                    setTimeout(() => {
+                        document.querySelector('.loading').style.display = 'none';
+                    }, 500);
+                })
+                .catch(err => {
+                    console.error('Import error:', err);
+                    showError('Failed to load Tina CMS. Trying fallback...');
+                    
+                    // Fallback to known working version
+                    import('https://unpkg.com/tinacms@1.5.2/dist/tinacms.es.js')
+                        .then((fallbackModule) => {
+                            updateStatus('Creating CMS app (fallback)...');
+                            const createApp = fallbackModule.createApp;
+                            const app = createApp({ config });
+                            updateStatus('Starting CMS...');
+                            app.start();
+                            updateStatus('CMS Ready!');
+                            setTimeout(() => {
+                                document.querySelector('.loading').style.display = 'none';
+                            }, 500);
+                        })
+                        .catch(fbErr => {
+                            showError('Failed to load Tina CMS. Please check your internet connection and try again.');
+                            console.error('Fallback error:', fbErr);
+                        });
+                });
             
         } catch (err) {
             showError('Configuration error: ' + err.message);
