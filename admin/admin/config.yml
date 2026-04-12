@@ -1,0 +1,92 @@
+backend:
+  name: github
+  repo: Peacemakersclub/lovelyaccadamy
+  branch: main
+  base_url: https://api.decapcms.org
+  auth_endpoint: auth
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "news"
+    label: "📰 News & Events"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title (English)", name: "title", widget: "string" }
+      - { label: "Title (Amharic)", name: "title_am", widget: "string", required: false }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["News", "Event", "Competition", "Announcement", "Success Story"], default: "News" }
+      - { label: "Content (English)", name: "body", widget: "markdown" }
+      - { label: "Content (Amharic)", name: "body_am", widget: "markdown", required: false }
+
+  - name: "courses"
+    label: "📚 Courses"
+    folder: "content/courses"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Course Name (English)", name: "title", widget: "string" }
+      - { label: "Course Name (Amharic)", name: "title_am", widget: "string" }
+      - { label: "Icon (Emoji)", name: "icon", widget: "string", default: "💇" }
+      - { label: "Category", name: "category", widget: "select", options: ["hair", "makeup", "nails", "skincare", "certification"] }
+      - { label: "Level", name: "level", widget: "select", options: ["Level 1", "Level 2", "Level 3", "Level 4", "All Levels", "Specialist", "Advanced"] }
+      - { label: "Duration", name: "duration", widget: "string", default: "2-4 months" }
+      - { label: "Certification", name: "certification", widget: "string", default: "Professional Certificate" }
+      - { label: "Short Description (English)", name: "description", widget: "text" }
+      - { label: "Short Description (Amharic)", name: "description_am", widget: "text", required: false }
+      - { label: "Course Image", name: "image", widget: "image", required: false }
+      - { label: "Topics (one per line)", name: "topics", widget: "list", default: ["Topic 1", "Topic 2"] }
+      - { label: "Career Opportunities (one per line)", name: "career", widget: "list", default: ["Career 1", "Career 2"] }
+
+  - name: "gallery"
+    label: "🖼️ Photo Gallery"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Graduation", "Competition", "Training", "Campus", "Events", "Students", "Awards"] }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Date", name: "date", widget: "datetime" }
+
+  - name: "settings"
+    label: "⚙️ Site Settings"
+    editor:
+      preview: false
+    files:
+      - file: "content/settings/contact.json"
+        label: "📞 Contact Information"
+        name: "contact"
+        fields:
+          - { label: "Phone Numbers", name: "phone", widget: "list", default: ["0991171819", "0911221032"] }
+          - { label: "Email Address", name: "email", widget: "string", default: "lovelybeautycollage@proton.me" }
+          - { label: "Address", name: "address", widget: "text", default: "Addis Ababa, Ethiopia" }
+          - { label: "Facebook URL", name: "facebook", widget: "string", default: "https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" }
+          - { label: "TikTok URL", name: "tiktok", widget: "string", default: "https://tiktok.com/@lovelybeautycollege" }
+      - file: "content/settings/branches.json"
+        label: "📍 Branches"
+        name: "branches"
+        fields:
+          - label: "Branches"
+            name: "branches"
+            widget: "list"
+            fields:
+              - { label: "Branch Name", name: "name", widget: "string" }
+              - { label: "Is Main Campus?", name: "main", widget: "boolean", default: false }
+              - { label: "Address", name: "address", widget: "text" }
+              - { label: "Phone", name: "phone", widget: "string" }
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
