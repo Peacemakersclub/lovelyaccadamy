@@ -9,8 +9,8 @@
 <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
-        // GitHub OAuth Client ID - replace with yours
-        const GITHUB_CLIENT_ID = 'YOUR_GITHUB_OAUTH_CLIENT_ID';
+        // GitHub OAuth Client ID
+        const GITHUB_CLIENT_ID = 'Ov23liXOn8EDq3ogRujc';
         
         CMS.init({
             config: {
@@ -40,18 +40,19 @@
             }
         });
         
-        // Override auth to use client-side OAuth without proxy
+        // Override auth to use client-side OAuth
         window.addEventListener('load', function() {
             setTimeout(() => {
-                const loginBtn = document.querySelector('[class*="LoginButton"]');
-                if (loginBtn) {
-                    loginBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const redirectUri = window.location.origin + '/admin/';
-                        const authUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo`;
+                const originalFetch = window.fetch;
+                window.fetch = function(url, options) {
+                    if (url.includes('auth')) {
+                        const redirectUri = window.location.origin + '/lovelyaccadamy/admin/';
+                        const authUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo,user`;
                         window.location.href = authUrl;
-                    });
-                }
+                        return Promise.reject('Redirecting to GitHub');
+                    }
+                    return originalFetch.apply(this, arguments);
+                };
             }, 1000);
         });
     </script>
