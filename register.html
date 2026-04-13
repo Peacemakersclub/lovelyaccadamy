@@ -3,105 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | Lovely Beauty College</title>
+    <title>Student Login | Lovely Beauty College</title>
     <link rel="icon" href="logo.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #0A0A0A;
-            color: white;
-            padding: 40px 20px;
-        }
-        .container { max-width: 600px; margin: 0 auto; }
-        .form-card {
-            background: #1A1A1A;
-            border: 2px solid #D4AF37;
-            border-radius: 24px;
-            padding: 40px;
-        }
-        h1 { color: #D4AF37; font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 8px; }
-        .subtitle { color: #B0B0B0; text-align: center; margin-bottom: 32px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; color: #D4AF37; margin-bottom: 8px; font-size: 14px; }
-        input, select {
-            width: 100%; padding: 14px; background: #0A0A0A;
-            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px;
-            color: white; font-size: 15px;
-        }
-        input:focus, select:focus { outline: none; border-color: #D4AF37; }
-        .btn {
-            width: 100%; padding: 14px; background: #D4AF37; color: #0A0A0A;
-            border: none; border-radius: 12px; font-weight: 600; font-size: 16px;
-            cursor: pointer; margin-top: 20px;
-        }
-        .btn:hover { background: #F5D76E; }
-        .status {
-            margin-top: 20px; padding: 14px; border-radius: 12px; display: none;
-            text-align: center; font-size: 14px;
-        }
-        .status.success { background: rgba(212, 175, 55, 0.15); border: 1px solid #D4AF37; color: #D4AF37; display: block; }
-        .status.error { background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; color: #dc3545; display: block; }
-        .status.info { background: rgba(212, 175, 55, 0.1); border: 1px solid #D4AF37; color: #D4AF37; display: block; }
-        .login-link { text-align: center; margin-top: 24px; color: #B0B0B0; }
-        .login-link a { color: #D4AF37; text-decoration: none; }
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .login-container { max-width: 420px; width: 100%; }
+        .login-card { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 24px; padding: 40px 32px; box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15); }
+        .logo { text-align: center; margin-bottom: 32px; }
+        .logo h1 { font-family: 'Playfair Display', serif; color: #D4AF37; font-size: 26px; letter-spacing: 2px; }
+        .logo p { color: #B0B0B0; font-size: 11px; letter-spacing: 2px; }
+        h2 { color: #D4AF37; font-family: 'Playfair Display', serif; text-align: center; font-size: 20px; margin-bottom: 8px; }
+        .subtitle { color: #B0B0B0; text-align: center; font-size: 13px; margin-bottom: 28px; }
+        .input-group { margin-bottom: 18px; }
+        label { display: block; color: #D4AF37; font-size: 13px; margin-bottom: 6px; }
+        input { width: 100%; padding: 14px 16px; background: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; color: white; font-size: 15px; }
+        input:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); }
+        .login-btn { width: 100%; padding: 14px; background: #D4AF37; color: #0A0A0A; border: none; border-radius: 12px; font-weight: 600; font-size: 16px; cursor: pointer; margin: 20px 0 16px; transition: all 0.3s; }
+        .login-btn:hover { background: #F5D76E; transform: translateY(-2px); }
+        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .register-link { text-align: center; color: #B0B0B0; font-size: 13px; }
+        .register-link a { color: #D4AF37; text-decoration: none; }
         .back-link { text-align: center; margin-top: 16px; }
-        .back-link a { color: #666; text-decoration: none; }
-        .required { color: #dc3545; }
+        .back-link a { color: #666; text-decoration: none; font-size: 13px; }
+        .back-link a:hover { color: #D4AF37; }
+        .status { padding: 12px; border-radius: 10px; margin-bottom: 16px; display: none; text-align: center; font-size: 13px; }
+        .status.error { display: block; background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; color: #dc3545; }
+        .status.success { display: block; background: rgba(212, 175, 55, 0.15); border: 1px solid #D4AF37; color: #D4AF37; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="form-card">
-            <h1>Student Registration</h1>
-            <p class="subtitle">Create your student account</p>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">
+                <h1>LOVELY BEAUTY</h1>
+                <p>COLLEGE & TRAINING CENTER</p>
+            </div>
+            <h2>Student Portal</h2>
+            <p class="subtitle">Login with your registered email</p>
             
             <div class="status" id="status"></div>
             
-            <form id="registerForm">
-                <div class="form-group">
-                    <label>Full Name <span class="required">*</span></label>
-                    <input type="text" name="full_name" placeholder="Enter your full name" required>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="student@example.com" required>
                 </div>
-                
-                <div class="form-group">
-                    <label>Phone Number <span class="required">*</span></label>
-                    <input type="tel" name="phone" placeholder="09xxxxxxxx" required>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
                 </div>
-                
-                <div class="form-group">
-                    <label>Email Address <span class="required">*</span></label>
-                    <input type="email" name="email" placeholder="your@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Password <span class="required">*</span></label>
-                    <input type="password" name="password" placeholder="Minimum 6 characters" required minlength="6">
-                </div>
-                
-                <div class="form-group">
-                    <label>Confirm Password <span class="required">*</span></label>
-                    <input type="password" name="password_confirm" placeholder="Re-enter password" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Select Course (Optional)</label>
-                    <select name="course">
-                        <option value="">-- Select a course --</option>
-                        <option value="Hairdressing">Hairdressing & Barbering</option>
-                        <option value="Makeup">Makeup Artistry</option>
-                        <option value="Nails">Nail Technology</option>
-                        <option value="Skincare">Skincare & Aesthetics</option>
-                    </select>
-                </div>
-                
-                <button type="submit" class="btn">Create Account</button>
+                <button type="submit" class="login-btn" id="loginBtn">Login to Portal</button>
             </form>
             
-            <div class="login-link">
-                Already have an account? <a href="student-login.html">Login here</a>
+            <div class="register-link">
+                Don't have an account? <a href="register.html">Register here</a>
             </div>
             
             <div class="back-link">
@@ -116,95 +74,78 @@
         
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        const form = document.getElementById('registerForm');
+        const loginForm = document.getElementById('loginForm');
         const status = document.getElementById('status');
+        const loginBtn = document.getElementById('loginBtn');
         
-        form.addEventListener('submit', async (e) => {
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const fullName = form.full_name.value.trim();
-            const phone = form.phone.value.trim();
-            const email = form.email.value.trim();
-            const password = form.password.value;
-            const passwordConfirm = form.password_confirm.value;
-            const course = form.course.value;
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
             
-            // Validate passwords match
-            if (password !== passwordConfirm) {
+            status.className = 'status';
+            status.textContent = '';
+            
+            if (!email || !password) {
                 status.className = 'status error';
-                status.textContent = '❌ Passwords do not match.';
+                status.textContent = 'Please enter email and password.';
                 return;
             }
             
-            // Validate password length
-            if (password.length < 6) {
-                status.className = 'status error';
-                status.textContent = '❌ Password must be at least 6 characters.';
-                return;
-            }
-            
-            // Generate student ID
-            const studentId = 'LBC-' + Date.now().toString().slice(-6);
-            
-            status.className = 'status info';
-            status.textContent = '⏳ Creating your account...';
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
             
             try {
-                // 1. Create auth user
-                const { data: authData, error: authError } = await supabase.auth.signUp({
+                const { data, error } = await supabase.auth.signInWithPassword({
                     email: email,
-                    password: password,
-                    options: {
-                        data: {
-                            full_name: fullName,
-                            phone: phone
-                        }
-                    }
+                    password: password
                 });
                 
-                if (authError) {
-                    if (authError.message.includes('already registered')) {
-                        throw new Error('This email is already registered. Please login instead.');
-                    }
-                    throw authError;
-                }
+                if (error) throw error;
                 
-                if (!authData.user) {
-                    throw new Error('Failed to create account. Please try again.');
-                }
-                
-                // 2. Create student profile in students table
-                const { error: profileError } = await supabase
+                // Get student profile
+                const { data: student, error: profileError } = await supabase
                     .from('students')
-                    .insert([{
-                        id: authData.user.id,
-                        full_name: fullName,
-                        phone: phone,
-                        email: email,
-                        student_id: studentId,
-                        course: course || null,
-                        enrollment_date: new Date().toISOString()
-                    }]);
+                    .select('*')
+                    .eq('id', data.user.id)
+                    .single();
                 
-                if (profileError) {
-                    console.error('Profile error:', profileError);
-                    throw new Error('Account created but profile setup failed. Please contact support.');
-                }
+                if (profileError) throw profileError;
+                
+                // Store in localStorage
+                localStorage.setItem('lovelyStudent', JSON.stringify({
+                    id: data.user.id,
+                    email: data.user.email,
+                    full_name: student.full_name,
+                    student_id: student.student_id,
+                    loggedIn: true
+                }));
                 
                 status.className = 'status success';
-                status.textContent = `✅ Registration successful! Your Student ID: ${studentId}. Redirecting to login...`;
-                
-                form.reset();
+                status.textContent = '✓ Login successful! Redirecting...';
                 
                 setTimeout(() => {
-                    window.location.href = 'student-login.html';
-                }, 3000);
+                    window.location.href = 'student-dashboard.html';
+                }, 1000);
                 
             } catch (error) {
                 status.className = 'status error';
-                status.textContent = '❌ ' + error.message;
+                status.textContent = '❌ ' + (error.message === 'Invalid login credentials' ? 'Invalid email or password.' : error.message);
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Login to Portal';
             }
         });
+        
+        // Check if already logged in
+        const storedStudent = localStorage.getItem('lovelyStudent');
+        if (storedStudent) {
+            const student = JSON.parse(storedStudent);
+            if (student.loggedIn) {
+                window.location.href = 'student-dashboard.html';
+            }
+        }
     </script>
 </body>
 </html>
