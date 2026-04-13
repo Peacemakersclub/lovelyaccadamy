@@ -1,68 +1,210 @@
-// Add this to your register.html, before closing </body>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script>
-    const SUPABASE_URL = 'https://d5gwP-ofTxVx2feA5AVM3A.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_d5gwP-ofTxVx2feA5AVM3A_EhQcHv8e';
-    
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    
-    const form = document.getElementById('registrationForm');
-    const status = document.getElementById('formStatus');
-    
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Get form values
-        const fullName = form.full_name.value;
-        const phone = form.phone.value;
-        const email = form.email.value;
-        const password = form.password?.value || 'Student2024!'; // Add password field if not present
-        
-        // Generate student ID
-        const studentId = 'LBC-' + Date.now().toString().slice(-6);
-        
-        status.className = 'form-status';
-        status.textContent = 'Creating account...';
-        status.style.display = 'block';
-        status.style.background = 'rgba(212, 175, 55, 0.15)';
-        status.style.color = '#D4AF37';
-        
-        try {
-            // Create auth user
-            const { data: authData, error: authError } = await supabase.auth.signUp({
-                email: email,
-                password: password
-            });
-            
-            if (authError) throw authError;
-            
-            // Create student profile
-            const { error: profileError } = await supabase
-                .from('students')
-                .insert([{
-                    id: authData.user.id,
-                    full_name: fullName,
-                    phone: phone,
-                    email: email,
-                    student_id: studentId,
-                    enrollment_date: new Date().toISOString()
-                }]);
-            
-            if (profileError) throw profileError;
-            
-            status.style.background = 'rgba(212, 175, 55, 0.15)';
-            status.style.color = '#D4AF37';
-            status.textContent = '✓ Registration successful! You can now login.';
-            form.reset();
-            
-            setTimeout(() => {
-                window.location.href = 'student-login.html';
-            }, 2000);
-            
-        } catch (error) {
-            status.style.background = 'rgba(220, 53, 69, 0.15)';
-            status.style.color = '#dc3545';
-            status.textContent = 'Error: ' + error.message;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Lovely Beauty College</title>
+    <link rel="icon" href="logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0A0A0A;
+            color: white;
+            padding: 40px 20px;
         }
-    });
-</script>
+        .container { max-width: 600px; margin: 0 auto; }
+        .form-card {
+            background: #1A1A1A;
+            border: 2px solid #D4AF37;
+            border-radius: 24px;
+            padding: 40px;
+        }
+        h1 { color: #D4AF37; font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 8px; }
+        .subtitle { color: #B0B0B0; text-align: center; margin-bottom: 32px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; color: #D4AF37; margin-bottom: 8px; font-size: 14px; }
+        input, select {
+            width: 100%; padding: 14px; background: #0A0A0A;
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px;
+            color: white; font-size: 15px;
+        }
+        input:focus, select:focus { outline: none; border-color: #D4AF37; }
+        .btn {
+            width: 100%; padding: 14px; background: #D4AF37; color: #0A0A0A;
+            border: none; border-radius: 12px; font-weight: 600; font-size: 16px;
+            cursor: pointer; margin-top: 20px;
+        }
+        .btn:hover { background: #F5D76E; }
+        .status {
+            margin-top: 20px; padding: 14px; border-radius: 12px; display: none;
+            text-align: center; font-size: 14px;
+        }
+        .status.success { background: rgba(212, 175, 55, 0.15); border: 1px solid #D4AF37; color: #D4AF37; display: block; }
+        .status.error { background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; color: #dc3545; display: block; }
+        .status.info { background: rgba(212, 175, 55, 0.1); border: 1px solid #D4AF37; color: #D4AF37; display: block; }
+        .login-link { text-align: center; margin-top: 24px; color: #B0B0B0; }
+        .login-link a { color: #D4AF37; text-decoration: none; }
+        .back-link { text-align: center; margin-top: 16px; }
+        .back-link a { color: #666; text-decoration: none; }
+        .required { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-card">
+            <h1>Student Registration</h1>
+            <p class="subtitle">Create your student account</p>
+            
+            <div class="status" id="status"></div>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" name="full_name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" name="phone" placeholder="09xxxxxxxx" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password <span class="required">*</span></label>
+                    <input type="password" name="password" placeholder="Minimum 6 characters" required minlength="6">
+                </div>
+                
+                <div class="form-group">
+                    <label>Confirm Password <span class="required">*</span></label>
+                    <input type="password" name="password_confirm" placeholder="Re-enter password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Course (Optional)</label>
+                    <select name="course">
+                        <option value="">-- Select a course --</option>
+                        <option value="Hairdressing">Hairdressing & Barbering</option>
+                        <option value="Makeup">Makeup Artistry</option>
+                        <option value="Nails">Nail Technology</option>
+                        <option value="Skincare">Skincare & Aesthetics</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn">Create Account</button>
+            </form>
+            
+            <div class="login-link">
+                Already have an account? <a href="student-login.html">Login here</a>
+            </div>
+            
+            <div class="back-link">
+                <a href="index.html">← Back to Homepage</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const SUPABASE_URL = 'https://d5gwP-ofTxVx2feA5AVM3A.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_d5gwP-ofTxVx2feA5AVM3A_EhQcHv8e';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        const form = document.getElementById('registerForm');
+        const status = document.getElementById('status');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fullName = form.full_name.value.trim();
+            const phone = form.phone.value.trim();
+            const email = form.email.value.trim();
+            const password = form.password.value;
+            const passwordConfirm = form.password_confirm.value;
+            const course = form.course.value;
+            
+            // Validate passwords match
+            if (password !== passwordConfirm) {
+                status.className = 'status error';
+                status.textContent = '❌ Passwords do not match.';
+                return;
+            }
+            
+            // Validate password length
+            if (password.length < 6) {
+                status.className = 'status error';
+                status.textContent = '❌ Password must be at least 6 characters.';
+                return;
+            }
+            
+            // Generate student ID
+            const studentId = 'LBC-' + Date.now().toString().slice(-6);
+            
+            status.className = 'status info';
+            status.textContent = '⏳ Creating your account...';
+            
+            try {
+                // 1. Create auth user
+                const { data: authData, error: authError } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: fullName,
+                            phone: phone
+                        }
+                    }
+                });
+                
+                if (authError) {
+                    if (authError.message.includes('already registered')) {
+                        throw new Error('This email is already registered. Please login instead.');
+                    }
+                    throw authError;
+                }
+                
+                if (!authData.user) {
+                    throw new Error('Failed to create account. Please try again.');
+                }
+                
+                // 2. Create student profile in students table
+                const { error: profileError } = await supabase
+                    .from('students')
+                    .insert([{
+                        id: authData.user.id,
+                        full_name: fullName,
+                        phone: phone,
+                        email: email,
+                        student_id: studentId,
+                        course: course || null,
+                        enrollment_date: new Date().toISOString()
+                    }]);
+                
+                if (profileError) {
+                    console.error('Profile error:', profileError);
+                    throw new Error('Account created but profile setup failed. Please contact support.');
+                }
+                
+                status.className = 'status success';
+                status.textContent = `✅ Registration successful! Your Student ID: ${studentId}. Redirecting to login...`;
+                
+                form.reset();
+                
+                setTimeout(() => {
+                    window.location.href = 'student-login.html';
+                }, 3000);
+                
+            } catch (error) {
+                status.className = 'status error';
+                status.textContent = '❌ ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
