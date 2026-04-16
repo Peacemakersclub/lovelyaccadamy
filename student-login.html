@@ -11,12 +11,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --black-primary: #0A0A0A;
-            --black-secondary: #111111;
             --black-card: #1A1A1A;
             --gold-primary: #D4AF37;
-            --gold-light: #F5D76E;
-            --gold-dark: #996515;
-            --gold-glow: rgba(212, 175, 55, 0.3);
             --white: #FFFFFF;
             --gray-mid: #B0B0B0;
             --header-height: 80px;
@@ -32,19 +28,16 @@
         .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .header-container { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 20px var(--gold-glow); }
+        .logo-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--gold-primary), #996515); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
         .logo-text { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.2; }
         .logo-main { font-size: 22px; color: var(--gold-primary); letter-spacing: 2px; }
         .logo-sub { font-size: 11px; color: var(--gray-mid); letter-spacing: 1px; }
         .nav-menu { display: flex; align-items: center; gap: 32px; }
-        .nav-link { font-weight: 500; font-size: 15px; color: var(--gray-mid); position: relative; padding: 8px 0; text-decoration: none; transition: color 0.3s ease; }
+        .nav-link { font-weight: 500; font-size: 15px; color: var(--gray-mid); position: relative; padding: 8px 0; text-decoration: none; }
         .nav-link:hover { color: var(--gold-primary); }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold-primary); transition: width 0.3s ease; }
-        .nav-link:hover::after { width: 100%; }
         .nav-link.active { color: var(--gold-primary); }
-        .nav-link.active::after { width: 100%; }
-        .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 16px; border-radius: 30px; font-size: 14px; cursor: pointer; transition: all 0.3s ease; margin-left: 16px; }
-        .lang-toggle:hover { background: var(--gold-primary); color: var(--black-primary); }
+        .nav-link.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--gold-primary); }
+        .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 16px; border-radius: 30px; font-size: 14px; cursor: pointer; margin-left: 16px; }
         .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
         
         /* Login Section */
@@ -57,18 +50,13 @@
         .input-group { margin-bottom: 18px; }
         .input-group label { display: block; color: var(--gold-primary); font-size: 13px; margin-bottom: 6px; }
         .input-group input { width: 100%; padding: 14px 16px; background: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; color: white; font-size: 15px; }
-        .input-group input:focus { outline: none; border-color: var(--gold-primary); box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); }
-        .input-group input::placeholder { color: #666; }
-        .login-btn { width: 100%; padding: 14px; background: var(--gold-primary); color: #0A0A0A; border: none; border-radius: 12px; font-weight: 600; font-size: 16px; cursor: pointer; margin: 20px 0 16px; transition: all 0.3s; }
-        .login-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
-        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .input-group input:focus { outline: none; border-color: var(--gold-primary); }
+        .login-btn { width: 100%; padding: 14px; background: var(--gold-primary); color: #0A0A0A; border: none; border-radius: 12px; font-weight: 600; font-size: 16px; cursor: pointer; margin: 20px 0 16px; }
         .register-link { text-align: center; color: var(--gray-mid); font-size: 13px; }
         .register-link a { color: var(--gold-primary); text-decoration: none; }
-        .register-link a:hover { text-decoration: underline; }
-        .error-msg { background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; border-radius: 10px; padding: 10px; margin-bottom: 16px; color: #dc3545; font-size: 13px; display: none; }
-        .error-msg.show { display: block; }
-        .success-msg { background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-primary); border-radius: 10px; padding: 10px; margin-bottom: 16px; color: var(--gold-primary); font-size: 13px; display: none; }
-        .success-msg.show { display: block; }
+        .status { padding: 12px; border-radius: 10px; margin-bottom: 16px; display: none; text-align: center; font-size: 13px; }
+        .status.error { display: block; background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; color: #dc3545; }
+        .status.success { display: block; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-primary); color: var(--gold-primary); }
         
         /* Footer */
         .footer { background: var(--black-primary); padding: 40px 0 30px; border-top: 1px solid rgba(212, 175, 55, 0.2); }
@@ -77,18 +65,15 @@
         .footer-desc { color: var(--gray-mid); font-size: 14px; margin: 20px 0; }
         .social-links { display: flex; gap: 16px; }
         .social-link { width: 40px; height: 40px; background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); }
-        .social-link:hover { background: var(--gold-primary); color: var(--black-primary); }
         .footer-title { color: var(--gold-primary); font-size: 18px; margin-bottom: 20px; }
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 12px; }
         .footer-links a { color: var(--gray-mid); font-size: 14px; }
-        .footer-links a:hover { color: var(--gold-primary); }
         .footer-contact p { color: var(--gray-mid); font-size: 14px; margin-bottom: 12px; }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.1); color: var(--gray-mid); font-size: 14px; }
         .footer-credit { margin-top: 10px; }
         .footer-credit a { color: var(--gold-primary); font-weight: 500; }
         
-        /* Responsive */
         @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 768px) {
             .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 30px; border-bottom: 1px solid var(--gold-primary); z-index: 999; }
@@ -114,12 +99,12 @@
             </a>
             
             <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
-                <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
-                <a href="courses.html" class="nav-link" data-en="Courses" data-am="ኮርሶች">Courses</a>
-                <a href="student-login.html" class="nav-link active" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
-                <a href="register.html" class="nav-link" data-en="Register" data-am="ይመዝገቡ">Register</a>
-                <a href="contact.html" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="student-login.html" class="nav-link active">Student Portal</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="contact.html" class="nav-link">Contact</a>
                 <button class="lang-toggle" id="langToggle">አማ / EN</button>
             </nav>
             
@@ -132,28 +117,26 @@
         <div class="login-container">
             <div class="login-card">
                 <div class="login-header">
-                    <h2 data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</h2>
-                    <p data-en="Login with your registered email" data-am="በተመዘገቡት ኢሜይል ይግቡ">Login with your registered email</p>
+                    <h2>Student Portal</h2>
+                    <p>Login with your registered email</p>
                 </div>
                 
-                <div class="error-msg" id="errorMsg"></div>
-                <div class="success-msg" id="successMsg"></div>
+                <div class="status" id="status"></div>
                 
                 <form id="loginForm">
                     <div class="input-group">
-                        <label data-en="Email Address" data-am="ኢሜይል አድራሻ">Email Address</label>
+                        <label>Email Address</label>
                         <input type="email" id="email" placeholder="student@example.com" required>
                     </div>
                     <div class="input-group">
-                        <label data-en="Password" data-am="የይለፍ ቃል">Password</label>
+                        <label>Password</label>
                         <input type="password" id="password" placeholder="••••••••" required>
                     </div>
-                    <button type="submit" class="login-btn" id="loginBtn" data-en="Login to Portal" data-am="ወደ ፖርታል ይግቡ">Login to Portal</button>
+                    <button type="submit" class="login-btn" id="loginBtn">Login to Portal</button>
                 </form>
                 
                 <div class="register-link">
-                    <span data-en="Don't have an account?" data-am="መለያ የሎትም?">Don't have an account?</span>
-                    <a href="register.html" data-en="Register here" data-am="እዚህ ይመዝገቡ">Register here</a>
+                    Don't have an account? <a href="register.html">Register here</a>
                 </div>
             </div>
         </div>
@@ -173,7 +156,7 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4>
+                    <h4 class="footer-title">Quick Links</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
@@ -183,7 +166,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="footer-title" data-en="Our Branches" data-am="ቅርንጫፎቻችን">Our Branches</h4>
+                    <h4 class="footer-title">Our Branches</h4>
                     <ul class="footer-links">
                         <li>📍 Megenagna (Main)</li>
                         <li>📍 Arada</li>
@@ -192,7 +175,7 @@
                     </ul>
                 </div>
                 <div class="footer-contact">
-                    <h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4>
+                    <h4 class="footer-title">Contact Us</h4>
                     <p>📍 Addis Ababa, Ethiopia</p>
                     <p>📞 0991171819 / 0911221032</p>
                     <p>✉️ lovelybeautycollage@proton.me</p>
@@ -206,13 +189,13 @@
     </footer>
     
     <script>
-        const SUPABASE_URL = 'https://d5gwP-ofTxVx2feA5AVM3A.supabase.co';
+        // CORRECT SUPABASE URL
+        const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_d5gwP-ofTxVx2feA5AVM3A_EhQcHv8e';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         const loginForm = document.getElementById('loginForm');
-        const errorMsg = document.getElementById('errorMsg');
-        const successMsg = document.getElementById('successMsg');
+        const status = document.getElementById('status');
         const loginBtn = document.getElementById('loginBtn');
         
         // Check if already logged in
@@ -224,18 +207,18 @@
         }
         checkSession();
         
-        loginForm.addEventListener('submit', async (e) => {
+        loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+            var email = document.getElementById('email').value.trim();
+            var password = document.getElementById('password').value;
             
-            errorMsg.classList.remove('show');
-            successMsg.classList.remove('show');
+            status.className = 'status';
+            status.textContent = '';
             
             if (!email || !password) {
-                errorMsg.textContent = 'Please enter your email and password.';
-                errorMsg.classList.add('show');
+                status.className = 'status error';
+                status.textContent = 'Please enter your email and password.';
                 return;
             }
             
@@ -243,23 +226,23 @@
             loginBtn.textContent = 'Logging in...';
             
             try {
-                const { data, error } = await supabase.auth.signInWithPassword({
+                var { data, error } = await supabase.auth.signInWithPassword({
                     email: email,
                     password: password
                 });
                 
                 if (error) throw error;
                 
-                successMsg.textContent = '✓ Login successful! Redirecting...';
-                successMsg.classList.add('show');
+                status.className = 'status success';
+                status.textContent = 'Login successful! Redirecting...';
                 
-                setTimeout(() => {
+                setTimeout(function() {
                     window.location.href = 'student-dashboard.html';
                 }, 1000);
                 
             } catch (error) {
-                errorMsg.textContent = 'Invalid email or password. Please try again.';
-                errorMsg.classList.add('show');
+                status.className = 'status error';
+                status.textContent = 'Invalid email or password.';
             } finally {
                 loginBtn.disabled = false;
                 loginBtn.textContent = 'Login to Portal';
@@ -267,41 +250,26 @@
         });
         
         // Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navMenu = document.getElementById('navMenu');
+        var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        var navMenu = document.getElementById('navMenu');
         if(mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.addEventListener('click', function() {
                 navMenu.classList.toggle('active');
                 mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
             });
         }
-        document.querySelectorAll('.nav-link').forEach(l => {
-            l.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                if(mobileMenuBtn) mobileMenuBtn.textContent = '☰';
-            });
-        });
         
         // Language
-        let currentLang = localStorage.getItem('lovelyLang') || 'en';
+        var currentLang = localStorage.getItem('lovelyLang') || 'en';
         function setLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('lovelyLang', lang);
-            document.querySelectorAll('[data-en][data-am]').forEach(el => {
-                const text = el.getAttribute(`data-${lang}`);
-                if(text) el.textContent = text;
-            });
             document.getElementById('langToggle').textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ';
         }
-        document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'am' : 'en'));
-        setLanguage(currentLang);
-        
-        // Header shadow
-        window.addEventListener('scroll', () => {
-            document.querySelector('.header').style.boxShadow = window.scrollY > 50 
-                ? '0 4px 30px rgba(0,0,0,0.6)' 
-                : '0 4px 20px rgba(0,0,0,0.5)';
+        document.getElementById('langToggle').addEventListener('click', function() {
+            setLanguage(currentLang === 'en' ? 'am' : 'en');
         });
+        setLanguage(currentLang);
     </script>
 </body>
 </html>
