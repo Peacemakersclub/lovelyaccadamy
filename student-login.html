@@ -36,6 +36,7 @@
         .input-group input { width: 100%; padding: 14px 16px; background: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; color: white; font-size: 15px; }
         .input-group input:focus { outline: none; border-color: var(--gold-primary); }
         .login-btn { width: 100%; padding: 14px; background: var(--gold-primary); color: #0A0A0A; border: none; border-radius: 12px; font-weight: 600; font-size: 16px; cursor: pointer; margin: 20px 0 16px; }
+        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
         .register-link { text-align: center; color: var(--gray-mid); font-size: 13px; }
         .register-link a { color: var(--gold-primary); text-decoration: none; }
         .status { padding: 12px; border-radius: 10px; margin-bottom: 16px; display: none; text-align: center; font-size: 13px; }
@@ -119,7 +120,6 @@
     </footer>
     
     <script>
-        // CORRECT SUPABASE CREDENTIALS
         const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtZHJ3d2F6dHlmZmZua3J2d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwODAzNzYsImV4cCI6MjA5MTY1NjM3Nn0.IKQ1eevZaO6uluDUU8PaqrD4uuQNy_Ex61n_dD2Qa8g';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
