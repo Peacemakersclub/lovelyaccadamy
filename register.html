@@ -50,8 +50,9 @@
         </div>
     </div>
     <script>
+        // CORRECT SUPABASE CREDENTIALS
         const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_d5gwP-ofTxVx2feA5AVM3A_EhQcHv8e';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtZHJ3d2F6dHlmZmZua3J2d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwODAzNzYsImV4cCI6MjA5MTY1NjM3Nn0.IKQ1eevZaO6uluDUU8PaqrD4uuQNy_Ex61n_dD2Qa8g';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         document.getElementById('registerForm').addEventListener('submit', async function(e) {
@@ -90,12 +91,7 @@
             submitBtn.disabled = true;
             
             try {
-                // Step 1: Create auth user
-                var authResult = await supabase.auth.signUp({ 
-                    email: email, 
-                    password: password 
-                });
-                
+                var authResult = await supabase.auth.signUp({ email: email, password: password });
                 if (authResult.error) {
                     if (authResult.error.message.includes('already registered')) {
                         throw new Error('This email is already registered. Please login.');
@@ -103,7 +99,6 @@
                     throw authResult.error;
                 }
                 
-                // Step 2: Insert into students table (NO id - let Supabase auto-generate)
                 var insertResult = await supabase.from('students').insert([{
                     email: email,
                     full_name: fullName,
@@ -118,9 +113,7 @@
                 status.textContent = 'Registration successful! Your Student ID: ' + studentId;
                 document.getElementById('registerForm').reset();
                 
-                setTimeout(function() {
-                    window.location.href = 'student-login.html';
-                }, 3000);
+                setTimeout(function() { window.location.href = 'student-login.html'; }, 3000);
                 
             } catch (error) {
                 status.className = 'status error';
