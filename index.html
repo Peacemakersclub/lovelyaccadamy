@@ -127,9 +127,12 @@
         
         /* Courses */
         .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .course-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px; transition: all 0.4s ease; text-align: center; }
+        .course-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; overflow: hidden; transition: all 0.4s ease; text-align: center; }
         .course-card:hover { transform: translateY(-10px); border-color: var(--gold-primary); box-shadow: 0 20px 40px var(--gold-glow); }
-        .course-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 30px; }
+        .course-image { width: 100%; height: 200px; overflow: hidden; }
+        .course-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .course-card:hover .course-image img { transform: scale(1.05); }
+        .course-content { padding: 24px; }
         .course-title { font-size: 20px; margin-bottom: 12px; color: var(--white); }
         .course-desc { color: var(--gray-mid); font-size: 13px; margin-bottom: 20px; }
         .course-link { color: var(--gold-primary); font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
@@ -278,7 +281,7 @@
         </div>
     </section>
     
-    <!-- COURSES -->
+    <!-- COURSES SECTION WITH REAL IMAGES -->
     <section class="section section-dark">
         <div class="container">
             <div class="section-header">
@@ -286,12 +289,77 @@
                 <p class="section-desc" data-en="Structured programs from short-term certification to Level 2-4 TVET qualifications" data-am="ከአጭር ጊዜ ሰርተፍኬት እስከ ደረጃ 2-4 የቴክኒክና ሙያ ብቃት ማረጋገጫ የተዋቀሩ ፕሮግራሞች">Structured programs from short-term certification to Level 2-4 TVET qualifications</p>
             </div>
             <div class="courses-grid">
-                <div class="course-card"><div class="course-icon">💇</div><h3 class="course-title" data-en="Hairdressing & Barbering" data-am="ፀጉር አስተካካይነት">Hairdressing & Barbering</h3><p class="course-desc" data-en="Professional cutting, styling, coloring, and treatments" data-am="ሙያዊ መቁረጥ፣ ማስተካከል፣ ቀለም መቀባት እና ህክምና">Professional cutting, styling, coloring, and treatments</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div>
-                <div class="course-card"><div class="course-icon">💄</div><h3 class="course-title" data-en="Makeup Artistry" data-am="ሜካፕ አርቲስትነት">Makeup Artistry</h3><p class="course-desc" data-en="Bridal, fashion, and professional makeup techniques" data-am="የሙሽራ፣ የፋሽን እና ሙያዊ የሜካፕ ቴክኒኮች">Bridal, fashion, and professional makeup techniques</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div>
-                <div class="course-card"><div class="course-icon">💅</div><h3 class="course-title" data-en="Nail Technology" data-am="የጥፍር ቴክኖሎጂ">Nail Technology</h3><p class="course-desc" data-en="Manicure, pedicure, nail art, and extensions" data-am="ማኒኬር፣ ፔዲኬር፣ የጥፍር ጥበብ እና ማራዘሚያ">Manicure, pedicure, nail art, and extensions</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div>
-                <div class="course-card"><div class="course-icon">🧖</div><h3 class="course-title" data-en="Skincare & Aesthetics" data-am="የቆዳ እንክብካቤ እና ውበት">Skincare & Aesthetics</h3><p class="course-desc" data-en="Facial treatments, skincare science, and therapy" data-am="የፊት ህክምና፣ የቆዳ ሳይንስ እና ቴራፒ">Facial treatments, skincare science, and therapy</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div>
-                <div class="course-card"><div class="course-icon">👁️</div><h3 class="course-title" data-en="Eyelash & Brow Services" data-am="የዐይን ሽፋሽፍ እና ቅንድብ አገልግሎት">Eyelash & Brow Services</h3><p class="course-desc" data-en="Extensions, lifting, tinting, and shaping" data-am="ማራዘሚያ፣ ማንሳት፣ ቀለም መቀባት እና ቅርጽ መስጠት">Extensions, lifting, tinting, and shaping</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div>
-                <div class="course-card"><div class="course-icon">💆</div><h3 class="course-title" data-en="Massage Therapy" data-am="የማሳጅ ቴራፒ">Massage Therapy</h3><p class="course-desc" data-en="Professional massage techniques for wellness" data-am="ለጤና ሙያዊ የማሳጅ ቴክኒኮች">Professional massage techniques for wellness</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div>
+                <!-- Course 1: Hairdressing & Barbering -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/hairdressing-and-barbering.png" alt="Hairdressing & Barbering">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title" data-en="Hairdressing & Barbering" data-am="ፀጉር አስተካካይነት">Hairdressing & Barbering</h3>
+                        <p class="course-desc" data-en="Professional cutting, styling, coloring, and treatments" data-am="ሙያዊ መቁረጥ፣ ማስተካከል፣ ቀለም መቀባት እና ህክምና">Professional cutting, styling, coloring, and treatments</p>
+                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
+                    </div>
+                </div>
+                
+                <!-- Course 2: Makeup Artistry -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/makeup-artistry.jpg" alt="Makeup Artistry">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title" data-en="Makeup Artistry" data-am="ሜካፕ አርቲስትነት">Makeup Artistry</h3>
+                        <p class="course-desc" data-en="Bridal, fashion, and professional makeup techniques" data-am="የሙሽራ፣ የፋሽን እና ሙያዊ የሜካፕ ቴክኒኮች">Bridal, fashion, and professional makeup techniques</p>
+                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
+                    </div>
+                </div>
+                
+                <!-- Course 3: Nail Technology -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/nail-technology.jpeg" alt="Nail Technology">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title" data-en="Nail Technology" data-am="የጥፍር ቴክኖሎጂ">Nail Technology</h3>
+                        <p class="course-desc" data-en="Manicure, pedicure, nail art, and extensions" data-am="ማኒኬር፣ ፔዲኬር፣ የጥፍር ጥበብ እና ማራዘሚያ">Manicure, pedicure, nail art, and extensions</p>
+                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
+                    </div>
+                </div>
+                
+                <!-- Course 4: Skincare & Aesthetics -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/skincare-and-aestetics.jpg" alt="Skincare & Aesthetics">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title" data-en="Skincare & Aesthetics" data-am="የቆዳ እንክብካቤ እና ውበት">Skincare & Aesthetics</h3>
+                        <p class="course-desc" data-en="Facial treatments, skincare science, and therapy" data-am="የፊት ህክምና፣ የቆዳ ሳይንስ እና ቴራፒ">Facial treatments, skincare science, and therapy</p>
+                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
+                    </div>
+                </div>
+                
+                <!-- Course 5: Eyelash & Brow Services -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/eyelash-and-brow-service.jpg" alt="Eyelash & Brow Services">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title" data-en="Eyelash & Brow Services" data-am="የዐይን ሽፋሽፍ እና ቅንድብ አገልግሎት">Eyelash & Brow Services</h3>
+                        <p class="course-desc" data-en="Extensions, lifting, tinting, and shaping" data-am="ማራዘሚያ፣ ማንሳት፣ ቀለም መቀባት እና ቅርጽ መስጠት">Extensions, lifting, tinting, and shaping</p>
+                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
+                    </div>
+                </div>
+                
+                <!-- Course 6: Massage Therapy -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/massge-therapy.jpg" alt="Massage Therapy">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title" data-en="Massage Therapy" data-am="የማሳጅ ቴራፒ">Massage Therapy</h3>
+                        <p class="course-desc" data-en="Professional massage techniques for wellness" data-am="ለጤና ሙያዊ የማሳጅ ቴክኒኮች">Professional massage techniques for wellness</p>
+                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
