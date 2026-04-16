@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body style="background:#0A0A0A; color:white; padding:20px;">
+    <h2>Supabase Connection Test</h2>
+    
+    <input type="email" id="email" placeholder="Email" value="test@test.com" style="padding:10px; margin:5px; width:250px;"><br>
+    <input type="password" id="password" placeholder="Password" value="test123" style="padding:10px; margin:5px; width:250px;"><br>
+    <button onclick="testRegister()" style="padding:10px 20px; background:#D4AF37; border:none; border-radius:5px; margin:10px;">Test Register</button>
+    <button onclick="testLogin()" style="padding:10px 20px; background:#D4AF37; border:none; border-radius:5px; margin:10px;">Test Login</button>
+    
+    <p id="result" style="margin-top:20px; padding:10px; border-radius:5px;"></p>
+    
+    <script>
+        const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_d5gwP-ofTxVx2feA5AVM3A_EhQcHv8e';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        const result = document.getElementById('result');
+        
+        async function testRegister() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            result.textContent = 'Testing registration...';
+            result.style.background = '#333';
+            
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) {
+                    result.textContent = '❌ REGISTER ERROR: ' + error.message;
+                    result.style.background = 'rgba(220,53,69,0.2)';
+                } else {
+                    result.textContent = '✅ REGISTER SUCCESS! User: ' + data.user.email;
+                    result.style.background = 'rgba(212,175,55,0.2)';
+                }
+            } catch (e) {
+                result.textContent = '❌ EXCEPTION: ' + e.message;
+                result.style.background = 'rgba(220,53,69,0.2)';
+            }
+        }
+        
+        async function testLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            result.textContent = 'Testing login...';
+            result.style.background = '#333';
+            
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+                
+                if (error) {
+                    result.textContent = '❌ LOGIN ERROR: ' + error.message;
+                    result.style.background = 'rgba(220,53,69,0.2)';
+                } else {
+                    result.textContent = '✅ LOGIN SUCCESS! Welcome ' + data.user.email;
+                    result.style.background = 'rgba(212,175,55,0.2)';
+                }
+            } catch (e) {
+                result.textContent = '❌ EXCEPTION: ' + e.message;
+                result.style.background = 'rgba(220,53,69,0.2)';
+            }
+        }
+    </script>
+</body>
+</html>
