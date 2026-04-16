@@ -83,9 +83,15 @@
         
         /* Courses Grid */
         .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .course-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px; transition: all 0.4s ease; text-align: center; display: flex; flex-direction: column; }
+        .course-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 0 0 30px 0; transition: all 0.4s ease; text-align: center; display: flex; flex-direction: column; overflow: hidden; }
         .course-card:hover { transform: translateY(-10px); border-color: var(--gold-primary); box-shadow: 0 20px 40px var(--gold-glow); }
-        .course-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 30px; }
+        
+        /* Course Image */
+        .course-image { width: 100%; height: 200px; overflow: hidden; }
+        .course-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .course-card:hover .course-image img { transform: scale(1.05); }
+        
+        .course-content { padding: 24px 24px 0 24px; flex-grow: 1; display: flex; flex-direction: column; }
         .course-level { display: inline-block; background: rgba(212, 175, 55, 0.15); color: var(--gold-primary); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; margin-bottom: 12px; }
         .course-title { font-size: 20px; margin-bottom: 8px; color: var(--white); }
         .course-title-am { font-size: 13px; color: var(--gray-mid); margin-bottom: 16px; }
@@ -263,18 +269,18 @@
     </footer>
     
     <script>
-        // Courses Data
+        // Courses Data with REAL IMAGES
         const coursesData = [
-            { id:1, title:"Hairdressing & Barbering", titleAm:"ፀጉር አስተካካይነት", category:"hair", icon:"💇", level:"Level 1-4", duration:"3-12 months", certification:"TVET Certificate", description:"Professional cutting, styling, coloring, chemical treatments, and men's grooming.", topics:["Hair cutting techniques","Styling and blow-drying","Hair coloring","Chemical treatments","Men's haircutting","Salon hygiene"], career:["Salon Stylist","Barber","Salon Owner","Session Stylist","Color Specialist"] },
-            { id:2, title:"Makeup Artistry", titleAm:"ሜካፕ አርቲስትነት", category:"makeup", icon:"💄", level:"All Levels", duration:"2-6 months", certification:"Professional Certificate", description:"Professional makeup techniques for all occasions including bridal, fashion, and editorial.", topics:["Face anatomy","Color theory","Bridal makeup","Fashion makeup","Editorial looks","Product knowledge"], career:["Makeup Artist","Bridal Specialist","Beauty Advisor","Brand Representative"] },
-            { id:3, title:"Nail Technology", titleAm:"የጥፍር ቴክኖሎጂ", category:"nails", icon:"💅", level:"All Levels", duration:"1-3 months", certification:"Certificate", description:"Manicure, pedicure, nail art, gel application, and acrylic extensions.", topics:["Manicure & Pedicure","Gel application","Acrylic nails","Nail art design","Nail health","Sanitation"], career:["Nail Technician","Nail Artist","Salon Owner","Mobile Nail Service"] },
-            { id:4, title:"Skincare & Aesthetics", titleAm:"የቆዳ እንክብካቤ እና ውበት", category:"skincare", icon:"🧖", level:"All Levels", duration:"2-4 months", certification:"Professional Certificate", description:"Facial treatments, skin analysis, and advanced skincare technologies.", topics:["Skin analysis","Facial massage","Mask therapy","Extraction techniques","Product knowledge","Skin conditions"], career:["Esthetician","Skincare Specialist","Spa Therapist","Product Consultant"] },
-            { id:5, title:"Eyelash & Brow Services", titleAm:"የዐይን ሽፋሽፍ እና ቅንድብ አገልግሎት", category:"makeup", icon:"👁️", level:"Specialist", duration:"2-4 weeks", certification:"Specialist Certificate", description:"Classic and volume eyelash extensions, lash lifting, brow shaping, and tinting.", topics:["Classic lashes","Volume lashes","Lash lifting","Brow mapping","Tinting","Aftercare"], career:["Lash Artist","Brow Specialist","Beauty Specialist","Freelance Tech"] },
-            { id:6, title:"Massage Therapy", titleAm:"የማሳጅ ቴራፒ", category:"skincare", icon:"💆", level:"All Levels", duration:"2-4 months", certification:"Professional Certificate", description:"Therapeutic massage techniques for wellness and relaxation.", topics:["Swedish massage","Deep tissue","Aromatherapy","Anatomy basics","Client care","Ethics"], career:["Massage Therapist","Spa Therapist","Wellness Center Staff","Mobile Therapist"] },
-            { id:7, title:"Henna Art", titleAm:"የሂና ጥበብ", category:"makeup", icon:"🌿", level:"All Levels", duration:"2-4 weeks", certification:"Certificate", description:"Traditional and modern henna design techniques.", topics:["Henna preparation","Traditional designs","Modern patterns","Bridal henna","Aftercare"], career:["Henna Artist","Bridal Specialist","Event Artist","Freelance Artist"] },
-            { id:8, title:"Bridal & Fashion Makeup", titleAm:"የሙሽራ እና ፋሽን ሜካፕ", category:"makeup", icon:"👰", level:"Advanced", duration:"1-3 months", certification:"Advanced Certificate", description:"Specialized training for bridal and high-fashion makeup applications.", topics:["Bridal looks","Fashion editorial","Airbrush techniques","Long-lasting makeup","Client consultation"], career:["Bridal Makeup Artist","Fashion Week Artist","Editorial Artist"] },
-            { id:9, title:"Facial Treatment", titleAm:"የፊት ህክምና", category:"skincare", icon:"✨", level:"Specialist", duration:"1-2 months", certification:"Specialist Certificate", description:"Professional facial treatments including deep cleansing, exfoliation, and mask therapy.", topics:["Deep cleansing","Exfoliation","Mask application","Facial massage","Skin analysis"], career:["Facialist","Spa Therapist","Skincare Specialist"] },
-            { id:10, title:"Beauty Therapy & Salon Management", titleAm:"የውበት ቴራፒ እና ሳሎን አስተዳደር", category:"certification", icon:"🏪", level:"Level 4", duration:"6-12 months", certification:"TVET Level 4", description:"Comprehensive training in beauty therapy plus business and salon management.", topics:["Advanced treatments","Salon operations","Staff management","Customer service","Business planning"], career:["Salon Manager","Salon Owner","Senior Therapist","Beauty Consultant"] }
+            { id:1, title:"Hairdressing & Barbering", titleAm:"ፀጉር አስተካካይነት", category:"hair", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/hairdressing-and-barbering.png", level:"Level 1-4", duration:"3-12 months", certification:"TVET Certificate", description:"Professional cutting, styling, coloring, chemical treatments, and men's grooming.", topics:["Hair cutting techniques","Styling and blow-drying","Hair coloring","Chemical treatments","Men's haircutting","Salon hygiene"], career:["Salon Stylist","Barber","Salon Owner","Session Stylist","Color Specialist"] },
+            { id:2, title:"Makeup Artistry", titleAm:"ሜካፕ አርቲስትነት", category:"makeup", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/makeup-artistry.jpg", level:"All Levels", duration:"2-6 months", certification:"Professional Certificate", description:"Professional makeup techniques for all occasions including bridal, fashion, and editorial.", topics:["Face anatomy","Color theory","Bridal makeup","Fashion makeup","Editorial looks","Product knowledge"], career:["Makeup Artist","Bridal Specialist","Beauty Advisor","Brand Representative"] },
+            { id:3, title:"Nail Technology", titleAm:"የጥፍር ቴክኖሎጂ", category:"nails", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/nail-technology.jpeg", level:"All Levels", duration:"1-3 months", certification:"Certificate", description:"Manicure, pedicure, nail art, gel application, and acrylic extensions.", topics:["Manicure & Pedicure","Gel application","Acrylic nails","Nail art design","Nail health","Sanitation"], career:["Nail Technician","Nail Artist","Salon Owner","Mobile Nail Service"] },
+            { id:4, title:"Skincare & Aesthetics", titleAm:"የቆዳ እንክብካቤ እና ውበት", category:"skincare", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/skincare-and-aestetics.jpg", level:"All Levels", duration:"2-4 months", certification:"Professional Certificate", description:"Facial treatments, skin analysis, and advanced skincare technologies.", topics:["Skin analysis","Facial massage","Mask therapy","Extraction techniques","Product knowledge","Skin conditions"], career:["Esthetician","Skincare Specialist","Spa Therapist","Product Consultant"] },
+            { id:5, title:"Eyelash & Brow Services", titleAm:"የዐይን ሽፋሽፍ እና ቅንድብ አገልግሎት", category:"makeup", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/eyelash-and-brow-service.jpg", level:"Specialist", duration:"2-4 weeks", certification:"Specialist Certificate", description:"Classic and volume eyelash extensions, lash lifting, brow shaping, and tinting.", topics:["Classic lashes","Volume lashes","Lash lifting","Brow mapping","Tinting","Aftercare"], career:["Lash Artist","Brow Specialist","Beauty Specialist","Freelance Tech"] },
+            { id:6, title:"Massage Therapy", titleAm:"የማሳጅ ቴራፒ", category:"skincare", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/massge-therapy.jpg", level:"All Levels", duration:"2-4 months", certification:"Professional Certificate", description:"Therapeutic massage techniques for wellness and relaxation.", topics:["Swedish massage","Deep tissue","Aromatherapy","Anatomy basics","Client care","Ethics"], career:["Massage Therapist","Spa Therapist","Wellness Center Staff","Mobile Therapist"] },
+            { id:7, title:"Henna Art", titleAm:"የሂና ጥበብ", category:"makeup", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/henna-art.jpg", level:"All Levels", duration:"2-4 weeks", certification:"Certificate", description:"Traditional and modern henna design techniques.", topics:["Henna preparation","Traditional designs","Modern patterns","Bridal henna","Aftercare"], career:["Henna Artist","Bridal Specialist","Event Artist","Freelance Artist"] },
+            { id:8, title:"Bridal & Fashion Makeup", titleAm:"የሙሽራ እና ፋሽን ሜካፕ", category:"makeup", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/bridal-makeup.jpg", level:"Advanced", duration:"1-3 months", certification:"Advanced Certificate", description:"Specialized training for bridal and high-fashion makeup applications.", topics:["Bridal looks","Fashion editorial","Airbrush techniques","Long-lasting makeup","Client consultation"], career:["Bridal Makeup Artist","Fashion Week Artist","Editorial Artist"] },
+            { id:9, title:"Facial Treatment", titleAm:"የፊት ህክምና", category:"skincare", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/facial-treatment.jpg", level:"Specialist", duration:"1-2 months", certification:"Specialist Certificate", description:"Professional facial treatments including deep cleansing, exfoliation, and mask therapy.", topics:["Deep cleansing","Exfoliation","Mask application","Facial massage","Skin analysis"], career:["Facialist","Spa Therapist","Skincare Specialist"] },
+            { id:10, title:"Beauty Therapy & Salon Management", titleAm:"የውበት ቴራፒ እና ሳሎን አስተዳደር", category:"certification", image:"https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/salon-management.jpg", level:"Level 4", duration:"6-12 months", certification:"TVET Level 4", description:"Comprehensive training in beauty therapy plus business and salon management.", topics:["Advanced treatments","Salon operations","Staff management","Customer service","Business planning"], career:["Salon Manager","Salon Owner","Senior Therapist","Beauty Consultant"] }
         ];
         
         // Render Courses
@@ -285,16 +291,20 @@
             const filtered = filter === 'all' ? coursesData : coursesData.filter(c => c.category === filter);
             grid.innerHTML = filtered.map(c => `
                 <div class="course-card">
-                    <div class="course-icon">${c.icon}</div>
-                    <span class="course-level">${c.level}</span>
-                    <h3 class="course-title">${c.title}</h3>
-                    <p class="course-title-am">${c.titleAm}</p>
-                    <p class="course-desc">${c.description}</p>
-                    <div class="course-meta">
-                        <div class="meta-item"><span class="meta-label">Duration</span><span class="meta-value">${c.duration}</span></div>
-                        <div class="meta-item"><span class="meta-label">Certificate</span><span class="meta-value">${c.certification}</span></div>
+                    <div class="course-image">
+                        <img src="${c.image}" alt="${c.title}" onerror="this.src='https://via.placeholder.com/400x200/1A1A1A/D4AF37?text=${encodeURIComponent(c.title)}'">
                     </div>
-                    <a href="#" class="course-link" data-id="${c.id}">View Details →</a>
+                    <div class="course-content">
+                        <span class="course-level">${c.level}</span>
+                        <h3 class="course-title">${c.title}</h3>
+                        <p class="course-title-am">${c.titleAm}</p>
+                        <p class="course-desc">${c.description}</p>
+                        <div class="course-meta">
+                            <div class="meta-item"><span class="meta-label">Duration</span><span class="meta-value">${c.duration}</span></div>
+                            <div class="meta-item"><span class="meta-label">Certificate</span><span class="meta-value">${c.certification}</span></div>
+                        </div>
+                        <a href="#" class="course-link" data-id="${c.id}">View Details →</a>
+                    </div>
                 </div>
             `).join('');
             document.querySelectorAll('.course-link').forEach(l => l.addEventListener('click', e => { e.preventDefault(); openModal(parseInt(l.dataset.id)); }));
