@@ -50,7 +50,6 @@
         </div>
     </div>
     <script>
-        // CORRECT SUPABASE URL
         const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_d5gwP-ofTxVx2feA5AVM3A_EhQcHv8e';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -63,7 +62,6 @@
             var email = document.getElementById('email').value.trim();
             var password = document.getElementById('password').value;
             var passwordConfirm = document.getElementById('password_confirm').value;
-            var course = document.getElementById('course').value;
             var status = document.getElementById('status');
             var submitBtn = document.getElementById('submitBtn');
             
@@ -92,17 +90,26 @@
             submitBtn.disabled = true;
             
             try {
-                var authResult = await supabase.auth.signUp({ email: email, password: password });
-                if (authResult.error) throw authResult.error;
-                if (!authResult.data.user) throw new Error('No user returned');
+                // Step 1: Create auth user
+                var authResult = await supabase.auth.signUp({ 
+                    email: email, 
+                    password: password 
+                });
                 
+                if (authResult.error) {
+                    if (authResult.error.message.includes('already registered')) {
+                        throw new Error('This email is already registered. Please login.');
+                    }
+                    throw authResult.error;
+                }
+                
+                // Step 2: Insert into students table (NO id - let Supabase auto-generate)
                 var insertResult = await supabase.from('students').insert([{
-                    id: authResult.data.user.id,
+                    email: email,
                     full_name: fullName,
                     phone: phone,
-                    email: email,
                     student_id: studentId,
-                    enrollment_date: new Date().toISOString()
+                    enrollment_date: new Date().toISOString().split('T')[0]
                 }]);
                 
                 if (insertResult.error) throw insertResult.error;
