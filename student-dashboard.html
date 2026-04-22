@@ -61,7 +61,7 @@
         .sidebar-nav { display: flex; flex-direction: column; gap: 8px; }
         .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; color: var(--gray-mid); transition: all 0.3s; }
         .sidebar-link:hover, .sidebar-link.active { background: rgba(212, 175, 55, 0.1); color: var(--gold-primary); }
-        .logout-btn { width: 100%; margin-top: 20px; padding: 12px; background: transparent; border: 1px solid rgba(220, 53, 69, 0.3); color: #dc3545; border-radius: 12px; cursor: pointer; transition: all 0.3s; }
+        .logout-btn { width: 100%; margin-top: 20px; padding: 12px; background: transparent; border: 1px solid rgba(220, 53, 69, 0.3); color: #dc3545; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 500; }
         .logout-btn:hover { background: rgba(220, 53, 69, 0.1); }
         
         /* Main Content */
@@ -93,7 +93,7 @@
         .course-info { flex: 1; }
         .course-info h4 { font-size: 15px; margin-bottom: 8px; }
         .progress-bar { height: 6px; background: var(--black-secondary); border-radius: 3px; overflow: hidden; }
-        .progress-fill { height: 100%; background: var(--gold-primary); border-radius: 3px; }
+        .progress-fill { height: 100%; background: var(--gold-primary); border-radius: 3px; transition: width 0.3s ease; }
         
         /* Footer */
         .footer { background: var(--black-primary); padding: 60px 0 30px; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 60px; }
@@ -114,6 +114,9 @@
         
         /* Empty State */
         .empty-state { text-align: center; padding: 40px; color: var(--gray-mid); }
+        
+        /* Loading State */
+        .loading { text-align: center; padding: 40px; color: var(--gold-primary); }
         
         /* Responsive */
         @media (max-width: 1024px) {
@@ -196,7 +199,7 @@
                     <div class="stat-card">
                         <div class="stat-icon">📅</div>
                         <div class="stat-info">
-                            <h3 id="attendanceRate">0%</h3>
+                            <h3 id="attendanceRate">--%</h3>
                             <p>Attendance Rate</p>
                         </div>
                     </div>
@@ -217,7 +220,7 @@
                                 <a href="courses.html">View All →</a>
                             </div>
                             <div id="coursesList">
-                                <div class="empty-state">Loading your courses...</div>
+                                <div class="loading">Loading your courses...</div>
                             </div>
                         </div>
                     </div>
@@ -227,7 +230,7 @@
                                 <h3>Recent Activity</h3>
                             </div>
                             <div id="activityList">
-                                <div class="empty-state">No recent activity</div>
+                                <div class="loading">Loading activity...</div>
                             </div>
                         </div>
                         <div class="dashboard-card">
@@ -292,11 +295,12 @@
     </footer>
     
     <script>
-        const SUPABASE_URL = 'https://d5gwP-ofTxVx2feA5AVM3A.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_d5gwP-ofTxVx2feA5AVM3A_EhQcHv8e';
+        // CORRECTED SUPABASE CONFIGURATION
+        const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtZHJ3d2F6dHlmZmZua3J2d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwODAzNzYsImV4cCI6MjA5MTY1NjM3Nn0.IKQ1eevZaO6uluDUU8PaqrD4uuQNy_Ex61n_dD2Qa8g';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        // Check authentication
+        // Check authentication - FIXED for your actual table structure
         async function checkAuth() {
             const { data: { session } } = await supabase.auth.getSession();
             
@@ -305,19 +309,53 @@
                 return null;
             }
             
-            // Get student profile
+            console.log('User logged in:', session.user.email);
+            
+            // Get student profile using EMAIL (since your table has direct email field)
             const { data: student, error } = await supabase
                 .from('students')
                 .select('*')
-                .eq('id', session.user.id)
+                .eq('email', session.user.email)
                 .single();
             
-            if (error || !student) {
+            if (error) {
                 console.error('Profile error:', error);
-                return session.user;
+                // If no student record exists, create one automatically
+                if (error.code === 'PGRST116') {
+                    console.log('No student record found, creating one...');
+                    const newStudent = await createStudentProfile(session.user);
+                    return { user: session.user, profile: newStudent };
+                }
+                return { user: session.user, profile: null };
             }
             
+            console.log('Student profile found:', student);
             return { user: session.user, profile: student };
+        }
+        
+        // Create student profile if it doesn't exist
+        async function createStudentProfile(user) {
+            const studentId = 'LBC-' + Date.now().toString().slice(-6);
+            const fullName = user.user_metadata?.full_name || user.email.split('@')[0];
+            
+            const { data, error } = await supabase
+                .from('students')
+                .insert([{
+                    email: user.email,
+                    full_name: fullName,
+                    student_id: studentId,
+                    enrollment_date: new Date().toISOString().split('T')[0]
+                }])
+                .select()
+                .single();
+            
+            if (error) {
+                console.error('Failed to create student profile:', error);
+                return null;
+            }
+            
+            console.log('Created new student profile:', data);
+            return data;
         }
         
         // Update UI with student data
@@ -330,8 +368,8 @@
             // Update name displays
             const firstName = profile?.full_name?.split(' ')[0] || user.email?.split('@')[0] || 'Student';
             document.getElementById('displayName').textContent = firstName;
-            document.getElementById('sidebarStudentName').textContent = profile?.full_name || 'Student';
-            document.getElementById('sidebarStudentId').textContent = profile?.student_id || '';
+            document.getElementById('sidebarStudentName').textContent = profile?.full_name || user.email?.split('@')[0] || 'Student';
+            document.getElementById('sidebarStudentId').textContent = profile?.student_id || 'Pending';
             
             // Update initials
             const initials = profile?.full_name 
@@ -339,27 +377,76 @@
                 : user.email?.substring(0, 2).toUpperCase() || 'ST';
             document.getElementById('studentInitials').textContent = initials;
             
-            // Load courses
-            await loadCourses(profile?.course);
-            
-            // Update stats
-            document.getElementById('activeCourses').textContent = profile?.course ? '1' : '0';
-            document.getElementById('attendanceRate').textContent = '90%';
-            document.getElementById('certificateCount').textContent = '0';
+            // Check if student has any enrollments
+            if (profile?.id) {
+                await loadEnrollments(profile.id);
+            } else {
+                // No profile found - show empty state
+                document.getElementById('coursesList').innerHTML = `
+                    <div class="empty-state">
+                        <p>No student profile found. Please contact administration.</p>
+                    </div>
+                `;
+                document.getElementById('activityList').innerHTML = `
+                    <div class="empty-state">No recent activity</div>
+                `;
+                document.getElementById('activeCourses').textContent = '0';
+            }
         }
         
-        async function loadCourses(selectedCourse) {
+        async function loadEnrollments(studentId) {
             const coursesList = document.getElementById('coursesList');
             
-            if (!selectedCourse) {
+            // Fetch enrollments for this student with course details
+            const { data: enrollments, error } = await supabase
+                .from('enrollments')
+                .select(`
+                    id,
+                    enrollment_date,
+                    progress,
+                    course_id,
+                    courses (
+                        id,
+                        title,
+                        description,
+                        duration
+                    )
+                `)
+                .eq('student_id', studentId);
+            
+            if (error) {
+                console.error('Enrollments error:', error);
+                coursesList.innerHTML = `<div class="empty-state">Error loading courses: ${error.message}</div>`;
+                document.getElementById('activeCourses').textContent = '0';
+                document.getElementById('activityList').innerHTML = `<div class="empty-state">Error loading activity</div>`;
+                return;
+            }
+            
+            console.log('Enrollments found:', enrollments);
+            
+            if (!enrollments || enrollments.length === 0) {
                 coursesList.innerHTML = `
                     <div class="empty-state">
                         <p>You haven't enrolled in any courses yet.</p>
                         <a href="courses.html" style="color: var(--gold-primary); margin-top: 16px; display: inline-block;">Browse Courses →</a>
                     </div>
                 `;
+                document.getElementById('activeCourses').textContent = '0';
+                document.getElementById('activityList').innerHTML = `
+                    <div class="empty-state">
+                        <p>No recent activity</p>
+                        <p style="font-size: 12px; margin-top: 8px;">Enroll in a course to get started!</p>
+                    </div>
+                `;
                 return;
             }
+            
+            // Update active courses count
+            document.getElementById('activeCourses').textContent = enrollments.length;
+            
+            // Build courses HTML
+            let coursesHTML = '';
+            let activityHTML = '';
             
             // Course emoji mapping
             const courseEmojis = {
@@ -371,44 +458,59 @@
                 'Massage': '💆'
             };
             
-            const emoji = Object.keys(courseEmojis).find(k => selectedCourse.includes(k)) 
-                ? courseEmojis[Object.keys(courseEmojis).find(k => selectedCourse.includes(k))] 
-                : '📚';
-            
-            coursesList.innerHTML = `
-                <div class="course-item">
-                    <div class="course-icon">${emoji}</div>
-                    <div class="course-info">
-                        <h4>${selectedCourse}</h4>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 25%;"></div>
+            enrollments.forEach(enrollment => {
+                const course = enrollment.courses;
+                if (!course) return;
+                
+                // Find matching emoji
+                let emoji = '📚';
+                for (const [key, value] of Object.entries(courseEmojis)) {
+                    if (course.title && course.title.includes(key)) {
+                        emoji = value;
+                        break;
+                    }
+                }
+                
+                const progress = enrollment.progress || 0;
+                const enrollDate = new Date(enrollment.enrollment_date).toLocaleDateString();
+                
+                coursesHTML += `
+                    <div class="course-item">
+                        <div class="course-icon">${emoji}</div>
+                        <div class="course-info">
+                            <h4>${course.title}</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progress}%;"></div>
+                            </div>
+                            <p style="color: var(--gray-dark); font-size: 11px; margin-top: 6px;">Progress: ${progress}%</p>
                         </div>
-                        <p style="color: var(--gray-dark); font-size: 11px; margin-top: 6px;">Progress: 25%</p>
                     </div>
-                </div>
-                <div style="margin-top: 20px; padding: 16px; background: rgba(212,175,55,0.05); border-radius: 12px;">
-                    <p style="color: var(--gray-mid); font-size: 13px;">📅 Next class: Monday, 10:00 AM</p>
-                    <p style="color: var(--gray-mid); font-size: 13px;">📍 Megenagna Campus</p>
+                `;
+                
+                activityHTML += `
+                    <div style="padding: 12px 0; border-bottom: 1px solid rgba(212,175,55,0.1);">
+                        <p style="color: var(--gray-mid);">📚 Enrolled in ${course.title}</p>
+                        <p style="color: var(--gray-dark); font-size: 11px;">${enrollDate}</p>
+                    </div>
+                `;
+            });
+            
+            coursesList.innerHTML = coursesHTML;
+            
+            // Add welcome activity
+            activityHTML += `
+                <div style="padding: 12px 0;">
+                    <p style="color: var(--gray-mid);">✅ Welcome to Lovely Beauty College!</p>
+                    <p style="color: var(--gray-dark); font-size: 11px;">Account active</p>
                 </div>
             `;
             
-            // Update activity
-            document.getElementById('activityList').innerHTML = `
-                <div style="padding: 12px 0; border-bottom: 1px solid rgba(212,175,55,0.1);">
-                    <p style="color: var(--gray-mid);">📝 Enrolled in ${selectedCourse}</p>
-                    <p style="color: var(--gray-dark); font-size: 11px;">Today</p>
-                </div>
-                <div style="padding: 12px 0;">
-                    <p style="color: var(--gray-mid);">✅ Account created successfully</p>
-                    <p style="color: var(--gray-dark); font-size: 11px;">Today</p>
-                </div>
-            `;
+            document.getElementById('activityList').innerHTML = activityHTML;
         }
         
         // Logout
         document.getElementById('logoutBtn').addEventListener('click', async () => {
             await supabase.auth.signOut();
-            localStorage.removeItem('lovelyStudent');
             window.location.href = 'student-login.html';
         });
         
@@ -433,10 +535,6 @@
         function setLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('lovelyLang', lang);
-            document.querySelectorAll('[data-en][data-am]').forEach(el => {
-                const text = el.getAttribute(`data-${lang}`);
-                if(text) el.textContent = text;
-            });
             document.getElementById('langToggle').textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ';
         }
         document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'am' : 'en'));
