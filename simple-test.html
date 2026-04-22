@@ -1,76 +1,171 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Test</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #0A0A0A; color: white; }
+        .test-box { background: #1A1A1A; padding: 15px; margin: 10px 0; border-radius: 10px; border-left: 4px solid #D4AF37; }
+        button { padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 10px; font-size: 16px; margin: 5px; width: 100%; }
+        input { padding: 15px; margin: 5px 0; width: 100%; border-radius: 10px; border: 1px solid #D4AF37; background: black; color: white; font-size: 16px; }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+        .info { color: #D4AF37; }
+    </style>
 </head>
-<body style="background:#0A0A0A; color:white; padding:20px;">
-    <h2>Supabase Connection Test</h2>
+<body>
+    <h2>🔍 Supabase Connection Test</h2>
     
-    <input type="email" id="email" placeholder="Email" value="test@test.com" style="padding:10px; margin:5px; width:250px;"><br>
-    <input type="password" id="password" placeholder="Password" value="test123" style="padding:10px; margin:5px; width:250px;"><br>
-    <button onclick="testRegister()" style="padding:10px 20px; background:#D4AF37; border:none; border-radius:5px; margin:10px;">Test Register</button>
-    <button onclick="testLogin()" style="padding:10px 20px; background:#D4AF37; border:none; border-radius:5px; margin:10px;">Test Login</button>
+    <div class="test-box">
+        <h3>Step 1: Test Connection</h3>
+        <button onclick="testConnection()">Test Supabase</button>
+        <p id="result1"></p>
+    </div>
     
-    <p id="result" style="margin-top:20px; padding:10px; border-radius:5px;"></p>
+    <div class="test-box">
+        <h3>Step 2: Test Registration</h3>
+        <input type="email" id="testEmail" placeholder="Test Email" value="test@example.com">
+        <input type="password" id="testPassword" placeholder="Password" value="test123456">
+        <input type="text" id="testName" placeholder="Full Name" value="Test Student">
+        <button onclick="testRegister()">Register Test Account</button>
+        <p id="result2"></p>
+    </div>
     
+    <div class="test-box">
+        <h3>Step 3: Check Students Table</h3>
+        <button onclick="checkStudents()">See All Students</button>
+        <p id="result3"></p>
+    </div>
+    
+    <div class="test-box">
+        <h3>Step 4: Clear & Reset</h3>
+        <button onclick="clearAll()">Clear Results</button>
+    </div>
+
     <script>
         const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_d5gwP-ofTxVx2feA5AVM3A_EhQcHv8e';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtZHJ3d2F6dHlmZmZua3J2d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwODAzNzYsImV4cCI6MjA5MTY1NjM3Nn0.IKQ1eevZaO6uluDUU8PaqrD4uuQNy_Ex61n_dD2Qa8g';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        const result = document.getElementById('result');
-        
-        async function testRegister() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            result.textContent = 'Testing registration...';
-            result.style.background = '#333';
+        async function testConnection() {
+            const result = document.getElementById('result1');
+            result.innerHTML = '<span class="info">Testing...</span>';
             
             try {
-                const { data, error } = await supabase.auth.signUp({
-                    email: email,
-                    password: password
-                });
+                const { data, error } = await supabase.from('courses').select('count');
                 
                 if (error) {
-                    result.textContent = '❌ REGISTER ERROR: ' + error.message;
-                    result.style.background = 'rgba(220,53,69,0.2)';
+                    result.innerHTML = `<span class="error">❌ Connection Failed: ${error.message}</span>`;
                 } else {
-                    result.textContent = '✅ REGISTER SUCCESS! User: ' + data.user.email;
-                    result.style.background = 'rgba(212,175,55,0.2)';
+                    result.innerHTML = '<span class="success">✅ Connected! Courses table accessible.</span>';
                 }
             } catch (e) {
-                result.textContent = '❌ EXCEPTION: ' + e.message;
-                result.style.background = 'rgba(220,53,69,0.2)';
+                result.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
             }
         }
         
-        async function testLogin() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+        async function testRegister() {
+            const result = document.getElementById('result2');
+            const email = document.getElementById('testEmail').value;
+            const password = document.getElementById('testPassword').value;
+            const fullName = document.getElementById('testName').value;
             
-            result.textContent = 'Testing login...';
-            result.style.background = '#333';
+            result.innerHTML = '<span class="info">Registering...</span>';
             
             try {
-                const { data, error } = await supabase.auth.signInWithPassword({
+                // Step 1: Sign up
+                const { data: authData, error: authError } = await supabase.auth.signUp({
                     email: email,
-                    password: password
+                    password: password,
+                    options: {
+                        data: { full_name: fullName }
+                    }
                 });
                 
-                if (error) {
-                    result.textContent = '❌ LOGIN ERROR: ' + error.message;
-                    result.style.background = 'rgba(220,53,69,0.2)';
+                if (authError) {
+                    if (authError.message.includes('already registered')) {
+                        result.innerHTML = `<span class="info">⚠️ Email already exists. Trying to login instead...</span>`;
+                        await testLogin(email, password);
+                        return;
+                    }
+                    result.innerHTML = `<span class="error">❌ Auth Error: ${authError.message}</span>`;
+                    return;
+                }
+                
+                result.innerHTML = `<span class="success">✅ Auth created! User ID: ${authData.user.id}</span><br>`;
+                
+                // Step 2: Create student record
+                const studentId = 'LBC-' + Date.now().toString().slice(-6);
+                const { data: studentData, error: studentError } = await supabase
+                    .from('students')
+                    .insert([{
+                        email: email,
+                        full_name: fullName,
+                        student_id: studentId,
+                        enrollment_date: new Date().toISOString().split('T')[0]
+                    }])
+                    .select();
+                
+                if (studentError) {
+                    result.innerHTML += `<span class="error">❌ Student Insert Error: ${studentError.message}</span><br>`;
+                    result.innerHTML += `<span class="error">Details: ${JSON.stringify(studentError)}</span>`;
                 } else {
-                    result.textContent = '✅ LOGIN SUCCESS! Welcome ' + data.user.email;
-                    result.style.background = 'rgba(212,175,55,0.2)';
+                    result.innerHTML += `<span class="success">✅ Student record created! ID: ${studentId}</span>`;
+                }
+                
+            } catch (e) {
+                result.innerHTML = `<span class="error">❌ Exception: ${e.message}</span>`;
+            }
+        }
+        
+        async function testLogin(email, password) {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+            
+            if (error) {
+                document.getElementById('result2').innerHTML += `<br><span class="error">❌ Login failed: ${error.message}</span>`;
+            } else {
+                document.getElementById('result2').innerHTML += `<br><span class="success">✅ Login successful!</span>`;
+            }
+        }
+        
+        async function checkStudents() {
+            const result = document.getElementById('result3');
+            result.innerHTML = '<span class="info">Fetching students...</span>';
+            
+            try {
+                const { data, error } = await supabase
+                    .from('students')
+                    .select('*')
+                    .limit(10);
+                
+                if (error) {
+                    result.innerHTML = `<span class="error">❌ Error: ${error.message}</span>`;
+                    return;
+                }
+                
+                if (!data || data.length === 0) {
+                    result.innerHTML = '<span class="info">📭 No students found in database.</span>';
+                } else {
+                    let html = `<span class="success">✅ Found ${data.length} student(s):</span><br>`;
+                    data.forEach(s => {
+                        html += `• ${s.full_name} (${s.email}) - ID: ${s.student_id}<br>`;
+                    });
+                    result.innerHTML = html;
                 }
             } catch (e) {
-                result.textContent = '❌ EXCEPTION: ' + e.message;
-                result.style.background = 'rgba(220,53,69,0.2)';
+                result.innerHTML = `<span class="error">❌ Error: ${e.message}</span>`;
             }
+        }
+        
+        function clearAll() {
+            document.getElementById('result1').innerHTML = '';
+            document.getElementById('result2').innerHTML = '';
+            document.getElementById('result3').innerHTML = '';
         }
     </script>
 </body>
