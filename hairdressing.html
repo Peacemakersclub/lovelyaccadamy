@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hairdressing & Barbering | Lovely Beauty College</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #0A0A0A; color: white; min-height: 100vh; }
+        
+        .header { background: #0A0A0A; border-bottom: 2px solid #D4AF37; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .header h1 { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 18px; }
+        .back-btn { color: #D4AF37; text-decoration: none; font-weight: bold; font-size: 14px; }
+        
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        
+        .course-hero { background: linear-gradient(135deg, #1A1A1A, #0A0A0A); border: 2px solid #D4AF37; border-radius: 20px; padding: 30px; margin-bottom: 25px; text-align: center; }
+        .course-hero .icon { font-size: 60px; margin-bottom: 15px; }
+        .course-hero h2 { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 10px; }
+        .course-hero p { color: #aaa; }
+        
+        .section-card { background: #1A1A1A; border: 1px solid #D4AF37; border-radius: 20px; padding: 25px; margin-bottom: 20px; }
+        .section-card h3 { color: #D4AF37; margin-bottom: 15px; font-size: 18px; }
+        
+        .progress-bar { height: 10px; background: #333; border-radius: 5px; margin: 10px 0; }
+        .progress-fill { height: 100%; background: #D4AF37; border-radius: 5px; transition: width 0.5s; }
+        
+        .module-card { background: #0A0A0A; border: 1px solid #333; border-radius: 15px; padding: 20px; margin-bottom: 15px; display: flex; align-items: center; gap: 15px; }
+        .module-icon { width: 50px; height: 50px; background: #D4AF37; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: black; flex-shrink: 0; }
+        .module-info { flex: 1; }
+        .module-info h4 { color: #fff; margin-bottom: 5px; }
+        .module-info p { color: #aaa; font-size: 13px; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+        .badge-done { background: #1a3a1a; color: #4CAF50; }
+        .badge-active { background: #1a2a3a; color: #2196F3; }
+        .badge-locked { background: #333; color: #666; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th { color: #D4AF37; text-align: left; padding: 10px; border-bottom: 1px solid #D4AF37; font-size: 14px; }
+        td { padding: 10px; border-bottom: 1px solid #333; color: #aaa; font-size: 14px; }
+        
+        .resource-link { display: flex; align-items: center; gap: 10px; padding: 12px; background: #0A0A0A; border-radius: 10px; margin-bottom: 10px; color: #D4AF37; text-decoration: none; }
+        .resource-link:hover { background: #222; }
+        
+        @media (max-width: 600px) {
+            .course-hero h2 { font-size: 22px; }
+            .module-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎓 LOVELY BEAUTY COLLEGE</h1>
+        <a href="portal.html" class="back-btn">← Dashboard</a>
+    </header>
+    
+    <div class="container">
+        <!-- Course Hero -->
+        <div class="course-hero">
+            <div class="icon">💇</div>
+            <h2>Hairdressing & Barbering</h2>
+            <p>Professional cutting, styling, coloring, and treatments</p>
+            <p style="color:#D4AF37; margin-top:10px;">Level: <strong>Beginner to Advanced</strong> | Duration: <strong>12 Weeks</strong></p>
+        </div>
+        
+        <!-- Progress -->
+        <div class="section-card">
+            <h3>📊 Your Progress</h3>
+            <div class="progress-bar"><div class="progress-fill" id="courseProgress" style="width:45%;"></div></div>
+            <p><strong id="progressPercent" style="color:#D4AF37;">45%</strong> Complete</p>
+        </div>
+        
+        <!-- Modules -->
+        <div class="section-card">
+            <h3>📚 Course Modules (4 Modules)</h3>
+            
+            <div class="module-card">
+                <div class="module-icon">✂️</div>
+                <div class="module-info">
+                    <h4>Module 1: Introduction to Hairdressing</h4>
+                    <p>Tools, hygiene, client consultation, hair types & scalp analysis</p>
+                </div>
+                <span class="badge badge-done">✅ Done</span>
+            </div>
+            
+            <div class="module-card">
+                <div class="module-icon">💇</div>
+                <div class="module-info">
+                    <h4>Module 2: Cutting Techniques</h4>
+                    <p>Layering, graduation, texturizing, bob cuts, clipper work</p>
+                </div>
+                <span class="badge badge-active">🔄 Active</span>
+            </div>
+            
+            <div class="module-card">
+                <div class="module-icon">🎨</div>
+                <div class="module-info">
+                    <h4>Module 3: Coloring & Chemical Treatments</h4>
+                    <p>Color theory, application techniques, perming, relaxing</p>
+                </div>
+                <span class="badge badge-locked">🔒 Locked</span>
+            </div>
+            
+            <div class="module-card">
+                <div class="module-icon">✨</div>
+                <div class="module-info">
+                    <h4>Module 4: Styling & Business Skills</h4>
+                    <p>Blow-drying, setting, bridal styling, salon management</p>
+                </div>
+                <span class="badge badge-locked">🔒 Locked</span>
+            </div>
+        </div>
+        
+        <!-- Schedule -->
+        <div class="section-card">
+            <h3>📅 Class Schedule</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <tr><th>Day</th><th>Time</th><th>Type</th><th>Location</th></tr>
+                    <tr><td>Monday</td><td>10:00 AM - 1:00 PM</td><td>Theory</td><td>Megenagna - Room 101</td></tr>
+                    <tr><td>Wednesday</td><td>10:00 AM - 1:00 PM</td><td>Practical</td><td>Megenagna - Salon Lab</td></tr>
+                    <tr><td>Friday</td><td>2:00 PM - 5:00 PM</td><td>Practical</td><td>Megenagna - Salon Lab</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Resources -->
+        <div class="section-card">
+            <h3>📖 Learning Resources</h3>
+            <a href="#" class="resource-link">📄 Course Syllabus & Outline</a>
+            <a href="#" class="resource-link">🎥 Module 1: Video Tutorial Series</a>
+            <a href="#" class="resource-link">📝 Assignment: Basic Layer Cut</a>
+            <a href="#" class="resource-link">📋 Equipment & Tools Checklist</a>
+            <a href="#" class="resource-link">📘 Recommended Textbook: Modern Hairdressing</a>
+        </div>
+        
+        <!-- Instructor -->
+        <div class="section-card">
+            <h3>👩‍🏫 Your Instructor</h3>
+            <div style="display:flex; align-items:center; gap:15px;">
+                <div style="width:60px;height:60px;background:#D4AF37;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;">👩‍🦰</div>
+                <div>
+                    <h4 style="color:#D4AF37;">Senior Stylist Meseret</h4>
+                    <p style="color:#aaa;">15+ years experience | Certified International Stylist</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get student progress from localStorage or URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const progress = urlParams.get('progress') || 45;
+        
+        document.getElementById('courseProgress').style.width = progress + '%';
+        document.getElementById('progressPercent').textContent = progress + '%';
+    </script>
+</body>
+</html>
