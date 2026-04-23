@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Lovely Beauty College</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #0A0A0A; color: white; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        .header { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 20px; padding: 25px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { color: #D4AF37; font-family: 'Playfair Display', serif; }
+        .header a { color: #D4AF37; text-decoration: none; }
+        
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: #1A1A1A; border: 1px solid #D4AF37; border-radius: 16px; padding: 20px; text-align: center; }
+        .stat-card h3 { color: #D4AF37; font-size: 36px; }
+        .stat-card p { color: #aaa; font-size: 14px; }
+        
+        .card { background: #1A1A1A; border: 1px solid #D4AF37; border-radius: 20px; padding: 25px; margin-bottom: 20px; }
+        .card h3 { color: #D4AF37; margin-bottom: 20px; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th { color: #D4AF37; text-align: left; padding: 12px; border-bottom: 1px solid #D4AF37; }
+        td { padding: 12px; border-bottom: 1px solid #333; }
+        
+        input, select { padding: 10px; background: black; border: 1px solid #D4AF37; color: white; border-radius: 8px; margin: 5px; }
+        button { padding: 10px 20px; background: #D4AF37; color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin: 5px; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; z-index: 1000; }
+        .modal-content { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 20px; padding: 30px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+        .modal-content h2 { color: #D4AF37; margin-bottom: 20px; }
+        
+        .progress-control { display: flex; align-items: center; gap: 10px; }
+        .progress-control input { width: 60px; text-align: center; }
+        
+        @media (max-width: 768px) {
+            .stats { grid-template-columns: 1fr 1fr; }
+            table { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Admin Dashboard</h1>
+            <div>
+                <a href="portal.html">👤 Student Portal</a> | 
+                <a href="index.html">🏠 Main Site</a>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3 id="totalStudents">0</h3>
+                <p>Total Students</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="totalCourses">0</h3>
+                <p>Active Courses</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="avgProgress">0%</h3>
+                <p>Average Progress</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>📋 Student Management</h3>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Courses</th>
+                            <th>Progress</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let students = [];
+        
+        // Load students from JSON file
+        async function loadStudents() {
+            try {
+                const response = await fetch('students.json');
+                students = await response.json();
+                displayStudents();
+                updateStats();
+            } catch (error) {
+                console.error('Error loading students:', error);
+            }
+        }
+        
+        function displayStudents() {
+            const table = document.getElementById('studentTable');
+            table.innerHTML = '';
+            
+            students.forEach(student => {
+                const coursesList = student.courses?.join(', ') || 'None';
+                const progressList = student.courses?.map(c => `${c}: ${student.progress?.[c] || 0}%`).join(', ') || 'N/A';
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.student_id}</td>
+                    <td>${student.full_name}</td>
+                    <td>${student.email}</td>
+                    <td>${coursesList}</td>
+                    <td>${progressList}</td>
+                    <td>
+                        <button onclick="editStudent('${student.student_id}')">✏️</button>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
+        }
+        
+        function updateStats() {
+            document.getElementById('totalStudents').textContent = students.length;
+            
+            const allCourses = new Set();
+            let totalProgress = 0;
+            let progressCount = 0;
+            
+            students.forEach(s => {
+                s.courses?.forEach(c => allCourses.add(c));
+                if (s.progress) {
+                    Object.values(s.progress).forEach(p => {
+                        totalProgress += p;
+                        progressCount++;
+                    });
+                }
+            });
+            
+            document.getElementById('totalCourses').textContent = allCourses.size;
+            document.getElementById('avgProgress').textContent = 
+                progressCount > 0 ? Math.round(totalProgress / progressCount) + '%' : '0%';
+        }
+        
+        function editStudent(studentId) {
+            const student = students.find(s => s.student_id === studentId);
+            if (!student) return;
+            
+            const newProgress = {};
+            student.courses?.forEach(course => {
+                const newVal = prompt(`Progress for ${course} (0-100):`, student.progress?.[course] || 0);
+                if (newVal !== null) {
+                    newProgress[course] = parseInt(newVal) || 0;
+                }
+            });
+            
+            if (Object.keys(newProgress).length > 0) {
+                student.progress = { ...student.progress, ...newProgress };
+                displayStudents();
+                updateStats();
+                alert('✅ Progress updated! Remember to update students.json file on GitHub.');
+            }
+        }
+        
+        // Load on page start
+        loadStudents();
+    </script>
+</body>
+</html>
