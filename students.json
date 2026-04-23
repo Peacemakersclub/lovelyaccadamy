@@ -1,0 +1,40 @@
+[
+  {
+    "id": "1",
+    "full_name": "Addis Kebede",
+    "email": "addis@lovely.edu",
+    "phone": "0911111111",
+    "student_id": "LBC-001",
+    "enrollment_date": "2026-04-23",
+    "courses": ["Hairdressing & Barbering", "Makeup Artistry"],
+    "progress": {
+      "Hairdressing & Barbering": 45,
+      "Makeup Artistry": 20
+    }
+  },
+  {
+    "id": "2",
+    "full_name": "Tigist Haile",
+    "email": "tigist@lovely.edu",
+    "phone": "0922222222",
+    "student_id": "LBC-002",
+    "enrollment_date": "2026-04-20",
+    "courses": ["Nail Technology", "Skincare & Aesthetics"],
+    "progress": {
+      "Nail Technology": 60,
+      "Skincare & Aesthetics": 30
+    }
+  },
+  {
+    "id": "3",
+    "full_name": "Chaltu Mohammed",
+    "email": "chaltu@lovely.edu",
+    "phone": "0933333333",
+    "student_id": "LBC-003",
+    "enrollment_date": "2026-04-15",
+    "courses": ["Massage Therapy"],
+    "progress": {
+      "Massage Therapy": 75
+    }
+  }
+]
