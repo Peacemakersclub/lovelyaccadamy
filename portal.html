@@ -5,106 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Portal | Lovely Beauty College</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Clean, simple styling */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0A0A0A; color: white; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-        .container { background: #1A1A1A; padding: 40px; border-radius: 24px; border: 2px solid #D4AF37; max-width: 450px; width: 100%; box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); text-align: center; }
-        h1 { color: #D4AF37; margin-bottom: 10px; }
-        p { color: #B0B0B0; margin-bottom: 30px; }
-        .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; color: #D4AF37; margin-bottom: 8px; font-weight: bold; }
-        input { width: 100%; padding: 14px; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; box-sizing: border-box; }
-        button { background: #D4AF37; color: black; border: none; width: 100%; padding: 16px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: all 0.2s; margin-top: 15px; }
-        button:hover { background: #F5D76E; }
-        #message { margin-top: 20px; font-weight: bold; min-height: 24px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #0A0A0A; color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        
+        #loginScreen, #dashboardScreen { max-width: 500px; width: 100%; }
+        #dashboardScreen { display: none; }
+        
+        .card { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 24px; padding: 35px 25px; text-align: center; }
+        h1 { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 8px; }
+        h2 { color: #D4AF37; font-size: 16px; margin-bottom: 25px; font-weight: 400; }
+        
+        input { width: 100%; padding: 14px; margin: 8px 0; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; }
+        button { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        
+        .demo-box { background: #222; padding: 12px; border-radius: 12px; margin: 15px 0; font-size: 13px; }
+        .demo-box code { background: black; padding: 2px 6px; border-radius: 4px; color: #D4AF37; }
+        
+        .message { margin-top: 15px; font-weight: bold; min-height: 24px; }
         .success { color: #4CAF50; }
-        .error { color: #dc3545; }
-        .demo-hint { background: #222; padding: 12px; border-radius: 12px; margin-bottom: 25px; font-size: 14px; border-left: 4px solid #D4AF37; }
-        .demo-hint code { background: black; padding: 2px 6px; border-radius: 4px; color: #D4AF37; }
+        .error { color: #f44336; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #D4AF37; }
+        .logout-btn { background: #dc3545; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .info-item { background: #0A0A0A; padding: 12px; border-radius: 10px; }
+        .info-item strong { color: #D4AF37; display: block; margin-bottom: 4px; font-size: 12px; }
+        
+        .course-item { display: flex; align-items: center; padding: 12px; background: #0A0A0A; border-radius: 12px; margin-bottom: 10px; }
+        .course-icon { width: 45px; height: 45px; background: #D4AF37; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-right: 12px; color: black; }
+        .progress-bar { height: 5px; background: #333; border-radius: 3px; margin-top: 6px; }
+        .progress-fill { height: 100%; background: #D4AF37; border-radius: 3px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎓 Student Portal</h1>
-        <p>Lovely Beauty College</p>
-        
-        <div class="demo-hint">
-            <strong>🔑 Test Credentials</strong><br>
-            Student ID: <code>LBC-001</code><br>
-            PIN: <code>1234</code> (demo unlock)
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen">
+        <div class="card">
+            <h1>🎓 LOVELY BEAUTY</h1>
+            <h2>Student Portal Login</h2>
+            
+            <div class="demo-box">
+                <strong>🔑 Demo Access</strong><br>
+                Student ID: <code>LBC-001</code> | PIN: <code>1234</code>
+            </div>
+            
+            <input type="text" id="studentId" placeholder="Student ID" value="LBC-001">
+            <input type="password" id="pin" placeholder="PIN" value="1234">
+            <button onclick="login()">🔐 LOGIN TO DASHBOARD</button>
+            <div id="loginMsg" class="message"></div>
         </div>
-
-        <div class="form-group">
-            <label>Student ID</label>
-            <input type="text" id="studentId" placeholder="e.g., LBC-001" value="LBC-001">
+    </div>
+    
+    <!-- DASHBOARD SCREEN -->
+    <div id="dashboardScreen">
+        <div class="card">
+            <div class="header">
+                <h1 style="margin:0; font-size:20px;">🎓 LOVELY BEAUTY</h1>
+                <button class="logout-btn" onclick="logout()" style="width:auto;">🚪 Logout</button>
+            </div>
+            
+            <div style="text-align:left;">
+                <div style="display:flex; align-items:center; margin-bottom:20px;">
+                    <div style="width:60px;height:60px;background:#D4AF37;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold;color:black;margin-right:15px;" id="initials">AK</div>
+                    <div>
+                        <h2 style="margin:0;" id="dashName">Addis Kebede</h2>
+                        <p style="color:#D4AF37;" id="dashId">LBC-001</p>
+                    </div>
+                </div>
+                
+                <div class="info-grid">
+                    <div class="info-item"><strong>Email</strong> <span id="dashEmail">-</span></div>
+                    <div class="info-item"><strong>Phone</strong> <span id="dashPhone">-</span></div>
+                    <div class="info-item"><strong>Enrolled</strong> <span id="dashDate">-</span></div>
+                    <div class="info-item"><strong>Status</strong> ✅ Active</div>
+                </div>
+                
+                <h3 style="color:#D4AF37; margin:20px 0 15px;">📚 My Courses</h3>
+                <div class="course-item">
+                    <div class="course-icon">💇</div>
+                    <div style="flex:1;">
+                        <strong>Hairdressing & Barbering</strong>
+                        <div class="progress-bar"><div class="progress-fill" style="width:45%;"></div></div>
+                        <small style="color:#aaa;">45% Complete</small>
+                    </div>
+                </div>
+                <div class="course-item">
+                    <div class="course-icon">💄</div>
+                    <div style="flex:1;">
+                        <strong>Makeup Artistry</strong>
+                        <div class="progress-bar"><div class="progress-fill" style="width:20%;"></div></div>
+                        <small style="color:#aaa;">20% Complete</small>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Security PIN</label>
-            <input type="password" id="pin" placeholder="Enter PIN" value="1234">
-        </div>
-        
-        <button onclick="login()">Access My Dashboard</button>
-        <div id="message"></div>
     </div>
 
     <script>
-        // --- REAL CONFIGURATION ---
-        const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtZHJ3d2F6dHlmZmZua3J2d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwODAzNzYsImV4cCI6MjA5MTY1NjM3Nn0.IKQ1eevZaO6uluDUU8PaqrD4uuQNy_Ex61n_dD2Qa8g';
+        // ═══════════════════════════════════════
+        // YOUR NEW SUPABASE CONFIGURATION
+        // ═══════════════════════════════════════
+        const SUPABASE_URL = 'https://crsenpmonzoeverlpemb.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNyc2VucG1vbnpvZXZlcmxwZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5NDMxMjQsImV4cCI6MjA5MjUxOTEyNH0.GFRmFJPwDXUtYCW3Cla93VdQg9ga1WhScLGvgaoPbxU';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
+        // ═══════════════════════════════════════
+        // LOGIN FUNCTION - CONNECTS TO SUPABASE
+        // ═══════════════════════════════════════
         async function login() {
             const studentId = document.getElementById('studentId').value.trim().toUpperCase();
             const pin = document.getElementById('pin').value;
-            const msgDiv = document.getElementById('message');
+            const msg = document.getElementById('loginMsg');
             
-            // Reset message
-            msgDiv.textContent = '';
-            msgDiv.className = '';
-
-            // 1. Demo PIN Check (You can replace this logic later)
+            msg.className = 'message';
+            msg.textContent = '';
+            
             if (pin !== '1234') {
-                msgDiv.textContent = 'Incorrect PIN (Demo PIN: 1234)';
-                msgDiv.className = 'error';
+                msg.className = 'message error';
+                msg.textContent = '❌ Invalid PIN. Use 1234';
                 return;
             }
-
-            msgDiv.textContent = 'Connecting to database...';
-            msgDiv.className = 'success';
-
+            
+            msg.textContent = '🔍 Connecting to database...';
+            msg.style.color = '#D4AF37';
+            
             try {
-                // 2. REAL DATABASE QUERY
                 const { data: student, error } = await supabase
                     .from('students')
                     .select('*')
                     .eq('student_id', studentId)
                     .single();
-
+                
                 if (error) {
                     console.error('Supabase error:', error);
-                    msgDiv.textContent = 'Database error. Please check console.';
-                    msgDiv.className = 'error';
+                    msg.className = 'message error';
+                    msg.textContent = '❌ Database error: ' + error.message;
                     return;
                 }
-
-                if (!student) {
-                    msgDiv.textContent = 'Student ID not found.';
-                    msgDiv.className = 'error';
-                    return;
-                }
-
-                // 3. SUCCESS! Save to session and redirect
-                msgDiv.textContent = `Welcome, ${student.full_name}! Redirecting...`;
-                sessionStorage.setItem('currentStudent', JSON.stringify(student));
                 
-                // Redirect to a dedicated dashboard page or show inline (redirect is cleaner)
-                window.location.href = 'student-dashboard.html';
+                if (!student) {
+                    msg.className = 'message error';
+                    msg.textContent = '❌ Student not found';
+                    return;
+                }
+                
+                // SUCCESS! Show dashboard
+                msg.className = 'message success';
+                msg.textContent = '✅ Welcome, ' + student.full_name + '!';
+                
+                showDashboard(student);
                 
             } catch (err) {
-                console.error('Unexpected error:', err);
-                msgDiv.textContent = 'An unexpected error occurred.';
-                msgDiv.className = 'error';
+                console.error('Error:', err);
+                msg.className = 'message error';
+                msg.textContent = '❌ Error: ' + err.message;
             }
+        }
+        
+        // ═══════════════════════════════════════
+        // SHOW DASHBOARD WITH STUDENT DATA
+        // ═══════════════════════════════════════
+        function showDashboard(student) {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboardScreen').style.display = 'block';
+            
+            document.getElementById('dashName').textContent = student.full_name;
+            document.getElementById('dashId').textContent = 'Student ID: ' + student.student_id;
+            document.getElementById('dashEmail').textContent = student.email || 'N/A';
+            document.getElementById('dashPhone').textContent = student.phone || 'N/A';
+            document.getElementById('dashDate').textContent = student.enrollment_date || 'N/A';
+            
+            const initials = student.full_name.split(' ').map(n => n[0]).join('').toUpperCase();
+            document.getElementById('initials').textContent = initials;
+        }
+        
+        // ═══════════════════════════════════════
+        // LOGOUT FUNCTION
+        // ═══════════════════════════════════════
+        function logout() {
+            document.getElementById('dashboardScreen').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('loginMsg').textContent = '';
         }
     </script>
 </body>
