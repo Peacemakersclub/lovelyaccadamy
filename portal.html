@@ -12,8 +12,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; background: #0A0A0A; color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
         
-        #loginScreen, #dashboardScreen { max-width: 500px; width: 100%; }
-        #dashboardScreen { display: none; }
+        #loginScreen, #forgotScreen, #dashboardScreen { max-width: 500px; width: 100%; }
+        #forgotScreen, #dashboardScreen { display: none; }
         
         .card { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 24px; padding: 35px 25px; text-align: center; }
         h1 { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 8px; }
@@ -22,6 +22,7 @@
         input { width: 100%; padding: 14px; margin: 8px 0; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; }
         button { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
         button:disabled { opacity: 0.6; }
+        .link-btn { background: none; border: none; color: #D4AF37; text-decoration: underline; cursor: pointer; font-size: 13px; padding: 0; margin-top: 10px; }
         
         .message { margin-top: 15px; font-weight: bold; min-height: 24px; }
         .success { color: #4CAF50; }
@@ -55,10 +56,24 @@
             <input type="password" id="password" placeholder="Password">
             <button onclick="login()" id="loginBtn">🔐 LOGIN</button>
             <div id="loginMsg" class="message"></div>
-            <p style="color:#666; margin-top:20px; font-size:13px;">
+            <button class="link-btn" onclick="showForgot()">Forgot Password?</button>
+            <p style="color:#666; margin-top:15px; font-size:13px;">
                 <a href="register.html" style="color:#D4AF37;">📝 Register New Account</a><br>
                 <a href="index.html" style="color:#666;">← Back to Home</a>
             </p>
+        </div>
+    </div>
+    
+    <!-- FORGOT PASSWORD SCREEN -->
+    <div id="forgotScreen">
+        <div class="card">
+            <h1>🔑 Reset Password</h1>
+            <p style="color:#aaa; margin-bottom:20px;">Enter your email to receive a reset link</p>
+            
+            <input type="email" id="resetEmail" placeholder="Email Address">
+            <button onclick="resetPassword()" id="resetBtn">📧 Send Reset Link</button>
+            <div id="resetMsg" class="message"></div>
+            <button class="link-btn" onclick="showLogin()">← Back to Login</button>
         </div>
     </div>
     
@@ -118,7 +133,7 @@
             return '📚';
         }
         
-        // Check if already logged in
+        // Auto-login if already authenticated
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 const doc = await db.collection('students').doc(user.uid).get();
@@ -128,6 +143,20 @@
             }
         });
         
+        // Screen switching
+        function showForgot() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('forgotScreen').style.display = 'block';
+            document.getElementById('resetMsg').textContent = '';
+        }
+        
+        function showLogin() {
+            document.getElementById('forgotScreen').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('loginMsg').textContent = '';
+        }
+        
+        // Login
         async function login() {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
@@ -149,26 +178,25 @@
             
             try {
                 const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                const user = userCredential.user;
-                
-                const doc = await db.collection('students').doc(user.uid).get();
+                const doc = await db.collection('students').doc(userCredential.user.uid).get();
                 
                 if (doc.exists) {
                     const studentData = doc.data();
                     msg.className = 'message success';
                     msg.textContent = '✅ Welcome, ' + studentData.full_name + '!';
-                    showDashboard({ id: user.uid, ...studentData });
+                    showDashboard({ id: userCredential.user.uid, ...studentData });
                 } else {
                     msg.className = 'message error';
-                    msg.textContent = 'Student record not found. Please contact admin.';
+                    msg.textContent = 'Student record not found. Contact admin.';
                 }
-                
             } catch (error) {
                 msg.className = 'message error';
                 if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
                     msg.textContent = 'Invalid email or password';
                 } else if (error.code === 'auth/invalid-email') {
                     msg.textContent = 'Invalid email format';
+                } else if (error.code === 'auth/too-many-requests') {
+                    msg.textContent = 'Too many attempts. Try again later.';
                 } else {
                     msg.textContent = 'Error: ' + error.message;
                 }
@@ -177,17 +205,61 @@
             }
         }
         
+        // Password Reset
+        async function resetPassword() {
+            const email = document.getElementById('resetEmail').value.trim();
+            const msg = document.getElementById('resetMsg');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            msg.className = 'message';
+            msg.textContent = '';
+            
+            if (!email) {
+                msg.className = 'message error';
+                msg.textContent = 'Enter your email address';
+                return;
+            }
+            
+            resetBtn.disabled = true;
+            msg.className = 'message info';
+            msg.textContent = 'Sending reset link...';
+            
+            try {
+                await auth.sendPasswordResetEmail(email, {
+                    url: window.location.href.replace('portal.html', 'portal.html'),
+                    handleCodeInApp: false
+                });
+                
+                msg.className = 'message success';
+                msg.innerHTML = '✅ Reset link sent!<br><small>Check your email (including spam folder).</small>';
+                document.getElementById('resetEmail').value = '';
+            } catch (error) {
+                msg.className = 'message error';
+                if (error.code === 'auth/user-not-found') {
+                    msg.textContent = 'No account found with this email';
+                } else if (error.code === 'auth/invalid-email') {
+                    msg.textContent = 'Invalid email format';
+                } else {
+                    msg.textContent = 'Error: ' + error.message;
+                }
+            } finally {
+                resetBtn.disabled = false;
+            }
+        }
+        
+        // Dashboard
         function showDashboard(student) {
             document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('forgotScreen').style.display = 'none';
             document.getElementById('dashboardScreen').style.display = 'block';
             
-            document.getElementById('dashName').textContent = student.full_name;
-            document.getElementById('dashId').textContent = 'ID: ' + student.student_id;
-            document.getElementById('dashEmail').textContent = student.email;
+            document.getElementById('dashName').textContent = student.full_name || 'Student';
+            document.getElementById('dashId').textContent = 'ID: ' + (student.student_id || 'N/A');
+            document.getElementById('dashEmail').textContent = student.email || 'N/A';
             document.getElementById('dashPhone').textContent = student.phone || 'N/A';
             document.getElementById('dashDate').textContent = student.enrollment_date || 'N/A';
             
-            const initials = student.full_name.split(' ').map(n => n[0]).join('').toUpperCase();
+            const initials = (student.full_name || 'S').split(' ').map(n => n[0]).join('').toUpperCase();
             document.getElementById('initials').textContent = initials;
             
             const container = document.getElementById('coursesContainer');
