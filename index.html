@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
     <style>
         :root {
             --black-primary: #0A0A0A;
@@ -58,6 +61,9 @@
         .nav-link:hover::after { width: 100%; }
         .nav-link.active { color: var(--gold-primary); }
         .nav-link.active::after { width: 100%; }
+        .portal-btn { background: var(--gold-primary); color: var(--black-primary) !important; padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 14px; }
+        .portal-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+        .portal-btn::after { display: none !important; }
         .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 6px 14px; border-radius: 30px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin-left: 12px; }
         .lang-toggle:hover { background: var(--gold-primary); color: var(--black-primary); }
         .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
@@ -72,17 +78,7 @@
         .btn-outline-white:hover { background: var(--white); color: var(--black-primary); }
         
         /* Hero */
-        .hero {
-            min-height: calc(100vh - var(--header-height));
-            display: flex;
-            align-items: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.88) 0%, rgba(26, 26, 26, 0.88) 50%, rgba(10, 10, 10, 0.88) 100%), url('hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
-        }
+        .hero { min-height: calc(100vh - var(--header-height)); display: flex; align-items: center; position: relative; background: linear-gradient(135deg, rgba(10, 10, 10, 0.88) 0%, rgba(26, 26, 26, 0.88) 50%, rgba(10, 10, 10, 0.88) 100%), url('hero-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; overflow: hidden; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 60%); }
         .hero-content { text-align: center; position: relative; z-index: 2; max-width: 950px; margin: 0 auto; padding: 60px 0; }
         .hero-badge { display: inline-block; background: rgba(212, 175, 55, 0.2); border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 24px; border-radius: 50px; font-size: 14px; font-weight: 500; letter-spacing: 3px; margin-bottom: 24px; animation: fadeInUp 0.8s ease; backdrop-filter: blur(5px); }
@@ -102,7 +98,7 @@
         .section-header { text-align: center; margin-bottom: 60px; }
         .section-header .gold-text { color: var(--gold-primary); }
         
-        /* About Grid with Hero Card */
+        /* About Grid */
         .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
         .about-content { animation: fadeInUp 0.8s ease; }
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
@@ -110,16 +106,7 @@
         .stat-number { font-size: 36px; font-weight: 700; color: var(--gold-primary); font-family: var(--font-heading); }
         .stat-label { color: var(--gray-mid); font-size: 14px; }
         
-        /* Hero Card (Beside Our Story) */
-        .hero-card {
-            background: var(--black-card);
-            border: 2px solid var(--gold-primary);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--gold-glow);
-            animation: fadeInUp 0.8s ease 0.2s both;
-            position: relative;
-        }
+        .hero-card { background: var(--black-card); border: 2px solid var(--gold-primary); border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--gold-glow); animation: fadeInUp 0.8s ease 0.2s both; position: relative; }
         .hero-card img { width: 100%; height: 100%; min-height: 400px; object-fit: cover; display: block; }
         .hero-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(180deg, transparent, rgba(10,10,10,0.85)); text-align: center; }
         .hero-card-overlay h4 { color: var(--gold-primary); font-size: 22px; margin-bottom: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
@@ -164,7 +151,7 @@
         .footer-logo { margin-bottom: 20px; }
         .footer-desc { color: var(--gray-mid); font-size: 14px; margin-bottom: 20px; }
         .social-links { display: flex; gap: 16px; }
-        .social-link { width: 40px; height: 40px; background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); transition: all 0.3s ease; }
+        .social-link { width: 40px; height: 40px; background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); font-size: 18px; transition: all 0.3s ease; }
         .social-link:hover { background: var(--gold-primary); color: var(--black-primary); }
         .footer-title { color: var(--gold-primary); font-size: 18px; margin-bottom: 20px; }
         .footer-links { list-style: none; }
@@ -183,29 +170,8 @@
         .fade-in-up.visible { opacity: 1; transform: translateY(0); }
         
         /* Responsive */
-        @media (max-width: 1024px) { 
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .hero-card { max-width: 450px; margin: 0 auto; }
-            .courses-grid { grid-template-columns: repeat(2, 1fr); } 
-            .impact-grid { grid-template-columns: repeat(2, 1fr); } 
-            .legacy-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; } 
-        }
-        @media (max-width: 768px) { 
-            .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 30px; border-bottom: 1px solid var(--gold-primary); z-index: 999; } 
-            .nav-menu.active { display: flex; } 
-            .mobile-menu-btn { display: block; } 
-            .lang-toggle { margin-left: 0; margin-top: 16px; } 
-            .hero-buttons { flex-direction: column; align-items: center; } 
-            .btn { width: 100%; max-width: 300px; }
-            .courses-grid { grid-template-columns: 1fr; } 
-            .impact-grid { grid-template-columns: 1fr; } 
-            .legacy-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; gap: 30px; } 
-            .hero { background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 26, 26, 0.9) 50%, rgba(10, 10, 10, 0.9) 100%), url('hero-bg.jpg'); background-size: cover; background-position: center; }
-        }
-        
-        [data-en], [data-am] { transition: opacity 0.2s ease; }
+        @media (max-width: 1024px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } .hero-card { max-width: 450px; margin: 0 auto; } .courses-grid { grid-template-columns: repeat(2, 1fr); } .impact-grid { grid-template-columns: repeat(2, 1fr); } .legacy-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 30px; border-bottom: 1px solid var(--gold-primary); z-index: 999; } .nav-menu.active { display: flex; } .mobile-menu-btn { display: block; } .lang-toggle { margin-left: 0; margin-top: 16px; } .hero-buttons { flex-direction: column; align-items: center; } .btn { width: 100%; max-width: 300px; } .courses-grid { grid-template-columns: 1fr; } .impact-grid { grid-template-columns: 1fr; } .legacy-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; gap: 30px; } }
     </style>
 </head>
 <body>
@@ -225,7 +191,8 @@
                 <a href="index.html" class="nav-link active" data-en="Home" data-am="መነሻ">Home</a>
                 <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
                 <a href="courses.html" class="nav-link" data-en="Courses" data-am="ኮርሶች">Courses</a>
-                <a href="student-login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
+                <!-- FIXED: Replaced broken student-login.html with working portal.html -->
+                <a href="portal.html" class="nav-link portal-btn" data-en="🎓 Student Portal" data-am="🎓 የተማሪ ፖርታል">🎓 Student Portal</a>
                 <a href="register.html" class="nav-link" data-en="Register" data-am="ይመዝገቡ">Register</a>
                 <a href="contact.html" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a>
                 <button class="lang-toggle" id="langToggle">አማ / EN</button>
@@ -248,7 +215,8 @@
             <div class="hero-buttons">
                 <a href="register.html" class="btn btn-gold" data-en="Register Now" data-am="አሁን ይመዝገቡ">Register Now</a>
                 <a href="courses.html" class="btn btn-outline-gold" data-en="Explore Courses" data-am="ኮርሶችን ይመልከቱ">Explore Courses</a>
-                <a href="student-login.html" class="btn btn-outline-white" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
+                <!-- FIXED: Replaced broken student-login.html with working portal.html -->
+                <a href="portal.html" class="btn btn-outline-white" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
             </div>
         </div>
     </section>
@@ -281,7 +249,7 @@
         </div>
     </section>
     
-    <!-- COURSES SECTION WITH REAL IMAGES -->
+    <!-- COURSES SECTION -->
     <section class="section section-dark">
         <div class="container">
             <div class="section-header">
@@ -289,77 +257,12 @@
                 <p class="section-desc" data-en="Structured programs from short-term certification to Level 2-4 TVET qualifications" data-am="ከአጭር ጊዜ ሰርተፍኬት እስከ ደረጃ 2-4 የቴክኒክና ሙያ ብቃት ማረጋገጫ የተዋቀሩ ፕሮግራሞች">Structured programs from short-term certification to Level 2-4 TVET qualifications</p>
             </div>
             <div class="courses-grid">
-                <!-- Course 1: Hairdressing & Barbering -->
-                <div class="course-card">
-                    <div class="course-image">
-                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/hairdressing-and-barbering.jpg" alt="Hairdressing & Barbering">
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-en="Hairdressing & Barbering" data-am="ፀጉር አስተካካይነት">Hairdressing & Barbering</h3>
-                        <p class="course-desc" data-en="Professional cutting, styling, coloring, and treatments" data-am="ሙያዊ መቁረጥ፣ ማስተካከል፣ ቀለም መቀባት እና ህክምና">Professional cutting, styling, coloring, and treatments</p>
-                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
-                    </div>
-                </div>
-                
-                <!-- Course 2: Makeup Artistry -->
-                <div class="course-card">
-                    <div class="course-image">
-                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/makeup-artistry.jpg" alt="Makeup Artistry">
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-en="Makeup Artistry" data-am="ሜካፕ አርቲስትነት">Makeup Artistry</h3>
-                        <p class="course-desc" data-en="Bridal, fashion, and professional makeup techniques" data-am="የሙሽራ፣ የፋሽን እና ሙያዊ የሜካፕ ቴክኒኮች">Bridal, fashion, and professional makeup techniques</p>
-                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
-                    </div>
-                </div>
-                
-                <!-- Course 3: Nail Technology -->
-                <div class="course-card">
-                    <div class="course-image">
-                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/nail-technology.jpeg" alt="Nail Technology">
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-en="Nail Technology" data-am="የጥፍር ቴክኖሎጂ">Nail Technology</h3>
-                        <p class="course-desc" data-en="Manicure, pedicure, nail art, and extensions" data-am="ማኒኬር፣ ፔዲኬር፣ የጥፍር ጥበብ እና ማራዘሚያ">Manicure, pedicure, nail art, and extensions</p>
-                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
-                    </div>
-                </div>
-                
-                <!-- Course 4: Skincare & Aesthetics -->
-                <div class="course-card">
-                    <div class="course-image">
-                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/skincare-and-aestetics.jpg" alt="Skincare & Aesthetics">
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-en="Skincare & Aesthetics" data-am="የቆዳ እንክብካቤ እና ውበት">Skincare & Aesthetics</h3>
-                        <p class="course-desc" data-en="Facial treatments, skincare science, and therapy" data-am="የፊት ህክምና፣ የቆዳ ሳይንስ እና ቴራፒ">Facial treatments, skincare science, and therapy</p>
-                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
-                    </div>
-                </div>
-                
-                <!-- Course 5: Eyelash & Brow Services -->
-                <div class="course-card">
-                    <div class="course-image">
-                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/eyelash-and-brow-service.jpg" alt="Eyelash & Brow Services">
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-en="Eyelash & Brow Services" data-am="የዐይን ሽፋሽፍ እና ቅንድብ አገልግሎት">Eyelash & Brow Services</h3>
-                        <p class="course-desc" data-en="Extensions, lifting, tinting, and shaping" data-am="ማራዘሚያ፣ ማንሳት፣ ቀለም መቀባት እና ቅርጽ መስጠት">Extensions, lifting, tinting, and shaping</p>
-                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
-                    </div>
-                </div>
-                
-                <!-- Course 6: Massage Therapy -->
-                <div class="course-card">
-                    <div class="course-image">
-                        <img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/massge-therapy.jpg" alt="Massage Therapy">
-                    </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-en="Massage Therapy" data-am="የማሳጅ ቴራፒ">Massage Therapy</h3>
-                        <p class="course-desc" data-en="Professional massage techniques for wellness" data-am="ለጤና ሙያዊ የማሳጅ ቴክኒኮች">Professional massage techniques for wellness</p>
-                        <a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a>
-                    </div>
-                </div>
+                <div class="course-card"><div class="course-image"><img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/hairdressing-and-barbering.jpg" alt="Hairdressing & Barbering"></div><div class="course-content"><h3 class="course-title" data-en="Hairdressing & Barbering" data-am="ፀጉር አስተካካይነት">Hairdressing & Barbering</h3><p class="course-desc" data-en="Professional cutting, styling, coloring, and treatments" data-am="ሙያዊ መቁረጥ፣ ማስተካከል፣ ቀለም መቀባት እና ህክምና">Professional cutting, styling, coloring, and treatments</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div></div>
+                <div class="course-card"><div class="course-image"><img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/makeup-artistry.jpg" alt="Makeup Artistry"></div><div class="course-content"><h3 class="course-title" data-en="Makeup Artistry" data-am="ሜካፕ አርቲስትነት">Makeup Artistry</h3><p class="course-desc" data-en="Bridal, fashion, and professional makeup techniques" data-am="የሙሽራ፣ የፋሽን እና ሙያዊ የሜካፕ ቴክኒኮች">Bridal, fashion, and professional makeup techniques</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div></div>
+                <div class="course-card"><div class="course-image"><img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/nail-technology.jpeg" alt="Nail Technology"></div><div class="course-content"><h3 class="course-title" data-en="Nail Technology" data-am="የጥፍር ቴክኖሎጂ">Nail Technology</h3><p class="course-desc" data-en="Manicure, pedicure, nail art, and extensions" data-am="ማኒኬር፣ ፔዲኬር፣ የጥፍር ጥበብ እና ማራዘሚያ">Manicure, pedicure, nail art, and extensions</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div></div>
+                <div class="course-card"><div class="course-image"><img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/skincare-and-aestetics.jpg" alt="Skincare & Aesthetics"></div><div class="course-content"><h3 class="course-title" data-en="Skincare & Aesthetics" data-am="የቆዳ እንክብካቤ እና ውበት">Skincare & Aesthetics</h3><p class="course-desc" data-en="Facial treatments, skincare science, and therapy" data-am="የፊት ህክምና፣ የቆዳ ሳይንስ እና ቴራፒ">Facial treatments, skincare science, and therapy</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div></div>
+                <div class="course-card"><div class="course-image"><img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/eyelash-and-brow-service.jpg" alt="Eyelash & Brow Services"></div><div class="course-content"><h3 class="course-title" data-en="Eyelash & Brow Services" data-am="የዐይን ሽፋሽፍ እና ቅንድብ አገልግሎት">Eyelash & Brow Services</h3><p class="course-desc" data-en="Extensions, lifting, tinting, and shaping" data-am="ማራዘሚያ፣ ማንሳት፣ ቀለም መቀባት እና ቅርጽ መስጠት">Extensions, lifting, tinting, and shaping</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div></div>
+                <div class="course-card"><div class="course-image"><img src="https://raw.githubusercontent.com/Peacemakersclub/lovelyaccadamy/main/massge-therapy.jpg" alt="Massage Therapy"></div><div class="course-content"><h3 class="course-title" data-en="Massage Therapy" data-am="የማሳጅ ቴራፒ">Massage Therapy</h3><p class="course-desc" data-en="Professional massage techniques for wellness" data-am="ለጤና ሙያዊ የማሳጅ ቴክኒኮች">Professional massage techniques for wellness</p><a href="courses.html" class="course-link" data-en="Learn More →" data-am="ተጨማሪ →">Learn More →</a></div></div>
             </div>
         </div>
     </section>
@@ -402,32 +305,59 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-info"><div class="footer-logo"><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div></div><p class="footer-desc" data-en="Ethiopia's first fully established professional beauty college, shaping careers since 1998." data-am="የኢትዮጵያ የመጀመሪያው ሙሉ በሙሉ የተቋቋመ ሙያዊ የውበት ኮሌጅ፣ ከ1998 ጀምሮ ሙያዎችን በመቅረጽ ላይ።">Ethiopia's first fully established professional beauty college, shaping careers since 1998.</p><div class="social-links"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a></div></div>
-                <div class="footer-links-section"><h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="courses.html">Courses</a></li><li><a href="news-events.html">News & Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-                <div class="footer-courses"><h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4><ul class="footer-links"><li><a href="courses.html">Hairdressing</a></li><li><a href="courses.html">Makeup Artistry</a></li><li><a href="courses.html">Nail Technology</a></li><li><a href="courses.html">Skincare</a></li></ul></div>
-                <div class="footer-contact"><h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4><p>📍 Addis Ababa, Ethiopia</p><p>📞 0991171819 / 0911221032</p><p>✉️ lovelybeautycollage@proton.me</p></div>
+                <div class="footer-info">
+                    <div class="footer-logo"><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div></div>
+                    <p class="footer-desc" data-en="Ethiopia's first fully established professional beauty college, shaping careers since 1998." data-am="የኢትዮጵያ የመጀመሪያው ሙሉ በሙሉ የተቋቋመ ሙያዊ የውበት ኮሌጅ፣ ከ1998 ጀምሮ ሙያዎችን በመቅረጽ ላይ።">Ethiopia's first fully established professional beauty college, shaping careers since 1998.</p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-section">
+                    <h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="news-events.html">News & Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="portal.html">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-courses">
+                    <h4 class="footer-title" data-en="Top Courses" data-am="ዋና ኮርሶች">Top Courses</h4>
+                    <ul class="footer-links">
+                        <li><a href="courses.html">Hairdressing</a></li>
+                        <li><a href="courses.html">Makeup Artistry</a></li>
+                        <li><a href="courses.html">Nail Technology</a></li>
+                        <li><a href="courses.html">Skincare</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4>
+                    <p>📍 Addis Ababa, Ethiopia</p>
+                    <p>📞 0991171819 / 0911221032</p>
+                    <p>✉️ lovelybeautycollage@proton.me</p>
+                </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Lovely Beauty College and Training Center. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
-                <p class="footer-credit"><span data-en="Powered by" data-am="የተጎላበተው በ">Powered by</span> <a href="https://addispowerwebsolution.pages.dev" target="_blank">Addis Power Web Solution</a></p>
+                <p>© 2026 Lovely Beauty College and Training Center. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
+                <p class="footer-credit"><span data-en="Powered by" data-am="የተጎላበተው በ">Powered by</span> <a href="http://addispower.pages.dev/" target="_blank">Addis Power Web Solution</a></p>
             </div>
         </div>
     </footer>
     
     <script>
-        // Mobile Menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navMenu = document.getElementById('navMenu');
         if(mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰'; }); }
         document.querySelectorAll('.nav-link').forEach(l => { l.addEventListener('click', () => { navMenu.classList.remove('active'); if(mobileMenuBtn) mobileMenuBtn.textContent = '☰'; }); });
         
-        // Language
         let currentLang = localStorage.getItem('lovelyLang') || 'en';
         function setLanguage(lang) { currentLang = lang; localStorage.setItem('lovelyLang', lang); document.querySelectorAll('[data-en][data-am]').forEach(el => { const text = el.getAttribute(`data-${lang}`); if(text) el.textContent = text; }); document.getElementById('langToggle').textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ'; document.documentElement.lang = lang; }
         document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'am' : 'en'));
         setLanguage(currentLang);
         
-        // Animations
         function checkVisibility() { document.querySelectorAll('.fade-in-up').forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('visible'); }); }
         window.addEventListener('scroll', checkVisibility);
         window.addEventListener('load', checkVisibility);
