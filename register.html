@@ -21,14 +21,16 @@
 <body>
     <div class="card">
         <h1>🎓 Student Registration</h1>
-        <p style="color:#aaa; margin-bottom:20px;">Fill in your details to enroll</p>
+        <p style="color:#aaa; margin-bottom:20px;">Create your student account</p>
         
         <div id="msg" class="message"></div>
         
         <form id="regForm">
             <input type="text" id="fullName" placeholder="Full Name *" required>
             <input type="email" id="email" placeholder="Email Address *" required>
-            <input type="tel" id="phone" placeholder="Phone Number *" required>
+            <input type="tel" id="phone" placeholder="Phone Number (09xxxxxxxx) *" required>
+            <input type="password" id="password" placeholder="Create Password (min 4 chars) *" required minlength="4">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password *" required>
             <select id="course">
                 <option value="">Select Course *</option>
                 <option>Hairdressing & Barbering</option>
@@ -57,24 +59,62 @@
             const fullName = document.getElementById('fullName').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
             const course = document.getElementById('course').value;
             
-            if (!fullName || !email || !phone || !course) {
+            // Reset message
+            msg.className = 'message';
+            
+            // Validation
+            if (!fullName || !email || !phone || !password || !course) {
                 msg.className = 'message error';
-                msg.textContent = '❌ Please fill all fields';
+                msg.textContent = '❌ Please fill all required fields';
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                msg.className = 'message error';
+                msg.textContent = '❌ Passwords do not match';
+                return;
+            }
+            
+            if (password.length < 4) {
+                msg.className = 'message error';
+                msg.textContent = '❌ Password must be at least 4 characters';
                 return;
             }
             
             // Generate student ID
             const studentId = 'LBC-' + Date.now().toString().slice(-6);
             
+            // Save registration to localStorage
+            const studentData = {
+                full_name: fullName,
+                email: email,
+                phone: phone,
+                password: password,
+                student_id: studentId,
+                course: course,
+                enrollment_date: new Date().toISOString().split('T')[0],
+                courses: [course],
+                progress: {}
+            };
+            studentData.progress[course] = 0;
+            
+            // Store in localStorage
+            let registrations = JSON.parse(localStorage.getItem('lovelyRegistrations') || '[]');
+            registrations.push(studentData);
+            localStorage.setItem('lovelyRegistrations', JSON.stringify(registrations));
+            
+            // Show success
             msg.className = 'message success';
             msg.innerHTML = `
-                ✅ <strong>Registration Submitted!</strong><br><br>
-                Your Student ID: <strong style="font-size:20px;">${studentId}</strong><br><br>
-                <em>Save this ID! You'll need it to log in.</em><br><br>
-                📞 We'll contact you at ${phone} to complete enrollment.<br>
-                <a href="portal.html" style="color:#4CAF50;">Go to Student Portal →</a>
+                ✅ <strong>Registration Successful!</strong><br><br>
+                Your Student ID: <strong style="font-size:20px;color:#fff;">${studentId}</strong><br>
+                Password: <strong>${password}</strong><br><br>
+                <small>⚠️ Save these credentials! You need them to log in.</small><br><br>
+                <a href="portal.html" style="color:#4CAF50;font-weight:bold;">Go to Student Portal →</a>
             `;
             
             document.getElementById('regForm').reset();
