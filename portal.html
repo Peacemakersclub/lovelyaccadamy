@@ -1,71 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <title>Student Portal | Lovely Beauty College</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { background: #0A0A0A; color: white; font-family: Arial; padding: 20px; text-align: center; }
-        input { display: block; width: 90%; padding: 15px; margin: 10px auto; background: black; border: 1px solid #D4AF37; color: white; border-radius: 10px; font-size: 16px; }
-        button { display: block; width: 90%; padding: 15px; margin: 20px auto; background: #D4AF37; color: black; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; }
-        #msg { margin-top: 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #0A0A0A; color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        
+        #loginScreen, #dashboardScreen { max-width: 500px; width: 100%; }
+        #dashboardScreen { display: none; }
+        
+        .card { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 24px; padding: 35px 25px; text-align: center; }
+        h1 { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 8px; }
+        h2 { color: #D4AF37; font-size: 16px; margin-bottom: 25px; font-weight: 400; }
+        
+        input { width: 100%; padding: 14px; margin: 8px 0; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; }
+        button { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        
+        .demo-box { background: #222; padding: 12px; border-radius: 12px; margin: 15px 0; font-size: 13px; text-align: left; }
+        .demo-box strong { color: #D4AF37; }
+        .demo-box code { background: black; padding: 2px 6px; border-radius: 4px; color: #D4AF37; }
+        
+        .message { margin-top: 15px; font-weight: bold; min-height: 24px; }
         .success { color: #4CAF50; }
         .error { color: #f44336; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #D4AF37; }
+        .logout-btn { background: #dc3545; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        
+        .student-header { display: flex; align-items: center; margin-bottom: 20px; }
+        .avatar { width: 60px; height: 60px; background: #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; color: black; margin-right: 15px; }
+        
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; text-align: left; }
+        .info-item { background: #0A0A0A; padding: 12px; border-radius: 10px; }
+        .info-item strong { color: #D4AF37; display: block; margin-bottom: 4px; font-size: 12px; }
+        
+        .course-item { display: flex; align-items: center; padding: 12px; background: #0A0A0A; border-radius: 12px; margin-bottom: 10px; text-align: left; }
+        .course-icon { width: 45px; height: 45px; background: #D4AF37; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-right: 12px; color: black; }
+        .progress-bar { height: 5px; background: #333; border-radius: 3px; margin-top: 6px; }
+        .progress-fill { height: 100%; background: #D4AF37; border-radius: 3px; }
     </style>
 </head>
 <body>
-    <h2 style="color:#D4AF37;">Student Portal</h2>
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen">
+        <div class="card">
+            <h1>🎓 LOVELY BEAUTY</h1>
+            <h2>Student Portal Login</h2>
+            
+            <div class="demo-box">
+                <strong>🔑 Demo Access</strong><br>
+                Student ID: <code>LBC-001</code><br>
+                PIN: <code>1234</code> (any PIN works for demo)
+            </div>
+            
+            <input type="text" id="studentId" placeholder="Student ID" value="LBC-001">
+            <input type="password" id="pin" placeholder="PIN" value="1234">
+            <button onclick="login()">🔐 LOGIN TO DASHBOARD</button>
+            <div id="loginMsg" class="message"></div>
+            <p style="color:#666; margin-top:15px; font-size:12px;">
+                <a href="index.html" style="color:#D4AF37;">← Back to Home</a>
+            </p>
+        </div>
+    </div>
     
-    <input type="text" id="studentId" placeholder="Student ID" value="LBC-001">
-    <input type="password" id="pin" placeholder="PIN" value="1234">
-    
-    <button onclick="doLogin()">LOGIN</button>
-    
-    <div id="msg"></div>
+    <!-- DASHBOARD SCREEN -->
+    <div id="dashboardScreen">
+        <div class="card">
+            <div class="header">
+                <h1 style="margin:0; font-size:20px;">🎓 LOVELY BEAUTY</h1>
+                <button class="logout-btn" onclick="logout()" style="width:auto;">🚪 Logout</button>
+            </div>
+            
+            <div class="student-header">
+                <div class="avatar" id="initials">AK</div>
+                <div style="text-align:left;">
+                    <h2 id="dashName" style="margin:0;">Addis Kebede</h2>
+                    <p style="color:#D4AF37;" id="dashId">LBC-001</p>
+                </div>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item"><strong>Email</strong> <span id="dashEmail">-</span></div>
+                <div class="info-item"><strong>Phone</strong> <span id="dashPhone">-</span></div>
+                <div class="info-item"><strong>Enrolled</strong> <span id="dashDate">-</span></div>
+                <div class="info-item"><strong>Status</strong> ✅ Active</div>
+            </div>
+            
+            <h3 style="color:#D4AF37; margin:20px 0 15px; text-align:left;">📚 My Courses</h3>
+            <div id="coursesContainer"></div>
+        </div>
+    </div>
 
     <script>
-        const SUPABASE_URL = 'https://crsenpmonzoeverlpemb.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNyc2VucG1vbnpvZXZlcmxwZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5NDMxMjQsImV4cCI6MjA5MjUxOTEyNH0.GFRmFJPwDXUtYCW3Cla93VdQg9ga1WhScLGvgaoPbxU';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Course emoji mapping
+        const emojis = {
+            'Hairdressing': '💇',
+            'Makeup': '💄',
+            'Nails': '💅',
+            'Skincare': '🧖',
+            'Eyelash': '👁️',
+            'Massage': '💆'
+        };
         
-        async function doLogin() {
-            const msg = document.getElementById('msg');
-            const studentId = document.getElementById('studentId').value;
+        function getEmoji(courseName) {
+            for (const [key, emoji] of Object.entries(emojis)) {
+                if (courseName.includes(key)) return emoji;
+            }
+            return '📚';
+        }
+        
+        async function login() {
+            const studentId = document.getElementById('studentId').value.trim().toUpperCase();
             const pin = document.getElementById('pin').value;
+            const msg = document.getElementById('loginMsg');
             
-            msg.textContent = 'Testing...';
+            msg.className = 'message';
+            msg.textContent = '';
             
-            if (pin !== '1234') {
-                msg.className = 'error';
-                msg.textContent = 'Wrong PIN';
+            if (!studentId) {
+                msg.className = 'message error';
+                msg.textContent = 'Please enter Student ID';
                 return;
             }
             
+            msg.textContent = '🔍 Loading student data...';
+            msg.style.color = '#D4AF37';
+            
             try {
-                const { data, error } = await supabase
-                    .from('students')
-                    .select('*')
-                    .eq('student_id', studentId)
-                    .single();
+                // FETCH FROM JSON FILE - ALWAYS WORKS!
+                const response = await fetch('students.json');
+                const students = await response.json();
                 
-                if (error) {
-                    msg.className = 'error';
-                    msg.textContent = 'Error: ' + error.message;
+                const student = students.find(s => s.student_id === studentId);
+                
+                if (!student) {
+                    msg.className = 'message error';
+                    msg.textContent = '❌ Student ID not found. Try LBC-001, LBC-002, or LBC-003';
                     return;
                 }
                 
-                if (data) {
-                    msg.className = 'success';
-                    msg.textContent = 'Found: ' + data.full_name;
-                } else {
-                    msg.className = 'error';
-                    msg.textContent = 'Not found';
-                }
-            } catch (e) {
-                msg.className = 'error';
-                msg.textContent = 'Error: ' + e.message;
+                // SUCCESS!
+                msg.className = 'message success';
+                msg.textContent = '✅ Welcome, ' + student.full_name + '!';
+                
+                showDashboard(student);
+                
+            } catch (error) {
+                msg.className = 'message error';
+                msg.textContent = '❌ Error loading data. Please try again.';
+                console.error(error);
             }
+        }
+        
+        function showDashboard(student) {
+            // Switch screens
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboardScreen').style.display = 'block';
+            
+            // Fill student info
+            document.getElementById('dashName').textContent = student.full_name;
+            document.getElementById('dashId').textContent = 'Student ID: ' + student.student_id;
+            document.getElementById('dashEmail').textContent = student.email || 'N/A';
+            document.getElementById('dashPhone').textContent = student.phone || 'N/A';
+            document.getElementById('dashDate').textContent = student.enrollment_date || 'N/A';
+            
+            // Set initials
+            const initials = student.full_name.split(' ').map(n => n[0]).join('').toUpperCase();
+            document.getElementById('initials').textContent = initials;
+            
+            // Build course list
+            const coursesContainer = document.getElementById('coursesContainer');
+            coursesContainer.innerHTML = '';
+            
+            if (student.courses && student.courses.length > 0) {
+                student.courses.forEach(course => {
+                    const progress = student.progress?.[course] || 0;
+                    const emoji = getEmoji(course);
+                    
+                    const courseItem = document.createElement('div');
+                    courseItem.className = 'course-item';
+                    courseItem.innerHTML = `
+                        <div class="course-icon">${emoji}</div>
+                        <div style="flex:1;">
+                            <strong>${course}</strong>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:${progress}%;"></div>
+                            </div>
+                            <small style="color:#aaa;">${progress}% Complete</small>
+                        </div>
+                    `;
+                    coursesContainer.appendChild(courseItem);
+                });
+            } else {
+                coursesContainer.innerHTML = '<p style="color:#aaa; text-align:center;">No courses enrolled yet.</p>';
+            }
+        }
+        
+        function logout() {
+            document.getElementById('dashboardScreen').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('studentId').value = 'LBC-001';
+            document.getElementById('loginMsg').textContent = '';
         }
     </script>
 </body>
