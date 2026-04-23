@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Portal | Lovely Beauty College</title>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,10 +21,12 @@
         
         input { width: 100%; padding: 14px; margin: 8px 0; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; }
         button { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        button:disabled { opacity: 0.6; }
         
         .message { margin-top: 15px; font-weight: bold; min-height: 24px; }
         .success { color: #4CAF50; }
         .error { color: #f44336; }
+        .info { color: #2196F3; }
         
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #D4AF37; }
         .logout-btn { background: #dc3545; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; }
@@ -46,9 +51,9 @@
             <h1>🎓 LOVELY BEAUTY</h1>
             <h2>Student Portal</h2>
             
-            <input type="text" id="studentId" placeholder="Student ID (e.g., LBC-001)">
+            <input type="email" id="email" placeholder="Email Address">
             <input type="password" id="password" placeholder="Password">
-            <button onclick="login()">🔐 LOGIN</button>
+            <button onclick="login()" id="loginBtn">🔐 LOGIN</button>
             <div id="loginMsg" class="message"></div>
             <p style="color:#666; margin-top:20px; font-size:13px;">
                 <a href="register.html" style="color:#D4AF37;">📝 Register New Account</a><br>
@@ -86,13 +91,23 @@
     </div>
 
     <script>
+        // Firebase Config
+        const firebaseConfig = {
+          apiKey: "AIzaSyCn5PGyIgPobaL8WE4E89dFQwcjsx9Pcqs",
+          authDomain: "lovely-beauty-college.firebaseapp.com",
+          projectId: "lovely-beauty-college",
+          storageBucket: "lovely-beauty-college.firebasestorage.app",
+          messagingSenderId: "283710330376",
+          appId: "1:283710330376:web:d34276a5918500b020e3bd"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        
         const emojis = {
-            'Hairdressing': '💇',
-            'Makeup': '💄',
-            'Nails': '💅',
-            'Skincare': '🧖',
-            'Eyelash': '👁️',
-            'Massage': '💆'
+            'Hairdressing': '💇', 'Makeup': '💄', 'Nails': '💅',
+            'Skincare': '🧖', 'Eyelash': '👁️', 'Massage': '💆'
         };
         
         function getEmoji(name) {
@@ -103,59 +118,62 @@
             return '📚';
         }
         
+        // Check if already logged in
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                const doc = await db.collection('students').doc(user.uid).get();
+                if (doc.exists) {
+                    showDashboard({ id: user.uid, ...doc.data() });
+                }
+            }
+        });
+        
         async function login() {
-            const studentId = document.getElementById('studentId').value.trim().toUpperCase();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const msg = document.getElementById('loginMsg');
+            const loginBtn = document.getElementById('loginBtn');
             
             msg.className = 'message';
             msg.textContent = '';
             
-            if (!studentId || !password) {
+            if (!email || !password) {
                 msg.className = 'message error';
-                msg.textContent = 'Enter Student ID and Password';
+                msg.textContent = 'Enter email and password';
                 return;
             }
             
-            msg.textContent = 'Verifying...';
-            msg.style.color = '#D4AF37';
+            loginBtn.disabled = true;
+            msg.className = 'message info';
+            msg.textContent = 'Logging in...';
             
-            // Check localStorage first
-            const registrations = JSON.parse(localStorage.getItem('lovelyRegistrations') || '[]');
-            const localStudent = registrations.find(s => s.student_id === studentId && s.password === password);
-            
-            if (localStudent) {
-                msg.className = 'message success';
-                msg.textContent = 'Welcome, ' + localStudent.full_name + '!';
-                showDashboard(localStudent);
-                return;
-            }
-            
-            // Check JSON file
             try {
-                const response = await fetch('students.json');
-                const students = await response.json();
-                const student = students.find(s => s.student_id === studentId);
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                const user = userCredential.user;
                 
-                if (!student) {
+                const doc = await db.collection('students').doc(user.uid).get();
+                
+                if (doc.exists) {
+                    const studentData = doc.data();
+                    msg.className = 'message success';
+                    msg.textContent = '✅ Welcome, ' + studentData.full_name + '!';
+                    showDashboard({ id: user.uid, ...studentData });
+                } else {
                     msg.className = 'message error';
-                    msg.textContent = 'Student ID not found';
-                    return;
+                    msg.textContent = 'Student record not found. Please contact admin.';
                 }
-                
-                if (student.password !== password) {
-                    msg.className = 'message error';
-                    msg.textContent = 'Incorrect password';
-                    return;
-                }
-                
-                msg.className = 'message success';
-                msg.textContent = 'Welcome, ' + student.full_name + '!';
-                showDashboard(student);
                 
             } catch (error) {
                 msg.className = 'message error';
-                msg.textContent = 'Error. Please try again.';
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    msg.textContent = 'Invalid email or password';
+                } else if (error.code === 'auth/invalid-email') {
+                    msg.textContent = 'Invalid email format';
+                } else {
+                    msg.textContent = 'Error: ' + error.message;
+                }
+            } finally {
+                loginBtn.disabled = false;
             }
         }
         
@@ -165,7 +183,7 @@
             
             document.getElementById('dashName').textContent = student.full_name;
             document.getElementById('dashId').textContent = 'ID: ' + student.student_id;
-            document.getElementById('dashEmail').textContent = student.email || 'N/A';
+            document.getElementById('dashEmail').textContent = student.email;
             document.getElementById('dashPhone').textContent = student.phone || 'N/A';
             document.getElementById('dashDate').textContent = student.enrollment_date || 'N/A';
             
@@ -196,9 +214,10 @@
         }
         
         function logout() {
+            auth.signOut();
             document.getElementById('dashboardScreen').style.display = 'none';
             document.getElementById('loginScreen').style.display = 'block';
-            document.getElementById('studentId').value = '';
+            document.getElementById('email').value = '';
             document.getElementById('password').value = '';
             document.getElementById('loginMsg').textContent = '';
         }
