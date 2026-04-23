@@ -3,362 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>News & Events | Lovely Beauty College and Training Center</title>
-    <meta name="description" content="Latest news, events, competitions, and success stories from Lovely Beauty College. Stay updated with Ethiopia's premier beauty institution.">
-    
+    <title>News & Events | Lovely Beauty College</title>
+    <meta name="description" content="Latest news, events, competitions, and success stories from Lovely Beauty College.">
     <link rel="icon" type="image/x-icon" href="logo.jpg">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        :root {
-            --black-primary: #0A0A0A;
-            --black-secondary: #111111;
-            --black-card: #1A1A1A;
-            --gold-primary: #D4AF37;
-            --gold-light: #F5D76E;
-            --gold-dark: #996515;
-            --gold-glow: rgba(212, 175, 55, 0.3);
-            --white: #FFFFFF;
-            --gray-light: #E0E0E0;
-            --gray-mid: #B0B0B0;
-            --gray-dark: #666666;
-            --font-heading: 'Playfair Display', serif;
-            --font-body: 'Poppins', sans-serif;
-            --container-max: 1280px;
-            --header-height: 80px;
-        }
-        
+        :root { --black-primary: #0A0A0A; --black-card: #1A1A1A; --gold-primary: #D4AF37; --gold-glow: rgba(212, 175, 55, 0.3); --white: #FFFFFF; --gray-mid: #B0B0B0; --gray-dark: #666666; --font-heading: 'Playfair Display', serif; --font-body: 'Poppins', sans-serif; --header-height: 80px; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); background-color: var(--black-primary); color: var(--white); line-height: 1.6; }
-        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; line-height: 1.3; }
-        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
-        .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
-        
-        /* Header */
-        .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        body { font-family: var(--font-body); background: var(--black-primary); color: var(--white); line-height: 1.6; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
         .header-container { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); }
         .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-image { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; box-shadow: 0 0 20px var(--gold-glow); border: 1px solid var(--gold-primary); }
-        .logo-text { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
-        .logo-main { font-size: 20px; color: var(--gold-primary); letter-spacing: 2px; }
+        .logo-image { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; border: 1px solid var(--gold-primary); }
+        .logo-main { font-size: 20px; color: var(--gold-primary); font-family: var(--font-heading); font-weight: 700; letter-spacing: 2px; }
         .logo-sub { font-size: 10px; color: var(--gray-mid); letter-spacing: 1px; }
-        .nav-menu { display: flex; align-items: center; gap: 28px; }
-        .nav-link { font-weight: 500; font-size: 14px; color: var(--gray-light); position: relative; padding: 8px 0; }
-        .nav-link:hover { color: var(--gold-primary); }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold-primary); transition: width 0.3s ease; }
-        .nav-link:hover::after { width: 100%; }
-        .nav-link.active { color: var(--gold-primary); }
-        .nav-link.active::after { width: 100%; }
-        .lang-toggle { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 6px 14px; border-radius: 30px; font-size: 13px; cursor: pointer; margin-left: 12px; }
-        .lang-toggle:hover { background: var(--gold-primary); color: var(--black-primary); }
+        .nav-menu { display: flex; align-items: center; gap: 24px; }
+        .nav-link { font-weight: 500; font-size: 14px; color: var(--gray-mid); padding: 8px 0; text-decoration: none; }
+        .nav-link:hover, .nav-link.active { color: var(--gold-primary); }
+        .portal-btn { background: var(--gold-primary); color: var(--black-primary) !important; padding: 10px 20px; border-radius: 50px; font-weight: 600; }
         .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
-        
-        /* Buttons */
-        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 15px; text-align: center; transition: all 0.3s ease; cursor: pointer; border: none; }
-        .btn-gold { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); color: var(--black-primary); box-shadow: 0 4px 15px var(--gold-glow); }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--gold-glow); }
-        .btn-outline-gold { background: transparent; border: 2px solid var(--gold-primary); color: var(--gold-primary); }
-        .btn-outline-gold:hover { background: var(--gold-primary); color: var(--black-primary); }
-        
-        /* Page Header */
-        .page-header { background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%); padding: 80px 0; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
-        .page-title { font-size: clamp(40px, 8vw, 64px); margin-bottom: 16px; }
+        .page-header { padding: 60px 0; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .page-title { font-size: clamp(32px, 6vw, 56px); font-family: var(--font-heading); }
         .page-title .gold-text { color: var(--gold-primary); }
-        .page-subtitle { color: var(--gray-mid); font-size: 18px; max-width: 700px; margin: 0 auto; }
-        
-        /* Sections */
-        .section { padding: 80px 0; }
-        .section-dark { background: var(--black-secondary); }
-        .section-title { font-size: clamp(28px, 4vw, 40px); margin-bottom: 20px; }
-        .section-title .gold-text { color: var(--gold-primary); }
-        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
-        
-        /* Featured News */
-        .featured-news { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; margin-bottom: 40px; }
-        .featured-main { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; overflow: hidden; }
-        .featured-image { height: 300px; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); display: flex; align-items: center; justify-content: center; color: var(--gold-primary); font-size: 48px; }
-        .featured-content { padding: 30px; }
-        .news-badge { display: inline-block; background: var(--gold-primary); color: var(--black-primary); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 16px; }
-        .news-date { color: var(--gray-dark); font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .featured-title { font-size: 28px; margin-bottom: 16px; color: var(--white); }
-        .featured-excerpt { color: var(--gray-mid); margin-bottom: 20px; }
-        .featured-sidebar { display: flex; flex-direction: column; gap: 20px; }
-        .sidebar-news { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 16px; padding: 24px; transition: all 0.3s ease; }
-        .sidebar-news:hover { border-color: var(--gold-primary); }
-        .sidebar-title { font-size: 18px; margin-bottom: 12px; }
-        
-        /* News Grid */
-        .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .news-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 16px; overflow: hidden; transition: all 0.3s ease; }
-        .news-card:hover { transform: translateY(-5px); border-color: var(--gold-primary); box-shadow: 0 10px 30px var(--gold-glow); }
-        .news-image { height: 180px; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); display: flex; align-items: center; justify-content: center; color: var(--gold-primary); font-size: 36px; }
+        .section { padding: 60px 0; }
+        .section-title { font-size: 28px; font-family: var(--font-heading); margin-bottom: 30px; color: var(--gold-primary); }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; }
+        .news-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+        .news-card:hover { border-color: var(--gold-primary); transform: translateY(-5px); }
+        .news-image { height: 180px; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); display: flex; align-items: center; justify-content: center; font-size: 48px; }
         .news-content { padding: 24px; }
-        .news-title { font-size: 18px; margin-bottom: 12px; }
-        .news-excerpt { color: var(--gray-mid); font-size: 14px; margin-bottom: 16px; }
-        
-        /* YouTube Section */
-        .youtube-section { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 40px; margin: 40px 0; }
-        .youtube-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; }
-        .youtube-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); color: var(--gray-mid); }
-        .play-icon { font-size: 64px; color: var(--gold-primary); margin-bottom: 20px; }
-        
-        /* Gallery */
-        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .gallery-item { position: relative; aspect-ratio: 1; background: linear-gradient(135deg, #1A1A1A, #0A0A0A); border-radius: 12px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.15); transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .gallery-item:hover { border-color: var(--gold-primary); transform: scale(1.02); }
-        .gallery-icon { font-size: 40px; color: var(--gold-primary); }
-        .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 20px; color: var(--white); }
-        .gallery-category { color: var(--gold-primary); font-size: 12px; font-weight: 600; margin-bottom: 4px; }
-        .gallery-title { font-size: 14px; }
-        
-        /* Upcoming Events */
-        .events-list { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px; }
-        .event-item { display: flex; align-items: center; gap: 24px; padding: 20px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
-        .event-item:last-child { border-bottom: none; }
-        .event-date { text-align: center; min-width: 70px; }
-        .event-day { font-size: 32px; font-weight: 700; color: var(--gold-primary); font-family: var(--font-heading); line-height: 1; }
-        .event-month { font-size: 14px; color: var(--gray-mid); text-transform: uppercase; }
-        .event-details { flex: 1; }
-        .event-title { font-size: 18px; margin-bottom: 8px; }
-        .event-meta { display: flex; gap: 20px; color: var(--gray-dark); font-size: 13px; }
-        .event-meta span { display: flex; align-items: center; gap: 6px; }
-        
-        /* CTA */
-        .cta-section { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); padding: 60px 0; text-align: center; margin-top: 40px; }
-        .cta-title { font-size: clamp(28px, 4vw, 40px); color: var(--black-primary); margin-bottom: 16px; }
-        .btn-black { background: var(--black-primary); color: var(--gold-primary); }
-        .btn-black:hover { background: var(--black-secondary); transform: translateY(-2px); }
-        
-        /* Footer */
-        .footer { background: var(--black-primary); padding: 60px 0 30px; border-top: 1px solid rgba(212, 175, 55, 0.2); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
-        .footer-desc { color: var(--gray-mid); font-size: 14px; margin: 20px 0; }
-        .social-links { display: flex; gap: 16px; }
-        .social-link { width: 40px; height: 40px; background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); }
-        .social-link:hover { background: var(--gold-primary); color: var(--black-primary); }
-        .footer-title { color: var(--gold-primary); font-size: 18px; margin-bottom: 20px; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: var(--gray-mid); font-size: 14px; }
-        .footer-links a:hover { color: var(--gold-primary); }
-        .footer-contact p { color: var(--gray-mid); font-size: 14px; margin-bottom: 12px; }
-        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(212, 175, 55, 0.1); color: var(--gray-mid); font-size: 14px; }
-        .footer-credit { margin-top: 10px; }
-        .footer-credit a { color: var(--gold-primary); font-weight: 500; }
-        .footer-credit a:hover { color: var(--gold-light); text-decoration: underline; }
-        
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .featured-news { grid-template-columns: 1fr; }
-            .news-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 768px) {
-            .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 30px; border-bottom: 1px solid var(--gold-primary); z-index: 999; }
-            .nav-menu.active { display: flex; }
-            .mobile-menu-btn { display: block; }
-            .lang-toggle { margin-left: 0; margin-top: 16px; }
-            .news-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .event-item { flex-direction: column; align-items: flex-start; gap: 12px; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .youtube-section { padding: 20px; }
-        }
-        @media (max-width: 480px) {
-            .gallery-grid { grid-template-columns: 1fr; }
-        }
+        .news-category { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+        .cat-news { background: #1a3a5c; color: #64B5F6; }
+        .cat-event { background: #3a1a5c; color: #CE93D8; }
+        .cat-announcement { background: #5c3a1a; color: #FFB74D; }
+        .cat-success { background: #1a5c3a; color: #81C784; }
+        .news-date { color: var(--gray-dark); font-size: 13px; margin-bottom: 10px; }
+        .news-title { font-size: 20px; margin-bottom: 10px; color: var(--white); }
+        .news-excerpt { color: var(--gray-mid); font-size: 14px; }
+        .loading { text-align: center; padding: 60px; color: var(--gold-primary); font-size: 18px; }
+        .empty { text-align: center; padding: 60px; color: var(--gray-mid); }
+        .footer { background: var(--black-primary); padding: 40px 0 30px; border-top: 1px solid rgba(212, 175, 55, 0.2); text-align: center; color: var(--gray-mid); font-size: 14px; }
+        .footer a { color: var(--gold-primary); }
+        @media (max-width: 768px) { .nav-menu { display: none; } .mobile-menu-btn { display: block; } .news-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    
-    <!-- HEADER -->
     <header class="header">
         <div class="container header-container">
             <div class="logo">
                 <img src="logo.jpg" alt="Lovely Beauty College" class="logo-image">
-                <div class="logo-text">
-                    <div class="logo-main">LOVELY BEAUTY</div>
-                    <div class="logo-sub">COLLEGE & TRAINING CENTER</div>
-                </div>
+                <div><div class="logo-main">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div></div>
             </div>
-            
             <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link" data-en="Home" data-am="መነሻ">Home</a>
-                <a href="about.html" class="nav-link" data-en="About" data-am="ስለ እኛ">About</a>
-                <a href="courses.html" class="nav-link" data-en="Courses" data-am="ኮርሶች">Courses</a>
-                <a href="student-login.html" class="nav-link" data-en="Student Portal" data-am="የተማሪ ፖርታል">Student Portal</a>
-                <a href="register.html" class="nav-link" data-en="Register" data-am="ይመዝገቡ">Register</a>
-                <a href="contact.html" class="nav-link" data-en="Contact" data-am="አድራሻ">Contact</a>
-                <a href="news-events.html" class="nav-link active" data-en="News & Events" data-am="ዜና እና ዝግጅቶች">News & Events</a>
-                <button class="lang-toggle" id="langToggle">አማ / EN</button>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="portal.html" class="nav-link portal-btn">🎓 Student Portal</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="news-events.html" class="nav-link active">News & Events</a>
             </nav>
-            
             <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
     </header>
     
-    <!-- PAGE HEADER -->
     <section class="page-header">
         <div class="container">
-            <h1 class="page-title">
-                <span data-en="News &" data-am="ዜና እና">News &</span>
-                <span class="gold-text" data-en="Events" data-am="ዝግጅቶች">Events</span>
-            </h1>
-            <p class="page-subtitle" data-en="Stay updated with the latest competitions, training announcements, and success stories from Lovely Beauty College" data-am="ከላቭሊ ቢዩቲ ኮሌጅ የቅርብ ጊዜ ውድድሮች፣ የስልጠና ማስታወቂያዎች እና የስኬት ታሪኮችን ይከታተሉ">Stay updated with the latest competitions, training announcements, and success stories from Lovely Beauty College</p>
+            <h1 class="page-title">News & <span class="gold-text">Events</span></h1>
+            <p style="color:var(--gray-mid);">Stay updated with the latest from Lovely Beauty College</p>
         </div>
     </section>
     
-    <!-- FEATURED NEWS -->
     <section class="section">
         <div class="container">
-            <div class="featured-news">
-                <div class="featured-main">
-                    <div class="featured-image"><span>🏆</span></div>
-                    <div class="featured-content">
-                        <span class="news-badge" data-en="FEATURED" data-am="የተለየ">FEATURED</span>
-                        <div class="news-date"><span>📅</span><span>May 2025</span></div>
-                        <h2 class="featured-title" data-en="National Beauty Competition 2025" data-am="ብሄራዊ የውበት ውድድር 2017">National Beauty Competition 2025</h2>
-                        <p class="featured-excerpt" data-en="Lovely Beauty College proudly announces the annual National Beauty Competition. Join us as we celebrate Ethiopia's finest beauty talent. Registration opens June 1st." data-am="ላቭሊ ቢዩቲ ኮሌጅ ዓመታዊውን ብሄራዊ የውበት ውድድር በኩራት ያስታውቃል። የኢትዮጵያን ምርጥ የውበት ተሰጥኦ ስናከብር ይቀላቀሉን። ምዝገባ ከሰኔ 1 ይጀምራል።">Lovely Beauty College proudly announces the annual National Beauty Competition. Join us as we celebrate Ethiopia's finest beauty talent. Registration opens June 1st.</p>
-                        <a href="#" class="btn btn-outline-gold" data-en="Learn More" data-am="ተጨማሪ">Learn More</a>
-                    </div>
-                </div>
-                <div class="featured-sidebar">
-                    <div class="sidebar-news"><span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);" data-en="ANNOUNCEMENT" data-am="ማስታወቂያ">ANNOUNCEMENT</span><h3 class="sidebar-title" data-en="New Intake Open for Registration" data-am="አዲስ ቅበላ ምዝገባ ተከፍቷል">New Intake Open for Registration</h3><p style="color:var(--gray-mid);font-size:14px;margin-bottom:12px;" data-en="Limited spots available" data-am="ውስን ቦታዎች ይገኛሉ">Limited spots available</p><div class="news-date">📅 May 2025</div></div>
-                    <div class="sidebar-news"><span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);" data-en="SUCCESS STORY" data-am="የስኬት ታሪክ">SUCCESS STORY</span><h3 class="sidebar-title" data-en="Graduate Opens Award-Winning Salon" data-am="ተመራቂ ተሸላሚ ሳሎን ከፈተ">Graduate Opens Award-Winning Salon</h3><p style="color:var(--gray-mid);font-size:14px;margin-bottom:12px;" data-en="Meet our successful alumna" data-am="ስኬታማ ተመራቂያችንን ያግኙ">Meet our successful alumna</p><div class="news-date">📅 April 2025</div></div>
-                    <div class="sidebar-news"><span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);" data-en="TRAINING" data-am="ስልጠና">TRAINING</span><h3 class="sidebar-title" data-en="Free Masterclass: Advanced Makeup" data-am="ነፃ ማስተርክላስ፡ የላቀ ሜካፕ">Free Masterclass: Advanced Makeup</h3><p style="color:var(--gray-mid);font-size:14px;margin-bottom:12px;" data-en="June 15, 2025 | 2:00 PM" data-am="ሰኔ 15, 2017 | 8:00 ሰዓት">June 15, 2025 | 2:00 PM</p><div class="news-date">📅 May 2025</div></div>
-                </div>
-            </div>
+            <h2 class="section-title">📰 Latest Updates</h2>
+            <div class="news-grid" id="newsGrid"><div class="loading">⏳ Loading news from Firebase...</div></div>
         </div>
     </section>
     
-    <!-- LATEST NEWS (STATIC) -->
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span data-en="Latest" data-am="የቅርብ ጊዜ">Latest</span>
-                    <span class="gold-text" data-en="News" data-am="ዜናዎች">News</span>
-                </h2>
-            </div>
-            <div class="news-grid">
-                <div class="news-card">
-                    <div class="news-image"><span>📰</span></div>
-                    <div class="news-content">
-                        <div class="news-date">📅 April 13, 2025</div>
-                        <h3 class="news-title">Welcome to Lovely Beauty College</h3>
-                        <p class="news-excerpt">We are excited to launch our new website! Stay tuned for updates on courses, events, and student success stories.</p>
-                        <span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);">News</span>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="news-image"><span>💇</span></div>
-                    <div class="news-content">
-                        <div class="news-date">📅 May 1, 2025</div>
-                        <h3 class="news-title" data-en="New Hairdressing Equipment" data-am="አዲስ የፀጉር መሳሪያዎች">New Hairdressing Equipment</h3>
-                        <p class="news-excerpt" data-en="State-of-the-art equipment installed at all campuses." data-am="በሁሉም ካምፓሶች ዘመናዊ መሳሪያዎች ተገጠሙ።">State-of-the-art equipment installed at all campuses.</p>
-                        <span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);">News</span>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="news-image"><span>🤝</span></div>
-                    <div class="news-content">
-                        <div class="news-date">📅 April 10, 2025</div>
-                        <h3 class="news-title" data-en="Industry Partnership" data-am="የኢንዱስትሪ ሽርክና">Industry Partnership</h3>
-                        <p class="news-excerpt" data-en="New collaboration with leading beauty brands." data-am="ከመሪ የውበት ብራንዶች ጋር አዲስ ትብብር።">New collaboration with leading beauty brands.</p>
-                        <span class="news-badge" style="background:transparent;border:1px solid var(--gold-primary);color:var(--gold-primary);">News</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- YOUTUBE SECTION -->
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <div class="youtube-section">
-                <h2 class="section-title" style="text-align:center;margin-bottom:24px;"><span data-en="Watch Our" data-am="ይመልከቱ">Watch Our</span> <span class="gold-text" data-en="Latest Video" data-am="የቅርብ ጊዜ ቪዲዮ">Latest Video</span></h2>
-                <div class="youtube-container"><div class="youtube-placeholder"><div class="play-icon">▶️</div><h3 style="color:var(--gold-primary);margin-bottom:12px;" data-en="YouTube Video Placeholder" data-am="የዩቲዩብ ቪዲዮ ቦታ">YouTube Video Placeholder</h3><p style="color:var(--gray-mid);margin-bottom:20px;" data-en="Replace with your YouTube embed code" data-am="በእርስዎ የዩቲዩብ ኤምቤድ ኮድ ይተኩ">Replace with your YouTube embed code</p></div></div>
-                <p style="color:var(--gray-mid);font-size:14px;text-align:center;margin-top:20px;" data-en="Subscribe for tutorials, campus tours, and success stories!" data-am="ለትምህርቶች፣ የካምፓስ ጉብኝቶች እና የስኬት ታሪኮች ይመዝገቡ!">Subscribe for tutorials, campus tours, and success stories!</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- GALLERY -->
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <div class="section-header"><h2 class="section-title"><span data-en="Photo" data-am="ፎቶ">Photo</span> <span class="gold-text" data-en="Gallery" data-am="ማዕከለ-ስዕላት">Gallery</span></h2></div>
-            <div class="gallery-grid">
-                <div class="gallery-item"><span class="gallery-icon">🎓</span><div class="gallery-overlay"><div class="gallery-category" data-en="Graduation" data-am="ምረቃ">Graduation</div><div class="gallery-title" data-en="Class of 2024" data-am="የ2016 ክፍል">Class of 2024</div></div></div>
-                <div class="gallery-item"><span class="gallery-icon">🏆</span><div class="gallery-overlay"><div class="gallery-category" data-en="Competition" data-am="ውድድር">Competition</div><div class="gallery-title" data-en="National Beauty 2024" data-am="ብሄራዊ ውበት 2016">National Beauty 2024</div></div></div>
-                <div class="gallery-item"><span class="gallery-icon">💇</span><div class="gallery-overlay"><div class="gallery-category" data-en="Training" data-am="ስልጠና">Training</div><div class="gallery-title" data-en="Hairdressing Workshop" data-am="የፀጉር አውደ ጥናት">Hairdressing Workshop</div></div></div>
-                <div class="gallery-item"><span class="gallery-icon">💄</span><div class="gallery-overlay"><div class="gallery-category" data-en="Training" data-am="ስልጠና">Training</div><div class="gallery-title" data-en="Makeup Masterclass" data-am="የሜካፕ ማስተርክላስ">Makeup Masterclass</div></div></div>
-                <div class="gallery-item"><span class="gallery-icon">🏫</span><div class="gallery-overlay"><div class="gallery-category" data-en="Campus" data-am="ካምፓስ">Campus</div><div class="gallery-title" data-en="Megenagna Campus" data-am="መገናኛ ካምፓስ">Megenagna Campus</div></div></div>
-                <div class="gallery-item"><span class="gallery-icon">🎉</span><div class="gallery-overlay"><div class="gallery-category" data-en="Events" data-am="ዝግጅቶች">Events</div><div class="gallery-title" data-en="Open House 2024" data-am="ክፍት ቤት 2016">Open House 2024</div></div></div>
-                <div class="gallery-item"><span class="gallery-icon">👩‍🎓</span><div class="gallery-overlay"><div class="gallery-category" data-en="Students" data-am="ተማሪዎች">Students</div><div class="gallery-title" data-en="Practical Session" data-am="ተግባራዊ ክፍለ ጊዜ">Practical Session</div></div></div>
-                <div class="gallery-item"><span class="gallery-icon">🏅</span><div class="gallery-overlay"><div class="gallery-category" data-en="Awards" data-am="ሽልማቶች">Awards</div><div class="gallery-title" data-en="Excellence Award" data-am="የላቀ ውጤት ሽልማት">Excellence Award</div></div></div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- UPCOMING EVENTS -->
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <h2 class="section-title" style="text-align:center;margin-bottom:40px;"><span data-en="Upcoming" data-am="መጪ">Upcoming</span> <span class="gold-text" data-en="Events" data-am="ዝግጅቶች">Events</span></h2>
-            <div class="events-list">
-                <div class="event-item"><div class="event-date"><div class="event-day">15</div><div class="event-month" data-en="JUN" data-am="ሰኔ">JUN</div></div><div class="event-details"><h3 class="event-title" data-en="Free Makeup Masterclass" data-am="ነፃ የሜካፕ ማስተርክላስ">Free Makeup Masterclass</h3><div class="event-meta"><span>⏰ 2:00 PM - 5:00 PM</span><span>📍 Megenagna Campus</span></div></div><a href="#" class="btn btn-outline-gold" data-en="Register" data-am="ይመዝገቡ">Register</a></div>
-                <div class="event-item"><div class="event-date"><div class="event-day">22</div><div class="event-month" data-en="JUN" data-am="ሰኔ">JUN</div></div><div class="event-details"><h3 class="event-title" data-en="Career Day & Job Fair" data-am="የሙያ ቀን እና የስራ ትርኢት">Career Day & Job Fair</h3><div class="event-meta"><span>⏰ 10:00 AM - 4:00 PM</span><span>📍 All Campuses</span></div></div><a href="#" class="btn btn-outline-gold" data-en="Learn More" data-am="ተጨማሪ">Learn More</a></div>
-                <div class="event-item"><div class="event-date"><div class="event-day">01</div><div class="event-month" data-en="JUL" data-am="ሐምሌ">JUL</div></div><div class="event-details"><h3 class="event-title" data-en="New Intake Registration Opens" data-am="አዲስ የምዝገባ ቅበላ ይከፈታል">New Intake Registration Opens</h3><div class="event-meta"><span>⏰ All Day</span><span>📍 Online & Campuses</span></div></div><a href="register.html" class="btn btn-gold" data-en="Register Now" data-am="አሁን ይመዝገቡ">Register Now</a></div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA -->
-    <section class="cta-section">
-        <div class="container">
-            <h2 class="cta-title" data-en="Never Miss an Update" data-am="ዝማኔ ፈጽሞ አያምልጥዎ">Never Miss an Update</h2>
-            <p style="color:var(--black-primary);margin-bottom:24px;opacity:0.9;" data-en="Follow us on social media for the latest news and events" data-am="ለቅርብ ጊዜ ዜናዎች እና ዝግጅቶች በማህበራዊ ሚዲያ ይከታተሉን">Follow us on social media for the latest news and events</p>
-            <div style="display:flex;gap:16px;justify-content:center;"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="btn btn-black">📘 Facebook</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="btn btn-black">🎵 TikTok</a></div>
-        </div>
-    </section>
-    
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div><div class="logo-main" style="color:var(--gold-primary);">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div><p class="footer-desc" data-en="Ethiopia's first fully established professional beauty college." data-am="የኢትዮጵያ የመጀመሪያው ሙሉ በሙሉ የተቋቋመ ሙያዊ የውበት ኮሌጅ።">Ethiopia's first fully established professional beauty college.</p><div class="social-links"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" class="social-link">📘</a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" class="social-link">🎵</a></div></div>
-                <div><h4 class="footer-title" data-en="Quick Links" data-am="ፈጣን አገናኞች">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="courses.html">Courses</a></li><li><a href="news-events.html">News & Events</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-                <div><h4 class="footer-title" data-en="Our Branches" data-am="ቅርንጫፎቻችን">Our Branches</h4><ul class="footer-links"><li>📍 Megenagna (Main)</li><li>📍 Arada</li><li>📍 Merkato</li><li>📍 Gofa</li></ul></div>
-                <div class="footer-contact"><h4 class="footer-title" data-en="Contact Us" data-am="ያግኙን">Contact Us</h4><p>📍 Addis Ababa, Ethiopia</p><p>📞 0991171819 / 0911221032</p><p>✉️ lovelybeautycollage@proton.me</p></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 Lovely Beauty College and Training Center. <span data-en="All rights reserved." data-am="መብቱ በህግ የተጠበቀ ነው።">All rights reserved.</span></p>
-                <p class="footer-credit"><span data-en="Powered by" data-am="የተጎላበተው በ">Powered by</span> <a href="https://addispowerwebsolution.pages.dev" target="_blank">Addis Power Web Solution</a></p>
-            </div>
+            <p>© 2026 Lovely Beauty College and Training Center. All rights reserved.</p>
+            <p style="margin-top:8px;">Powered by <a href="http://addispower.pages.dev/" target="_blank">Addis Power Web Solution</a></p>
         </div>
     </footer>
-    
+
     <script>
-        // Mobile Menu
+        const firebaseConfig = { apiKey: "AIzaSyCn5PGyIgPobaL8WE4E89dFQwcjsx9Pcqs", authDomain: "lovely-beauty-college.firebaseapp.com", projectId: "lovely-beauty-college", storageBucket: "lovely-beauty-college.firebasestorage.app", messagingSenderId: "283710330376", appId: "1:283710330376:web:d34276a5918500b020e3bd" };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        
+        const categoryIcons = { 'News': '📰', 'Event': '📅', 'Announcement': '📢', 'Success Story': '🏆' };
+        const categoryClass = { 'News': 'cat-news', 'Event': 'cat-event', 'Announcement': 'cat-announcement', 'Success Story': 'cat-success' };
+        
+        async function loadNews() {
+            const grid = document.getElementById('newsGrid');
+            try {
+                const snapshot = await db.collection('news').orderBy('createdAt', 'desc').get();
+                if (snapshot.empty) { grid.innerHTML = '<div class="empty">📭 No news posted yet. Check back soon!</div>'; return; }
+                grid.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const n = doc.data();
+                    const card = document.createElement('div');
+                    card.className = 'news-card';
+                    card.innerHTML = `
+                        <div class="news-image">${categoryIcons[n.category] || '📰'}</div>
+                        <div class="news-content">
+                            <span class="news-category ${categoryClass[n.category] || 'cat-news'}">${n.category || 'News'}</span>
+                            <div class="news-date">📅 ${n.date || 'N/A'}</div>
+                            <h3 class="news-title">${n.title}</h3>
+                            <p class="news-excerpt">${n.content}</p>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                grid.innerHTML = '<div class="empty">❌ Error loading news. Please try again later.</div>';
+                console.error('News load error:', error);
+            }
+        }
+        
+        loadNews();
+        
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navMenu = document.getElementById('navMenu');
         if(mobileMenuBtn) { mobileMenuBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰'; }); }
-        document.querySelectorAll('.nav-link').forEach(l => { l.addEventListener('click', () => { navMenu.classList.remove('active'); if(mobileMenuBtn) mobileMenuBtn.textContent = '☰'; }); });
-        
-        // Language
-        let currentLang = localStorage.getItem('lovelyLang') || 'en';
-        function setLanguage(lang) { currentLang = lang; localStorage.setItem('lovelyLang', lang); document.querySelectorAll('[data-en][data-am]').forEach(el => { const text = el.getAttribute(`data-${lang}`); if(text) el.textContent = text; }); document.getElementById('langToggle').textContent = lang === 'en' ? 'አማ / EN' : 'EN / አማ'; document.documentElement.lang = lang; }
-        document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'en' ? 'am' : 'en'));
-        setLanguage(currentLang);
-        
-        // Header Shadow
-        window.addEventListener('scroll', () => { document.querySelector('.header').style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.6)' : '0 4px 20px rgba(0,0,0,0.5)'; });
     </script>
 </body>
 </html>
