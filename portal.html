@@ -1,166 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Portal | Lovely Beauty College</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #0A0A0A; color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        
-        /* Both screens */
-        #loginScreen, #dashboardScreen { max-width: 500px; width: 100%; margin: 0 auto; }
-        #dashboardScreen { display: none; }
-        
-        /* Login Card */
-        .login-card { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 24px; padding: 40px 30px; text-align: center; }
-        .login-card h1 { color: #D4AF37; font-size: 28px; margin-bottom: 10px; }
-        .login-card h2 { color: #D4AF37; font-size: 18px; margin-bottom: 30px; }
-        .login-card input { width: 100%; padding: 15px; margin: 10px 0; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; }
-        .login-card button { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 12px; font-size: 20px; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        .demo-box { background: #222; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; }
-        .demo-box p { margin: 5px 0; }
-        .demo-box code { background: #000; padding: 3px 8px; border-radius: 5px; color: #D4AF37; }
-        
-        /* Dashboard */
-        .header { background: #0A0A0A; border-bottom: 2px solid #D4AF37; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .header h1 { color: #D4AF37; font-size: 18px; }
-        .logout-btn { background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .student-card { background: #1A1A1A; border: 1px solid #D4AF37; border-radius: 20px; padding: 25px; margin-bottom: 20px; }
-        .student-header { display: flex; align-items: center; margin-bottom: 20px; }
-        .avatar { width: 60px; height: 60px; background: #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; color: black; margin-right: 15px; }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .info-item { background: #0A0A0A; padding: 12px; border-radius: 10px; }
-        .info-item strong { color: #D4AF37; display: block; margin-bottom: 5px; }
-        .course-item { display: flex; align-items: center; padding: 15px; background: #0A0A0A; border-radius: 12px; margin-bottom: 10px; }
-        .course-icon { width: 45px; height: 45px; background: #D4AF37; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-right: 15px; color: black; }
-        .progress-bar { height: 6px; background: #333; border-radius: 3px; margin-top: 8px; }
-        .progress-fill { height: 100%; background: #D4AF37; border-radius: 3px; width: 45%; }
+        /* Clean, simple styling */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0A0A0A; color: white; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .container { background: #1A1A1A; padding: 40px; border-radius: 24px; border: 2px solid #D4AF37; max-width: 450px; width: 100%; box-shadow: 0 0 30px rgba(212, 175, 55, 0.1); text-align: center; }
+        h1 { color: #D4AF37; margin-bottom: 10px; }
+        p { color: #B0B0B0; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; color: #D4AF37; margin-bottom: 8px; font-weight: bold; }
+        input { width: 100%; padding: 14px; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; box-sizing: border-box; }
+        button { background: #D4AF37; color: black; border: none; width: 100%; padding: 16px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: all 0.2s; margin-top: 15px; }
+        button:hover { background: #F5D76E; }
+        #message { margin-top: 20px; font-weight: bold; min-height: 24px; }
+        .success { color: #4CAF50; }
+        .error { color: #dc3545; }
+        .demo-hint { background: #222; padding: 12px; border-radius: 12px; margin-bottom: 25px; font-size: 14px; border-left: 4px solid #D4AF37; }
+        .demo-hint code { background: black; padding: 2px 6px; border-radius: 4px; color: #D4AF37; }
     </style>
 </head>
 <body>
-    <!-- LOGIN SCREEN - Always visible first -->
-    <div id="loginScreen">
-        <div class="login-card">
-            <h1>🎓 LOVELY BEAUTY</h1>
-            <h2>Student Portal</h2>
-            
-            <div class="demo-box">
-                <p><strong>📋 DEMO ACCESS</strong></p>
-                <p>Student ID: <code>LBC-001</code></p>
-                <p>PIN: <code>1234</code></p>
-                <p style="color:#aaa; font-size:12px; margin-top:10px;">👇 Fields are pre-filled</p>
-            </div>
-            
-            <input type="text" id="studentIdInput" placeholder="Student ID" value="LBC-001">
-            <input type="password" id="pinInput" placeholder="PIN" value="1234">
-            <button onclick="manualLogin()">🔐 LOGIN TO DASHBOARD</button>
-            <p id="loginError" style="color:#f44336; margin-top:15px;"></p>
+    <div class="container">
+        <h1>🎓 Student Portal</h1>
+        <p>Lovely Beauty College</p>
+        
+        <div class="demo-hint">
+            <strong>🔑 Test Credentials</strong><br>
+            Student ID: <code>LBC-001</code><br>
+            PIN: <code>1234</code> (demo unlock)
         </div>
-    </div>
-    
-    <!-- DASHBOARD SCREEN - Hidden until login -->
-    <div id="dashboardScreen">
-        <div class="header">
-            <h1>🎓 LOVELY BEAUTY COLLEGE</h1>
-            <button class="logout-btn" onclick="logout()">🚪 LOGOUT</button>
+
+        <div class="form-group">
+            <label>Student ID</label>
+            <input type="text" id="studentId" placeholder="e.g., LBC-001" value="LBC-001">
+        </div>
+        <div class="form-group">
+            <label>Security PIN</label>
+            <input type="password" id="pin" placeholder="Enter PIN" value="1234">
         </div>
         
-        <div class="student-card">
-            <div class="student-header">
-                <div class="avatar" id="studentInitials">ST</div>
-                <div>
-                    <h2 id="studentName" style="margin-bottom:5px;">Addis Kebede</h2>
-                    <p style="color:#D4AF37;">Student ID: <span id="studentIdDisplay">LBC-001</span></p>
-                </div>
-            </div>
-            
-            <div class="info-grid">
-                <div class="info-item"><strong>Email</strong> <span id="infoEmail">agoodperception@gmail.com</span></div>
-                <div class="info-item"><strong>Phone</strong> <span id="infoPhone">09f573354</span></div>
-                <div class="info-item"><strong>Enrolled</strong> <span id="infoDate">2026-04-23</span></div>
-                <div class="info-item"><strong>Status</strong> ✅ Active</div>
-            </div>
-        </div>
-        
-        <div class="student-card">
-            <h3 style="color:#D4AF37; margin-bottom:20px;">📚 My Courses</h3>
-            <div class="course-item">
-                <div class="course-icon">💇</div>
-                <div style="flex:1;">
-                    <h4>Hairdressing & Barbering</h4>
-                    <div class="progress-bar"><div class="progress-fill" style="width:45%;"></div></div>
-                    <p style="color:#aaa; font-size:12px; margin-top:5px;">45% Complete</p>
-                </div>
-            </div>
-            <div class="course-item">
-                <div class="course-icon">💄</div>
-                <div style="flex:1;">
-                    <h4>Makeup Artistry</h4>
-                    <div class="progress-bar"><div class="progress-fill" style="width:20%;"></div></div>
-                    <p style="color:#aaa; font-size:12px; margin-top:5px;">20% Complete</p>
-                </div>
-            </div>
-        </div>
+        <button onclick="login()">Access My Dashboard</button>
+        <div id="message"></div>
     </div>
 
     <script>
-        // Hardcoded demo student data
-        const DEMO_STUDENT = {
-            full_name: 'Addis Kebede',
-            email: 'agoodperception@gmail.com',
-            phone: '09f573354',
-            student_id: 'LBC-001',
-            enrollment_date: '2026-04-23'
-        };
+        // --- REAL CONFIGURATION ---
+        const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtZHJ3d2F6dHlmZmZua3J2d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwODAzNzYsImV4cCI6MjA5MTY1NjM3Nn0.IKQ1eevZaO6uluDUU8PaqrD4uuQNy_Ex61n_dD2Qa8g';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        // Check if already logged in
-        const saved = sessionStorage.getItem('lovelyStudent');
-        if (saved) {
-            showDashboard(JSON.parse(saved));
-        }
-        
-        function manualLogin() {
-            const studentId = document.getElementById('studentIdInput').value.trim().toUpperCase();
-            const pin = document.getElementById('pinInput').value;
-            const errorEl = document.getElementById('loginError');
+        async function login() {
+            const studentId = document.getElementById('studentId').value.trim().toUpperCase();
+            const pin = document.getElementById('pin').value;
+            const msgDiv = document.getElementById('message');
             
-            errorEl.textContent = '';
-            
+            // Reset message
+            msgDiv.textContent = '';
+            msgDiv.className = '';
+
+            // 1. Demo PIN Check (You can replace this logic later)
             if (pin !== '1234') {
-                errorEl.textContent = '❌ PIN must be 1234';
+                msgDiv.textContent = 'Incorrect PIN (Demo PIN: 1234)';
+                msgDiv.className = 'error';
                 return;
             }
-            
-            if (studentId === 'LBC-001') {
-                // Use demo student
-                sessionStorage.setItem('lovelyStudent', JSON.stringify(DEMO_STUDENT));
-                showDashboard(DEMO_STUDENT);
-            } else {
-                errorEl.textContent = '❌ Student not found. Try LBC-001';
+
+            msgDiv.textContent = 'Connecting to database...';
+            msgDiv.className = 'success';
+
+            try {
+                // 2. REAL DATABASE QUERY
+                const { data: student, error } = await supabase
+                    .from('students')
+                    .select('*')
+                    .eq('student_id', studentId)
+                    .single();
+
+                if (error) {
+                    console.error('Supabase error:', error);
+                    msgDiv.textContent = 'Database error. Please check console.';
+                    msgDiv.className = 'error';
+                    return;
+                }
+
+                if (!student) {
+                    msgDiv.textContent = 'Student ID not found.';
+                    msgDiv.className = 'error';
+                    return;
+                }
+
+                // 3. SUCCESS! Save to session and redirect
+                msgDiv.textContent = `Welcome, ${student.full_name}! Redirecting...`;
+                sessionStorage.setItem('currentStudent', JSON.stringify(student));
+                
+                // Redirect to a dedicated dashboard page or show inline (redirect is cleaner)
+                window.location.href = 'student-dashboard.html';
+                
+            } catch (err) {
+                console.error('Unexpected error:', err);
+                msgDiv.textContent = 'An unexpected error occurred.';
+                msgDiv.className = 'error';
             }
-        }
-        
-        function showDashboard(student) {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('dashboardScreen').style.display = 'block';
-            
-            // Update all fields
-            document.getElementById('studentName').textContent = student.full_name;
-            document.getElementById('studentIdDisplay').textContent = student.student_id;
-            document.getElementById('infoEmail').textContent = student.email;
-            document.getElementById('infoPhone').textContent = student.phone;
-            document.getElementById('infoDate').textContent = student.enrollment_date;
-            
-            const initials = student.full_name.split(' ').map(n => n[0]).join('').toUpperCase();
-            document.getElementById('studentInitials').textContent = initials;
-        }
-        
-        function logout() {
-            sessionStorage.removeItem('lovelyStudent');
-            document.getElementById('dashboardScreen').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'block';
-            document.getElementById('loginError').textContent = '';
         }
     </script>
 </body>
