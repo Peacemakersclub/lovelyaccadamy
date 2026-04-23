@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovely Beauty College | Student Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #0A0A0A; color: white; min-height: 100vh; }
+        
+        /* Login Screen */
+        #loginScreen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .login-card { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 24px; padding: 40px 30px; max-width: 450px; width: 100%; text-align: center; }
+        .login-card h1 { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 10px; }
+        .login-card h2 { color: #D4AF37; font-size: 18px; margin-bottom: 30px; }
+        .login-card input { width: 100%; padding: 15px; margin: 10px 0; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; }
+        .login-card button { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .demo-info { background: #222; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; }
+        .demo-info p { color: #D4AF37; margin-bottom: 5px; }
+        .demo-info code { background: #000; padding: 5px 10px; border-radius: 5px; color: #fff; }
+        .error { color: #f44336; margin-top: 15px; }
+        .success { color: #4CAF50; margin-top: 15px; }
+        
+        /* Dashboard Screen */
+        #dashboardScreen { display: none; }
+        .header { background: #0A0A0A; border-bottom: 2px solid #D4AF37; padding: 15px 20px; position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 20px; }
+        .logout-btn { background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        .welcome-banner { background: linear-gradient(135deg, #D4AF37, #996515); color: black; padding: 30px; border-radius: 20px; margin-bottom: 30px; }
+        .welcome-banner h2 { font-size: 28px; margin-bottom: 10px; }
+        
+        .student-info { display: flex; align-items: center; margin-bottom: 20px; }
+        .avatar { width: 60px; height: 60px; background: #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: black; margin-right: 15px; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: #1A1A1A; border: 1px solid #D4AF37; border-radius: 15px; padding: 20px; text-align: center; }
+        .stat-card h3 { color: #D4AF37; font-size: 32px; margin-bottom: 5px; }
+        .stat-card p { color: #aaa; font-size: 14px; }
+        
+        .dashboard-card { background: #1A1A1A; border: 1px solid #D4AF37; border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        .dashboard-card h3 { color: #D4AF37; margin-bottom: 20px; font-size: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        
+        .course-item { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #333; }
+        .course-item:last-child { border-bottom: none; }
+        .course-icon { width: 50px; height: 50px; background: #D4AF37; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 24px; color: black; }
+        .course-info h4 { margin-bottom: 5px; }
+        .course-info p { color: #aaa; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen">
+        <div class="login-card">
+            <h1>🎓 LOVELY BEAUTY</h1>
+            <h2>Student Portal</h2>
+            
+            <div class="demo-info">
+                <p>📋 <strong>Demo Access</strong></p>
+                <p>Student ID: <code>LBC-001</code></p>
+                <p>PIN: <code>1234</code></p>
+                <p style="color:#aaa; font-size:12px; margin-top:10px;">👇 Or search any student by ID</p>
+            </div>
+            
+            <input type="text" id="studentIdInput" placeholder="Student ID (e.g., LBC-001)" value="LBC-001">
+            <input type="password" id="pinInput" placeholder="PIN (enter 1234)" value="1234">
+            <button onclick="login()">🔐 LOGIN TO PORTAL</button>
+            <div id="loginMessage"></div>
+            <p style="color:#666; margin-top:20px; font-size:12px;">
+                <a href="index.html" style="color:#D4AF37;">← Back to Home</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- DASHBOARD SCREEN -->
+    <div id="dashboardScreen">
+        <header class="header">
+            <h1>🎓 LOVELY BEAUTY COLLEGE</h1>
+            <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        </header>
+        
+        <div class="container">
+            <div class="student-info">
+                <div class="avatar" id="studentInitials">ST</div>
+                <div>
+                    <h2 id="studentName">Loading...</h2>
+                    <p id="studentIdDisplay" style="color:#D4AF37;">Student ID: --</p>
+                </div>
+            </div>
+            
+            <div class="welcome-banner">
+                <h2>Welcome back, <span id="firstName">Student</span>! 👋</h2>
+                <p>Here's your learning progress overview</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="activeCourses">2</h3>
+                    <p>Active Courses</p>
+                </div>
+                <div class="stat-card">
+                    <h3>90%</h3>
+                    <p>Attendance Rate</p>
+                </div>
+                <div class="stat-card">
+                    <h3>0</h3>
+                    <p>Certificates</p>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3>📚 My Courses</h3>
+                <div id="coursesList">
+                    <div class="course-item">
+                        <div class="course-icon">💇</div>
+                        <div class="course-info">
+                            <h4>Hairdressing & Barbering</h4>
+                            <p>Progress: 45% | Next class: Monday, 10:00 AM</p>
+                        </div>
+                    </div>
+                    <div class="course-item">
+                        <div class="course-icon">💄</div>
+                        <div class="course-info">
+                            <h4>Makeup Artistry</h4>
+                            <p>Progress: 20% | Next class: Wednesday, 2:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3>📋 Student Information</h3>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                    <div><strong>Full Name:</strong> <span id="infoName">-</span></div>
+                    <div><strong>Email:</strong> <span id="infoEmail">-</span></div>
+                    <div><strong>Phone:</strong> <span id="infoPhone">-</span></div>
+                    <div><strong>Enrolled:</strong> <span id="infoDate">-</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://pmdrwwaztyfffnkrvwkq.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtZHJ3d2F6dHlmZmZua3J2d2txIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwODAzNzYsImV4cCI6MjA5MTY1NjM3Nn0.IKQ1eevZaO6uluDUU8PaqrD4uuQNy_Ex61n_dD2Qa8g';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        let currentStudent = null;
+        
+        // Check if already logged in
+        const savedStudent = sessionStorage.getItem('portalStudent');
+        if (savedStudent) {
+            currentStudent = JSON.parse(savedStudent);
+            showDashboard();
+        }
+        
+        async function login() {
+            const studentId = document.getElementById('studentIdInput').value.trim().toUpperCase();
+            const pin = document.getElementById('pinInput').value;
+            const msg = document.getElementById('loginMessage');
+            
+            msg.className = '';
+            msg.textContent = '';
+            
+            if (!studentId) {
+                msg.className = 'error';
+                msg.textContent = 'Please enter Student ID';
+                return;
+            }
+            
+            if (pin !== '1234') {
+                msg.className = 'error';
+                msg.textContent = 'PIN must be 1234 for demo';
+                return;
+            }
+            
+            msg.textContent = '🔍 Searching...';
+            msg.style.color = '#D4AF37';
+            
+            // Try to find student in database
+            const { data: student, error } = await supabase
+                .from('students')
+                .select('*')
+                .eq('student_id', studentId)
+                .single();
+            
+            if (error || !student) {
+                // If student not found, use demo student
+                if (studentId === 'LBC-001') {
+                    currentStudent = {
+                        full_name: 'Addis Kebede',
+                        email: 'agoodperception@gmail.com',
+                        phone: '09f573354',
+                        student_id: 'LBC-001',
+                        enrollment_date: '2026-04-23'
+                    };
+                    msg.className = 'success';
+                    msg.textContent = '✅ Demo student loaded!';
+                } else {
+                    msg.className = 'error';
+                    msg.textContent = 'Student not found. Try LBC-001';
+                    return;
+                }
+            } else {
+                currentStudent = student;
+                msg.className = 'success';
+                msg.textContent = '✅ Student found!';
+            }
+            
+            // Save and show dashboard
+            sessionStorage.setItem('portalStudent', JSON.stringify(currentStudent));
+            showDashboard();
+        }
+        
+        function showDashboard() {
+            if (!currentStudent) return;
+            
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboardScreen').style.display = 'block';
+            
+            // Update all dashboard fields
+            document.getElementById('studentName').textContent = currentStudent.full_name;
+            document.getElementById('studentIdDisplay').textContent = 'Student ID: ' + currentStudent.student_id;
+            document.getElementById('firstName').textContent = currentStudent.full_name.split(' ')[0];
+            
+            const initials = currentStudent.full_name.split(' ').map(n => n[0]).join('').toUpperCase();
+            document.getElementById('studentInitials').textContent = initials;
+            
+            document.getElementById('infoName').textContent = currentStudent.full_name;
+            document.getElementById('infoEmail').textContent = currentStudent.email || 'Not provided';
+            document.getElementById('infoPhone').textContent = currentStudent.phone || 'Not provided';
+            document.getElementById('infoDate').textContent = currentStudent.enrollment_date || 'N/A';
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('portalStudent');
+            currentStudent = null;
+            document.getElementById('dashboardScreen').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('studentIdInput').value = 'LBC-001';
+            document.getElementById('pinInput').value = '1234';
+            document.getElementById('loginMessage').textContent = '';
+        }
+    </script>
+</body>
+</html>
