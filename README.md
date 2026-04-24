@@ -1,32 +1,37 @@
-# Lovely Plus Beauty College
+# Lovely Beauty College & Training Center
 
-**The 1st Private Beauty College in Ethiopia | Est. 1998**
+**Ethiopia's First Professional Beauty College | Est. 1998**
 
 ## 🌐 Live Website
-🔗 [lovely-beauty-college.pages.dev](https://lovely-beauty-college.pages.dev) *(after deployment)*
+🔗 [peacemakersclub.github.io/lovelyaccadamy](https://peacemakersclub.github.io/lovelyaccadamy)
+
+---
 
 ## 📋 Project Overview
 
-Complete student portal and website for Lovely Plus Beauty College.
+Complete student portal and website for Lovely Beauty College and Training Center.
 
 ### ✅ Features
 - 🎨 Gold & Black Luxury UI Design
 - 🌍 English / Amharic Language Toggle
-- 👩‍🎓 Real Student Portal (Login + Dashboard)
-- 👑 Admin Dashboard (Course & Student Management)
-- 📜 Digital Certificate Generation
-- 📅 News & Events with YouTube Integration
-- 🖼️ Cloudinary Image Gallery
-- 📍 Multi-Branch Location System
-- 📧 Functional Contact Form
+- 👩‍🎓 Student Registration with Email/Password
+- 🔐 Student Portal (Login + Personal Dashboard)
+- 🔑 Password Reset via Email
+- 👑 Admin Dashboard (Student & News Management)
+- 📰 Dynamic News & Events System
+- 📸 Photo Gallery with Filter Categories
+- 💇 Course Content Pages
+- 📍 Multi-Branch Campus Locations
+- 📞 Contact Form
+- 📱 Fully Mobile Responsive
 
 ### 🛠️ Tech Stack
 | Layer | Technology | Hosting |
 |-------|------------|---------|
-| Frontend | HTML, CSS, JavaScript | Cloudflare Pages |
-| Backend | PocketBase | Fly.io |
-| Database | SQLite | Fly.io |
-| Images | Cloudinary | Cloudinary |
-| Email | Web3Forms / Resend | Free Tier |
+| Frontend | HTML, CSS, JavaScript | GitHub Pages |
+| Authentication | Firebase Auth | Google Cloud |
+| Database | Firebase Firestore | Google Cloud |
+| Storage | Firebase Storage | Google Cloud |
+| Hosting | GitHub Pages | Free |
 
-### 📁 Project Structure
+### 📁 Page Structure
