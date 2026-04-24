@@ -14,7 +14,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-body); background: var(--black-primary); color: var(--white); min-height: 100vh; }
         
-        /* Header Navigation */
+        /* Header */
         .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
         .header-container { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -37,8 +37,8 @@
         }
         
         /* Main Content */
-        .main-container { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - var(--header-height)); padding: 20px; }
-        #loginScreen, #forgotScreen, #dashboardScreen { max-width: 480px; width: 100%; }
+        .main-container { display: flex; align-items: center; justify-content: center; padding: 40px 20px; min-height: calc(100vh - var(--header-height) - 300px); }
+        #loginScreen, #forgotScreen, #dashboardScreen { max-width: 480px; width: 100%; margin: auto; }
         #forgotScreen, #dashboardScreen { display: none; }
         
         .card { background: var(--black-card); border: 2px solid var(--gold-primary); border-radius: 24px; padding: 35px 28px; text-align: center; animation: fadeIn 0.4s ease; }
@@ -63,9 +63,6 @@
         .info { color: #2196F3; }
         
         .divider { border-top: 1px solid rgba(212, 175, 55, 0.15); margin: 20px 0; }
-        .footer-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; font-size: 12px; }
-        .footer-links a { color: var(--gray-mid); text-decoration: none; }
-        .footer-links a:hover { color: var(--gold-primary); }
         
         /* Dashboard */
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid var(--gold-primary); }
@@ -88,7 +85,7 @@
     </style>
 </head>
 <body>
-    <!-- HEADER NAVIGATION -->
+    <!-- HEADER -->
     <header class="header">
         <div class="header-container">
             <a href="index.html" class="logo">
@@ -112,80 +109,106 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <div class="main-container">
-        <!-- LOGIN SCREEN -->
         <div id="loginScreen">
             <div class="card">
                 <h1>🎓 Student Portal</h1>
                 <h2>Login to your account</h2>
-                
-                <div class="input-group">
-                    <label>Email Address</label>
-                    <input type="email" id="email" placeholder="your@email.com">
-                </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" id="password" placeholder="••••••••">
-                </div>
+                <div class="input-group"><label>Email Address</label><input type="email" id="email" placeholder="your@email.com"></div>
+                <div class="input-group"><label>Password</label><input type="password" id="password" placeholder="••••••••"></div>
                 <button onclick="login()" id="loginBtn">🔐 Login</button>
                 <div id="loginMsg" class="message"></div>
                 <button class="link-btn" onclick="showForgot()">Forgot Password?</button>
-                
                 <div class="divider"></div>
-                <p style="color:var(--gray-mid); font-size:13px;">
-                    Don't have an account? <a href="register.html" style="color:var(--gold-primary);">Register here</a>
-                </p>
+                <p style="color:var(--gray-mid); font-size:13px;">Don't have an account? <a href="register.html" style="color:var(--gold-primary);">Register here</a></p>
             </div>
         </div>
         
-        <!-- FORGOT PASSWORD SCREEN -->
         <div id="forgotScreen">
             <div class="card">
                 <h1>🔑 Reset Password</h1>
                 <p style="color:var(--gray-mid); margin-bottom:20px;">Enter your email to receive a reset link</p>
-                
-                <div class="input-group">
-                    <label>Email Address</label>
-                    <input type="email" id="resetEmail" placeholder="your@email.com">
-                </div>
+                <div class="input-group"><label>Email Address</label><input type="email" id="resetEmail" placeholder="your@email.com"></div>
                 <button onclick="resetPassword()" id="resetBtn">📧 Send Reset Link</button>
                 <div id="resetMsg" class="message"></div>
                 <button class="link-btn" onclick="showLogin()">← Back to Login</button>
             </div>
         </div>
         
-        <!-- DASHBOARD SCREEN -->
         <div id="dashboardScreen">
             <div class="card">
                 <div class="dash-header">
                     <h1 style="font-size:20px; margin:0;">🎓 My Dashboard</h1>
                     <button class="logout-btn" onclick="logout()">🚪 Logout</button>
                 </div>
-                
                 <div class="student-header">
                     <div class="avatar" id="initials">ST</div>
-                    <div>
-                        <h3 id="dashName">Student</h3>
-                        <p id="dashId">ID: --</p>
-                    </div>
+                    <div><h3 id="dashName">Student</h3><p id="dashId">ID: --</p></div>
                 </div>
-                
                 <div class="info-grid">
                     <div class="info-item"><strong>Email</strong> <span id="dashEmail">-</span></div>
                     <div class="info-item"><strong>Phone</strong> <span id="dashPhone">-</span></div>
                     <div class="info-item"><strong>Enrolled</strong> <span id="dashDate">-</span></div>
                     <div class="info-item"><strong>Status</strong> <span style="color:#4CAF50;">✅ Active</span></div>
                 </div>
-                
                 <h3 style="color:var(--gold-primary); margin:18px 0 12px; text-align:left; font-size:16px;">📚 My Courses</h3>
                 <div id="coursesContainer"></div>
             </div>
         </div>
     </div>
 
+    <!-- FOOTER -->
+    <footer style="background: var(--black-primary); padding: 50px 20px 30px; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+        <div style="max-width:1200px; margin:0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 30px; margin-bottom: 30px; text-align: left;">
+                <div>
+                    <div style="font-family: var(--font-heading); font-size: 18px; color: var(--gold-primary); letter-spacing: 2px;">LOVELY BEAUTY</div>
+                    <div style="font-size: 9px; color: var(--gray-mid); letter-spacing: 1px;">COLLEGE & TRAINING CENTER</div>
+                    <p style="color: var(--gray-mid); font-size: 13px; margin: 12px 0;">Ethiopia's first fully established professional beauty college, shaping careers since 1998.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Quick Links</h4>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <a href="index.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Home</a>
+                        <a href="about.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">About Us</a>
+                        <a href="courses.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Courses</a>
+                        <a href="news-events.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">News & Events</a>
+                        <a href="gallery.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Gallery</a>
+                        <a href="portal.html" style="color:var(--gold-primary); text-decoration:none; font-size:13px; font-weight:600;">Student Portal</a>
+                        <a href="contact.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Our Branches</h4>
+                    <div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;">
+                        <span>📍 Megenagna (Main)</span>
+                        <span>📍 Arada</span>
+                        <span>📍 Merkato</span>
+                        <span>📍 Gofa</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Contact Us</h4>
+                    <div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;">
+                        <span>📍 Addis Ababa, Ethiopia</span>
+                        <span>📞 0991171819 / 0911221032</span>
+                        <span>✉️ lovelybeautycollage@proton.me</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center; padding-top:25px; border-top:1px solid rgba(212,175,55,0.1); color:var(--gray-mid); font-size:13px;">
+                <p>© 2026 Lovely Beauty College and Training Center. All rights reserved.</p>
+                <p style="margin-top:6px;">Powered by <a href="http://addispower.pages.dev/" target="_blank" style="color:var(--gold-primary);">Addis Power Web Solution</a></p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Firebase Config
         const firebaseConfig = {
           apiKey: "AIzaSyCn5PGyIgPobaL8WE4E89dFQwcjsx9Pcqs",
           authDomain: "lovely-beauty-college.firebaseapp.com",
@@ -201,17 +224,13 @@
         const emojis = { 'Hairdressing': '💇', 'Makeup': '💄', 'Nails': '💅', 'Skincare': '🧖', 'Eyelash': '👁️', 'Massage': '💆' };
         function getEmoji(name) { if (!name) return '📚'; for (const [k, e] of Object.entries(emojis)) { if (name.includes(k)) return e; } return '📚'; }
         
-        // Auto-login
-        auth.onAuthStateChanged(async (user) => {
-            if (user) { const doc = await db.collection('students').doc(user.uid).get(); if (doc.exists) showDashboard({ id: user.uid, ...doc.data() }); }
-        });
+        auth.onAuthStateChanged(async (user) => { if (user) { const doc = await db.collection('students').doc(user.uid).get(); if (doc.exists) showDashboard({ id: user.uid, ...doc.data() }); } });
         
-        function showForgot() { document.getElementById('loginScreen').style.display = 'none'; document.getElementById('forgotScreen').style.display = 'block'; document.getElementById('resetMsg').textContent = ''; }
-        function showLogin() { document.getElementById('forgotScreen').style.display = 'none'; document.getElementById('loginScreen').style.display = 'block'; document.getElementById('loginMsg').textContent = ''; }
+        function showForgot() { document.getElementById('loginScreen').style.display = 'none'; document.getElementById('forgotScreen').style.display = 'block'; }
+        function showLogin() { document.getElementById('forgotScreen').style.display = 'none'; document.getElementById('loginScreen').style.display = 'block'; }
         
         async function login() {
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value.trim(), password = document.getElementById('password').value;
             const msg = document.getElementById('loginMsg'), btn = document.getElementById('loginBtn');
             msg.className = 'message'; msg.textContent = '';
             if (!email || !password) { msg.className = 'message error'; msg.textContent = 'Enter email and password'; return; }
@@ -230,20 +249,15 @@
         }
         
         async function resetPassword() {
-            const email = document.getElementById('resetEmail').value.trim();
-            const msg = document.getElementById('resetMsg'), btn = document.getElementById('resetBtn');
+            const email = document.getElementById('resetEmail').value.trim(), msg = document.getElementById('resetMsg'), btn = document.getElementById('resetBtn');
             msg.className = 'message'; msg.textContent = '';
             if (!email) { msg.className = 'message error'; msg.textContent = 'Enter your email'; return; }
             btn.disabled = true; msg.className = 'message info'; msg.textContent = 'Sending reset link...';
             try {
                 await auth.sendPasswordResetEmail(email, { url: 'https://peacemakersclub.github.io/lovelyaccadamy/portal.html', handleCodeInApp: false });
                 msg.className = 'message success'; msg.innerHTML = '✅ Reset link sent!<br><small>Check your email (spam too).</small>';
-            } catch (e) {
-                msg.className = 'message error';
-                if (e.code === 'auth/user-not-found') msg.textContent = 'No account with this email';
-                else if (e.code === 'auth/unauthorized-continue-uri') msg.textContent = 'Domain not authorized. Contact admin.';
-                else msg.textContent = e.message;
-            } finally { btn.disabled = false; }
+            } catch (e) { msg.className = 'message error'; msg.textContent = e.message; }
+            finally { btn.disabled = false; }
         }
         
         function showDashboard(student) {
@@ -256,21 +270,13 @@
             document.getElementById('dashPhone').textContent = student.phone || 'N/A';
             document.getElementById('dashDate').textContent = student.enrollment_date || 'N/A';
             document.getElementById('initials').textContent = (student.full_name || 'S').split(' ').map(n => n[0]).join('').toUpperCase();
-            
             const ctr = document.getElementById('coursesContainer'); ctr.innerHTML = '';
-            if (student.courses?.length) {
-                student.courses.forEach(c => {
-                    const p = student.progress?.[c] || 0;
-                    const div = document.createElement('div'); div.className = 'course-item';
-                    div.innerHTML = `<div class="course-icon">${getEmoji(c)}</div><div style="flex:1;"><strong style="font-size:14px;">${c}</strong><div class="progress-bar"><div class="progress-fill" style="width:${p}%;"></div></div><small style="color:var(--gray-dark);">${p}% Complete</small></div>`;
-                    ctr.appendChild(div);
-                });
-            } else { ctr.innerHTML = '<p style="color:var(--gray-mid); text-align:center;">No courses yet</p>'; }
+            if (student.courses?.length) { student.courses.forEach(c => { const p = student.progress?.[c] || 0; const div = document.createElement('div'); div.className = 'course-item'; div.innerHTML = `<div class="course-icon">${getEmoji(c)}</div><div style="flex:1;"><strong style="font-size:14px;">${c}</strong><div class="progress-bar"><div class="progress-fill" style="width:${p}%;"></div></div><small style="color:var(--gray-dark);">${p}% Complete</small></div>`; ctr.appendChild(div); }); }
+            else { ctr.innerHTML = '<p style="color:var(--gray-mid); text-align:center;">No courses yet</p>'; }
         }
         
         function logout() { auth.signOut(); document.getElementById('dashboardScreen').style.display = 'none'; document.getElementById('loginScreen').style.display = 'block'; document.getElementById('email').value = ''; document.getElementById('password').value = ''; }
         
-        // Mobile menu
         const mmb = document.getElementById('mobileMenuBtn'), nm = document.getElementById('navMenu');
         mmb?.addEventListener('click', () => { nm.classList.toggle('active'); mmb.textContent = nm.classList.contains('active') ? '✕' : '☰'; });
     </script>
