@@ -37,7 +37,7 @@
         }
         
         /* Main */
-        .main-container { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - var(--header-height)); padding: 20px; }
+        .main-container { display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
         .card { background: var(--black-card); border: 2px solid var(--gold-primary); border-radius: 24px; padding: 35px 28px; max-width: 500px; width: 100%; text-align: center; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
@@ -125,6 +125,56 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
+    <footer style="background: var(--black-primary); padding: 50px 20px 30px; border-top: 1px solid rgba(212, 175, 55, 0.2);">
+        <div style="max-width:1200px; margin:0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 30px; margin-bottom: 30px; text-align: left;">
+                <div>
+                    <div style="font-family: var(--font-heading); font-size: 18px; color: var(--gold-primary); letter-spacing: 2px;">LOVELY BEAUTY</div>
+                    <div style="font-size: 9px; color: var(--gray-mid); letter-spacing: 1px;">COLLEGE & TRAINING CENTER</div>
+                    <p style="color: var(--gray-mid); font-size: 13px; margin: 12px 0;">Ethiopia's first fully established professional beauty college, shaping careers since 1998.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Quick Links</h4>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <a href="index.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Home</a>
+                        <a href="about.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">About Us</a>
+                        <a href="courses.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Courses</a>
+                        <a href="news-events.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">News & Events</a>
+                        <a href="gallery.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Gallery</a>
+                        <a href="portal.html" style="color:var(--gold-primary); text-decoration:none; font-size:13px; font-weight:600;">Student Portal</a>
+                        <a href="contact.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Our Branches</h4>
+                    <div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;">
+                        <span>📍 Megenagna (Main)</span>
+                        <span>📍 Arada</span>
+                        <span>📍 Merkato</span>
+                        <span>📍 Gofa</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Contact Us</h4>
+                    <div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;">
+                        <span>📍 Addis Ababa, Ethiopia</span>
+                        <span>📞 0991171819 / 0911221032</span>
+                        <span>✉️ lovelybeautycollage@proton.me</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center; padding-top:25px; border-top:1px solid rgba(212,175,55,0.1); color:var(--gray-mid); font-size:13px;">
+                <p>© 2026 Lovely Beauty College and Training Center. All rights reserved.</p>
+                <p style="margin-top:6px;">Powered by <a href="http://addispower.pages.dev/" target="_blank" style="color:var(--gold-primary);">Addis Power Web Solution</a></p>
+            </div>
+        </div>
+    </footer>
+
     <script>
         const firebaseConfig = {
           apiKey: "AIzaSyCn5PGyIgPobaL8WE4E89dFQwcjsx9Pcqs",
@@ -177,7 +227,6 @@
             } finally { btn.disabled = false; }
         });
         
-        // Mobile menu
         const mmb = document.getElementById('mobileMenuBtn'), nm = document.getElementById('navMenu');
         mmb?.addEventListener('click', () => { nm.classList.toggle('active'); mmb.textContent = nm.classList.contains('active') ? '✕' : '☰'; });
     </script>
