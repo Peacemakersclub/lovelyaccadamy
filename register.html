@@ -7,8 +7,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-    <!-- reCAPTCHA Enterprise -->
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcoNsgsAAAAAIda4BgSURzmLAgt6rrB7hZs8Nua"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -58,9 +56,6 @@
         .success { display: block; background: #1a3a1a; color: #4CAF50; border: 1px solid #4CAF50; }
         .error { display: block; background: #3a1a1a; color: #f44336; border: 1px solid #f44336; }
         .info { display: block; background: #1a2a3a; color: #2196F3; border: 1px solid #2196F3; }
-        
-        .recaptcha-notice { font-size: 11px; color: var(--gray-dark); margin-top: 12px; }
-        .recaptcha-notice a { color: var(--gold-primary); }
         
         .divider { border-top: 1px solid rgba(212, 175, 55, 0.15); margin: 20px 0; }
         .footer-links { font-size: 13px; color: var(--gray-mid); }
@@ -118,10 +113,6 @@
                 <button type="submit" id="submitBtn">🔐 Register Now</button>
             </form>
             
-            <p class="recaptcha-notice">
-                🔒 Protected by <a href="https://www.google.com/recaptcha" target="_blank">reCAPTCHA</a> - Google Privacy & Terms
-            </p>
-            
             <div class="divider"></div>
             <p class="footer-links">
                 Already have an account? <a href="portal.html">Login here</a><br>
@@ -162,7 +153,6 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
-        const RECAPTCHA_SITE_KEY = '6LcoNsgsAAAAAIda4BgSURzmLAgt6rrB7hZs8Nua';
         
         document.getElementById('regForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -176,35 +166,68 @@
             
             msg.className = 'message'; msg.textContent = '';
             
+            // Validation
             if (!fullName || !email || !phone || !password || !course) { msg.className = 'message error'; msg.textContent = '❌ Please fill all fields'; return; }
             if (password !== confirmPassword) { msg.className = 'message error'; msg.textContent = '❌ Passwords do not match'; return; }
             if (password.length < 6) { msg.className = 'message error'; msg.textContent = '❌ Password must be at least 6 characters'; return; }
             
-            btn.disabled = true; msg.className = 'message info'; msg.textContent = '⏳ Verifying...';
+            // Basic email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) { msg.className = 'message error'; msg.textContent = '❌ Please enter a valid email address'; return; }
+            
+            // Block common fake email domains
+            const fakeDomains = ['test.com', 'fake.com', 'email.com', 'mailinator.com', 'tempmail.com', 'guerrillamail.com', '10minutemail.com', 'yopmail.com', 'throwaway.com', 'noreply.com', 'noemail.com', 'example.com'];
+            const domain = email.split('@')[1]?.toLowerCase();
+            if (fakeDomains.includes(domain)) { msg.className = 'message error'; msg.textContent = '❌ Please use a valid email address'; return; }
+            
+            btn.disabled = true; msg.className = 'message info'; msg.textContent = '⏳ Creating your account...';
             
             try {
-                // Get reCAPTCHA token
-                const token = await grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, { action: 'REGISTER' });
-                
-                // Create user with reCAPTCHA token
+                // Create auth user
                 const uc = await auth.createUserWithEmailAndPassword(email, password);
                 const studentId = 'LBC-' + Date.now().toString().slice(-6);
                 
+                // Save student data to Firestore
                 await db.collection('students').doc(uc.user.uid).set({
-                    full_name: fullName, email: email, phone: phone, student_id: studentId,
+                    full_name: fullName,
+                    email: email,
+                    phone: phone,
+                    student_id: studentId,
                     enrollment_date: new Date().toISOString().split('T')[0],
-                    courses: [course], progress: { [course]: 0 },
+                    courses: [course],
+                    progress: { [course]: 0 },
+                    emailVerified: false,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 
+                // Send verification email
+                await uc.user.sendEmailVerification({
+                    url: 'https://peacemakersclub.github.io/lovelyaccadamy/portal.html',
+                    handleCodeInApp: false
+                });
+                
                 msg.className = 'message success';
-                msg.innerHTML = `✅ <strong>Registration Successful!</strong><br><br>Your Student ID: <strong style="font-size:18px;">${studentId}</strong><br><br>⚠️ Save this ID! You'll need it.<br><br><a href="portal.html" style="color:#4CAF50;">→ Go to Student Portal</a>`;
+                msg.innerHTML = `✅ <strong>Registration Successful!</strong><br><br>
+                Your Student ID: <strong style="font-size:18px;">${studentId}</strong><br><br>
+                📧 <strong>Verification email sent!</strong><br>
+                Please check your email (including spam folder) and click the verification link before logging in.<br><br>
+                <a href="portal.html" style="color:#4CAF50;">→ Go to Student Portal</a>`;
                 document.getElementById('regForm').reset();
+                
             } catch (error) {
                 msg.className = 'message error';
-                if (error.code === 'auth/email-already-in-use') msg.textContent = '❌ This email is already registered.';
-                else msg.textContent = '❌ ' + error.message;
-            } finally { btn.disabled = false; }
+                if (error.code === 'auth/email-already-in-use') {
+                    msg.textContent = '❌ This email is already registered. Please login or use another email.';
+                } else if (error.code === 'auth/invalid-email') {
+                    msg.textContent = '❌ Invalid email address format.';
+                } else if (error.code === 'auth/weak-password') {
+                    msg.textContent = '❌ Password is too weak. Use at least 6 characters.';
+                } else {
+                    msg.textContent = '❌ Registration failed: ' + error.message;
+                }
+            } finally {
+                btn.disabled = false;
+            }
         });
         
         const mmb = document.getElementById('mobileMenuBtn'), nm = document.getElementById('navMenu');
