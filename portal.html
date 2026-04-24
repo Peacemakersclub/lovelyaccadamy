@@ -8,100 +8,179 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
+        :root { --black-primary: #0A0A0A; --black-card: #1A1A1A; --gold-primary: #D4AF37; --gold-light: #F5D76E; --white: #FFFFFF; --gray-mid: #B0B0B0; --gray-dark: #666666; --header-height: 70px; --font-heading: 'Playfair Display', serif; --font-body: 'Poppins', sans-serif; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: #0A0A0A; color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        body { font-family: var(--font-body); background: var(--black-primary); color: var(--white); min-height: 100vh; }
         
-        #loginScreen, #forgotScreen, #dashboardScreen { max-width: 500px; width: 100%; }
+        /* Header Navigation */
+        .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        .header-container { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold-primary), #996515); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+        .logo-text { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
+        .logo-main { font-size: 18px; color: var(--gold-primary); letter-spacing: 2px; }
+        .logo-sub { font-size: 9px; color: var(--gray-mid); letter-spacing: 1px; }
+        .nav-menu { display: flex; align-items: center; gap: 20px; }
+        .nav-link { font-weight: 500; font-size: 13px; color: var(--gray-mid); text-decoration: none; padding: 8px 0; transition: color 0.3s; white-space: nowrap; }
+        .nav-link:hover, .nav-link.active { color: var(--gold-primary); }
+        .portal-btn { background: var(--gold-primary); color: var(--black-primary) !important; padding: 8px 16px; border-radius: 50px; font-weight: 600; }
+        .portal-btn:hover { background: var(--gold-light); }
+        .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 26px; cursor: pointer; }
+        
+        @media (max-width: 900px) {
+            .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 20px; border-bottom: 2px solid var(--gold-primary); z-index: 999; gap: 12px; }
+            .nav-menu.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .portal-btn { text-align: center; width: 100%; }
+        }
+        
+        /* Main Content */
+        .main-container { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - var(--header-height)); padding: 20px; }
+        #loginScreen, #forgotScreen, #dashboardScreen { max-width: 480px; width: 100%; }
         #forgotScreen, #dashboardScreen { display: none; }
         
-        .card { background: #1A1A1A; border: 2px solid #D4AF37; border-radius: 24px; padding: 35px 25px; text-align: center; }
-        h1 { color: #D4AF37; font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 8px; }
-        h2 { color: #D4AF37; font-size: 16px; margin-bottom: 25px; font-weight: 400; }
+        .card { background: var(--black-card); border: 2px solid var(--gold-primary); border-radius: 24px; padding: 35px 28px; text-align: center; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        input { width: 100%; padding: 14px; margin: 8px 0; background: black; border: 1px solid #D4AF37; color: white; border-radius: 12px; font-size: 16px; }
-        button { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        button:disabled { opacity: 0.6; }
-        .link-btn { background: none; border: none; color: #D4AF37; text-decoration: underline; cursor: pointer; font-size: 13px; padding: 0; margin-top: 10px; }
+        h1 { color: var(--gold-primary); font-family: var(--font-heading); font-size: 24px; margin-bottom: 6px; }
+        h2 { color: var(--gold-primary); font-size: 15px; margin-bottom: 24px; font-weight: 400; }
         
-        .message { margin-top: 15px; font-weight: bold; min-height: 24px; }
+        .input-group { margin-bottom: 14px; text-align: left; }
+        .input-group label { display: block; color: var(--gold-primary); font-size: 12px; margin-bottom: 5px; font-weight: 500; }
+        input { width: 100%; padding: 13px 14px; background: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.3); color: var(--white); border-radius: 12px; font-size: 15px; transition: border-color 0.3s; }
+        input:focus { outline: none; border-color: var(--gold-primary); }
+        
+        button { width: 100%; padding: 14px; background: var(--gold-primary); color: var(--black-primary); border: none; border-radius: 12px; font-size: 17px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        button:hover { background: var(--gold-light); transform: translateY(-1px); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .link-btn { background: none; border: none; color: var(--gold-primary); text-decoration: underline; cursor: pointer; font-size: 13px; padding: 0; margin-top: 12px; }
+        
+        .message { margin-top: 14px; font-weight: 500; min-height: 22px; font-size: 14px; }
         .success { color: #4CAF50; }
         .error { color: #f44336; }
         .info { color: #2196F3; }
         
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #D4AF37; }
-        .logout-btn { background: #dc3545; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .divider { border-top: 1px solid rgba(212, 175, 55, 0.15); margin: 20px 0; }
+        .footer-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; font-size: 12px; }
+        .footer-links a { color: var(--gray-mid); text-decoration: none; }
+        .footer-links a:hover { color: var(--gold-primary); }
         
-        .student-header { display: flex; align-items: center; margin-bottom: 20px; }
-        .avatar { width: 60px; height: 60px; background: #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; color: black; margin-right: 15px; }
+        /* Dashboard */
+        .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid var(--gold-primary); }
+        .logout-btn { background: #dc3545; color: white; border: none; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; }
         
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; text-align: left; }
-        .info-item { background: #0A0A0A; padding: 12px; border-radius: 10px; }
-        .info-item strong { color: #D4AF37; display: block; margin-bottom: 4px; font-size: 12px; }
+        .student-header { display: flex; align-items: center; margin-bottom: 20px; text-align: left; }
+        .avatar { width: 55px; height: 55px; background: var(--gold-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; color: var(--black-primary); margin-right: 14px; flex-shrink: 0; }
+        .student-header h3 { font-size: 20px; margin-bottom: 2px; }
+        .student-header p { color: var(--gold-primary); font-size: 13px; }
+        
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 18px 0; text-align: left; }
+        .info-item { background: #0A0A0A; padding: 10px 12px; border-radius: 10px; }
+        .info-item strong { color: var(--gold-primary); display: block; font-size: 11px; margin-bottom: 3px; }
+        .info-item span { font-size: 13px; }
         
         .course-item { display: flex; align-items: center; padding: 12px; background: #0A0A0A; border-radius: 12px; margin-bottom: 10px; text-align: left; }
-        .course-icon { width: 45px; height: 45px; background: #D4AF37; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-right: 12px; color: black; }
-        .progress-bar { height: 5px; background: #333; border-radius: 3px; margin-top: 6px; }
-        .progress-fill { height: 100%; background: #D4AF37; border-radius: 3px; }
+        .course-icon { width: 42px; height: 42px; background: var(--gold-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-right: 12px; color: var(--black-primary); flex-shrink: 0; }
+        .progress-bar { height: 5px; background: #333; border-radius: 3px; margin-top: 5px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gold-primary); border-radius: 3px; transition: width 0.5s ease; }
     </style>
 </head>
 <body>
-    <!-- LOGIN SCREEN -->
-    <div id="loginScreen">
-        <div class="card">
-            <h1>🎓 LOVELY BEAUTY</h1>
-            <h2>Student Portal</h2>
-            
-            <input type="email" id="email" placeholder="Email Address">
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="login()" id="loginBtn">🔐 LOGIN</button>
-            <div id="loginMsg" class="message"></div>
-            <button class="link-btn" onclick="showForgot()">Forgot Password?</button>
-            <p style="color:#666; margin-top:15px; font-size:13px;">
-                <a href="register.html" style="color:#D4AF37;">📝 Register New Account</a><br>
-                <a href="index.html" style="color:#666;">← Back to Home</a>
-            </p>
-        </div>
-    </div>
-    
-    <!-- FORGOT PASSWORD SCREEN -->
-    <div id="forgotScreen">
-        <div class="card">
-            <h1>🔑 Reset Password</h1>
-            <p style="color:#aaa; margin-bottom:20px;">Enter your email to receive a reset link</p>
-            
-            <input type="email" id="resetEmail" placeholder="Email Address">
-            <button onclick="resetPassword()" id="resetBtn">📧 Send Reset Link</button>
-            <div id="resetMsg" class="message"></div>
-            <button class="link-btn" onclick="showLogin()">← Back to Login</button>
-        </div>
-    </div>
-    
-    <!-- DASHBOARD SCREEN -->
-    <div id="dashboardScreen">
-        <div class="card">
-            <div class="header">
-                <h1 style="margin:0; font-size:20px;">🎓 LOVELY BEAUTY</h1>
-                <button class="logout-btn" onclick="logout()" style="width:auto;">🚪 Logout</button>
-            </div>
-            
-            <div class="student-header">
-                <div class="avatar" id="initials">ST</div>
-                <div style="text-align:left;">
-                    <h2 id="dashName" style="margin:0;">Student</h2>
-                    <p style="color:#D4AF37;" id="dashId">ID: --</p>
+    <!-- HEADER NAVIGATION -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">💎</div>
+                <div class="logo-text">
+                    <div class="logo-main">LOVELY BEAUTY</div>
+                    <div class="logo-sub">COLLEGE & TRAINING CENTER</div>
                 </div>
+            </a>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="portal.html" class="nav-link portal-btn active">🎓 Student Portal</a>
+                <a href="register.html" class="nav-link">Register</a>
+                <a href="news-events.html" class="nav-link">📰 News</a>
+                <a href="gallery.html" class="nav-link">📸 Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        <!-- LOGIN SCREEN -->
+        <div id="loginScreen">
+            <div class="card">
+                <h1>🎓 Student Portal</h1>
+                <h2>Login to your account</h2>
+                
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="your@email.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="••••••••">
+                </div>
+                <button onclick="login()" id="loginBtn">🔐 Login</button>
+                <div id="loginMsg" class="message"></div>
+                <button class="link-btn" onclick="showForgot()">Forgot Password?</button>
+                
+                <div class="divider"></div>
+                <p style="color:var(--gray-mid); font-size:13px;">
+                    Don't have an account? <a href="register.html" style="color:var(--gold-primary);">Register here</a>
+                </p>
             </div>
-            
-            <div class="info-grid">
-                <div class="info-item"><strong>Email</strong> <span id="dashEmail">-</span></div>
-                <div class="info-item"><strong>Phone</strong> <span id="dashPhone">-</span></div>
-                <div class="info-item"><strong>Enrolled</strong> <span id="dashDate">-</span></div>
-                <div class="info-item"><strong>Status</strong> ✅ Active</div>
+        </div>
+        
+        <!-- FORGOT PASSWORD SCREEN -->
+        <div id="forgotScreen">
+            <div class="card">
+                <h1>🔑 Reset Password</h1>
+                <p style="color:var(--gray-mid); margin-bottom:20px;">Enter your email to receive a reset link</p>
+                
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="resetEmail" placeholder="your@email.com">
+                </div>
+                <button onclick="resetPassword()" id="resetBtn">📧 Send Reset Link</button>
+                <div id="resetMsg" class="message"></div>
+                <button class="link-btn" onclick="showLogin()">← Back to Login</button>
             </div>
-            
-            <h3 style="color:#D4AF37; margin:20px 0 15px; text-align:left;">📚 My Courses</h3>
-            <div id="coursesContainer"></div>
+        </div>
+        
+        <!-- DASHBOARD SCREEN -->
+        <div id="dashboardScreen">
+            <div class="card">
+                <div class="dash-header">
+                    <h1 style="font-size:20px; margin:0;">🎓 My Dashboard</h1>
+                    <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+                </div>
+                
+                <div class="student-header">
+                    <div class="avatar" id="initials">ST</div>
+                    <div>
+                        <h3 id="dashName">Student</h3>
+                        <p id="dashId">ID: --</p>
+                    </div>
+                </div>
+                
+                <div class="info-grid">
+                    <div class="info-item"><strong>Email</strong> <span id="dashEmail">-</span></div>
+                    <div class="info-item"><strong>Phone</strong> <span id="dashPhone">-</span></div>
+                    <div class="info-item"><strong>Enrolled</strong> <span id="dashDate">-</span></div>
+                    <div class="info-item"><strong>Status</strong> <span style="color:#4CAF50;">✅ Active</span></div>
+                </div>
+                
+                <h3 style="color:var(--gold-primary); margin:18px 0 12px; text-align:left; font-size:16px;">📚 My Courses</h3>
+                <div id="coursesContainer"></div>
+            </div>
         </div>
     </div>
 
@@ -115,184 +194,85 @@
           messagingSenderId: "283710330376",
           appId: "1:283710330376:web:d34276a5918500b020e3bd"
         };
-        
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
         
-        const emojis = {
-            'Hairdressing': '💇', 'Makeup': '💄', 'Nails': '💅',
-            'Skincare': '🧖', 'Eyelash': '👁️', 'Massage': '💆'
-        };
+        const emojis = { 'Hairdressing': '💇', 'Makeup': '💄', 'Nails': '💅', 'Skincare': '🧖', 'Eyelash': '👁️', 'Massage': '💆' };
+        function getEmoji(name) { if (!name) return '📚'; for (const [k, e] of Object.entries(emojis)) { if (name.includes(k)) return e; } return '📚'; }
         
-        function getEmoji(name) {
-            if (!name) return '📚';
-            for (const [key, emoji] of Object.entries(emojis)) {
-                if (name.includes(key)) return emoji;
-            }
-            return '📚';
-        }
-        
-        // Auto-login if already authenticated
+        // Auto-login
         auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                const doc = await db.collection('students').doc(user.uid).get();
-                if (doc.exists) {
-                    showDashboard({ id: user.uid, ...doc.data() });
-                }
-            }
+            if (user) { const doc = await db.collection('students').doc(user.uid).get(); if (doc.exists) showDashboard({ id: user.uid, ...doc.data() }); }
         });
         
-        // Screen switching
-        function showForgot() {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('forgotScreen').style.display = 'block';
-            document.getElementById('resetMsg').textContent = '';
-        }
+        function showForgot() { document.getElementById('loginScreen').style.display = 'none'; document.getElementById('forgotScreen').style.display = 'block'; document.getElementById('resetMsg').textContent = ''; }
+        function showLogin() { document.getElementById('forgotScreen').style.display = 'none'; document.getElementById('loginScreen').style.display = 'block'; document.getElementById('loginMsg').textContent = ''; }
         
-        function showLogin() {
-            document.getElementById('forgotScreen').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'block';
-            document.getElementById('loginMsg').textContent = '';
-        }
-        
-        // Login
         async function login() {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
-            const msg = document.getElementById('loginMsg');
-            const loginBtn = document.getElementById('loginBtn');
-            
-            msg.className = 'message';
-            msg.textContent = '';
-            
-            if (!email || !password) {
-                msg.className = 'message error';
-                msg.textContent = 'Enter email and password';
-                return;
-            }
-            
-            loginBtn.disabled = true;
-            msg.className = 'message info';
-            msg.textContent = 'Logging in...';
-            
+            const msg = document.getElementById('loginMsg'), btn = document.getElementById('loginBtn');
+            msg.className = 'message'; msg.textContent = '';
+            if (!email || !password) { msg.className = 'message error'; msg.textContent = 'Enter email and password'; return; }
+            btn.disabled = true; msg.className = 'message info'; msg.textContent = 'Logging in...';
             try {
-                const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                const doc = await db.collection('students').doc(userCredential.user.uid).get();
-                
-                if (doc.exists) {
-                    const studentData = doc.data();
-                    msg.className = 'message success';
-                    msg.textContent = '✅ Welcome, ' + studentData.full_name + '!';
-                    showDashboard({ id: userCredential.user.uid, ...studentData });
-                } else {
-                    msg.className = 'message error';
-                    msg.textContent = 'Student record not found. Contact admin.';
-                }
-            } catch (error) {
+                const uc = await auth.signInWithEmailAndPassword(email, password);
+                const doc = await db.collection('students').doc(uc.user.uid).get();
+                if (doc.exists) { msg.className = 'message success'; msg.textContent = '✅ Welcome, ' + doc.data().full_name + '!'; showDashboard({ id: uc.user.uid, ...doc.data() }); }
+                else { msg.className = 'message error'; msg.textContent = 'Student record not found.'; }
+            } catch (e) {
                 msg.className = 'message error';
-                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-                    msg.textContent = 'Invalid email or password';
-                } else if (error.code === 'auth/invalid-email') {
-                    msg.textContent = 'Invalid email format';
-                } else if (error.code === 'auth/too-many-requests') {
-                    msg.textContent = 'Too many attempts. Try again later.';
-                } else {
-                    msg.textContent = 'Error: ' + error.message;
-                }
-            } finally {
-                loginBtn.disabled = false;
-            }
+                if (e.code === 'auth/user-not-found' || e.code === 'auth/wrong-password') msg.textContent = 'Invalid email or password';
+                else if (e.code === 'auth/too-many-requests') msg.textContent = 'Too many attempts. Try later.';
+                else msg.textContent = e.message;
+            } finally { btn.disabled = false; }
         }
         
-        // Password Reset
         async function resetPassword() {
             const email = document.getElementById('resetEmail').value.trim();
-            const msg = document.getElementById('resetMsg');
-            const resetBtn = document.getElementById('resetBtn');
-            
-            msg.className = 'message';
-            msg.textContent = '';
-            
-            if (!email) {
-                msg.className = 'message error';
-                msg.textContent = 'Enter your email address';
-                return;
-            }
-            
-            resetBtn.disabled = true;
-            msg.className = 'message info';
-            msg.textContent = 'Sending reset link...';
-            
+            const msg = document.getElementById('resetMsg'), btn = document.getElementById('resetBtn');
+            msg.className = 'message'; msg.textContent = '';
+            if (!email) { msg.className = 'message error'; msg.textContent = 'Enter your email'; return; }
+            btn.disabled = true; msg.className = 'message info'; msg.textContent = 'Sending reset link...';
             try {
-                await auth.sendPasswordResetEmail(email, {
-                    url: window.location.href.replace('portal.html', 'portal.html'),
-                    handleCodeInApp: false
-                });
-                
-                msg.className = 'message success';
-                msg.innerHTML = '✅ Reset link sent!<br><small>Check your email (including spam folder).</small>';
-                document.getElementById('resetEmail').value = '';
-            } catch (error) {
+                await auth.sendPasswordResetEmail(email, { url: 'https://peacemakersclub.github.io/lovelyaccadamy/portal.html', handleCodeInApp: false });
+                msg.className = 'message success'; msg.innerHTML = '✅ Reset link sent!<br><small>Check your email (spam too).</small>';
+            } catch (e) {
                 msg.className = 'message error';
-                if (error.code === 'auth/user-not-found') {
-                    msg.textContent = 'No account found with this email';
-                } else if (error.code === 'auth/invalid-email') {
-                    msg.textContent = 'Invalid email format';
-                } else {
-                    msg.textContent = 'Error: ' + error.message;
-                }
-            } finally {
-                resetBtn.disabled = false;
-            }
+                if (e.code === 'auth/user-not-found') msg.textContent = 'No account with this email';
+                else if (e.code === 'auth/unauthorized-continue-uri') msg.textContent = 'Domain not authorized. Contact admin.';
+                else msg.textContent = e.message;
+            } finally { btn.disabled = false; }
         }
         
-        // Dashboard
         function showDashboard(student) {
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('forgotScreen').style.display = 'none';
             document.getElementById('dashboardScreen').style.display = 'block';
-            
             document.getElementById('dashName').textContent = student.full_name || 'Student';
             document.getElementById('dashId').textContent = 'ID: ' + (student.student_id || 'N/A');
             document.getElementById('dashEmail').textContent = student.email || 'N/A';
             document.getElementById('dashPhone').textContent = student.phone || 'N/A';
             document.getElementById('dashDate').textContent = student.enrollment_date || 'N/A';
+            document.getElementById('initials').textContent = (student.full_name || 'S').split(' ').map(n => n[0]).join('').toUpperCase();
             
-            const initials = (student.full_name || 'S').split(' ').map(n => n[0]).join('').toUpperCase();
-            document.getElementById('initials').textContent = initials;
-            
-            const container = document.getElementById('coursesContainer');
-            container.innerHTML = '';
-            
-            if (student.courses && student.courses.length > 0) {
-                student.courses.forEach(course => {
-                    const progress = student.progress?.[course] || 0;
-                    const div = document.createElement('div');
-                    div.className = 'course-item';
-                    div.innerHTML = `
-                        <div class="course-icon">${getEmoji(course)}</div>
-                        <div style="flex:1;">
-                            <strong>${course}</strong>
-                            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%;"></div></div>
-                            <small style="color:#aaa;">${progress}% Complete</small>
-                        </div>
-                    `;
-                    container.appendChild(div);
+            const ctr = document.getElementById('coursesContainer'); ctr.innerHTML = '';
+            if (student.courses?.length) {
+                student.courses.forEach(c => {
+                    const p = student.progress?.[c] || 0;
+                    const div = document.createElement('div'); div.className = 'course-item';
+                    div.innerHTML = `<div class="course-icon">${getEmoji(c)}</div><div style="flex:1;"><strong style="font-size:14px;">${c}</strong><div class="progress-bar"><div class="progress-fill" style="width:${p}%;"></div></div><small style="color:var(--gray-dark);">${p}% Complete</small></div>`;
+                    ctr.appendChild(div);
                 });
-            } else {
-                container.innerHTML = '<p style="color:#aaa; text-align:center;">No courses yet</p>';
-            }
+            } else { ctr.innerHTML = '<p style="color:var(--gray-mid); text-align:center;">No courses yet</p>'; }
         }
         
-        function logout() {
-            auth.signOut();
-            document.getElementById('dashboardScreen').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'block';
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('loginMsg').textContent = '';
-        }
+        function logout() { auth.signOut(); document.getElementById('dashboardScreen').style.display = 'none'; document.getElementById('loginScreen').style.display = 'block'; document.getElementById('email').value = ''; document.getElementById('password').value = ''; }
+        
+        // Mobile menu
+        const mmb = document.getElementById('mobileMenuBtn'), nm = document.getElementById('navMenu');
+        mmb?.addEventListener('click', () => { nm.classList.toggle('active'); mmb.textContent = nm.classList.contains('active') ? '✕' : '☰'; });
     </script>
 </body>
 </html>
