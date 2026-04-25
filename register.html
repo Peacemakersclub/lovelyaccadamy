@@ -30,7 +30,7 @@
         .main-container { display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
         .card { background: var(--black-card); border: 2px solid var(--gold-primary); border-radius: 24px; padding: 35px 28px; max-width: 500px; width: 100%; text-align: center; }
         h1 { color: var(--gold-primary); font-family: var(--font-heading); font-size: 26px; margin-bottom: 6px; }
-        p.subtitle { color: var(--gray-mid); font-size: 14px; margin-bottom: 24px; }
+        .subtitle { color: var(--gray-mid); font-size: 14px; margin-bottom: 24px; }
         .input-group { margin-bottom: 14px; text-align: left; }
         .input-group label { display: block; color: var(--gold-primary); font-size: 12px; margin-bottom: 5px; font-weight: 500; }
         input, select { width: 100%; padding: 13px 14px; background: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.3); color: var(--white); border-radius: 12px; font-size: 15px; transition: border-color 0.3s; }
@@ -49,22 +49,12 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-container">
-            <a href="index.html" class="logo"><div class="logo-icon">💎</div><div class="logo-text"><div class="logo-main">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div></div></a>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a><a href="courses.html" class="nav-link">Courses</a>
-                <a href="portal.html" class="nav-link portal-btn">🎓 Student Portal</a><a href="register.html" class="nav-link active">Register</a>
-                <a href="news-events.html" class="nav-link">📰 News</a><a href="gallery.html" class="nav-link">📸 Gallery</a><a href="contact.html" class="nav-link">Contact</a>
-            </nav>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-        </div>
-    </header>
+    <header class="header"><div class="header-container"><a href="index.html" class="logo"><div class="logo-icon">💎</div><div class="logo-text"><div class="logo-main">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div></div></a><nav class="nav-menu" id="navMenu"><a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a><a href="courses.html" class="nav-link">Courses</a><a href="portal.html" class="nav-link portal-btn">🎓 Student Portal</a><a href="register.html" class="nav-link active">Register</a><a href="news-events.html" class="nav-link">📰 News</a><a href="gallery.html" class="nav-link">📸 Gallery</a><a href="contact.html" class="nav-link">Contact</a></nav><button class="mobile-menu-btn" id="mobileMenuBtn">☰</button></div></header>
 
     <div class="main-container">
         <div class="card">
             <h1>📝 Student Registration</h1>
-            <p class="subtitle">Create your permanent student account</p>
+            <p class="subtitle">Create your account (Admin approval required)</p>
             <div id="msg" class="message"></div>
             <form id="regForm">
                 <div class="input-group"><label>Full Name *</label><input type="text" id="fullName" placeholder="Enter your full name" required></div>
@@ -72,9 +62,7 @@
                 <div class="input-group"><label>Phone Number *</label><input type="tel" id="phone" placeholder="09xxxxxxxx" required></div>
                 <div class="input-group"><label>Password *</label><input type="password" id="password" placeholder="Min 6 characters" required minlength="6"></div>
                 <div class="input-group"><label>Confirm Password *</label><input type="password" id="confirmPassword" placeholder="Re-enter password" required></div>
-                <div class="input-group"><label>Select Course *</label>
-                    <select id="course" required><option value="">-- Choose a course --</option><option>Hairdressing & Barbering</option><option>Makeup Artistry</option><option>Nail Technology</option><option>Skincare & Aesthetics</option><option>Eyelash & Brow Services</option><option>Massage Therapy</option></select>
-                </div>
+                <div class="input-group"><label>Select Course *</label><select id="course" required><option value="">-- Choose a course --</option><option>Hairdressing & Barbering</option><option>Makeup Artistry</option><option>Nail Technology</option><option>Skincare & Aesthetics</option><option>Eyelash & Brow Services</option><option>Massage Therapy</option><option>Henna Art (Mehndi)</option><option>Men's Barbering</option></select></div>
                 <button type="submit" id="submitBtn">🔐 Register Now</button>
             </form>
             <div class="divider"></div>
@@ -94,14 +82,13 @@
             e.preventDefault();
             const msg = document.getElementById('msg'), btn = document.getElementById('submitBtn');
             const fullName = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim().toLowerCase();
+            const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             const course = document.getElementById('course').value;
             
             msg.className = 'message'; msg.textContent = '';
-            
             if (!fullName || !email || !phone || !password || !course) { msg.className = 'message error'; msg.textContent = '❌ Please fill all fields'; return; }
             if (password !== confirmPassword) { msg.className = 'message error'; msg.textContent = '❌ Passwords do not match'; return; }
             if (password.length < 6) { msg.className = 'message error'; msg.textContent = '❌ Password must be at least 6 characters'; return; }
@@ -111,12 +98,21 @@
             try {
                 const uc = await auth.createUserWithEmailAndPassword(email, password);
                 const studentId = 'LBC-' + Date.now().toString().slice(-6);
-                await db.collection('students').doc(uc.user.uid).set({ full_name: fullName, email: email, phone: phone, student_id: studentId, enrollment_date: new Date().toISOString().split('T')[0], courses: [course], progress: { [course]: 0 }, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
                 
-                await uc.user.sendEmailVerification({ url: 'https://lovely-beauty-college.firebaseapp.com/__/auth/action', handleCodeInApp: false });
+                await db.collection('students').doc(uc.user.uid).set({
+                    full_name: fullName, email: email, phone: phone, student_id: studentId,
+                    enrollment_date: new Date().toISOString().split('T')[0],
+                    courses: [course], progress: { [course]: 0 },
+                    approved: false,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
                 
                 msg.className = 'message success';
-                msg.innerHTML = `✅ <strong>Registration Successful!</strong><br><br>Your Student ID: <strong style="font-size:18px;">${studentId}</strong><br><br>📧 <strong>Verification email sent!</strong><br>Check your email and click the verification link before logging in.<br><br><a href="portal.html" style="color:#4CAF50;">→ Go to Student Portal</a>`;
+                msg.innerHTML = `✅ <strong>Registration Submitted!</strong><br><br>
+                Your Student ID: <strong style="font-size:18px;">${studentId}</strong><br><br>
+                ⏳ <strong>Pending Admin Approval</strong><br>
+                You will be able to login once an administrator approves your account.<br><br>
+                📞 Contact us: 0991171819`;
                 document.getElementById('regForm').reset();
             } catch (error) {
                 msg.className = 'message error';
