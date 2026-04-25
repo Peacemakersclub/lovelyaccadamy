@@ -7,6 +7,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -63,6 +65,10 @@
                 <div class="input-group"><label>Password *</label><input type="password" id="password" placeholder="Min 6 characters" required minlength="6"></div>
                 <div class="input-group"><label>Confirm Password *</label><input type="password" id="confirmPassword" placeholder="Re-enter password" required></div>
                 <div class="input-group"><label>Select Course *</label><select id="course" required><option value="">-- Choose a course --</option><option>Hairdressing & Barbering</option><option>Makeup Artistry</option><option>Nail Technology</option><option>Skincare & Aesthetics</option><option>Eyelash & Brow Services</option><option>Massage Therapy</option><option>Henna Art (Mehndi)</option><option>Men's Barbering</option></select></div>
+                
+                <!-- Cloudflare Turnstile -->
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAADDLLsS1bwWvabwW" data-theme="dark" style="display:flex; justify-content:center; margin:10px 0;"></div>
+                
                 <button type="submit" id="submitBtn">🔐 Register Now</button>
             </form>
             <div class="divider"></div>
@@ -93,6 +99,14 @@
             if (password !== confirmPassword) { msg.className = 'message error'; msg.textContent = '❌ Passwords do not match'; return; }
             if (password.length < 6) { msg.className = 'message error'; msg.textContent = '❌ Password must be at least 6 characters'; return; }
             
+            // Turnstile verification
+            const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]');
+            if (!turnstileResponse || !turnstileResponse.value) {
+                msg.className = 'message error';
+                msg.textContent = '❌ Please complete the security verification';
+                return;
+            }
+            
             btn.disabled = true; msg.className = 'message info'; msg.textContent = '⏳ Creating your account...';
             
             try {
@@ -107,6 +121,9 @@
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 
+                // Reset Turnstile after success
+                if (typeof turnstile !== 'undefined') turnstile.reset();
+                
                 msg.className = 'message success';
                 msg.innerHTML = `✅ <strong>Registration Submitted!</strong><br><br>
                 Your Student ID: <strong style="font-size:18px;">${studentId}</strong><br><br>
@@ -118,6 +135,8 @@
                 msg.className = 'message error';
                 if (error.code === 'auth/email-already-in-use') msg.textContent = '❌ This email is already registered.';
                 else msg.textContent = '❌ ' + error.message;
+                // Reset Turnstile after error
+                if (typeof turnstile !== 'undefined') turnstile.reset();
             } finally { btn.disabled = false; }
         });
         
