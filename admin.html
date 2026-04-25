@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel | Lovely Beauty College</title>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -18,11 +17,10 @@
         .login-card p { color: var(--gray-mid); font-size: 14px; margin-bottom: 24px; }
         .input-group { margin-bottom: 14px; text-align: left; }
         .input-group label { display: block; color: var(--gold-primary); font-size: 12px; margin-bottom: 5px; font-weight: 500; }
-        input { width: 100%; padding: 13px; background: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.3); color: var(--white); border-radius: 12px; font-size: 15px; }
-        input:focus { outline: none; border-color: var(--gold-primary); }
+        input, textarea, select { width: 100%; padding: 13px; background: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.3); color: var(--white); border-radius: 12px; font-size: 15px; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold-primary); }
         button { width: 100%; padding: 14px; background: var(--gold-primary); color: var(--black-primary); border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
         button:hover { background: var(--gold-light); }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
         .message { margin-top: 14px; font-weight: 500; font-size: 14px; min-height: 20px; }
         .success { color: #4CAF50; } .error { color: #f44336; } .info { color: #2196F3; }
         #dashboardScreen { display: none; padding: 20px; max-width: 1400px; margin: 0 auto; }
@@ -41,107 +39,225 @@
         td { padding: 10px 8px; border-bottom: 1px solid #333; }
         .action-btn { padding: 6px 14px; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; margin: 2px; }
         .approve-btn { background: #4CAF50; color: white; }
-        .edit-btn { background: var(--gold-primary); color: black; }
         .delete-btn { background: #dc3545; color: white; }
-        .approved-badge { background: #1a3a1a; color: #4CAF50; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-        .pending-badge { background: #3a2a1a; color: #FF9800; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .approved-badge { background: #1a3a1a; color: #4CAF50; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; }
+        .pending-badge { background: #3a2a1a; color: #FF9800; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; }
         @media (max-width: 768px) { table { font-size: 11px; } th, td { padding: 6px 4px; } }
     </style>
 </head>
 <body>
+    <!-- LOGIN SCREEN -->
     <div id="loginScreen">
         <div class="login-card">
-            <h1>🔧 Admin Panel</h1><p>Secure Login via Firebase</p>
-            <div class="input-group"><label>Email</label><input type="email" id="adminEmail" placeholder="admin@lovelybeauty.edu"></div>
-            <div class="input-group"><label>Password</label><input type="password" id="adminPassword" placeholder="••••••••"></div>
-            <button onclick="adminLogin()" id="loginBtn">🔐 Login</button><div id="loginMsg" class="message"></div>
+            <h1>🔧 Admin Panel</h1>
+            <p>Lovely Beauty College</p>
+            <div class="input-group"><label>Email</label><input type="email" id="adminEmail" placeholder="admin@lovelybeauty.edu" value="admin@lovelybeauty.edu"></div>
+            <div class="input-group"><label>Password</label><input type="password" id="adminPassword" placeholder="••••••••" value="LovelyAdmin202677"></div>
+            <button onclick="adminLogin()">🔐 Login</button>
+            <div id="loginMsg" class="message"></div>
         </div>
     </div>
     
+    <!-- DASHBOARD -->
     <div id="dashboardScreen">
-        <div class="header"><h1>🔧 Admin Dashboard</h1><div class="header-btns"><button class="btn-refresh" onclick="loadAll()">🔄 Refresh</button><a href="portal.html" class="btn-portal">👤 Portal</a><a href="news-events.html" class="btn-portal">📰 News</a><a href="index.html" class="btn-portal">🏠 Site</a><button class="btn-logout" onclick="adminLogout()">🚪 Logout</button></div></div>
-        <div class="stats"><div class="stat-card"><h3 id="totalStudents">0</h3><p>Students</p></div><div class="stat-card"><h3 id="pendingCount">0</h3><p>Pending Approval</p></div><div class="stat-card"><h3 id="totalNews">0</h3><p>News</p></div></div>
+        <div class="header">
+            <h1>🔧 Admin Dashboard</h1>
+            <div class="header-btns">
+                <button class="btn-refresh" onclick="loadAll()">🔄 Refresh</button>
+                <a href="portal.html" class="btn-portal">👤 Portal</a>
+                <a href="news-events.html" class="btn-portal">📰 News</a>
+                <a href="index.html" class="btn-portal">🏠 Site</a>
+                <button class="btn-logout" onclick="adminLogout()">🚪 Logout</button>
+            </div>
+        </div>
         
-        <!-- STUDENTS -->
-        <div class="card"><h3>📋 Students</h3><div style="overflow-x:auto;"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Course</th><th>Status</th><th>Actions</th></tr></thead><tbody id="studentTable"></tbody></table></div></div>
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stat-card"><h3 id="totalStudents">0</h3><p>Total Students</p></div>
+            <div class="stat-card"><h3 id="pendingCount">0</h3><p>Pending Approval</p></div>
+            <div class="stat-card"><h3 id="totalNews">0</h3><p>News Posted</p></div>
+            <div class="stat-card"><h3 id="approvedCount">0</h3><p>Approved</p></div>
+        </div>
         
-        <!-- NEWS -->
-        <div class="card"><h3>📰 Post News</h3><div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;"><input type="text" id="newsTitle" placeholder="Title" style="flex:2;"><input type="date" id="newsDate" style="flex:1;"><select id="newsCategory" style="flex:1;"><option value="News">📰 News</option><option value="Event">📅 Event</option><option value="Announcement">📢 Announcement</option><option value="Success Story">🏆 Success Story</option></select></div><textarea id="newsContent" placeholder="Content..." rows="3" style="width:100%; margin-bottom:10px; background:#0A0A0A; border:1px solid rgba(212,175,55,0.3); color:white; border-radius:8px; padding:10px; resize:vertical;"></textarea><input type="text" id="newsImageUrl" placeholder="Image URL (optional)" style="margin-bottom:10px; width:100%; padding:10px; background:#0A0A0A; border:1px solid rgba(212,175,55,0.3); color:white; border-radius:8px;"><button onclick="postNews()" style="background:#FF9800; color:white;">📰 Post News</button><div id="newsMsg" class="message" style="margin-top:10px;"></div></div>
-        <div class="card"><h3>📋 Posted News</h3><table><thead><tr><th>Date</th><th>Title</th><th>Category</th><th>Actions</th></tr></thead><tbody id="newsTable"></tbody></table></div>
+        <!-- STUDENTS TABLE -->
+        <div class="card">
+            <h3>📋 Student Management</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Course</th><th>Status</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody id="studentTable"></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- POST NEWS -->
+        <div class="card">
+            <h3>📰 Post News / Event</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+                <input type="text" id="newsTitle" placeholder="News Title" style="flex:2;">
+                <input type="date" id="newsDate" style="flex:1;">
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+                <select id="newsCategory" style="flex:1;">
+                    <option value="News">📰 News</option>
+                    <option value="Event">📅 Event</option>
+                    <option value="Announcement">📢 Announcement</option>
+                    <option value="Success Story">🏆 Success Story</option>
+                </select>
+                <input type="text" id="newsImageUrl" placeholder="Image URL (optional)" style="flex:2;">
+            </div>
+            <textarea id="newsContent" placeholder="News content..." rows="3" style="width:100%; margin-bottom:10px; resize:vertical;"></textarea>
+            <button onclick="postNews()" style="background:#FF9800; color:white;">📰 Post News</button>
+            <div id="newsMsg" class="message" style="margin-top:10px;"></div>
+        </div>
+        
+        <!-- NEWS TABLE -->
+        <div class="card">
+            <h3>📋 Posted News</h3>
+            <table>
+                <thead><tr><th>Date</th><th>Title</th><th>Category</th><th>Actions</th></tr></thead>
+                <tbody id="newsTable"></tbody>
+            </table>
+        </div>
     </div>
 
     <script>
         const firebaseConfig = { apiKey: "AIzaSyCn5PGyIgPobaL8WE4E89dFQwcjsx9Pcqs", authDomain: "lovely-beauty-college.firebaseapp.com", projectId: "lovely-beauty-college", storageBucket: "lovely-beauty-college.firebasestorage.app", messagingSenderId: "283710330376", appId: "1:283710330376:web:d34276a5918500b020e3bd" };
         firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
         const db = firebase.firestore();
         let allStudents = [];
         const ADMIN_EMAIL = 'admin@lovelybeauty.edu', ADMIN_PASSWORD = 'LovelyAdmin202677';
         
-        auth.onAuthStateChanged((user) => {
-            if (user) { document.getElementById('loginScreen').style.display = 'none'; document.getElementById('dashboardScreen').style.display = 'block'; loadAll(); }
-            else { document.getElementById('loginScreen').style.display = 'flex'; document.getElementById('dashboardScreen').style.display = 'none'; }
-        });
-        
-        async function adminLogin() {
-            const email = document.getElementById('adminEmail').value.trim(), password = document.getElementById('adminPassword').value;
-            const msg = document.getElementById('loginMsg'), btn = document.getElementById('loginBtn');
-            msg.className = 'message'; msg.textContent = '';
-            if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-                try { await auth.signInWithEmailAndPassword(email, password); }
-                catch(e) { msg.className = 'message error'; msg.textContent = 'Error: ' + e.message; }
-            } else { msg.className = 'message error'; msg.textContent = 'Invalid credentials'; }
+        // Check if already logged in
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboardScreen').style.display = 'block';
+            loadAll();
         }
-        function adminLogout() { auth.signOut(); }
+        
+        function adminLogin() {
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value;
+            const msg = document.getElementById('loginMsg');
+            msg.className = 'message'; msg.textContent = '';
+            
+            if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboardScreen').style.display = 'block';
+                loadAll();
+            } else {
+                msg.className = 'message error';
+                msg.textContent = '❌ Invalid credentials';
+            }
+        }
+        
+        function adminLogout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('dashboardScreen').style.display = 'none';
+        }
         
         async function loadAll() { await loadStudents(); await loadNews(); }
         
         async function loadStudents() {
             const table = document.getElementById('studentTable');
-            table.innerHTML = '<tr><td colspan="6">⏳ Loading...</td></tr>';
+            table.innerHTML = '<tr><td colspan="7">⏳ Loading...</td></tr>';
             try {
                 const snap = await db.collection('students').orderBy('createdAt', 'desc').get();
-                allStudents = []; table.innerHTML = ''; let pending = 0;
+                allStudents = []; table.innerHTML = '';
+                let pending = 0, approved = 0;
+                
                 snap.forEach(doc => { allStudents.push({ id: doc.id, ...doc.data() }); });
+                
                 allStudents.forEach(s => {
-                    if (s.approved === false) pending++;
-                    const statusHtml = s.approved !== false ? '<span class="approved-badge">✅ Approved</span>' : '<span class="pending-badge">⏳ Pending</span>';
+                    if (s.approved !== false) approved++; else pending++;
+                    
+                    const statusHtml = s.approved !== false 
+                        ? '<span class="approved-badge">✅ Approved</span>' 
+                        : '<span class="pending-badge">⏳ Pending</span>';
+                    
                     const actionHtml = s.approved !== false 
-                        ? `<button class="action-btn edit-btn" onclick="editStudent('${s.id}')">✏️</button>`
+                        ? `<button class="action-btn delete-btn" onclick="deleteStudent('${s.id}')">🗑️</button>`
                         : `<button class="action-btn approve-btn" onclick="approveStudent('${s.id}')">✅ Approve</button> <button class="action-btn delete-btn" onclick="deleteStudent('${s.id}')">🗑️</button>`;
-                    table.innerHTML += `<tr><td>${s.student_id||'N/A'}</td><td>${s.full_name||'N/A'}</td><td>${s.email||'N/A'}</td><td>${s.courses?.[0]||'N/A'}</td><td>${statusHtml}</td><td>${actionHtml}</td></tr>`;
+                    
+                    table.innerHTML += `<tr>
+                        <td>${s.student_id||'N/A'}</td>
+                        <td>${s.full_name||'N/A'}</td>
+                        <td style="font-size:11px;">${s.email||'N/A'}</td>
+                        <td>${s.phone||'N/A'}</td>
+                        <td style="font-size:11px;">${s.courses?.[0]||'N/A'}</td>
+                        <td>${statusHtml}</td>
+                        <td>${actionHtml}</td>
+                    </tr>`;
                 });
-                if (allStudents.length === 0) table.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--gray-mid);">No students yet</td></tr>';
+                
+                if (allStudents.length === 0) {
+                    table.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--gray-mid);">No students yet</td></tr>';
+                }
+                
                 document.getElementById('totalStudents').textContent = allStudents.length;
                 document.getElementById('pendingCount').textContent = pending;
-            } catch(e) { table.innerHTML = '<tr><td colspan="6" style="color:#f44336;">Error loading</td></tr>'; }
+                document.getElementById('approvedCount').textContent = approved;
+            } catch(e) {
+                table.innerHTML = '<tr><td colspan="7" style="color:#f44336;">Error loading students</td></tr>';
+                console.error(e);
+            }
         }
         
         async function approveStudent(docId) {
-            try { await db.collection('students').doc(docId).update({ approved: true }); alert('✅ Student approved! They can now login.'); loadStudents(); }
-            catch(e) { alert('Error: ' + e.message); }
+            try {
+                await db.collection('students').doc(docId).update({ approved: true });
+                alert('✅ Student approved! They can now login.');
+                loadStudents();
+            } catch(e) {
+                alert('Error: ' + e.message);
+            }
         }
         
         async function deleteStudent(docId) {
-            if (!confirm('Delete this student?')) return;
-            try { await db.collection('students').doc(docId).delete(); loadStudents(); }
-            catch(e) { alert('Error: ' + e.message); }
+            if (!confirm('Delete this student permanently?')) return;
+            try {
+                await db.collection('students').doc(docId).delete();
+                loadStudents();
+            } catch(e) {
+                alert('Error: ' + e.message);
+            }
         }
         
-        function editStudent(docId) { alert('Edit feature - update progress in Firestore directly for now.'); }
-        
         async function postNews() {
-            const title = document.getElementById('newsTitle').value.trim(), date = document.getElementById('newsDate').value || new Date().toISOString().split('T')[0];
-            const category = document.getElementById('newsCategory').value, content = document.getElementById('newsContent').value.trim(), image = document.getElementById('newsImageUrl').value.trim();
+            const title = document.getElementById('newsTitle').value.trim();
+            const date = document.getElementById('newsDate').value || new Date().toISOString().split('T')[0];
+            const category = document.getElementById('newsCategory').value;
+            const content = document.getElementById('newsContent').value.trim();
+            const image = document.getElementById('newsImageUrl').value.trim();
             const msg = document.getElementById('newsMsg');
-            if (!title || !content) { msg.textContent = '❌ Title and content required'; msg.className = 'message error'; return; }
+            
+            if (!title || !content) {
+                msg.textContent = '❌ Title and content required';
+                msg.className = 'message error';
+                return;
+            }
+            
             msg.className = 'message info'; msg.textContent = 'Posting...';
+            
             try {
-                await db.collection('news').add({ title, date, category, content, image, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-                msg.textContent = '✅ Posted!'; msg.className = 'message success';
-                document.getElementById('newsTitle').value = ''; document.getElementById('newsContent').value = ''; document.getElementById('newsImageUrl').value = '';
+                await db.collection('news').add({
+                    title, date, category, content, image,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                msg.textContent = '✅ News posted!';
+                msg.className = 'message success';
+                document.getElementById('newsTitle').value = '';
+                document.getElementById('newsContent').value = '';
+                document.getElementById('newsImageUrl').value = '';
                 loadNews();
-            } catch(e) { msg.textContent = '❌ ' + e.message; msg.className = 'message error'; }
+            } catch(e) {
+                msg.textContent = '❌ ' + e.message;
+                msg.className = 'message error';
+            }
         }
         
         async function loadNews() {
@@ -149,14 +265,33 @@
             table.innerHTML = '<tr><td colspan="4">⏳ Loading...</td></tr>';
             try {
                 const snap = await db.collection('news').orderBy('createdAt', 'desc').get();
-                table.innerHTML = ''; let t = 0;
-                snap.forEach(d => { t++; const n = d.data(); table.innerHTML += `<tr><td>${n.date||'N/A'}</td><td><strong>${n.title}</strong></td><td>${n.category||'News'}</td><td><button class="action-btn delete-btn" onclick="deleteNews('${d.id}')">🗑️</button></td></tr>`; });
-                if (t === 0) table.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--gray-mid);">No news yet</td></tr>';
-                document.getElementById('totalNews').textContent = t;
-            } catch(e) { table.innerHTML = '<tr><td colspan="4" style="color:#f44336;">Error</td></tr>'; }
+                table.innerHTML = '';
+                let total = 0;
+                snap.forEach(doc => {
+                    total++;
+                    const n = doc.data();
+                    table.innerHTML += `<tr>
+                        <td>${n.date||'N/A'}</td>
+                        <td><strong>${n.title}</strong></td>
+                        <td>${n.category||'News'}</td>
+                        <td><button class="action-btn delete-btn" onclick="deleteNews('${doc.id}')">🗑️</button></td>
+                    </tr>`;
+                });
+                if (total === 0) {
+                    table.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--gray-mid);">No news yet</td></tr>';
+                }
+                document.getElementById('totalNews').textContent = total;
+            } catch(e) {
+                table.innerHTML = '<tr><td colspan="4" style="color:#f44336;">Error</td></tr>';
+            }
         }
         
-        async function deleteNews(id) { if (confirm('Delete?')) { await db.collection('news').doc(id).delete(); loadNews(); } }
+        async function deleteNews(id) {
+            if (confirm('Delete this news?')) {
+                await db.collection('news').doc(id).delete();
+                loadNews();
+            }
+        }
     </script>
 </body>
 </html>
