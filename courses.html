@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Courses | Lovely Beauty College</title>
-    <meta name="description" content="Explore professional beauty courses at Lovely Beauty College - Hairdressing, Makeup, Nail Technology, Skincare, and more.">
+    <meta name="description" content="Explore 8 professional beauty courses at Lovely Beauty College - Hairdressing, Makeup, Nails, Skincare, Henna Art, Barbering and more.">
     <link rel="icon" type="image/x-icon" href="logo.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,7 +12,6 @@
         :root { --black-primary: #0A0A0A; --black-card: #1A1A1A; --gold-primary: #D4AF37; --gold-light: #F5D76E; --gold-glow: rgba(212, 175, 55, 0.3); --white: #FFFFFF; --gray-mid: #B0B0B0; --gray-dark: #666666; --header-height: 70px; --font-heading: 'Playfair Display', serif; --font-body: 'Poppins', sans-serif; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-body); background: var(--black-primary); color: var(--white); line-height: 1.6; }
-        
         .header { position: sticky; top: 0; z-index: 1000; background: var(--black-primary); border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
         .header-container { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -26,18 +25,10 @@
         .portal-btn { background: var(--gold-primary); color: var(--black-primary) !important; padding: 8px 16px; border-radius: 50px; font-weight: 600; }
         .portal-btn:hover { background: var(--gold-light); }
         .mobile-menu-btn { display: none; background: transparent; border: none; color: var(--white); font-size: 26px; cursor: pointer; }
-        
-        @media (max-width: 900px) {
-            .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 20px; border-bottom: 2px solid var(--gold-primary); z-index: 999; gap: 12px; }
-            .nav-menu.active { display: flex; }
-            .mobile-menu-btn { display: block; }
-            .portal-btn { text-align: center; width: 100%; }
-        }
-        
+        @media (max-width: 900px) { .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 20px; border-bottom: 2px solid var(--gold-primary); z-index: 999; gap: 12px; } .nav-menu.active { display: flex; } .mobile-menu-btn { display: block; } .portal-btn { text-align: center; width: 100%; } }
         .page-header { padding: 60px 20px 40px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); background: linear-gradient(135deg, #0A0A0A, #111); }
         .page-header h1 { font-family: var(--font-heading); font-size: clamp(32px, 6vw, 52px); color: var(--gold-primary); margin-bottom: 10px; }
         .page-header p { color: var(--gray-mid); max-width: 600px; margin: 0 auto; font-size: 15px; }
-        
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         .courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; }
         .course-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; overflow: hidden; transition: all 0.35s ease; }
@@ -53,170 +44,51 @@
         .course-content h3 { font-size: 20px; margin-bottom: 8px; }
         .course-content p { color: var(--gray-mid); font-size: 13px; margin-bottom: 16px; }
         .course-meta { display: flex; gap: 15px; margin-bottom: 16px; font-size: 12px; color: var(--gray-dark); }
-        .course-meta span { display: flex; align-items: center; gap: 5px; }
         .course-btn { display: inline-block; padding: 10px 20px; background: var(--gold-primary); color: var(--black-primary); border-radius: 50px; font-weight: 600; font-size: 13px; text-decoration: none; transition: all 0.3s; }
         .course-btn:hover { background: var(--gold-light); }
-        
-        .cta { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, var(--gold-primary), #996515); }
-        .cta h2 { font-family: var(--font-heading); font-size: 32px; color: var(--black-primary); margin-bottom: 12px; }
-        .cta p { color: var(--black-primary); margin-bottom: 20px; opacity: 0.9; }
-        .cta .course-btn { background: var(--black-primary); color: var(--gold-primary); font-size: 16px; padding: 14px 30px; }
-        
+        .cta { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, var(--gold-primary), #996515); margin-top: 30px; }
+        .cta h2 { color: var(--black-primary); font-family: var(--font-heading); font-size: 28px; }
+        .cta a { display: inline-block; padding: 14px 30px; background: var(--black-primary); color: var(--gold-primary); border-radius: 50px; font-weight: 600; text-decoration: none; margin-top: 10px; }
         @media (max-width: 500px) { .courses-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">💎</div>
-                <div class="logo-text">
-                    <div class="logo-main">LOVELY BEAUTY</div>
-                    <div class="logo-sub">COLLEGE & TRAINING CENTER</div>
-                </div>
-            </a>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="courses.html" class="nav-link active">Courses</a>
-                <a href="portal.html" class="nav-link portal-btn">🎓 Student Portal</a>
-                <a href="register.html" class="nav-link">Register</a>
-                <a href="news-events.html" class="nav-link">📰 News</a>
-                <a href="gallery.html" class="nav-link">📸 Gallery</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </nav>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-        </div>
-    </header>
+    <header class="header"><div class="header-container"><a href="index.html" class="logo"><div class="logo-icon">💎</div><div class="logo-text"><div class="logo-main">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div></div></a><nav class="nav-menu" id="navMenu"><a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a><a href="courses.html" class="nav-link active">Courses</a><a href="portal.html" class="nav-link portal-btn">🎓 Student Portal</a><a href="register.html" class="nav-link">Register</a><a href="news-events.html" class="nav-link">📰 News</a><a href="gallery.html" class="nav-link">📸 Gallery</a><a href="contact.html" class="nav-link">Contact</a></nav><button class="mobile-menu-btn" id="mobileMenuBtn">☰</button></div></header>
 
-    <section class="page-header">
-        <h1>Our Professional Courses</h1>
-        <p>Structured programs from short-term certification to Level 2-4 TVET qualifications. All courses taught by certified industry professionals.</p>
-    </section>
+    <section class="page-header"><h1>Our Professional Courses</h1><p>8 structured programs from short-term certification to Level 2-4 TVET qualifications.</p></section>
 
     <div class="container">
         <div class="courses-grid">
-            <div class="course-card">
-                <div class="course-image"><img src="hairdressing-and-barbering.jpg" alt="Hairdressing & Barbering" loading="lazy"></div>
-                <div class="course-content">
-                    <span class="course-badge badge-beginner">Beginner to Advanced</span>
-                    <h3>Hairdressing & Barbering</h3>
-                    <p>Professional cutting, styling, coloring, and treatments.</p>
-                    <div class="course-meta"><span>⏱️ 12 Weeks</span><span>📅 Full-time</span></div>
-                    <a href="hairdressing.html" class="course-btn">View Course →</a>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-image"><img src="makeup-artistry.jpg" alt="Makeup Artistry" loading="lazy"></div>
-                <div class="course-content">
-                    <span class="course-badge badge-intermediate">Beginner to Advanced</span>
-                    <h3>Makeup Artistry</h3>
-                    <p>Bridal, fashion, and professional makeup techniques.</p>
-                    <div class="course-meta"><span>⏱️ 8 Weeks</span><span>📅 Full-time</span></div>
-                    <a href="register.html" class="course-btn">Enroll Now →</a>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-image"><img src="nail-technology.jpeg" alt="Nail Technology" loading="lazy"></div>
-                <div class="course-content">
-                    <span class="course-badge badge-beginner">Beginner to Intermediate</span>
-                    <h3>Nail Technology</h3>
-                    <p>Manicure, pedicure, nail art, and extensions.</p>
-                    <div class="course-meta"><span>⏱️ 6 Weeks</span><span>📅 Part-time</span></div>
-                    <a href="register.html" class="course-btn">Enroll Now →</a>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-image"><img src="skincare-and-aesthetics.jpg" alt="Skincare & Aesthetics" loading="lazy"></div>
-                <div class="course-content">
-                    <span class="course-badge badge-advanced">Beginner to Advanced</span>
-                    <h3>Skincare & Aesthetics</h3>
-                    <p>Facial treatments, skincare science, and therapy.</p>
-                    <div class="course-meta"><span>⏱️ 10 Weeks</span><span>📅 Full-time</span></div>
-                    <a href="register.html" class="course-btn">Enroll Now →</a>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-image"><img src="eyelash-and-brow-service.jpg" alt="Eyelash & Brow Services" loading="lazy"></div>
-                <div class="course-content">
-                    <span class="course-badge badge-beginner">Beginner to Intermediate</span>
-                    <h3>Eyelash & Brow Services</h3>
-                    <p>Extensions, lifting, tinting, and shaping.</p>
-                    <div class="course-meta"><span>⏱️ 4 Weeks</span><span>📅 Part-time</span></div>
-                    <a href="register.html" class="course-btn">Enroll Now →</a>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-image"><img src="massage-therapy.jpg" alt="Massage Therapy" loading="lazy"></div>
-                <div class="course-content">
-                    <span class="course-badge badge-intermediate">Beginner to Advanced</span>
-                    <h3>Massage Therapy</h3>
-                    <p>Professional massage techniques for wellness.</p>
-                    <div class="course-meta"><span>⏱️ 8 Weeks</span><span>📅 Full-time</span></div>
-                    <a href="register.html" class="course-btn">Enroll Now →</a>
-                </div>
-            </div>
+            <!-- 1. Hairdressing -->
+            <div class="course-card"><div class="course-image"><img src="hairdressing-and-barbering.jpg" alt="Hairdressing" loading="lazy"></div><div class="course-content"><span class="course-badge badge-beginner">Beginner to Advanced</span><h3>Hairdressing & Barbering</h3><p>Professional cutting, styling, coloring, and treatments.</p><div class="course-meta"><span>⏱️ 12 Weeks</span><span>📅 Full-time</span></div><a href="hairdressing.html" class="course-btn">View Course →</a></div></div>
+            
+            <!-- 2. Makeup -->
+            <div class="course-card"><div class="course-image"><img src="makeup-artistry.jpg" alt="Makeup" loading="lazy"></div><div class="course-content"><span class="course-badge badge-intermediate">Beginner to Advanced</span><h3>Makeup Artistry</h3><p>Bridal, fashion, and professional makeup techniques.</p><div class="course-meta"><span>⏱️ 8 Weeks</span><span>📅 Full-time</span></div><a href="makeup.html" class="course-btn">View Course →</a></div></div>
+            
+            <!-- 3. Nails -->
+            <div class="course-card"><div class="course-image"><img src="nail-technology.jpeg" alt="Nail Technology" loading="lazy"></div><div class="course-content"><span class="course-badge badge-beginner">Beginner to Intermediate</span><h3>Nail Technology</h3><p>Manicure, pedicure, nail art, and extensions.</p><div class="course-meta"><span>⏱️ 6 Weeks</span><span>📅 Part-time</span></div><a href="nails.html" class="course-btn">View Course →</a></div></div>
+            
+            <!-- 4. Skincare -->
+            <div class="course-card"><div class="course-image"><img src="skincare-and-aestetics.jpg" alt="Skincare" loading="lazy"></div><div class="course-content"><span class="course-badge badge-advanced">Beginner to Advanced</span><h3>Skincare & Aesthetics</h3><p>Facial treatments, skincare science, and therapy.</p><div class="course-meta"><span>⏱️ 10 Weeks</span><span>📅 Full-time</span></div><a href="skincare.html" class="course-btn">View Course →</a></div></div>
+            
+            <!-- 5. Eyelash -->
+            <div class="course-card"><div class="course-image"><img src="eyelash-and-brow-service.jpg" alt="Eyelash & Brow" loading="lazy"></div><div class="course-content"><span class="course-badge badge-beginner">Beginner to Intermediate</span><h3>Eyelash & Brow Services</h3><p>Extensions, lifting, tinting, and shaping.</p><div class="course-meta"><span>⏱️ 4 Weeks</span><span>📅 Part-time</span></div><a href="eyelash.html" class="course-btn">View Course →</a></div></div>
+            
+            <!-- 6. Massage -->
+            <div class="course-card"><div class="course-image"><img src="massge-therapy.jpg" alt="Massage Therapy" loading="lazy"></div><div class="course-content"><span class="course-badge badge-intermediate">Beginner to Advanced</span><h3>Massage Therapy</h3><p>Professional massage techniques for wellness.</p><div class="course-meta"><span>⏱️ 8 Weeks</span><span>📅 Full-time</span></div><a href="massage.html" class="course-btn">View Course →</a></div></div>
+            
+            <!-- 7. Henna Art - NEW -->
+            <div class="course-card"><div class="course-image"><img src="hinna-technology.webp" alt="Henna Art" loading="lazy"></div><div class="course-content"><span class="course-badge badge-beginner">Traditional & Modern</span><h3>Henna Art (Mehndi)</h3><p>Traditional Ethiopian, bridal, and modern henna designs.</p><div class="course-meta"><span>⏱️ 3 Weeks</span><span>📅 Part-time</span></div><a href="henna.html" class="course-btn">View Course →</a></div></div>
+            
+            <!-- 8. Men's Barbering - NEW -->
+            <div class="course-card"><div class="course-image"><img src="hairdressing-and-barbering.jpg" alt="Men's Barbering" loading="lazy"></div><div class="course-content"><span class="course-badge badge-intermediate">Beginner to Advanced</span><h3>Men's Barbering</h3><p>Classic cuts, modern fades, hot towel shaves, beard grooming.</p><div class="course-meta"><span>⏱️ 6 Weeks</span><span>📅 Full-time</span></div><a href="barbering.html" class="course-btn">View Course →</a></div></div>
         </div>
     </div>
 
-    <section class="cta">
-        <h2>Start Your Beauty Career Today</h2>
-        <p>Join Ethiopia's most prestigious beauty institution</p>
-        <a href="register.html" class="course-btn">Register Now</a>
-    </section>
+    <section class="cta"><h2>Start Your Beauty Career Today</h2><p style="color:var(--black-primary); opacity:0.9;">Join Ethiopia's most prestigious beauty institution</p><a href="register.html">Register Now</a></section>
 
-    <footer style="background: var(--black-primary); padding: 50px 20px 30px; border-top: 1px solid rgba(212, 175, 55, 0.2);">
-        <div style="max-width:1200px; margin:0 auto;">
-            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 30px; margin-bottom: 30px; text-align: left;">
-                <div>
-                    <div style="font-family: var(--font-heading); font-size: 18px; color: var(--gold-primary); letter-spacing: 2px;">LOVELY BEAUTY</div>
-                    <div style="font-size: 9px; color: var(--gray-mid); letter-spacing: 1px;">COLLEGE & TRAINING CENTER</div>
-                    <p style="color: var(--gray-mid); font-size: 13px; margin: 12px 0;">Ethiopia's first fully established professional beauty college, shaping careers since 1998.</p>
-                    <div style="display: flex; gap: 10px;">
-                        <a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://tiktok.com/@lovelybeautycollege" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Quick Links</h4>
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                        <a href="index.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Home</a>
-                        <a href="about.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">About Us</a>
-                        <a href="courses.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Courses</a>
-                        <a href="news-events.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">News & Events</a>
-                        <a href="gallery.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Gallery</a>
-                        <a href="portal.html" style="color:var(--gold-primary); text-decoration:none; font-size:13px; font-weight:600;">Student Portal</a>
-                        <a href="contact.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Contact</a>
-                    </div>
-                </div>
-                <div>
-                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Our Branches</h4>
-                    <div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;">
-                        <span>📍 Megenagna (Main)</span>
-                        <span>📍 Arada</span>
-                        <span>📍 Merkato</span>
-                        <span>📍 Gofa</span>
-                    </div>
-                </div>
-                <div>
-                    <h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Contact Us</h4>
-                    <div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;">
-                        <span>📍 Addis Ababa, Ethiopia</span>
-                        <span>📞 0991171819 / 0911221032</span>
-                        <span>✉️ lovelybeautycollage@proton.me</span>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align:center; padding-top:25px; border-top:1px solid rgba(212,175,55,0.1); color:var(--gray-mid); font-size:13px;">
-                <p>© 2026 Lovely Beauty College and Training Center. All rights reserved.</p>
-                <p style="margin-top:6px;">Powered by <a href="http://addispower.pages.dev/" target="_blank" style="color:var(--gold-primary);">Addis Power Web Solution</a></p>
-            </div>
-        </div>
-    </footer>
+    <footer style="background: var(--black-primary); padding: 50px 20px 30px; border-top: 1px solid rgba(212, 175, 55, 0.2);"><div style="max-width:1200px; margin:0 auto;"><div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 30px; margin-bottom: 30px; text-align: left;"><div><div style="font-family: var(--font-heading); font-size: 18px; color: var(--gold-primary); letter-spacing: 2px;">LOVELY BEAUTY</div><div style="font-size: 9px; color: var(--gray-mid); letter-spacing: 1px;">COLLEGE & TRAINING CENTER</div><p style="color: var(--gray-mid); font-size: 13px; margin: 12px 0;">Ethiopia's first fully established professional beauty college.</p><div style="display: flex; gap: 10px;"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-facebook-f"></i></a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-tiktok"></i></a></div></div><div><h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Quick Links</h4><div style="display:flex; flex-direction:column; gap:8px;"><a href="index.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Home</a><a href="about.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">About Us</a><a href="courses.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Courses</a><a href="news-events.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">News & Events</a><a href="gallery.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Gallery</a><a href="portal.html" style="color:var(--gold-primary); text-decoration:none; font-size:13px; font-weight:600;">Student Portal</a><a href="contact.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Contact</a></div></div><div><h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Our Branches</h4><div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;"><span>📍 Megenagna (Main)</span><span>📍 Arada</span><span>📍 Merkato</span><span>📍 Gofa</span></div></div><div><h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Contact Us</h4><div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;"><span>📍 Addis Ababa, Ethiopia</span><span>📞 0991171819 / 0911221032</span><span>✉️ lovelybeautycollage@proton.me</span></div></div></div><div style="text-align:center; padding-top:25px; border-top:1px solid rgba(212,175,55,0.1); color:var(--gray-mid); font-size:13px;"><p>© 2026 Lovely Beauty College and Training Center. All rights reserved.</p><p style="margin-top:6px;">Powered by <a href="http://addispower.pages.dev/" target="_blank" style="color:var(--gold-primary);">Addis Power Web Solution</a></p></div></div></footer>
 
-    <script>
-        const mmb = document.getElementById('mobileMenuBtn'), nm = document.getElementById('navMenu');
-        mmb?.addEventListener('click', () => { nm.classList.toggle('active'); mmb.textContent = nm.classList.contains('active') ? '✕' : '☰'; });
-    </script>
+    <script>const mmb=document.getElementById('mobileMenuBtn'),nm=document.getElementById('navMenu');mmb?.addEventListener('click',()=>{nm.classList.toggle('active');mmb.textContent=nm.classList.contains('active')?'✕':'☰';});</script>
 </body>
 </html>
