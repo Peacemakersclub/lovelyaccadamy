@@ -110,6 +110,17 @@
         .legacy-title { color: var(--gold-primary); margin-bottom: 12px; font-size: 18px; }
         .legacy-desc { color: var(--gray-mid); font-size: 14px; }
         
+        /* Testimonials */
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .testimonial-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.3s; }
+        .testimonial-card:hover { border-color: var(--gold-primary); transform: translateY(-5px); }
+        .testimonial-stars { font-size: 18px; margin-bottom: 15px; }
+        .testimonial-text { color: var(--gray-mid); font-size: 14px; line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; justify-content: center; }
+        .testimonial-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-primary); }
+        .testimonial-name { font-size: 15px; font-weight: 600; }
+        .testimonial-role { color: var(--gold-primary); font-size: 12px; }
+        
         .cta-section { background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark)); padding: 80px 0; text-align: center; }
         .cta-title { font-size: clamp(32px, 5vw, 48px); color: var(--black-primary); margin-bottom: 20px; }
         .cta-subtitle { color: var(--black-primary); font-size: 18px; margin-bottom: 32px; opacity: 0.9; }
@@ -140,7 +151,7 @@
         .fade-in-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .fade-in-up.visible { opacity: 1; transform: translateY(0); }
         
-        @media (max-width: 1024px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } .hero-card { max-width: 450px; margin: 0 auto; } .courses-grid { grid-template-columns: repeat(2, 1fr); } .impact-grid { grid-template-columns: repeat(2, 1fr); } .legacy-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 1024px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } .hero-card { max-width: 450px; margin: 0 auto; } .courses-grid { grid-template-columns: repeat(2, 1fr); } .impact-grid { grid-template-columns: repeat(2, 1fr); } .legacy-grid { grid-template-columns: repeat(2, 1fr); } .testimonial-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 768px) { 
             .header-container { padding: 0 16px; }
             .nav-menu { display: none; position: fixed; top: var(--header-height); left: 0; right: 0; background: var(--black-primary); flex-direction: column; padding: 20px; border-bottom: 2px solid var(--gold-primary); z-index: 999; gap: 14px; max-height: 80vh; overflow-y: auto; }
@@ -157,6 +168,7 @@
             .courses-grid { grid-template-columns: 1fr; }
             .impact-grid { grid-template-columns: 1fr; }
             .legacy-grid { grid-template-columns: 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .cta-section { padding: 50px 20px; }
@@ -260,6 +272,42 @@
         </div>
     </section>
     
+    <!-- ⭐ TESTIMONIALS -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our <span class="gold-text">Students Say</span></h2>
+                <p class="section-desc">Hear from our graduates who built successful careers</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Lovely Beauty College gave me the skills and confidence to open my own salon. The hands-on training was incredible. Best decision I ever made!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Student" class="testimonial-avatar">
+                        <div><div class="testimonial-name">Tigist Bekele</div><div class="testimonial-role">Salon Owner | Graduate 2024</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The instructors are so knowledgeable and supportive. Now I work at a 5-star hotel spa! This college changed my life."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Student" class="testimonial-avatar">
+                        <div><div class="testimonial-name">Dawit Haile</div><div class="testimonial-role">Spa Therapist | Graduate 2025</div></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Best beauty college in Ethiopia! The practical training prepared me for the real world. Highly recommend to anyone!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="Student" class="testimonial-avatar">
+                        <div><div class="testimonial-name">Meron Assefa</div><div class="testimonial-role">Makeup Artist | Graduate 2024</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section class="cta-section">
         <div class="container"><h2 class="cta-title">Start Your Beauty Career Today</h2><p class="cta-subtitle">Join Ethiopia's most prestigious beauty institution</p><a href="register.html" class="btn btn-black">Register Now</a></div>
     </section>
@@ -274,10 +322,7 @@
             </div>
             <div class="footer-bottom">
                 <p>© 2026 Lovely Beauty College and Training Center. All rights reserved.</p>
-                <p class="footer-legal">
-                    <a href="terms.html">Terms of Use</a> | 
-                    <a href="privacy.html">Privacy Policy</a>
-                </p>
+                <p class="footer-legal"><a href="terms.html">Terms of Use</a> | <a href="privacy.html">Privacy Policy</a></p>
                 <p class="footer-credit">Powered by <a href="http://addispower.pages.dev/" target="_blank">Addis Power Web Solution</a></p>
             </div>
         </div>
