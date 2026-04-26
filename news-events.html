@@ -50,6 +50,20 @@
         .news-card .preview { color: var(--gray-mid); font-size: 13px; flex: 1; }
         .read-more-btn { background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 12px; transition: all 0.3s; align-self: flex-start; }
         .read-more-btn:hover { background: var(--gold-primary); color: var(--black-primary); }
+        
+        /* Share Buttons */
+        .share-buttons { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+        .share-btn { padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border: none; color: white; transition: all 0.3s; }
+        .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .share-facebook { background: #1877F2; }
+        .share-twitter { background: #000000; }
+        .share-whatsapp { background: #25D366; }
+        .share-telegram { background: #0088cc; }
+        .share-copy { background: #555; }
+        .share-copied { background: #4CAF50; }
+        .modal-share { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(212,175,55,0.2); display: flex; gap: 10px; flex-wrap: wrap; }
+        .modal-share .share-btn { padding: 10px 16px; font-size: 13px; }
+        
         .loading { text-align: center; padding: 60px; color: var(--gold-primary); font-size: 18px; }
         .empty { text-align: center; padding: 60px; color: var(--gray-mid); }
         
@@ -86,7 +100,7 @@
 
     <footer style="background: var(--black-primary); padding: 50px 20px 30px; border-top: 1px solid rgba(212, 175, 55, 0.2);"><div style="max-width:1200px; margin:0 auto;"><div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 30px; margin-bottom: 30px; text-align: left;"><div><div style="font-family: var(--font-heading); font-size: 18px; color: var(--gold-primary); letter-spacing: 2px;">LOVELY BEAUTY</div><div style="font-size: 9px; color: var(--gray-mid); letter-spacing: 1px;">COLLEGE & TRAINING CENTER</div><p style="color: var(--gray-mid); font-size: 13px; margin: 12px 0;">Ethiopia's first fully established professional beauty college.</p><div style="display: flex; gap: 10px;"><a href="https://web.facebook.com/people/Lovely-Beauty-College/61584082114535/" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-facebook-f"></i></a><a href="https://tiktok.com/@lovelybeautycollege" target="_blank" style="width:36px;height:36px;background:var(--black-card);border:1px solid rgba(212,175,55,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);text-decoration:none;"><i class="fab fa-tiktok"></i></a></div></div><div><h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Quick Links</h4><div style="display:flex; flex-direction:column; gap:8px;"><a href="index.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Home</a><a href="about.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">About Us</a><a href="courses.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Courses</a><a href="news-events.html" style="color:var(--gold-primary); text-decoration:none; font-size:13px;">News & Events</a><a href="gallery.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Gallery</a><a href="videos.html" style="color:var(--gold-primary); text-decoration:none; font-size:13px; font-weight:600;">Videos</a><a href="portal.html" style="color:var(--gold-primary); text-decoration:none; font-size:13px; font-weight:600;">Student Portal</a><a href="contact.html" style="color:var(--gray-mid); text-decoration:none; font-size:13px;">Contact</a></div></div><div><h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Our Branches</h4><div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;"><span>📍 Megenagna (Main)</span><span>📍 Arada</span><span>📍 Merkato</span><span>📍 Gofa</span></div></div><div><h4 style="color:var(--gold-primary); font-size:15px; margin-bottom:12px;">Contact Us</h4><div style="display:flex; flex-direction:column; gap:8px; color:var(--gray-mid); font-size:13px;"><span>📍 Addis Ababa, Ethiopia</span><span>📞 0991171819 / 0911221032</span><span>✉️ lovelybeautycollage@proton.me</span></div></div></div><div style="text-align:center; padding-top:25px; border-top:1px solid rgba(212,175,55,0.1); color:var(--gray-mid); font-size:13px;"><p>© 2026 Lovely Beauty College and Training Center. All rights reserved.</p><p style="margin-top:6px;">Powered by <a href="http://addispower.pages.dev/" target="_blank" style="color:var(--gold-primary);">Addis Power Web Solution</a></p></div></div></footer>
 
-    <div class="modal-overlay" id="readMoreModal"><div class="modal-box"><button class="modal-close" onclick="closeModal()">✕</button><div class="modal-image" id="modalImage">📰</div><div style="padding:0 5px;"><span class="modal-category" id="modalCategory">News</span><h2 id="modalTitle"></h2><p class="modal-meta" id="modalDate"></p><div class="modal-body" id="modalBody"></div></div></div></div>
+    <div class="modal-overlay" id="readMoreModal"><div class="modal-box"><button class="modal-close" onclick="closeModal()">✕</button><div class="modal-image" id="modalImage">📰</div><div style="padding:0 5px;"><span class="modal-category" id="modalCategory">News</span><h2 id="modalTitle"></h2><p class="modal-meta" id="modalDate"></p><div class="modal-body" id="modalBody"></div><div class="modal-share" id="modalShare"></div></div></div></div>
 
     <script>
         const firebaseConfig = { apiKey: "AIzaSyCn5PGyIgPobaL8WE4E89dFQwcjsx9Pcqs", authDomain: "lovely-beauty-college.firebaseapp.com", projectId: "lovely-beauty-college", storageBucket: "lovely-beauty-college.firebasestorage.app", messagingSenderId: "283710330376", appId: "1:283710330376:web:d34276a5918500b020e3bd" };
@@ -94,6 +108,59 @@
         const db = firebase.firestore();
         const categoryIcons = { 'News': '📰', 'Event': '📅', 'Announcement': '📢', 'Success Story': '🏆' };
         const categoryClass = { 'News': 'cat-news', 'Event': 'cat-event', 'Announcement': 'cat-announcement', 'Success Story': 'cat-success' };
+        const BASE_URL = 'https://peacemakersclub.github.io/lovelyaccadamy/news-events.html';
+        let currentNewsId = null;
+        
+        function getShareButtons(docId, title, content) {
+            const url = BASE_URL + '?id=' + docId;
+            const shareText = title + ' - Lovely Beauty College';
+            const encodedUrl = encodeURIComponent(url);
+            const encodedText = encodeURIComponent(shareText);
+            const encodedContent = encodeURIComponent(content ? content.substring(0, 200) : '');
+            
+            return `
+                <div class="share-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank" class="share-btn share-facebook" onclick="event.stopPropagation()"><i class="fab fa-facebook-f"></i> Share</a>
+                    <a href="https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}" target="_blank" class="share-btn share-twitter" onclick="event.stopPropagation()"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://wa.me/?text=${encodedText}%20${encodedUrl}" target="_blank" class="share-btn share-whatsapp" onclick="event.stopPropagation()"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedText}" target="_blank" class="share-btn share-telegram" onclick="event.stopPropagation()"><i class="fab fa-telegram-plane"></i></a>
+                    <button class="share-btn share-copy" onclick="event.stopPropagation();copyLink('${docId}')" id="copyBtn-${docId}"><i class="fas fa-link"></i> Copy</button>
+                </div>
+            `;
+        }
+        
+        function getModalShareButtons(docId, title) {
+            const url = BASE_URL + '?id=' + docId;
+            const shareText = title + ' - Lovely Beauty College';
+            const encodedUrl = encodeURIComponent(url);
+            const encodedText = encodeURIComponent(shareText);
+            
+            return `
+                <span style="color:var(--gold-primary); font-weight:600;">📤 Share this:</span><br>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank" class="share-btn share-facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}" target="_blank" class="share-btn share-twitter"><i class="fab fa-x-twitter"></i> Twitter</a>
+                <a href="https://wa.me/?text=${encodedText}%20${encodedUrl}" target="_blank" class="share-btn share-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedText}" target="_blank" class="share-btn share-telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <button class="share-btn share-copy" onclick="copyLink('${docId}')" id="modalCopyBtn-${docId}"><i class="fas fa-link"></i> Copy Link</button>
+            `;
+        }
+        
+        function copyLink(docId) {
+            const url = BASE_URL + '?id=' + docId;
+            navigator.clipboard.writeText(url).then(() => {
+                const btns = document.querySelectorAll(`#copyBtn-${docId}, #modalCopyBtn-${docId}`);
+                btns.forEach(btn => {
+                    btn.className = 'share-btn share-copied';
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                });
+                setTimeout(() => {
+                    btns.forEach(btn => {
+                        btn.className = 'share-btn share-copy';
+                        btn.innerHTML = '<i class="fas fa-link"></i> Copy';
+                    });
+                }, 2000);
+            });
+        }
         
         async function loadNews() {
             const grid = document.getElementById('newsGrid');
@@ -106,13 +173,14 @@
                     const preview = n.content && n.content.length > 120 ? n.content.substring(0, 120) + '...' : (n.content || '');
                     const imgHtml = n.image ? `<img src="${n.image}" alt="${n.title}" loading="lazy">` : (categoryIcons[n.category] || '📰');
                     const card = document.createElement('div'); card.className = 'news-card';
-                    card.innerHTML = `<div class="news-image">${imgHtml}</div><div class="news-content"><span class="news-category ${categoryClass[n.category] || 'cat-news'}">${n.category || 'News'}</span><div class="news-date">📅 ${n.date || 'N/A'}</div><h3>${n.title || 'Untitled'}</h3><p class="preview">${preview}</p><button class="read-more-btn" onclick="readMore('${doc.id}')">📖 Read More</button></div>`;
+                    card.innerHTML = `<div class="news-image">${imgHtml}</div><div class="news-content"><span class="news-category ${categoryClass[n.category] || 'cat-news'}">${n.category || 'News'}</span><div class="news-date">📅 ${n.date || 'N/A'}</div><h3>${n.title || 'Untitled'}</h3><p class="preview">${preview}</p><button class="read-more-btn" onclick="readMore('${doc.id}')">📖 Read More</button>${getShareButtons(doc.id, n.title, n.content)}</div>`;
                     grid.appendChild(card);
                 });
             } catch (error) { grid.innerHTML = '<div class="empty"><p>❌ Error loading news. Try again later.</p></div>'; }
         }
         
         async function readMore(docId) {
+            currentNewsId = docId;
             const doc = await db.collection('news').doc(docId).get(); if (!doc.exists) return;
             const n = doc.data();
             document.getElementById('modalImage').innerHTML = n.image ? `<img src="${n.image}" alt="${n.title}">` : (categoryIcons[n.category] || '📰');
@@ -121,11 +189,17 @@
             document.getElementById('modalCategory').textContent = n.category || 'News';
             document.getElementById('modalCategory').className = 'modal-category ' + (categoryClass[n.category] || 'cat-news');
             document.getElementById('modalBody').textContent = n.content || '';
+            document.getElementById('modalShare').innerHTML = getModalShareButtons(docId, n.title);
             document.getElementById('readMoreModal').classList.add('active');
         }
         
         function closeModal() { document.getElementById('readMoreModal').classList.remove('active'); }
         document.getElementById('readMoreModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+        
+        // Check URL for shared news
+        const urlParams = new URLSearchParams(window.location.search);
+        const sharedId = urlParams.get('id');
+        if (sharedId) { setTimeout(() => readMore(sharedId), 500); }
         
         loadNews();
         const mmb = document.getElementById('mobileMenuBtn'), nm = document.getElementById('navMenu');
