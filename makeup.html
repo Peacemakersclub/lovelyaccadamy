@@ -35,30 +35,26 @@
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
         .section-card { background: var(--black-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
         .section-card h2 { color: var(--gold-primary); font-family: var(--font-heading); font-size: 22px; margin-bottom: 15px; }
-        .module { display: flex; align-items: center; gap: 15px; padding: 16px; background: #0A0A0A; border-radius: 12px; margin-bottom: 12px; }
-        .module-icon { width: 50px; height: 50px; background: var(--gold-primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--black-primary); flex-shrink: 0; }
-        .module-info { flex: 1; } .module-info h3 { font-size: 16px; margin-bottom: 4px; } .module-info p { color: var(--gray-mid); font-size: 13px; }
-        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; } .badge-done { background: #1a3a1a; color: #4CAF50; } .badge-active { background: #1a2a3a; color: #2196F3; } .badge-locked { background: #333; color: #666; }
-        table { width: 100%; border-collapse: collapse; } th { color: var(--gold-primary); text-align: left; padding: 10px; border-bottom: 1px solid var(--gold-primary); font-size: 13px; } td { padding: 10px; border-bottom: 1px solid #333; color: var(--gray-mid); font-size: 13px; }
-        .cta { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, var(--gold-primary), #996515); margin-top: 30px; } .cta h2 { color: var(--black-primary); font-family: var(--font-heading); font-size: 24px; } .cta a { display: inline-block; padding: 14px 30px; background: var(--black-primary); color: var(--gold-primary); border-radius: 50px; font-weight: 600; text-decoration: none; margin-top: 10px; }
-        @media (max-width: 500px) { .module { flex-direction: column; text-align: center; } }
+        .classes-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .class-tag { background: #0A0A0A; padding: 6px 14px; border-radius: 20px; font-size: 12px; color: var(--gold-primary); border: 1px solid rgba(212,175,55,0.3); }
+        .cta { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, var(--gold-primary), #996515); margin-top: 30px; }
+        .cta h2 { color: var(--black-primary); font-family: var(--font-heading); font-size: 24px; }
+        .cta a { display: inline-block; padding: 14px 30px; background: var(--black-primary); color: var(--gold-primary); border-radius: 50px; font-weight: 600; text-decoration: none; margin-top: 10px; }
     </style>
 </head>
 <body>
     <header class="header"><div class="header-container"><a href="index.html" class="logo"><div class="logo-icon">💎</div><div class="logo-text"><div class="logo-main">LOVELY BEAUTY</div><div class="logo-sub">COLLEGE & TRAINING CENTER</div></div></a><nav class="nav-menu" id="navMenu"><a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a><a href="courses.html" class="nav-link active">Courses</a><a href="portal.html" class="nav-link portal-btn">🎓 Student Portal</a><a href="register.html" class="nav-link">Register</a><a href="news-events.html" class="nav-link">📰 News</a><a href="gallery.html" class="nav-link">📸 Gallery</a><a href="contact.html" class="nav-link">Contact</a></nav><button class="mobile-menu-btn" id="mobileMenuBtn">☰</button></div></header>
     
-    <section class="course-hero"><div class="icon">💄</div><h1>Makeup Artistry</h1><p>Bridal, fashion, and professional makeup techniques</p><div class="course-meta"><span>⏱️ 8 Weeks</span><span>📅 Full-time</span><span>🎓 Certification</span><span>📍 All Campuses</span></div></section>
+    <section class="course-hero"><div class="icon">💄</div><h1>Makeup Artistry</h1><p>Bridal, fashion, and professional makeup techniques</p><div class="course-meta"><span>⏱️ 1 Month 15 Days</span><span>📅 Full-time</span><span>🎓 Certification</span><span>📍 All Campuses</span></div></section>
     
     <div class="container">
         <div class="section-card"><h2>📖 About This Course</h2><p style="color:var(--gray-mid);">Master the art of professional makeup application. From bridal to fashion editorial, learn techniques used by industry professionals. This comprehensive program covers foundation matching, contouring, eye makeup, and business skills for freelance artists.</p><p style="color:var(--gray-mid); margin-top:10px;">Accredited course leading to TVET certification upon completion.</p></div>
-        <div class="section-card"><h2>📚 Course Modules</h2>
-            <div class="module"><div class="module-icon">🧴</div><div class="module-info"><h3>Module 1: Foundation & Skin Prep</h3><p>Skin analysis, priming, foundation matching, concealing</p></div><span class="badge badge-done">✅ Done</span></div>
-            <div class="module"><div class="module-icon">👁️</div><div class="module-info"><h3>Module 2: Eye Makeup Techniques</h3><p>Eyeshadow, eyeliner, lashes, brow shaping</p></div><span class="badge badge-active">🔄 Active</span></div>
-            <div class="module"><div class="module-icon">💋</div><div class="module-info"><h3>Module 3: Bridal & Special Occasion</h3><p>Bridal looks, party makeup, photoshoot preparation</p></div><span class="badge badge-locked">🔒 Locked</span></div>
-            <div class="module"><div class="module-icon">📸</div><div class="module-info"><h3>Module 4: Fashion & Business Skills</h3><p>Editorial looks, portfolio building, client management</p></div><span class="badge badge-locked">🔒 Locked</span></div>
-        </div>
-        <div class="section-card"><h2>📅 Class Schedule</h2><div style="overflow-x:auto;"><table><tr><th>Day</th><th>Time</th><th>Type</th><th>Location</th></tr><tr><td>Tuesday</td><td>10:00 AM - 1:00 PM</td><td>Theory</td><td>Megenagna - Room 102</td></tr><tr><td>Thursday</td><td>10:00 AM - 1:00 PM</td><td>Practical</td><td>Megenagna - Makeup Studio</td></tr><tr><td>Saturday</td><td>2:00 PM - 5:00 PM</td><td>Workshop</td><td>Megenagna - Makeup Studio</td></tr></table></div></div>
-        <div class="section-card"><h2>👩‍🏫 Your Instructor</h2><div style="display:flex; align-items:center; gap:15px;"><div style="width:60px;height:60px;background:var(--gold-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">👩‍🎨</div><div><h3 style="color:var(--gold-primary);">Makeup Artist Sara</h3><p style="color:var(--gray-mid); font-size:14px;">10+ years experience | Certified International Makeup Artist</p></div></div></div>
+        
+        <div class="section-card"><h2>📅 Class Schedule</h2><div style="overflow-x:auto;"><table><tr><th>Shift</th><th>Time</th><th>Days</th><th>Location</th></tr><tr><td>Morning</td><td>2:00 - 6:00</td><td>Monday - Sunday</td><td>Megenagna - Makeup Studio</td></tr><tr><td>Afternoon</td><td>7:00 - 11:00</td><td>Monday - Sunday</td><td>Megenagna - Makeup Studio</td></tr><tr><td>Night</td><td>11:00 - 2:00</td><td>Monday - Sunday</td><td>Megenagna - Makeup Studio</td></tr></table></div></div>
+        
+        <div class="section-card"><h2>👩‍🏫 Your Instructor</h2><div style="display:flex; align-items:center; gap:15px;"><div style="width:60px;height:60px;background:var(--gold-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">👩‍🎨</div><div><h3 style="color:var(--gold-primary);">Makeup Artist</h3><p style="color:var(--gray-mid); font-size:14px;">10+ years experience | Certified International Makeup Artist</p></div></div></div>
+        
+        <div class="section-card"><h2>📖 Included Classes</h2><div class="classes-list"><span class="class-tag">📸 Photography</span><span class="class-tag">📱 Digital Marketing</span><span class="class-tag">💼 Entrepreneurship</span><span class="class-tag">👔 Professional Image & Ethics</span><span class="class-tag">🧼 Hygenic Cleaning Tools & Equipment</span><span class="class-tag">🗣️ Client Consultation</span></div></div>
     </div>
     
     <section class="cta"><h2>Start Your Makeup Career</h2><p style="color:var(--black-primary); opacity:0.9;">Join the next intake — limited spots available</p><a href="register.html">Enroll Now</a></section>
